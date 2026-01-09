@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GaonConnect — 미국법인 설립 보드</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#fbfbfa;
+      --muted:#6b7280;
+      --text:#111827;
+      --border:#e5e7eb;
+      --accent:#f3f4f6;
+      --shadow:0 1px 2px rgba(0,0,0,.06);
+      --radius:14px;
+      --radius-sm:10px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Apple SD Gothic Neo, "Noto Sans KR", Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    /* Layout */
+    .app{height:100vh; width:100vw; display:flex; overflow:hidden;}
+    .sidebar{
+      width:280px; flex:0 0 280px;
+      border-right:1px solid var(--border);
+      background:var(--bg);
+      display:none;
+    }
+    @media (min-width: 900px){
+      .sidebar{display:flex; flex-direction:column;}
+    }
+    .main{flex:1; min-width:0; display:flex; flex-direction:column;}
+    .topbar{
+      border-bottom:1px solid var(--border);
+      background:var(--bg);
+      padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .top-left{min-width:0}
+    .title{font-size:18px; font-weight:700; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .subtitle{font-size:12px; color:var(--muted); margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .top-right{display:flex; align-items:center; gap:10px;}
+    .search{
+      width:320px; max-width:36vw;
+      border:1px solid var(--border); border-radius:10px;
+      padding:9px 10px; font-size:13px; outline:none;
+      background:#fff;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background:#111827;
+      color:#fff;
+      padding:9px 12px;
+      border-radius:10px;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .btn:active{transform:translateY(1px)}
+    .content{flex:1; min-height:0; overflow:auto; padding:18px;}
+
+    /* Sidebar */
+    .sb-head{padding:16px 14px 10px 14px;}
+    .brand{display:flex; align-items:center; gap:10px;}
+    .logo{
+      width:28px; height:28px; border-radius:8px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg,#fff,#f7f7f7);
+      box-shadow: var(--shadow);
+    }
+    .brand-name{font-weight:700;}
+    .sb-section{padding:10px 10px;}
+    .sb-label{font-size:11px; color:var(--muted); font-weight:700; padding:8px 10px;}
+    .sb-item{
+      width:100%;
+      display:flex; align-items:center; gap:10px;
+      padding:9px 10px;
+      border-radius:10px;
+      border:1px solid transparent;
+      background:transparent;
+      cursor:pointer;
+      color:var(--text);
+      font-size:13px;
+      text-align:left;
+    }
+    .sb-item:hover{background:var(--accent)}
+    .sb-item.active{
+      background:var(--accent);
+      border-color:var(--border);
+      font-weight:600;
+    }
+    .sb-foot{margin-top:auto; padding:12px 14px; font-size:11px; color:var(--muted);}
+
+    /* Board */
+    .board{
+      display:flex; gap:14px;
+      overflow-x:auto;
+      padding-bottom:6px;
+    }
+    .col{
+      width:320px; flex:0 0 320px;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:12px;
+    }
+    .col-head{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .col-title{
+      display:flex; align-items:center; gap:8px;
+      font-size:14px; font-weight:700;
+    }
+    .badge{
+      font-size:12px; color:#111827;
+      background:#fff;
+      border:1px solid var(--border);
+      padding:2px 8px;
+      border-radius:999px;
+      box-shadow:0 1px 0 rgba(0,0,0,.02);
+    }
+    .icon-btn{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:10px;
+      padding:6px 8px;
+      cursor:pointer;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .icon-btn:hover{background:var(--accent); color:var(--text);}
+
+    .cards{display:flex; flex-direction:column; gap:10px;}
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      padding:10px;
+      box-shadow:var(--shadow);
+    }
+    .card-row{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
+    .card-title{font-size:13px; font-weight:650; line-height:1.25;}
+    .meta{margin-top:6px; font-size:11px; color:var(--muted);}
+    .meta .dot{padding:0 6px; color:#c4c7cf;}
+    .pill{
+      font-size:11px;
+      border-radius:999px;
+      padding:3px 8px;
+      border:1px solid var(--border);
+      background:var(--accent);
+      color:var(--text);
+      white-space:nowrap;
+    }
+    .pill.urgent{
+      background:#fff1f2;
+      border-color:#fecdd3;
+      color:#9f1239;
+    }
+    .comment{margin-top:8px; font-size:11px; color:var(--muted);}
+
+    /* Small helpers */
+    .hidden{display:none !important;}
+    .mobile-hint{
+      display:block;
+      padding:10px 12px;
+      border:1px dashed var(--border);
+      border-radius:12px;
+      background:#fafafa;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+    @media (min-width: 900px){
+      .mobile-hint{display:none;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <!-- Sidebar (desktop only) -->
+    <aside class="sidebar">
+      <div class="sb-head">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div class="brand-name">GaonConnect</div>
+        </div>
+      </div>
+
+      <div class="sb-section">
+        <button class="sb-item">홈</button>
+        <button class="sb-item">수신함</button>
+      </div>
+
+      <div class="sb-label">공유된 페이지</div>
+      <div class="sb-section">
+        <button class="sb-item active">가온커넥트</button>
+        <button class="sb-item">법인 설립 체크리스트</button>
+        <button class="sb-item">진행 현황 보드</button>
+      </div>
+
+      <div class="sb-foot">© <span id="year"></span> GaonConnect</div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <header class="topbar">
+        <div class="top-left">
+          <div class="title">가온커넥트</div>
+          <div class="subtitle">미국 법인 설립 프로세스를 한 곳에서 관리하세요.</div>
+        </div>
+
+        <div class="top-right">
+          <input id="q" class="search" placeholder="검색 (카드 제목)" />
+          <button class="btn" type="button">새로 만들기</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="mobile-hint">💡 가로 스크롤로 보드를 확인할 수 있어요.</div>
+
+        <section class="board" id="board">
+
+          <!-- Column: 요청 -->
+          <div class="col" data-col="req">
+            <div class="col-head">
+              <div class="col-title">요청 <span class="badge" data-count>2</span></div>
+              <button class="icon-btn" type="button" data-toggle>접기</button>
+            </div>
+            <div class="cards" data-cards>
+              <article class="card" data-title="취약점 점검 상세 가이드">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">취약점 점검 상세 가이드</div>
+                    <div class="meta"><span>김형규</span><span class="dot">·</span><span>2025-12-15 10:08</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 2</div>
+              </article>
+
+              <article class="card" data-title="계정 요청">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">계정 요청</div>
+                    <div class="meta"><span>차윤석</span><span class="dot">·</span><span>어제 16:00</span></div>
+                  </div>
+                  <span class="pill urgent">긴급</span>
+                </div>
+                <div class="comment">💬 7</div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Column: 처리 중 -->
+          <div class="col" data-col="doing">
+            <div class="col-head">
+              <div class="col-title">처리 중 <span class="badge" data-count>8</span></div>
+              <button class="icon-btn" type="button" data-toggle>접기</button>
+            </div>
+            <div class="cards" data-cards>
+              <article class="card" data-title="핵심 서비스 구현(2026/1/17 시연용)">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">핵심 서비스 구현(2026/1/17 시연용)</div>
+                    <div class="meta"><span>김형규</span><span class="dot">·</span><span>어제 13:05</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 49</div>
+              </article>
+
+              <article class="card" data-title="디자인 시안 요청">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">디자인 시안 요청</div>
+                    <div class="meta"><span>—</span><span class="dot">·</span><span>2025-11-24 17:38</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 10</div>
+              </article>
+
+              <article class="card" data-title="탭 정리">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">탭 정리</div>
+                    <div class="meta"><span>—</span><span class="dot">·</span><span>2025-08-25 16:49</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 53</div>
+              </article>
+
+              <article class="card" data-title="질문">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">질문</div>
+                    <div class="meta"><span>—</span><span class="dot">·</span><span>2025-07-28 10:29</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 33</div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Column: 종료 -->
+          <div class="col" data-col="done">
+            <div class="col-head">
+              <div class="col-title">종료 <span class="badge" data-count>7</span></div>
+              <button class="icon-btn" type="button" data-toggle>접기</button>
+            </div>
+            <div class="cards" data-cards>
+              <article class="card" data-title="진행사항">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">진행사항</div>
+                    <div class="meta"><span>—</span><span class="dot">·</span><span>2025-07-10 12:40</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 9</div>
+              </article>
+
+              <article class="card" data-title="미팅 요청">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">미팅 요청</div>
+                    <div class="meta"><span>—</span><span class="dot">·</span><span>2025-12-10</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 0</div>
+              </article>
+
+              <article class="card" data-title="이름 & 로고">
+                <div class="card-row">
+                  <div>
+                    <div class="card-title">이름 & 로고</div>
+                    <div class="meta"><span>—</span><span class="dot">·</span><span>2025-07-07 10:30</span></div>
+                  </div>
+                  <span class="pill">일반</span>
+                </div>
+                <div class="comment">💬 3</div>
+              </article>
+            </div>
+          </div>
+
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Collapse columns
+    document.querySelectorAll("[data-toggle]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const col = btn.closest(".col");
+        const cards = col.querySelector("[data-cards]");
+        const isHidden = cards.classList.toggle("hidden");
+        btn.textContent = isHidden ? "펼치기" : "접기";
+      });
+    });
+
+    // Search filter (by card title)
+    const q = document.getElementById("q");
+    q.addEventListener("input", () => {
+      const keyword = q.value.trim().toLowerCase();
+      document.querySelectorAll(".card").forEach(card => {
+        const title = (card.dataset.title || "").toLowerCase();
+        card.style.display = title.includes(keyword) ? "" : "none";
+      });
+    });
+
+    // Update visible counts per column (optional - basic)
+    function refreshCounts(){
+      document.querySelectorAll(".col").forEach(col => {
+        const cards = col.querySelectorAll(".card");
+        const visible = Array.from(cards).filter(c => c.style.display !== "none").length;
+        const badge = col.querySelector("[data-count]");
+        if (badge) badge.textContent = visible;
+      });
+    }
+    q.addEventListener("input", refreshCounts);
+  </script>
+</body>
+</html>
