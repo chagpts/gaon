@@ -37,7 +37,6 @@ body{
   width:260px;
   border-right:1px solid var(--border);
   background:#fff;
-  position:relative;
   transition:width .25s ease;
   display:flex;
   flex-direction:column;
@@ -45,41 +44,31 @@ body{
 .sidebar.collapsed{width:0}
 
 .sidebar-inner{
-  padding:18px 16px;
+  padding:16px;
   overflow:hidden;
   flex:1;
 }
 
-/* Sidebar toggle arrow */
-.sidebar-toggle{
-  position:absolute;
-  top:50%;
-  right:-12px;
-  transform:translateY(-50%);
-  width:24px;
-  height:32px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#fff;
+/* Brand + toggle */
+.sb-header{
   display:flex;
   align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:14px;
-  color:var(--muted);
-}
-
-/* Brand */
-.sb-brand{
-  display:flex;
-  justify-content:center;
-  margin-bottom:22px;
+  justify-content:space-between;
+  margin-bottom:20px;
 }
 .sb-logo-only{
-  max-width:180px;
   max-height:36px;
+  max-width:180px;
   object-fit:contain;
 }
+.sb-toggle{
+  font-size:16px;
+  color:var(--muted);
+  cursor:pointer;
+  padding:4px 6px;
+  border-radius:6px;
+}
+.sb-toggle:hover{background:var(--accent)}
 
 /* Sidebar items */
 .sb-item{
@@ -94,7 +83,7 @@ body{
   font-weight:600;
 }
 
-/* Contact (bottom) */
+/* Bottom contact */
 .sb-bottom{
   border-top:1px solid var(--border);
   padding:12px 16px;
@@ -116,40 +105,36 @@ body{
   width:240px;
   border-right:1px solid var(--border);
   background:#fff;
-  position:relative;
   transition:width .25s ease;
 }
 .sub-sidebar.collapsed{width:0}
 .sub-inner{
-  padding:18px 14px;
+  padding:16px;
   overflow:hidden;
 }
 
-/* Sub toggle */
-.sub-toggle{
-  position:absolute;
-  top:50%;
-  right:-12px;
-  transform:translateY(-50%);
-  width:24px;
-  height:32px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#fff;
+/* Sub header */
+.sub-header{
   display:flex;
   align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:14px;
-  color:var(--muted);
+  justify-content:space-between;
+  margin-bottom:14px;
 }
-
 .sub-title{
   font-size:12px;
   font-weight:700;
   color:var(--muted);
-  margin-bottom:14px;
 }
+.sub-toggle{
+  font-size:16px;
+  color:var(--muted);
+  cursor:pointer;
+  padding:4px 6px;
+  border-radius:6px;
+}
+.sub-toggle:hover{background:var(--accent)}
+
+/* Steps */
 .sub-step{
   display:flex;
   align-items:center;
@@ -198,7 +183,7 @@ body{
 }
 .title{font-weight:700}
 .top-right{
-  font-size:14px;
+  font-size:15px;
   font-weight:600;
   color:#374151;
 }
@@ -249,8 +234,10 @@ body{
   <!-- Primary Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
-      <div class="sb-brand">
+
+      <div class="sb-header">
         <img src="gaon.jpg" class="sb-logo-only" alt="GaonConnect">
+        <div class="sb-toggle" onclick="togglePrimary()">❮</div>
       </div>
 
       <div class="sb-item active">법인 설립</div>
@@ -258,24 +245,25 @@ body{
       <div class="sb-item">진행 현황</div>
     </div>
 
-    <!-- Bottom Contact -->
     <div class="sb-bottom">
       <div class="sb-contact">문의하기</div>
     </div>
-
-    <div class="sidebar-toggle" onclick="togglePrimary()">❮</div>
   </aside>
 
   <!-- Sub Sidebar -->
   <aside class="sub-sidebar" id="subSidebar">
     <div class="sub-inner">
-      <div class="sub-title">법인 설립 절차</div>
+
+      <div class="sub-header">
+        <div class="sub-title">법인 설립 절차</div>
+        <div class="sub-toggle" onclick="toggleSub()">❮</div>
+      </div>
+
       <div class="sub-step active"><span class="num">1</span>설립 법인 정보</div>
       <div class="sub-step"><span class="num">2</span>추가 정보</div>
       <div class="sub-step"><span class="num">3</span>결제 및 입금 확인</div>
       <div class="sub-step"><span class="num">4</span>사업장 소재지</div>
     </div>
-    <div class="sub-toggle" onclick="toggleSub()">❮</div>
   </aside>
 
   <!-- Main -->
@@ -306,16 +294,16 @@ body{
 <script>
 function togglePrimary(){
   const sb = document.getElementById('sidebar');
+  const btn = sb.querySelector('.sb-toggle');
   sb.classList.toggle('collapsed');
-  sb.querySelector('.sidebar-toggle').textContent =
-    sb.classList.contains('collapsed') ? '❯' : '❮';
+  btn.textContent = sb.classList.contains('collapsed') ? '❯' : '❮';
 }
 
 function toggleSub(){
   const ss = document.getElementById('subSidebar');
+  const btn = ss.querySelector('.sub-toggle');
   ss.classList.toggle('collapsed');
-  ss.querySelector('.sub-toggle').textContent =
-    ss.classList.contains('collapsed') ? '❯' : '❮';
+  btn.textContent = ss.classList.contains('collapsed') ? '❯' : '❮';
 }
 </script>
 
