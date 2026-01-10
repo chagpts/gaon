@@ -69,22 +69,43 @@ body{
 }
 
 /* Sidebar */
-.sb-title{font-weight:700;margin-bottom:12px}
+.sb-brand{
+  display:flex;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.sb-logo-only{
+  height:14px;          /* 텍스트 높이 수준 */
+  width:auto;
+  object-fit:contain;
+}
+
 .sb-item{
   padding:8px 10px;
   border-radius:8px;
   font-size:13px;
   cursor:pointer;
 }
-.sb-item.active{background:var(--accent);font-weight:600}
+.sb-item.active{
+  background:var(--accent);
+  font-weight:600;
+}
 
 /* Content */
 .content{
   padding:24px;
   overflow:auto;
 }
-.step-title{font-size:20px;font-weight:700}
-.step-desc{font-size:13px;color:var(--muted);margin-top:6px}
+.step-title{
+  font-size:20px;
+  font-weight:700;
+}
+.step-desc{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:6px;
+}
 
 /* Progress */
 .steps{
@@ -98,13 +119,8 @@ body{
   background:#e5e7eb;
   border-radius:999px;
 }
-.step.active{background:#111827}
-
-.sb-logo{
-  width:20px;
-  height:20px;
-  object-fit:contain;
-  border-radius:4px;
+.step.active{
+  background:#111827;
 }
 
 /* Form */
@@ -115,7 +131,9 @@ body{
   border-radius:var(--radius);
   padding:20px;
 }
-.form-group{margin-bottom:16px}
+.form-group{
+  margin-bottom:16px;
+}
 label{
   display:block;
   font-size:13px;
@@ -139,7 +157,9 @@ input, select{
   padding:10px 14px;
   cursor:pointer;
 }
-.radio input{margin-right:6px}
+.radio input{
+  margin-right:6px;
+}
 
 /* Footer / Actions */
 .actions{
@@ -155,8 +175,6 @@ input, select{
   border-radius:10px;
   cursor:pointer;
 }
-
-  
 </style>
 </head>
 
@@ -166,10 +184,12 @@ input, select{
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
+
+      <!-- Logo only -->
       <div class="sb-brand">
-        <img src="gaon.jpg" alt="GaonConnect Logo" class="sb-logo">
-        <span class="sb-title">GaonConnect</span>
+        <img src="gaon.jpg" alt="GaonConnect Logo" class="sb-logo-only">
       </div>
+
       <div class="sb-item active">법인 설립</div>
       <div class="sb-item">계좌 개설</div>
       <div class="sb-item">진행 현황</div>
