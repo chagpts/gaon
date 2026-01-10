@@ -30,9 +30,10 @@ body{
   display:flex;
   height:100vh;
   overflow:hidden;
+  position:relative;
 }
 
-/* ---------- Primary Sidebar ---------- */
+/* ================= Primary Sidebar ================= */
 .sidebar{
   width:260px;
   border-right:1px solid var(--border);
@@ -40,16 +41,20 @@ body{
   transition:width .25s ease;
   display:flex;
   flex-direction:column;
+  position:relative;
 }
-.sidebar.collapsed{width:0}
+.sidebar.collapsed{
+  width:0;
+}
 
+/* sidebar content */
 .sidebar-inner{
   padding:16px;
-  overflow:hidden;
   flex:1;
+  overflow:hidden;
 }
 
-/* Brand + toggle */
+/* header */
 .sb-header{
   display:flex;
   align-items:center;
@@ -61,16 +66,33 @@ body{
   max-width:180px;
   object-fit:contain;
 }
-.sb-toggle{
+
+/* toggle buttons */
+.sb-toggle,
+.sb-toggle-open{
   font-size:16px;
   color:var(--muted);
   cursor:pointer;
   padding:4px 6px;
   border-radius:6px;
 }
-.sb-toggle:hover{background:var(--accent)}
+.sb-toggle:hover,
+.sb-toggle-open:hover{
+  background:var(--accent);
+}
 
-/* Sidebar items */
+/* collapsed open handle (always visible) */
+.sb-toggle-open{
+  position:absolute;
+  left:0;
+  top:16px;
+  display:none;
+}
+.sidebar.collapsed .sb-toggle-open{
+  display:block;
+}
+
+/* menu */
 .sb-item{
   padding:9px 12px;
   border-radius:10px;
@@ -83,7 +105,7 @@ body{
   font-weight:600;
 }
 
-/* Bottom contact */
+/* bottom contact */
 .sb-bottom{
   border-top:1px solid var(--border);
   padding:12px 16px;
@@ -100,20 +122,43 @@ body{
   color:var(--text);
 }
 
-/* ---------- Sub Sidebar ---------- */
+/* ================= Sub Sidebar ================= */
 .sub-sidebar{
   width:240px;
   border-right:1px solid var(--border);
   background:#fff;
   transition:width .25s ease;
+  position:relative;
 }
-.sub-sidebar.collapsed{width:0}
+.sub-sidebar.collapsed{
+  width:0;
+}
+
+/* open handle */
+.sub-toggle-open{
+  position:absolute;
+  left:0;
+  top:60px;
+  font-size:16px;
+  color:var(--muted);
+  cursor:pointer;
+  padding:4px 6px;
+  border-radius:6px;
+  display:none;
+}
+.sub-sidebar.collapsed .sub-toggle-open{
+  display:block;
+}
+.sub-toggle-open:hover{
+  background:var(--accent);
+}
+
 .sub-inner{
   padding:16px;
   overflow:hidden;
 }
 
-/* Sub header */
+/* sub header */
 .sub-header{
   display:flex;
   align-items:center;
@@ -134,7 +179,7 @@ body{
 }
 .sub-toggle:hover{background:var(--accent)}
 
-/* Steps */
+/* steps */
 .sub-step{
   display:flex;
   align-items:center;
@@ -165,14 +210,14 @@ body{
   color:#fff;
 }
 
-/* ---------- Main ---------- */
+/* ================= Main ================= */
 .main{
   flex:1;
   display:flex;
   flex-direction:column;
 }
 
-/* Topbar */
+/* topbar */
 .topbar{
   height:56px;
   border-bottom:1px solid var(--border);
@@ -188,7 +233,7 @@ body{
   color:#374151;
 }
 
-/* Content */
+/* content */
 .content{
   padding:24px;
   overflow:auto;
@@ -203,7 +248,7 @@ body{
   margin-top:6px;
 }
 
-/* Progress */
+/* progress */
 .steps{
   display:flex;
   gap:6px;
@@ -217,7 +262,7 @@ body{
 }
 .step.active{background:#111827}
 
-/* Form */
+/* card */
 .form-card{
   max-width:720px;
   background:#fff;
@@ -233,8 +278,9 @@ body{
 
   <!-- Primary Sidebar -->
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-inner">
+    <div class="sb-toggle-open" onclick="togglePrimary()">❯</div>
 
+    <div class="sidebar-inner">
       <div class="sb-header">
         <img src="gaon.jpg" class="sb-logo-only" alt="GaonConnect">
         <div class="sb-toggle" onclick="togglePrimary()">❮</div>
@@ -252,8 +298,9 @@ body{
 
   <!-- Sub Sidebar -->
   <aside class="sub-sidebar" id="subSidebar">
-    <div class="sub-inner">
+    <div class="sub-toggle-open" onclick="toggleSub()">❯</div>
 
+    <div class="sub-inner">
       <div class="sub-header">
         <div class="sub-title">법인 설립 절차</div>
         <div class="sub-toggle" onclick="toggleSub()">❮</div>
@@ -293,17 +340,11 @@ body{
 
 <script>
 function togglePrimary(){
-  const sb = document.getElementById('sidebar');
-  const btn = sb.querySelector('.sb-toggle');
-  sb.classList.toggle('collapsed');
-  btn.textContent = sb.classList.contains('collapsed') ? '❯' : '❮';
+  document.getElementById('sidebar').classList.toggle('collapsed');
 }
 
 function toggleSub(){
-  const ss = document.getElementById('subSidebar');
-  const btn = ss.querySelector('.sub-toggle');
-  ss.classList.toggle('collapsed');
-  btn.textContent = ss.classList.contains('collapsed') ? '❯' : '❮';
+  document.getElementById('subSidebar').classList.toggle('collapsed');
 }
 </script>
 
