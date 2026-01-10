@@ -32,27 +32,53 @@ body{
   overflow:hidden;
 }
 
-/* Primary Sidebar */
+/* ---------- Primary Sidebar ---------- */
 .sidebar{
   width:260px;
   border-right:1px solid var(--border);
   background:#fff;
+  position:relative;
   transition:width .25s ease;
 }
-.sidebar.collapsed{width:0}
-.sidebar-inner{padding:18px 16px}
+.sidebar.collapsed{
+  width:0;
+}
+.sidebar-inner{
+  padding:18px 16px;
+  overflow:hidden;
+}
 
+/* Sidebar toggle arrow */
+.sidebar-toggle{
+  position:absolute;
+  top:50%;
+  right:-12px;
+  transform:translateY(-50%);
+  width:24px;
+  height:32px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:14px;
+  color:var(--muted);
+}
+.sidebar.collapsed .sidebar-toggle{
+  right:-12px;
+}
+
+/* Brand */
 .sb-brand{
   display:flex;
   justify-content:center;
-  align-items:center;
   margin-bottom:22px;
 }
 .sb-logo-only{
-  max-width:180px;     /* 사이드바 폭에 맞게 */
-  max-height:36px;     /* 텍스트 로고 느낌 */
-  width:auto;
-  height:auto;
+  max-width:180px;
+  max-height:36px;
   object-fit:contain;
 }
 
@@ -68,20 +94,41 @@ body{
   font-weight:600;
 }
 
-/* Sub Sidebar */
+/* ---------- Sub Sidebar ---------- */
 .sub-sidebar{
   width:240px;
   border-right:1px solid var(--border);
   background:#fff;
-  transform:translateX(-100%);
-  transition:transform .25s ease;
+  position:relative;
+  transition:width .25s ease, transform .25s ease;
 }
-.sub-sidebar.open{
-  transform:translateX(0);
+.sub-sidebar.collapsed{
+  width:0;
 }
 .sub-inner{
   padding:18px 14px;
+  overflow:hidden;
 }
+
+/* Sub sidebar toggle */
+.sub-toggle{
+  position:absolute;
+  top:50%;
+  right:-12px;
+  transform:translateY(-50%);
+  width:24px;
+  height:32px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:14px;
+  color:var(--muted);
+}
+
 .sub-title{
   font-size:12px;
   font-weight:700;
@@ -120,7 +167,7 @@ body{
   color:#fff;
 }
 
-/* Main */
+/* ---------- Main ---------- */
 .main{
   flex:1;
   display:flex;
@@ -136,26 +183,13 @@ body{
   justify-content:space-between;
   padding:0 18px;
 }
-.top-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.title{
+  font-weight:700;
 }
-.toggle-btn{
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:8px;
-  padding:6px 8px;
-  cursor:pointer;
-}
-.title{font-weight:700}
-
-/* ⬇️ 저작권 문구 강조 */
 .top-right{
   font-size:13px;
   font-weight:600;
   color:#374151;
-  white-space:nowrap;
 }
 
 /* Content */
@@ -199,41 +233,16 @@ body{
 }
 .form-group{margin-bottom:16px}
 label{
-  display:block;
   font-size:13px;
   font-weight:600;
+  display:block;
   margin-bottom:6px;
 }
-input, select{
+input{
   width:100%;
   padding:10px;
   border:1px solid var(--border);
   border-radius:10px;
-  font-size:14px;
-}
-.radio-group{
-  display:flex;
-  gap:12px;
-}
-.radio{
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:10px 14px;
-  cursor:pointer;
-}
-.radio input{margin-right:6px}
-.actions{
-  display:flex;
-  justify-content:flex-end;
-  margin-top:20px;
-}
-.btn{
-  background:#111827;
-  color:#fff;
-  border:none;
-  padding:10px 18px;
-  border-radius:10px;
-  cursor:pointer;
 }
 </style>
 </head>
@@ -245,53 +254,40 @@ input, select{
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
       <div class="sb-brand">
-        <img src="gaon.jpg" alt="GaonConnect Logo" class="sb-logo-only">
+        <img src="gaon.jpg" class="sb-logo-only">
       </div>
       <div class="sb-item active">법인 설립</div>
       <div class="sb-item">계좌 개설</div>
       <div class="sb-item">진행 현황</div>
     </div>
+    <div class="sidebar-toggle" onclick="togglePrimary()">❮</div>
   </aside>
 
   <!-- Sub Sidebar -->
-  <aside class="sub-sidebar open" id="subSidebar">
+  <aside class="sub-sidebar" id="subSidebar">
     <div class="sub-inner">
       <div class="sub-title">법인 설립 절차</div>
-
       <div class="sub-step active"><span class="num">1</span>설립 법인 정보</div>
       <div class="sub-step"><span class="num">2</span>추가 정보</div>
       <div class="sub-step"><span class="num">3</span>결제 및 입금 확인</div>
-      <div class="sub-step"><span class="num">4</span>사업장 소재지 / 가상 오피스</div>
-      <div class="sub-step"><span class="num">5</span>RA 등록</div>
-      <div class="sub-step"><span class="num">6</span>주정부 등록</div>
-      <div class="sub-step"><span class="num">7</span>SS-4 서명</div>
-      <div class="sub-step"><span class="num">8</span>EIN 신청</div>
-      <div class="sub-step"><span class="num">9</span>미국 법인 계좌 개설 정보</div>
-      <div class="sub-step"><span class="num">10</span>미국 법인 계좌 개설중</div>
+      <div class="sub-step"><span class="num">4</span>사업장 소재지</div>
     </div>
+    <div class="sub-toggle" onclick="toggleSub()">❮</div>
   </aside>
 
   <!-- Main -->
   <div class="main">
     <header class="topbar">
-      <div class="top-left">
-        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-        <div class="title">미국 법인 설립</div>
-      </div>
-      <div class="top-right">
-        © 2026 Tony Cha. All rights reserved.
-      </div>
+      <div class="title">미국 법인 설립</div>
+      <div class="top-right">© 2026 Tony Cha. All rights reserved.</div>
     </header>
 
     <main class="content">
       <div class="step-title">STEP 1. 설립 법인 정보 입력</div>
-      <div class="step-desc">
-        미국 내 법인 설립을 위한 필수 정보를 입력합니다.
-      </div>
+      <div class="step-desc">미국 내 법인 설립을 위한 필수 정보를 입력합니다.</div>
 
       <div class="steps">
         <div class="step active"></div>
-        <div class="step"></div>
         <div class="step"></div>
         <div class="step"></div>
         <div class="step"></div>
@@ -299,25 +295,8 @@ input, select{
 
       <div class="form-card">
         <div class="form-group">
-          <label>법인의 소유주</label>
-          <div class="radio-group">
-            <label class="radio"><input type="radio" checked> 개인</label>
-            <label class="radio"><input type="radio"> 한국 내 법인</label>
-          </div>
-        </div>
-
-        <div class="form-group">
           <label>성명 (여권 국문)</label>
           <input placeholder="홍길동">
-        </div>
-
-        <div class="form-group">
-          <label>성명 (여권 영문)</label>
-          <input placeholder="Hong Gil Dong">
-        </div>
-
-        <div class="actions">
-          <button class="btn">다음</button>
         </div>
       </div>
     </main>
@@ -325,23 +304,19 @@ input, select{
 </div>
 
 <script>
-function toggleSidebar(){
-  document.getElementById("sidebar").classList.toggle("collapsed");
+function togglePrimary(){
+  const sb = document.getElementById('sidebar');
+  sb.classList.toggle('collapsed');
+  sb.querySelector('.sidebar-toggle').textContent =
+    sb.classList.contains('collapsed') ? '❯' : '❮';
 }
 
-document.querySelectorAll('.sb-item').forEach(item=>{
-  item.addEventListener('click',()=>{
-    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-    item.classList.add('active');
-
-    const sub = document.getElementById('subSidebar');
-    if(item.textContent.includes('법인 설립')){
-      sub.classList.add('open');
-    }else{
-      sub.classList.remove('open');
-    }
-  });
-});
+function toggleSub(){
+  const ss = document.getElementById('subSidebar');
+  ss.classList.toggle('collapsed');
+  ss.querySelector('.sub-toggle').textContent =
+    ss.classList.contains('collapsed') ? '❯' : '❮';
+}
 </script>
 
 </body>
