@@ -8,13 +8,11 @@
 <style>
 :root{
   --bg:#ffffff;
-  --panel:#fbfbfa;
   --muted:#6b7280;
   --text:#111827;
   --border:#e5e7eb;
   --accent:#f3f4f6;
   --radius:14px;
-  --radius-sm:10px;
   --font: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR";
 }
 
@@ -28,7 +26,13 @@ body{
 }
 
 /* Layout */
-.app{display:flex;height:100vh;overflow:hidden}
+.app{
+  display:flex;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* Primary Sidebar */
 .sidebar{
   width:260px;
   border-right:1px solid var(--border);
@@ -37,7 +41,87 @@ body{
 }
 .sidebar.collapsed{width:0}
 .sidebar-inner{padding:14px}
-.main{flex:1;display:flex;flex-direction:column}
+
+.sb-brand{
+  display:flex;
+  align-items:center;
+  margin-bottom:16px;
+}
+.sb-logo-only{
+  height:14px;
+  width:auto;
+  object-fit:contain;
+}
+
+.sb-item{
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:13px;
+  cursor:pointer;
+}
+.sb-item.active{
+  background:var(--accent);
+  font-weight:600;
+}
+
+/* Sub Sidebar */
+.sub-sidebar{
+  width:240px;
+  border-right:1px solid var(--border);
+  background:#fff;
+  transform:translateX(-100%);
+  transition:transform .25s ease;
+}
+.sub-sidebar.open{
+  transform:translateX(0);
+}
+.sub-inner{
+  padding:16px 14px;
+}
+.sub-title{
+  font-size:12px;
+  font-weight:700;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+.sub-step{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:13px;
+  cursor:pointer;
+}
+.sub-step:hover{
+  background:var(--accent);
+}
+.sub-step.active{
+  background:#eef2ff;
+  font-weight:600;
+}
+.sub-step .num{
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  background:#e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:700;
+}
+.sub-step.active .num{
+  background:#111827;
+  color:#fff;
+}
+
+/* Main */
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
 
 /* Topbar */
 .topbar{
@@ -61,35 +145,10 @@ body{
   cursor:pointer;
 }
 .title{font-weight:700}
-
 .top-right{
   font-size:11px;
   color:var(--muted);
   white-space:nowrap;
-}
-
-/* Sidebar */
-.sb-brand{
-  display:flex;
-  align-items:center;
-  margin-bottom:16px;
-}
-
-.sb-logo-only{
-  height:14px;          /* 텍스트 높이 수준 */
-  width:auto;
-  object-fit:contain;
-}
-
-.sb-item{
-  padding:8px 10px;
-  border-radius:8px;
-  font-size:13px;
-  cursor:pointer;
-}
-.sb-item.active{
-  background:var(--accent);
-  font-weight:600;
 }
 
 /* Content */
@@ -131,9 +190,7 @@ body{
   border-radius:var(--radius);
   padding:20px;
 }
-.form-group{
-  margin-bottom:16px;
-}
+.form-group{margin-bottom:16px}
 label{
   display:block;
   font-size:13px;
@@ -157,11 +214,7 @@ input, select{
   padding:10px 14px;
   cursor:pointer;
 }
-.radio input{
-  margin-right:6px;
-}
-
-/* Footer / Actions */
+.radio input{margin-right:6px}
 .actions{
   display:flex;
   justify-content:flex-end;
@@ -181,18 +234,33 @@ input, select{
 <body>
 <div class="app">
 
-  <!-- Sidebar -->
+  <!-- Primary Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
-
-      <!-- Logo only -->
       <div class="sb-brand">
         <img src="gaon.jpg" alt="GaonConnect Logo" class="sb-logo-only">
       </div>
-
       <div class="sb-item active">법인 설립</div>
       <div class="sb-item">계좌 개설</div>
       <div class="sb-item">진행 현황</div>
+    </div>
+  </aside>
+
+  <!-- Sub Sidebar -->
+  <aside class="sub-sidebar open" id="subSidebar">
+    <div class="sub-inner">
+      <div class="sub-title">법인 설립 절차</div>
+
+      <div class="sub-step active"><span class="num">1</span>설립 법인 정보</div>
+      <div class="sub-step"><span class="num">2</span>추가 정보</div>
+      <div class="sub-step"><span class="num">3</span>결제 및 입금 확인</div>
+      <div class="sub-step"><span class="num">4</span>사업장 소재지 / 가상 오피스</div>
+      <div class="sub-step"><span class="num">5</span>RA 등록</div>
+      <div class="sub-step"><span class="num">6</span>주정부 등록</div>
+      <div class="sub-step"><span class="num">7</span>SS-4 서명</div>
+      <div class="sub-step"><span class="num">8</span>EIN 신청</div>
+      <div class="sub-step"><span class="num">9</span>미국 법인 계좌 개설 정보</div>
+      <div class="sub-step"><span class="num">10</span>미국 법인 계좌 개설중</div>
     </div>
   </aside>
 
@@ -203,7 +271,6 @@ input, select{
         <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
         <div class="title">미국 법인 설립</div>
       </div>
-
       <div class="top-right">
         © 2026 Tony Cha. All rights reserved.
       </div>
@@ -215,7 +282,6 @@ input, select{
         미국 내 법인 설립을 위한 필수 정보를 입력합니다.
       </div>
 
-      <!-- Progress -->
       <div class="steps">
         <div class="step active"></div>
         <div class="step"></div>
@@ -224,7 +290,6 @@ input, select{
         <div class="step"></div>
       </div>
 
-      <!-- Form -->
       <div class="form-card">
         <div class="form-group">
           <label>법인의 소유주</label>
@@ -244,24 +309,6 @@ input, select{
           <input placeholder="Hong Gil Dong">
         </div>
 
-        <div class="form-group">
-          <label>SSN or ITIN</label>
-          <input placeholder="123-45-6789">
-        </div>
-
-        <div class="form-group">
-          <label>설립 법인 형태</label>
-          <select>
-            <option>C-Corporation</option>
-            <option>LLC</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>설립할 법인명 (영문)</label>
-          <input placeholder="Gil Dong Inc.">
-        </div>
-
         <div class="actions">
           <button class="btn">다음</button>
         </div>
@@ -274,6 +321,20 @@ input, select{
 function toggleSidebar(){
   document.getElementById("sidebar").classList.toggle("collapsed");
 }
+
+document.querySelectorAll('.sb-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+
+    const sub = document.getElementById('subSidebar');
+    if(item.textContent.includes('법인 설립')){
+      sub.classList.add('open');
+    }else{
+      sub.classList.remove('open');
+    }
+  });
+});
 </script>
 
 </body>
