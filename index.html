@@ -39,13 +39,15 @@ body{
   background:#fff;
   position:relative;
   transition:width .25s ease;
+  display:flex;
+  flex-direction:column;
 }
-.sidebar.collapsed{
-  width:0;
-}
+.sidebar.collapsed{width:0}
+
 .sidebar-inner{
   padding:18px 16px;
   overflow:hidden;
+  flex:1;
 }
 
 /* Sidebar toggle arrow */
@@ -65,9 +67,6 @@ body{
   cursor:pointer;
   font-size:14px;
   color:var(--muted);
-}
-.sidebar.collapsed .sidebar-toggle{
-  right:-12px;
 }
 
 /* Brand */
@@ -89,9 +88,27 @@ body{
   font-size:13px;
   cursor:pointer;
 }
+.sb-item:hover{background:var(--accent)}
 .sb-item.active{
   background:var(--accent);
   font-weight:600;
+}
+
+/* Contact (bottom) */
+.sb-bottom{
+  border-top:1px solid var(--border);
+  padding:12px 16px;
+}
+.sb-contact{
+  font-size:12px;
+  color:var(--muted);
+  cursor:pointer;
+  padding:8px 10px;
+  border-radius:10px;
+}
+.sb-contact:hover{
+  background:var(--accent);
+  color:var(--text);
 }
 
 /* ---------- Sub Sidebar ---------- */
@@ -100,17 +117,15 @@ body{
   border-right:1px solid var(--border);
   background:#fff;
   position:relative;
-  transition:width .25s ease, transform .25s ease;
+  transition:width .25s ease;
 }
-.sub-sidebar.collapsed{
-  width:0;
-}
+.sub-sidebar.collapsed{width:0}
 .sub-inner{
   padding:18px 14px;
   overflow:hidden;
 }
 
-/* Sub sidebar toggle */
+/* Sub toggle */
 .sub-toggle{
   position:absolute;
   top:50%;
@@ -144,9 +159,7 @@ body{
   font-size:13px;
   cursor:pointer;
 }
-.sub-step:hover{
-  background:var(--accent);
-}
+.sub-step:hover{background:var(--accent)}
 .sub-step.active{
   background:#eef2ff;
   font-weight:600;
@@ -183,11 +196,9 @@ body{
   justify-content:space-between;
   padding:0 18px;
 }
-.title{
-  font-weight:700;
-}
+.title{font-weight:700}
 .top-right{
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
   color:#374151;
 }
@@ -219,9 +230,7 @@ body{
   background:#e5e7eb;
   border-radius:999px;
 }
-.step.active{
-  background:#111827;
-}
+.step.active{background:#111827}
 
 /* Form */
 .form-card{
@@ -230,19 +239,6 @@ body{
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:20px;
-}
-.form-group{margin-bottom:16px}
-label{
-  font-size:13px;
-  font-weight:600;
-  display:block;
-  margin-bottom:6px;
-}
-input{
-  width:100%;
-  padding:10px;
-  border:1px solid var(--border);
-  border-radius:10px;
 }
 </style>
 </head>
@@ -254,12 +250,19 @@ input{
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
       <div class="sb-brand">
-        <img src="gaon.jpg" class="sb-logo-only">
+        <img src="gaon.jpg" class="sb-logo-only" alt="GaonConnect">
       </div>
+
       <div class="sb-item active">법인 설립</div>
       <div class="sb-item">계좌 개설</div>
       <div class="sb-item">진행 현황</div>
     </div>
+
+    <!-- Bottom Contact -->
+    <div class="sb-bottom">
+      <div class="sb-contact">문의하기</div>
+    </div>
+
     <div class="sidebar-toggle" onclick="togglePrimary()">❮</div>
   </aside>
 
@@ -294,10 +297,7 @@ input{
       </div>
 
       <div class="form-card">
-        <div class="form-group">
-          <label>성명 (여권 국문)</label>
-          <input placeholder="홍길동">
-        </div>
+        <div>폼 영역</div>
       </div>
     </main>
   </div>
