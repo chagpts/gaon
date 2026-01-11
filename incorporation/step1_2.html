@@ -1,266 +1,282 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<title>Incorporation – Step 1</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GaonConnect — 법인 설립 시스템</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f7f7f5;
-  color: #2f3437;
-}
-
-/* Layout */
-.wrapper {
-  display: flex;
-  min-height: 100vh;
+:root{
+  --bg:#ffffff;
+  --muted:#6b7280;
+  --text:#111827;
+  --border:#e5e7eb;
+  --accent:#f3f4f6;
+  --primary:#4f46e5;
+  --radius:14px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR", sans-serif;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 260px;
-  background: #ffffff;
-  border-right: 1px solid #e6e6e3;
-  padding: 24px;
+*{box-sizing:border-box}
+html,body{height:100%; overflow: hidden;}
+body{
+  margin:0;
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
 }
 
-.sidebar h2 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 24px;
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* ================= Sidebar Styles ================= */
+.sidebar, .sub-sidebar {
+  border-right:1px solid var(--border);
+  background:#fff;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow: hidden;
+}
+.sidebar { width:260px; }
+.sub-sidebar { width:240px; }
+.sidebar.collapsed, .sub-sidebar.collapsed { width:0; border-right: none; }
+
+.sidebar-inner, .sub-inner { padding:16px; min-width: 240px; flex:1; }
+
+.sb-header, .sub-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+.sb-logo-only { max-height:36px; object-fit:contain; }
+.sb-toggle, .sub-toggle, .sb-toggle-open, .sub-toggle-open {
+  cursor:pointer; color: var(--muted); padding: 4px;
 }
 
-.step {
-  font-size: 14px;
-  padding: 10px 12px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  color: #6b6f73;
+.sb-toggle-open, .sub-toggle-open {
+  position: absolute; left: 10px; z-index: 10; background: #fff;
+  border: 1px solid var(--border); border-radius: 4px; display: none;
+}
+.sidebar.collapsed .sb-toggle-open { display: block; top: 16px; }
+.sub-sidebar.collapsed .sub-toggle-open { display: block; top: 60px; }
+
+.sb-item { padding:9px 12px; border-radius:10px; font-size:13px; cursor:pointer; transition: background 0.2s; }
+.sb-item:hover { background: var(--accent); }
+.sb-item.active { background: var(--accent); font-weight:600; }
+
+.sub-title { font-size:12px; font-weight:700; color:var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.sub-step {
+  display:flex; align-items:center; gap:10px; padding:8px 10px;
+  border-radius:10px; font-size:13px; color: var(--muted); cursor: pointer; transition: all 0.2s;
+}
+.sub-step.active { background:#eef2ff; color: var(--primary); font-weight:600; }
+.num {
+  width:20px; height:20px; border-radius:50%; background:var(--border);
+  color:var(--muted); display:flex; align-items:center; justify-content:center; font-size:11px;
+}
+.active .num { background: var(--primary); color: #fff; }
+
+/* ================= Main Content & Animation ================= */
+.main { flex:1; display:flex; flex-direction:column; background: #fff; }
+.topbar {
+  height:56px; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; padding:0 24px;
+}
+.top-right { font-size:13px; color:var(--muted); }
+
+.content-container { flex:1; overflow-y:auto; position: relative; }
+.step-content {
+  padding:40px 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: none; /* 기본적으로 숨김 */
+}
+.step-content.active {
+  display: block;
+  animation: slideUp 0.4s ease-out;
 }
 
-.step.active {
-  background: #f1f1ef;
-  color: #2f3437;
-  font-weight: 600;
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Main */
-.main {
-  flex: 1;
-  padding: 48px;
-}
+.step-title { font-size:24px; font-weight:700; letter-spacing: -0.02em; }
+.step-desc { font-size:14px; color:var(--muted); margin-top:8px; margin-bottom: 32px; }
 
-/* Card */
-.card {
-  max-width: 760px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+/* ================= Form Elements ================= */
+.form-card {
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:32px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
+.form-group { margin-bottom:24px; }
+label { display:block; font-size:13px; font-weight:600; margin-bottom:8px; color: #374151; }
+input, select {
+  width:100%; padding:12px; border:1px solid var(--border);
+  border-radius:10px; font-size:14px; transition: border-color 0.2s;
+}
+input:focus { outline: none; border-color: var(--primary); ring: 2px solid #eef2ff; }
 
-.card h1 {
-  font-size: 22px;
-  margin-bottom: 8px;
-}
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+.actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px; border-top: 1px solid var(--border); padding-top: 24px; }
 
-.card p.subtitle {
-  color: #6b6f73;
-  font-size: 14px;
-  margin-bottom: 32px;
+.btn {
+  padding:10px 24px; border-radius:8px; font-size:14px; font-weight: 500; cursor:pointer; transition: all 0.2s;
 }
+.btn-primary { background:var(--text); color:#fff; border:none; }
+.btn-primary:hover { background: #000; }
+.btn-secondary { background: #fff; color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--accent); }
 
-/* Form */
-.section {
-  margin-bottom: 32px;
-}
-
-.section h3 {
-  font-size: 16px;
-  margin-bottom: 16px;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  font-size: 13px;
-  color: #6b6f73;
-  margin-bottom: 6px;
-}
-
-.form-group input,
-.form-group select {
-  padding: 10px 12px;
-  border-radius: 6px;
-  border: 1px solid #dcdcdc;
-  font-size: 14px;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #b3b3b3;
-}
-
-/* Footer */
-.footer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 32px;
-}
-
-.footer button {
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-secondary {
-  background: #f1f1ef;
-}
-
-.btn-primary {
-  background: #2f3437;
-  color: #ffffff;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .wrapper {
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #e6e6e3;
-  }
-  .main {
-    padding: 24px;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-}
 </style>
 </head>
 
 <body>
+<div class="app">
 
-<div class="wrapper">
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <h2>법인 설립 절차</h2>
-    <div class="step active">1. 설립 법인 정보</div>
-    <div class="step">2. 추가 정보</div>
-    <div class="step">3. 결제 및 입금</div>
-    <div class="step">4. 사업장 주소</div>
-    <div class="step">5. RA 등록</div>
-    <div class="step">6. 주정부 등록</div>
-    <div class="step">7. SS-4 서명</div>
-    <div class="step">8. EIN 신청</div>
-    <div class="step">9. 계좌 개설</div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-toggle-open" onclick="togglePrimary()">❯</div>
+    <div class="sidebar-inner">
+      <div class="sb-header">
+        <img src="gaon.jpg" class="sb-logo-only" alt="Logo">
+        <div class="sb-toggle" onclick="togglePrimary()">❮</div>
+      </div>
+      <div class="sb-item active">법인 설립</div>
+      <div class="sb-item">계좌 개설</div>
+      <div class="sb-item">진행 현황</div>
+    </div>
   </aside>
 
-  <!-- Main -->
-  <main class="main">
-    <div class="card">
-      <h1>STEP 1. 설립 법인 정보 입력</h1>
-      <p class="subtitle">
-        미국 법인 설립을 위한 기본 정보를 입력해주세요.
-      </p>
-
-      <!-- Owner -->
-      <div class="section">
-        <h3>법인의 소유주</h3>
-        <div class="form-row">
-          <div class="form-group">
-            <label>성명 (국문)</label>
-            <input type="text" placeholder="홍길동">
-          </div>
-          <div class="form-group">
-            <label>성명 (영문)</label>
-            <input type="text" placeholder="Hong Gil Dong">
-          </div>
-        </div>
+  <aside class="sub-sidebar" id="subSidebar">
+    <div class="sub-toggle-open" onclick="toggleSub()">❯</div>
+    <div class="sub-inner">
+      <div class="sub-header">
+        <div class="sub-title">법인 설립 절차</div>
+        <div class="sub-toggle" onclick="toggleSub()">❮</div>
       </div>
+      <div id="step-menu">
+        <div class="sub-step active" onclick="goToStep(1)"><span class="num">1</span> 설립 법인 정보</div>
+        <div class="sub-step" onclick="goToStep(2)"><span class="num">2</span> 추가 정보 입력</div>
+        <div class="sub-step" onclick="goToStep(3)"><span class="num">3</span> 결제 및 입금 확인</div>
+        <div class="sub-step" onclick="goToStep(4)"><span class="num">4</span> 사업장 소재지</div>
+      </div>
+    </div>
+  </aside>
 
-      <!-- ID -->
-      <div class="section">
-        <div class="form-row">
+  <div class="main">
+    <header class="topbar">
+      <div style="font-weight: 600;">미국 법인 설립 대시보드</div>
+      <div class="top-right">© 2026 Tony Cha.</div>
+    </header>
+
+    <div class="content-container">
+      
+      <section id="step1" class="step-content active">
+        <div class="step-title">STEP 1. 설립 법인 정보 입력</div>
+        <div class="step-desc">미국 내 법인 설립을 위한 필수 정보를 입력받습니다.</div>
+        <div class="form-card">
           <div class="form-group">
-            <label>SSN 또는 ITIN</label>
-            <input type="text" placeholder="123-45-6789">
+            <label>성명 (국문/영문)</label>
+            <div class="grid-2">
+              <input placeholder="홍길동">
+              <input placeholder="Hong Gil Dong">
+            </div>
           </div>
           <div class="form-group">
             <label>여권 사본</label>
-            <input type="file">
+            <input type="file" style="border:none; padding:0;">
+          </div>
+          <div class="form-group">
+            <label>설립 법인명 (1순위)</label>
+            <input placeholder="Gil Dong Inc.">
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="goToStep(2)">다음 단계로</button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Company -->
-      <div class="section">
-        <h3>설립 법인 정보</h3>
-        <div class="form-row">
+      <section id="step2" class="step-content">
+        <div class="step-title">STEP 2. 추가 정보 입력</div>
+        <div class="step-desc">법인의 주요 활동 및 추가 세부 정보를 입력해주세요.</div>
+        <div class="form-card">
           <div class="form-group">
-            <label>법인 형태</label>
+            <label>주요 사업 목적</label>
+            <input placeholder="예: IT 컨설팅, 전자상거래">
+          </div>
+          <div class="form-group">
+            <label>예상 연매출</label>
             <select>
-              <option>C-Corporation</option>
-              <option>LLC</option>
+              <option>$0 - $50,000</option>
+              <option>$50,000 - $200,000</option>
+              <option>$200,000+</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>설립 주(State)</label>
-            <input type="text" placeholder="California">
+          <div class="actions">
+            <button class="btn btn-secondary" onclick="goToStep(1)">이전</button>
+            <button class="btn btn-primary" onclick="goToStep(3)">다음 단계로</button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Name -->
-      <div class="section">
-        <div class="form-row">
-          <div class="form-group">
-            <label>법인명 (영문)</label>
-            <input type="text" placeholder="Gil Dong Inc.">
-          </div>
-          <div class="form-group">
-            <label>차순위 법인명</label>
-            <input type="text" placeholder="Gil Dong Holdings Inc.">
+      <section id="step3" class="step-content">
+        <div class="step-title">STEP 3. 결제 및 입금 확인</div>
+        <div class="step-desc">설립 비용 결제를 진행합니다.</div>
+        <div class="form-card">
+          <p>결제 모듈이 여기에 들어갑니다.</p>
+          <div class="actions">
+            <button class="btn btn-secondary" onclick="goToStep(2)">이전</button>
+            <button class="btn btn-primary" onclick="alert('완료!')">결제하기</button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Footer -->
-      <div class="footer">
-        <button class="btn-secondary">이전</button>
-        <button class="btn-primary">다음</button>
-      </div>
     </div>
-  </main>
-
+  </div>
 </div>
 
+<script>
+// 사이드바 토글 함수
+function togglePrimary(){
+  document.getElementById('sidebar').classList.toggle('collapsed');
+}
+function toggleSub(){
+  document.getElementById('subSidebar').classList.toggle('collapsed');
+}
+
+// 핵심: 단계 전환 함수
+function goToStep(stepNumber) {
+  // 1. 모든 콘텐츠 섹션 비활성화
+  const sections = document.querySelectorAll('.step-content');
+  sections.forEach(sec => sec.classList.remove('active'));
+
+  // 2. 선택한 단계 콘텐츠 활성화
+  const targetSection = document.getElementById('step' + stepNumber);
+  if (targetSection) {
+    targetSection.classList.add('active');
+  }
+
+  // 3. 사이드바 메뉴 하이라이트 변경
+  const menuItems = document.querySelectorAll('.sub-step');
+  menuItems.forEach((item, index) => {
+    if (index + 1 === stepNumber) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+
+  // 4. 스크롤을 맨 위로 부드럽게 이동
+  document.querySelector('.content-container').scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+</script>
 </body>
 </html>
