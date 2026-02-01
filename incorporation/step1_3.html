@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>외환(해외직접투자) vs 국제조세조정법 제출의무</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0b0b0b;
+      --muted:#6b7280;
+      --line:#ececec;
+      --card:#fbfbfb;
+      --accent:#ff8a00;
+      --shadow: 0 18px 50px rgba(0,0,0,.06);
+      --radius: 28px;
+      --max: 980px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding: 0 20px; }
+
+    /* Top bar (PDF 상단 느낌) */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(236,236,236,.7);
+    }
+    .topbar-inner{
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      height:64px;
+      gap:10px;
+    }
+    .topbar-left{ font-size:12px; color:var(--muted); }
+    .brand{ font-size:13px; letter-spacing:.2px; color:#111; text-align:center; }
+    .topbar-right{ text-align:right; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      height:34px; padding:0 14px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      font-size:12px;
+      color:#111;
+      background:#fff;
+    }
+    .btn:hover{ border-color:#dcdcdc; }
+
+    /* Hero */
+    .hero{
+      padding: 46px 0 10px;
+    }
+    .hero-card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px 34px 32px;
+      text-align:center;
+    }
+    .eyebrow{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.2px;
+      margin-bottom:10px;
+    }
+    .hero-title{
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      margin: 0 0 14px;
+      line-height:1.18;
+    }
+    .hero-sub{
+      font-size: 14px;
+      color: #111;
+      margin: 0 0 16px;
+    }
+    .hero-desc{
+      font-size: 14px;
+      color: #444;
+      margin: 0;
+    }
+    mark{
+      background: rgba(255,138,0,.22);
+      color: inherit;
+      padding: .08em .28em;
+      border-radius: 10px;
+    }
+    .meta{
+      margin-top: 14px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* Section titles */
+    .section{
+      padding: 54px 0;
+    }
+    .section-title{
+      text-align:center;
+      font-size: clamp(20px, 2.6vw, 32px);
+      font-weight: 800;
+      margin:0 0 10px;
+    }
+    .section-sub{
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
+      margin:0 0 26px;
+    }
+
+    /* Comparison grid */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 860px){
+      .grid-2{
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .card p{
+      margin:0;
+      font-size: 13px;
+      color:#444;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:12px;
+      color:#111;
+      margin-bottom: 10px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px; background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255,138,0,.16);
+    }
+    .list{
+      margin: 10px 0 0 0;
+      padding-left: 18px;
+      color:#444;
+      font-size:13px;
+    }
+    .list li{ margin: 6px 0; }
+
+    /* Simple timeline rows */
+    .rows{
+      display:grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .row{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+      background:#fff;
+    }
+    .row-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .row-title{
+      font-weight:800;
+      font-size:14px;
+      margin:0;
+    }
+    .when{
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      margin-top:2px;
+    }
+    .what{
+      font-size:13px;
+      color:#444;
+      margin:0;
+    }
+
+    /* FAQ accordion */
+    .faq{
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    details{
+      border-bottom:1px solid var(--line);
+      padding: 16px 0;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:800;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width: 10px; height: 10px;
+      border-right:2px solid #111;
+      border-bottom:2px solid #111;
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      opacity:.7;
+      flex: 0 0 auto;
+      margin-left: 10px;
+    }
+    details[open] .chev{ transform: rotate(225deg); }
+    .faq-body{
+      margin: 10px 0 0;
+      color:#444;
+      font-size:13px;
+    }
+
+    /* Footer (PDF 하단 컬럼 느낌) */
+    footer{
+      border-top:1px solid var(--line);
+      padding: 40px 0 28px;
+      margin-top: 10px;
+      color:#111;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media(min-width: 860px){
+      .footer-grid{
+        grid-template-columns: 1.2fr 1fr 1fr 1fr;
+        gap: 16px;
+      }
+    }
+    .footer-title{
+      font-size:12px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-weight:700;
+    }
+    .footer-link{
+      display:block;
+      font-size:13px;
+      color:#111;
+      margin: 7px 0;
+      opacity:.9;
+    }
+    .footer-link:hover{ opacity:1; text-decoration:underline; }
+    .copyright{
+      margin-top: 24px;
+      font-size:12px;
+      color: var(--muted);
+    }
+
+    /* Small CTA */
+    .cta{
+      margin-top: 26px;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn-primary{
+      border:1px solid rgba(255,138,0,.35);
+      background: rgba(255,138,0,.10);
+    }
+    .btn-primary:hover{
+      background: rgba(255,138,0,.14);
+      border-color: rgba(255,138,0,.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="topbar-left" id="nowText">—</div>
+        <div class="brand">Gaon Connect</div>
+        <div class="topbar-right">
+          <a class="btn" href="#contact">문의하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="eyebrow">해외 투자/운영 시 반드시 구분해야 할 의무</div>
+        <h1 class="hero-title">
+          외환(해외직접투자) 신고 vs<br/>국제조세조정법 자료제출
+        </h1>
+        <div class="hero-sub">— “은행(외환)” 절차와 “세무서(국제조세)” 제출은 서로 대체되지 않습니다 —</div>
+        <p class="hero-desc">
+          <mark>외환</mark>은 해외로 돈·지분이 이동하는 <mark>자본거래</mark> 관리,
+          <mark>국제조세</mark>는 해외현지법인 보유 및 국제거래에 대한 <mark>세무자료 제출</mark>입니다.
+        </p>
+        <div class="meta">* 이 페이지는 고객 안내용 요약본입니다. (케이스별 세부 의무는 거래유형/규모에 따라 달라질 수 있습니다.)</div>
+
+        <div class="cta">
+          <a class="btn btn-primary" href="#compare">한눈에 비교 보기</a>
+          <a class="btn" href="#faq">자주 묻는 질문</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="section" id="compare">
+    <div class="container">
+      <h2 class="section-title">어떤 의무가 해당되나요?</h2>
+      <p class="section-sub">아래는 실무에서 가장 많이 혼동하는 포인트를 중심으로 정리했습니다.</p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="badge"><span class="dot"></span>외환(해외직접투자) 신고</div>
+          <h3>핵심 질문</h3>
+          <p>“해외로 자금/지분이 이동했나? (자본거래인가?)”</p>
+
+          <ul class="list">
+            <li>신고/보고 창구: 통상 <strong>지정 외국환은행</strong></li>
+            <li>주요 범위: 해외법인 설립·증자 참여·지분취득, 대여/회수 등</li>
+            <li>실무 포인트: 송금/취득/변경/청산 등 <strong>사유 발생 시점</strong>에 맞춰 진행</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="badge"><span class="dot"></span>국제조세조정법 자료제출</div>
+          <h3>핵심 질문</h3>
+          <p>“해외현지법인을 보유했나? 국제거래 규모가 기준을 넘나?”</p>
+
+          <ul class="list">
+            <li>제출처: <strong>납세지 관할 세무서</strong></li>
+            <li>기본 구조: 보유/거래가 있으면 통상 <strong>과세기간 종료 후 6개월 내</strong> 제출</li>
+            <li>추가 의무: Local/Master, CbCR 등은 <strong>일정 기준 충족 시</strong> 발생</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>절대 헷갈리면 안 되는 한 줄</h3>
+          <p>
+            외환 신고를 했다고 국제조세 자료제출이 면제되지 않고,
+            국제조세 자료를 냈다고 외환 신고가 자동으로 처리되지 않습니다.
+          </p>
+        </div>
+        <div class="card">
+          <h3>안전한 문구(고객 안내용)</h3>
+          <p>
+            “외환은 은행 절차(자본거래), 국제조세는 세무서 제출(해외현지법인/국제거래)로 목적과 시점이 다릅니다.”
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOREIGN EXCHANGE (외환) -->
+  <section class="section" id="fx">
+    <div class="container">
+      <h2 class="section-title">외환(해외직접투자) 신고 흐름</h2>
+      <p class="section-sub">PDF 스타일처럼 “언제 / 무엇을” 중심으로 간단 명료하게</p>
+
+      <div class="rows">
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">설립/투자(자본금 불입·지분취득)</p>
+            <div class="when">사유 발생 전후 (거래유형별)</div>
+          </div>
+          <p class="what">해외법인 설립·증자 참여·지분 취득 등 해외직접투자에 해당하는 거래를 은행 절차에 따라 신고/증빙 제출합니다.</p>
+        </div>
+
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">운영(추가 자본거래·변동)</p>
+            <div class="when">변경/추가 발생 시</div>
+          </div>
+          <p class="what">추가 증자, 대여, 주요사항 변경 등 자본거래 변동이 있으면 관련 보고/신고가 추가될 수 있습니다.</p>
+        </div>
+
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">청산/회수(청산 배당·대여금 회수 등)</p>
+            <div class="when">회수 직후 등 (거래유형별)</div>
+          </div>
+          <p class="what">청산 사실과 회수 내역(원금/이자 포함 등)을 은행을 통해 보고합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNATIONAL TAX (국제조세) -->
+  <section class="section" id="ita">
+    <div class="container">
+      <h2 class="section-title">국제조세조정법 제출의무 흐름</h2>
+      <p class="section-sub">“설립 시”가 아니라 “보유/거래가 있었는지”가 출발점</p>
+
+      <div class="rows">
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">기본 제출 (해외현지법인 보유)</p>
+            <div class="when">과세기간 종료 후 6개월 이내</div>
+          </div>
+          <p class="what">해외현지법인을 보유한 경우, 관할 세무서에 해외현지법인명세서 등 관련 자료를 제출합니다.</p>
+        </div>
+
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">추가 제출 (개별/통합보고서 등)</p>
+            <div class="when">국제거래 규모 등 기준 충족 시</div>
+          </div>
+          <p class="what">Local file/Master file 등은 모든 회사가 아니라, 매출·국외특수관계 거래 규모 등 일정 요건 충족 시 제출의무가 발생합니다.</p>
+        </div>
+
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">청산/지분 전부 처분</p>
+            <div class="when">해당 과세기간 보유분 정리</div>
+          </div>
+          <p class="what">청산 또는 지분 전부 처분을 하더라도, 해당 과세기간에 보유/거래가 있었다면 그 기간분 제출의무가 남을 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-sub">필요한 부분만 빠르게 확인하세요.</p>
+
+      <div class="faq">
+        <details>
+          <summary>외환(해외직접투자) 신고를 하면 국제조세 자료제출은 안 해도 되나요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            아닙니다. 외환 신고는 “은행/외환” 절차이고, 국제조세 자료제출은 “세무서” 제출 의무입니다. 목적과 기관이 달라 서로 대체되지 않습니다.
+          </div>
+        </details>
+
+        <details>
+          <summary>국제조세 제출은 ‘설립할 때’ 바로 해야 하나요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            보통은 “설립 시점”이 아니라, 해당 과세기간에 해외현지법인을 보유/거래했는지에 따라 과세기간 종료 후 6개월 내 제출하는 구조입니다.
+          </div>
+        </details>
+
+        <details>
+          <summary>Local file/Master file, 국가별보고서(CbCR)는 모두 대상인가요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            모두가 대상은 아닙니다. 국제거래 규모·매출 등 일정 기준을 충족하는 경우에만 추가 제출의무가 발생합니다.
+          </div>
+        </details>
+
+        <details>
+          <summary>청산하거나 지분을 전부 팔면 제출의무가 없어지나요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            “해당 과세기간에 보유/거래가 있었는지”가 핵심입니다. 그 기간에 보유분이 있었다면 제출의무가 남을 수 있습니다.
+          </div>
+        </details>
+      </div>
+
+      <div class="cta" id="contact">
+        <a class="btn btn-primary" href="mailto:contact@example.com">문의하기</a>
+        <a class="btn" href="#compare">상단으로</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-title">©2025 Gaon Connect. All rights reserved.</p>
+          <div class="footer-link" style="opacity:.75">서울 종로구 새문안로 76 콘코디언빌딩 3층</div>
+        </div>
+
+        <div>
+          <p class="footer-title">About 및 법인 소개</p>
+          <a class="footer-link" href="#">About Us</a>
+          <a class="footer-link" href="#">미국 법인 소개</a>
+          <a class="footer-link" href="#">미국 법인 설립</a>
+          <a class="footer-link" href="#">기장</a>
+        </div>
+
+        <div>
+          <p class="footer-title">Our Services</p>
+          <a class="footer-link" href="#">법인 세금 보고</a>
+          <a class="footer-link" href="#">주 정부 유지 보고</a>
+          <a class="footer-link" href="#">RA 등록·갱신</a>
+          <a class="footer-link" href="#">외환/국제조세 컴플라이언스</a>
+        </div>
+
+        <div>
+          <p class="footer-title">FAQ 및 소식</p>
+          <a class="footer-link" href="#faq">FAQ</a>
+          <a class="footer-link" href="#">공지사항</a>
+          <a class="footer-link" href="#">뉴스</a>
+          <a class="footer-link" href="#">이벤트</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        * 본 페이지는 일반 안내용이며, 거래유형/규모/특수관계 여부에 따라 의무가 달라질 수 있습니다.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 상단 좌측 날짜/시간 (PDF에 찍힌 느낌)
+    (function(){
+      const el = document.getElementById('nowText');
+      const d = new Date();
+      const pad = n => String(n).padStart(2,'0');
+      const yy = String(d.getFullYear()).slice(2);
+      const mm = pad(d.getMonth()+1);
+      const dd = pad(d.getDate());
+      const hr = d.getHours();
+      const min = pad(d.getMinutes());
+      const ampm = hr < 12 ? '오전' : '오후';
+      const h12 = ((hr + 11) % 12) + 1;
+      el.textContent = `${yy}. ${mm}. ${dd}. ${ampm} ${h12}:${min}`;
+    })();
+  </script>
+</body>
+</html>
