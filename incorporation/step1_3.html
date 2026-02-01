@@ -325,11 +325,9 @@
         </h1>
         <div class="hero-sub">— “은행(외환)” 절차와 “세무서(국제조세)” 제출은 서로 대체되지 않습니다 —</div>
         <p class="hero-desc">
-          <mark>외환</mark>은 해외로 돈·지분이 이동하는 <mark>자본거래</mark> 관리,
-          <mark>국제조세</mark>는 해외현지법인 보유 및 국제거래에 대한 <mark>세무자료 제출</mark>입니다.
+          외환은 해외로 돈·지분이 이동하는 자본거래 관리,
+          국제조세는 해외현지법인 보유 및 국제거래에 대한 세무자료 제출입니다.
         </p>
-        <div class="meta">* 이 페이지는 고객 안내용 요약본입니다. (케이스별 세부 의무는 거래유형/규모에 따라 달라질 수 있습니다.)</div>
-
         <div class="cta">
           <a class="btn btn-primary" href="#compare">한눈에 비교 보기</a>
           <a class="btn" href="#faq">자주 묻는 질문</a>
@@ -535,27 +533,9 @@
         </div>
       </div>
 
-      <div class="copyright">
-        * 본 페이지는 일반 안내용이며, 거래유형/규모/특수관계 여부에 따라 의무가 달라질 수 있습니다.
-      </div>
+    
     </div>
   </footer>
 
-  <script>
-    // 상단 좌측 날짜/시간 (PDF에 찍힌 느낌)
-    (function(){
-      const el = document.getElementById('nowText');
-      const d = new Date();
-      const pad = n => String(n).padStart(2,'0');
-      const yy = String(d.getFullYear()).slice(2);
-      const mm = pad(d.getMonth()+1);
-      const dd = pad(d.getDate());
-      const hr = d.getHours();
-      const min = pad(d.getMinutes());
-      const ampm = hr < 12 ? '오전' : '오후';
-      const h12 = ((hr + 11) % 12) + 1;
-      el.textContent = `${yy}. ${mm}. ${dd}. ${ampm} ${h12}:${min}`;
-    })();
-  </script>
 </body>
 </html>
