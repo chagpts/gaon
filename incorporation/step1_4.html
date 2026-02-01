@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>국제조세조정법 자료제출 의무 정리</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0b0b0b;
+      --muted:#6b7280;
+      --line:#ececec;
+      --card:#fbfbfb;
+      --accent:#ff8a00;
+      --shadow: 0 18px 50px rgba(0,0,0,.06);
+      --radius: 28px;
+      --max: 980px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding: 0 20px; }
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(236,236,236,.7);
+    }
+    .topbar-inner{
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      height:64px;
+      gap:10px;
+    }
+    .topbar-left{ font-size:12px; color:var(--muted); }
+    .brand{ font-size:13px; letter-spacing:.2px; color:#111; text-align:center; }
+    .topbar-right{ text-align:right; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      height:34px; padding:0 14px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      font-size:12px;
+      color:#111;
+      background:#fff;
+    }
+    .btn:hover{ border-color:#dcdcdc; }
+
+    /* Hero */
+    .hero{ padding: 46px 0 10px; }
+    .hero-card{
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px 34px 32px;
+      text-align:center;
+    }
+    .eyebrow{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.2px;
+      margin-bottom:10px;
+    }
+    .hero-title{
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      margin: 0 0 14px;
+      line-height:1.18;
+    }
+    .hero-sub{
+      font-size: 14px;
+      color: #111;
+      margin: 0 0 16px;
+    }
+    .hero-desc{
+      font-size: 14px;
+      color: #444;
+      margin: 0;
+    }
+    mark{
+      background: rgba(255,138,0,.22);
+      color: inherit;
+      padding: .08em .28em;
+      border-radius: 10px;
+    }
+    .meta{
+      margin-top: 14px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* Section */
+    .section{ padding: 54px 0; }
+    .section-title{
+      text-align:center;
+      font-size: clamp(20px, 2.6vw, 32px);
+      font-weight: 800;
+      margin:0 0 10px;
+    }
+    .section-sub{
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
+      margin:0 0 26px;
+    }
+
+    /* Cards / grids */
+    .grid{ display:grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 860px){
+      .grid-2{ grid-template-columns: 1fr 1fr; gap: 16px; }
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .card p{ margin:0; font-size: 13px; color:#444; }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:12px;
+      color:#111;
+      margin-bottom: 10px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px; background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255,138,0,.16);
+    }
+
+    .list{
+      margin: 10px 0 0 0;
+      padding-left: 18px;
+      color:#444;
+      font-size:13px;
+    }
+    .list li{ margin: 6px 0; }
+
+    /* Rows */
+    .rows{ display:grid; gap: 12px; margin-top: 8px; }
+    .row{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+      background:#fff;
+    }
+    .row-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .row-title{ font-weight:800; font-size:14px; margin:0; }
+    .when{ font-size:12px; color:var(--muted); white-space:nowrap; margin-top:2px; }
+    .what{ font-size:13px; color:#444; margin:0; }
+
+    /* FAQ */
+    .faq{ max-width: 860px; margin: 0 auto; }
+    details{
+      border-bottom:1px solid var(--line);
+      padding: 16px 0;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:800;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width: 10px; height: 10px;
+      border-right:2px solid #111;
+      border-bottom:2px solid #111;
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      opacity:.7;
+      flex: 0 0 auto;
+      margin-left: 10px;
+    }
+    details[open] .chev{ transform: rotate(225deg); }
+    .faq-body{
+      margin: 10px 0 0;
+      color:#444;
+      font-size:13px;
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid var(--line);
+      padding: 40px 0 28px;
+      margin-top: 10px;
+      color:#111;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media(min-width: 860px){
+      .footer-grid{
+        grid-template-columns: 1.2fr 1fr 1fr 1fr;
+        gap: 16px;
+      }
+    }
+    .footer-title{
+      font-size:12px;
+      color:var(--muted);
+      margin:0 0 10px;
+      font-weight:700;
+    }
+    .footer-link{
+      display:block;
+      font-size:13px;
+      color:#111;
+      margin: 7px 0;
+      opacity:.9;
+    }
+    .footer-link:hover{ opacity:1; text-decoration:underline; }
+    .copyright{
+      margin-top: 24px;
+      font-size:12px;
+      color: var(--muted);
+    }
+
+    /* CTA */
+    .cta{
+      margin-top: 26px;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn-primary{
+      border:1px solid rgba(255,138,0,.35);
+      background: rgba(255,138,0,.10);
+    }
+    .btn-primary:hover{
+      background: rgba(255,138,0,.14);
+      border-color: rgba(255,138,0,.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="topbar-left" id="nowText">—</div>
+        <div class="brand">Gaon Connect</div>
+        <div class="topbar-right">
+          <a class="btn" href="#contact">문의하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="eyebrow">국제조세 컴플라이언스 핵심 정리</div>
+        <h1 class="hero-title">
+          국제조세조정법<br/>자료제출 의무
+        </h1>
+        <div class="hero-sub">— 해외현지법인 보유/국제거래가 있으면 “과세기간 종료 후 6개월”이 기본 축입니다 —</div>
+        <p class="hero-desc">
+          이 페이지는 고객 안내를 위한 요약본이며,
+          <mark>해외현지법인명세서</mark> 및 <mark>개별·통합보고서(Local/Master)</mark>,
+          <mark>국가별보고서(CbCR)</mark>의 “대상/시점”을 헷갈리지 않도록 정리했습니다.
+        </p>
+        <div class="meta">* 케이스별 의무는 규모·거래유형·특수관계 여부에 따라 달라질 수 있습니다.</div>
+
+        <div class="cta">
+          <a class="btn btn-primary" href="#core">핵심만 보기</a>
+          <a class="btn" href="#faq">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE -->
+  <section class="section" id="core">
+    <div class="container">
+      <h2 class="section-title">제출의무 핵심 구조</h2>
+      <p class="section-sub">“설립 시”가 아니라 “해당 과세기간 보유/거래 여부”가 출발점입니다.</p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="badge"><span class="dot"></span>제출처</div>
+          <h3>납세지 관할 세무서</h3>
+          <p>국제조세조정법상 자료는 원칙적으로 <strong>납세지 관할 세무서장</strong>에게 제출합니다.</p>
+        </div>
+
+        <div class="card">
+          <div class="badge"><span class="dot"></span>기본 기한</div>
+          <h3>과세기간 종료 후 6개월 이내</h3>
+          <p>해외현지법인 보유 등 요건 충족 시, 기본적으로 <strong>과세기간 종료 후 6개월 이내</strong> 제출합니다.</p>
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>기본 제출(대부분 해당)</h3>
+          <p>해외현지법인을 보유한 거주자는 통상 <strong>해외현지법인명세서</strong> 등 기본 자료 제출 의무가 발생합니다.</p>
+          <ul class="list">
+            <li>해외현지법인 보유 여부가 핵심 트리거</li>
+            <li>제출기한: 과세기간 종료 후 6개월</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>추가 제출(일정 기준 충족 시)</h3>
+          <p>국외특수관계자 거래 규모 등 기준을 충족하면 <strong>개별/통합보고서(Local/Master)</strong> 제출 의무가 추가될 수 있습니다.</p>
+          <ul class="list">
+            <li>모든 회사가 제출하는 서류가 아님</li>
+            <li>기준 충족 여부 판단 필요</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="section" id="flow">
+    <div class="container">
+      <h2 class="section-title">실무 흐름(설립·운영·청산)</h2>
+      <p class="section-sub">각 단계별로 “무엇을/언제”만 남겨 간단하게 구성했습니다.</p>
+
+      <div class="rows">
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">설립/보유 단계</p>
+            <div class="when">과세기간 종료 후 6개월 이내</div>
+          </div>
+          <p class="what">
+            “설립 시점” 자체가 아니라, 해당 과세기간에 해외현지법인을 <strong>보유</strong>했다면
+            과세기간 종료 후 6개월 내 <strong>해외현지법인명세서 등</strong>을 제출합니다.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">운영 단계</p>
+            <div class="when">기본: 6개월 / 추가: 기준 충족 시</div>
+          </div>
+          <p class="what">
+            기본적으로 해외현지법인명세서 등은 과세기간 종료 후 6개월 내 제출합니다.
+            다만 국제거래 규모 요건을 충족하면 <strong>Local file/Master file</strong> 등 추가 제출의무가 발생할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">국가별보고서(CbCR)</p>
+            <div class="when">다국적기업집단 요건 충족 시</div>
+          </div>
+          <p class="what">
+            CbCR은 “가능성” 문제가 아니라, <strong>다국적기업집단 매출요건 등</strong>을 충족하는 경우에만 제출의무가 발생합니다.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="row-head">
+            <p class="row-title">청산/지분 전부 양도 단계</p>
+            <div class="when">해당 과세기간 보유분 정리</div>
+          </div>
+          <p class="what">
+            외국법인을 청산하거나 지분을 전부 처분하더라도, 해당 과세기간에 보유/거래가 있었다면
+            그 기간분에 대해 제출의무가 <strong>남을 수 있습니다</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <h2 class="section-title">자주 묻는 질문</h2>
+      <p class="section-sub">고객 문의에서 가장 많이 나오는 포인트만 추렸습니다.</p>
+
+      <div class="faq">
+        <details>
+          <summary>“설립 시 제출”이 맞나요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            안전하게는 “설립 시점”이 아니라, 해당 과세기간에 해외현지법인을 보유/거래했는지에 따라
+            과세기간 종료 후 6개월 내 제출하는 구조라고 안내하는 것이 맞습니다.
+          </div>
+        </details>
+
+        <details>
+          <summary>Local file/Master file은 모두 제출하나요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            아닙니다. 국제거래 규모(국외특수관계자 거래 등) 등 일정 기준을 충족하는 경우에만 추가 제출의무가 발생합니다.
+          </div>
+        </details>
+
+        <details>
+          <summary>국가별보고서(CbCR)는 “가능성”이라고 써도 되나요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            권장하지 않습니다. CbCR은 다국적기업집단 매출요건 등 기준을 충족하면 “의무”가 되므로,
+            “요건 충족 시에만 제출의무”로 표현하는 것이 정확합니다.
+          </div>
+        </details>
+
+        <details>
+          <summary>청산/지분 전부 양도하면 제출의무가 사라지나요? <span class="chev"></span></summary>
+          <div class="faq-body">
+            해당 과세기간에 보유/거래가 있었다면 그 기간분 제출의무가 남을 수 있습니다.
+            따라서 “무조건 면제”로 단정하지 않는 표현이 안전합니다.
+          </div>
+        </details>
+      </div>
+
+      <div class="cta" id="contact">
+        <a class="btn btn-primary" href="mailto:contact@example.com">문의하기</a>
+        <a class="btn" href="#core">상단으로</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-title">©2025 Gaon Connect. All rights reserved.</p>
+          <div class="footer-link" style="opacity:.75">서울 종로구 새문안로 76 콘코디언빌딩 3층</div>
+        </div>
+
+        <div>
+          <p class="footer-title">About 및 법인 소개</p>
+          <a class="footer-link" href="#">About Us</a>
+          <a class="footer-link" href="#">미국 법인 소개</a>
+          <a class="footer-link" href="#">미국 법인 설립</a>
+          <a class="footer-link" href="#">기장</a>
+        </div>
+
+        <div>
+          <p class="footer-title">Our Services</p>
+          <a class="footer-link" href="#">법인 세금 보고</a>
+          <a class="footer-link" href="#">주 정부 유지 보고</a>
+          <a class="footer-link" href="#">RA 등록·갱신</a>
+          <a class="footer-link" href="#">국제조세 컴플라이언스</a>
+        </div>
+
+        <div>
+          <p class="footer-title">FAQ 및 소식</p>
+          <a class="footer-link" href="#faq">FAQ</a>
+          <a class="footer-link" href="#">공지사항</a>
+          <a class="footer-link" href="#">뉴스</a>
+          <a class="footer-link" href="#">이벤트</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+</body>
+</html>
