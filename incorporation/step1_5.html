@@ -216,6 +216,11 @@
         gap: 0;
       }
     }
+    .service-desc{
+  font-size:13px;
+  color:#666;
+  margin-top:4px;
+}
   </style>
 </head>
 <body>
@@ -232,44 +237,49 @@
         </div>
       </div>
 
-      <div class="service">
-        <div class="service-header">
-          <div class="service-name">RA 주소 등록 비용</div>
-          <div class="service-price">$50</div>
-        </div>
-
-        <div class="form-area">
-          <div class="form-title">고객 카드 정보 입력</div>
-
-          <div class="form-group">
-            <label for="signature">서명</label>
-            <input type="text" id="signature" placeholder="Signature" />
-          </div>
-
-          <div class="form-group">
-            <label for="card-number">카드번호</label>
-            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" />
-          </div>
-
-          <div class="row">
-            <div class="form-group">
-              <label for="expiry">유효기간</label>
-              <input type="text" id="expiry" placeholder="MM/YY" />
-            </div>
-
-            <div class="form-group">
-              <label for="cvv">CVV</label>
-              <input type="text" id="cvv" placeholder="123" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="address">주소</label>
-            <textarea id="address" rows="3" placeholder="Billing Address"></textarea>
-          </div>
-        </div>
+<div class="service">
+  <div class="service-header">
+    <div>
+      <div class="service-name">RA 주소 등록 비용</div>
+      <div class="service-desc">
+        해당 비용은 아래 입력한 고객 카드로 결제됩니다.
       </div>
     </div>
+    <div class="service-price">$50</div>
+  </div>
+
+  <div class="form-area">
+    <div class="form-title">고객 카드 정보 입력</div>
+
+    <div class="form-group">
+      <label>서명</label>
+      <input type="text" placeholder="Signature" />
+    </div>
+
+    <div class="form-group">
+      <label>카드번호</label>
+      <input type="text" placeholder="1234 5678 9012 3456" />
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label>유효기간</label>
+        <input type="text" placeholder="MM/YY" />
+      </div>
+
+      <div class="form-group">
+        <label>CVV</label>
+        <input type="text" placeholder="123" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>주소</label>
+      <textarea rows="3" placeholder="Billing Address"></textarea>
+    </div>
+
+  </div>
+</div>
 
     <div class="total-box">
       <div class="total-label">총 결제 금액</div>
