@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaon Connect</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Pretendard',sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#eef4ff,#ffffff);
+color:#111;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:80px;
+}
+
+.logo{
+font-weight:700;
+font-size:20px;
+color:#2563eb;
+}
+
+.nav{
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.nav a{
+text-decoration:none;
+color:#555;
+}
+
+.btn{
+background:#2563eb;
+color:white;
+padding:10px 20px;
+border-radius:30px;
+text-decoration:none;
+font-weight:500;
+}
+
+.hero{
+text-align:center;
+margin-bottom:100px;
+}
+
+.hero h1{
+font-size:48px;
+font-weight:700;
+line-height:1.4;
+margin-bottom:20px;
+}
+
+.hero p{
+color:#666;
+margin-bottom:30px;
+}
+
+.hero .start{
+padding:14px 28px;
+border-radius:30px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+font-weight:600;
+}
+
+.dashboard{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top:60px;
+}
+
+.card{
+width:800px;
+background:white;
+border-radius:16px;
+box-shadow:0 30px 60px rgba(0,0,0,0.1);
+overflow:hidden;
+}
+
+.gradient{
+height:120px;
+background:linear-gradient(90deg,#4f7cff,#d946ef);
+}
+
+.card-content{
+padding:30px;
+}
+
+.company{
+font-weight:600;
+margin-bottom:10px;
+}
+
+.table{
+margin-top:20px;
+border-top:1px solid #eee;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+.side-box{
+position:absolute;
+width:220px;
+background:white;
+border-radius:14px;
+box-shadow:0 20px 40px rgba(0,0,0,0.08);
+padding:16px;
+font-size:13px;
+}
+
+.box1{left:10%;top:420px;}
+.box2{right:10%;top:420px;}
+.box3{left:20%;top:600px;}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<div class="logo">Gaon Connect</div>
+
+<div class="nav">
+<a href="#">블로그</a>
+<a class="btn" href="#">시작하기</a>
+</div>
+</header>
+
+<section class="hero">
+
+<h1>
+미국 법인<br>
+설립 이후가 더 중요합니다.
+</h1>
+
+<p>
+설립부터 유지 관리까지, 한국에서 한국어로.<br>
+미국 회계사가 운영하는 올인원 법인 관리 플랫폼.
+</p>
+
+<a class="start">지금 시작하기</a>
+
+<div class="dashboard">
+
+<div class="card">
+
+<div class="gradient"></div>
+
+<div class="card-content">
+
+<div class="company">ABC Inc. (Delaware C-corporation)</div>
+
+<div class="table">
+
+<div class="row">
+<span>법인 설립</span>
+<span>완료</span>
+</div>
+
+<div class="row">
+<span>세금 보고</span>
+<span>진행중</span>
+</div>
+
+<div class="row">
+<span>연간 보고</span>
+<span>예정</span>
+</div>
+
+<div class="row">
+<span>RA 갱신</span>
+<span>완료</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="side-box box1">
+<b>Sales tax 신고</b><br><br>
+납부 금액<br>
+<b>$650</b>
+</div>
+
+<div class="side-box box2">
+<b>미국 법인 설립 서비스</b><br><br>
+미국 법인 계좌 개설<br>
+빠른 설립
+</div>
+
+<div class="side-box box3">
+<b>세금보고 신청</b><br><br>
+기존 고객 보고
+</div>
+
+</div>
+
+</body>
+</html>
