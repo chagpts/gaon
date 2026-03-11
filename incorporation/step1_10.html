@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gaon Connect</title>
+
+<style>
+:root{
+  --bg-top:#f7f8fa;
+  --bg-bottom:#ffffff;
+  --surface:#ffffff;
+  --surface-soft:rgba(255,255,255,0.92);
+  --line:#d9dee5;
+
+  --text:#1d232b;
+  --muted:#6b7280;
+  --muted-2:#8b93a1;
+
+  --brand:#2f3742;
+  --brand-strong:#232a33;
+  --brand-dark:#161b22;
+  --brand-soft:#eef1f4;
+  --brand-soft-2:#f6f8fa;
+
+  --shadow-lg:0 30px 80px rgba(15,23,42,0.10);
+  --shadow-md:0 16px 40px rgba(15,23,42,0.08);
+  --shadow-sm:0 8px 18px rgba(15,23,42,0.06);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bottom) 100%);
+}
+
+.page{
+  width:min(1280px,calc(100% - 48px));
+  margin:0 auto;
+  padding:18px 0 80px;
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:28px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand-mark{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  overflow:hidden;
+  border:1px solid #d9dee5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.brand-mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.brand-copy strong{
+  font-size:18px;
+  color:var(--brand-dark);
+}
+
+.brand-copy span{
+  font-size:11px;
+  color:var(--muted-2);
+}
+
+.nav{
+  display:flex;
+  gap:18px;
+}
+
+.nav .btn{
+  padding:10px 18px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#414a57,var(--brand));
+  color:#fff;
+}
+
+.hero{
+  text-align:center;
+  margin-top:20px;
+}
+
+.hero h1{
+  font-size:56px;
+  margin-bottom:20px;
+}
+
+.hero p{
+  color:var(--muted);
+  margin-bottom:24px;
+}
+
+.main-btn{
+  padding:16px 30px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#414a57,var(--brand));
+  color:#fff;
+}
+
+.scene{
+  margin-top:60px;
+}
+
+.main-dashboard{
+  width:760px;
+  margin:auto;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:var(--shadow-lg);
+}
+
+.dashboard-top{
+  padding:16px;
+  border-bottom:1px solid var(--line);
+}
+
+.cover{
+  height:100px;
+  border-radius:14px;
+  background:linear-gradient(90deg,#1f252d,#46515f,#8b95a3);
+}
+
+.company-row{
+  display:flex;
+  gap:16px;
+  padding:16px 24px;
+  align-items:center;
+}
+
+.gaon-logo-box{
+  width:60px;
+  height:60px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid #dce2e9;
+}
+
+.gaon-logo-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.company-title h3{
+  font-size:18px;
+}
+
+.pill{
+  background:#f4f6f8;
+  border:1px solid #e1e6ec;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:11px;
+}
+
+.dashboard-body{
+  padding:24px;
+}
+
+.tabs-row{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #e7ebf0;
+  padding-bottom:14px;
+}
+
+.tabs{
+  display:flex;
+  gap:18px;
+  color:#8b93a1;
+}
+
+.tabs .active{
+  color:#1d232b;
+}
+
+.request-btn{
+  padding:8px 14px;
+  background:#2f3742;
+  color:white;
+  border-radius:8px;
+}
+
+.toolbar{
+  display:flex;
+  justify-content:space-between;
+  margin:16px 0;
+}
+
+.search{
+  border:1px solid #e1e6ec;
+  padding:10px 14px;
+  border-radius:8px;
+  width:220px;
+  color:#8b93a1;
+}
+
+.filter{
+  border:1px solid #e1e6ec;
+  padding:10px 14px;
+  border-radius:8px;
+}
+
+.list{
+  border-top:1px solid #edf1f5;
+}
+
+.item{
+  display:grid;
+  grid-template-columns:84px 1fr 1fr 80px 120px 60px;
+  padding:14px 6px;
+  border-bottom:1px solid #edf1f5;
+  font-size:13px;
+}
+
+.name{
+  font-weight:700;
+}
+
+.status{
+  font-size:11px;
+  padding:4px 8px;
+  border-radius:999px;
+}
+
+.done{
+  background:#edf7f0;
+  color:#2f6a3c;
+}
+
+.wait{
+  background:#f8f1e8;
+  color:#9a5a1c;
+}
+
+.plan{
+  background:#eef2f7;
+  color:#556070;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="topbar">
+<div class="brand">
+
+<div class="brand-mark">
+<img src="../Glogo.jpg" alt="Gaon logo">
+</div>
+
+<div class="brand-copy">
+<strong>Gaon Connect</strong>
+<span>가온 커넥트</span>
+</div>
+
+</div>
+
+<nav class="nav">
+<a href="#">블로그</a>
+<a href="#" class="btn">시작하기</a>
+</nav>
+</header>
+
+
+<section class="hero">
+
+<h1>미국 법인<br>설립 이후가 더 중요합니다.</h1>
+
+<p>
+설립부터 유지 관리까지, 한국에서 한국어로.<br>
+미국 회계사가 운영하는 올인원 법인 관리 플랫폼.
+</p>
+
+<a href="#" class="main-btn">지금 시작하기</a>
+
+
+<div class="scene">
+
+<div class="main-dashboard">
+
+<div class="dashboard-top">
+
+<div class="cover"></div>
+
+</div>
+
+<div class="company-row">
+
+<div class="gaon-logo-box">
+<img src="../Glogo.jpg" alt="Gaon logo">
+</div>
+
+<div class="company-meta">
+
+<div class="company-title">
+
+<h3>Gaon Inc.</h3>
+
+<span class="pill">Delaware</span>
+<span class="pill">C-corporation</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="dashboard-body">
+
+<div class="tabs-row">
+
+<div class="tabs">
+<span>기본정보</span>
+<span class="active">업무 관리</span>
+</div>
+
+<button class="request-btn">새 업무 요청</button>
+
+</div>
+
+<div class="toolbar">
+<div class="search">🔎 검색어 입력</div>
+<div class="filter">모든 상태보기</div>
+</div>
+
+<div class="list">
+
+<div class="item">
+<div class="name">법인설립</div>
+<div>김범수님의 요청</div>
+<div>법인을 매입하려 합니다</div>
+<div>1</div>
+<div>2025년 2월 13일</div>
+<div><span class="status done">완료</span></div>
+</div>
+
+<div class="item">
+<div class="name">기장</div>
+<div>이하늘님의 요청</div>
+<div>세무 기장 요청</div>
+<div>-</div>
+<div>2025년 2월 11일</div>
+<div><span class="status wait">접수</span></div>
+</div>
+
+<div class="item">
+<div class="name">세무</div>
+<div>김범수님의 요청</div>
+<div>세금 보고 요청</div>
+<div>-</div>
+<div>2025년 2월 9일</div>
+<div><span class="status plan">검토</span></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</body>
+  </html>
