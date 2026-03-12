@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>세금보고 신청 - 결제 및 입금확인</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+    }
+
+    .topbar {
+      height: 36px;
+      background: #fff;
+      border-bottom: 1px solid #e4e4e4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .brand span.sub {
+      font-weight: 500;
+      color: #999;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .top-actions button {
+      height: 26px;
+      padding: 0 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      border: 1px solid #cfcfcf;
+      background: #fff;
+    }
+
+    .top-actions .dark {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .page {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 20px 16px 40px;
+    }
+
+    .container {
+      width: 410px;
+    }
+
+    .notice {
+      height: 22px;
+      border-radius: 4px;
+      background: #f8f8f8;
+      color: #999;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 26px;
+      padding: 0 2px;
+    }
+
+    .step {
+      width: 25%;
+      text-align: center;
+      font-size: 9px;
+      color: #999;
+      position: relative;
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: -50%;
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+      z-index: 0;
+    }
+
+    .step:first-child::before {
+      display: none;
+    }
+
+    .step-dot {
+      width: 12px;
+      height: 12px;
+      line-height: 12px;
+      border-radius: 50%;
+      margin: 0 auto 6px;
+      background: #eee;
+      color: #777;
+      font-size: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step.active {
+      color: #111;
+      font-weight: 700;
+    }
+
+    .step.active .step-dot {
+      background: #0d4fbf;
+      color: #fff;
+    }
+
+    .step small {
+      display: block;
+      font-size: 8px;
+      margin-top: 2px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .section-kicker {
+      color: #0d4fbf;
+      font-size: 10px;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      margin: 0 0 12px;
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid #e5e5e5;
+      margin: 0 0 14px;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 700;
+      margin: 12px 0 8px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e4e4e4;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 10px;
+      border-top: 1px solid #efefef;
+    }
+
+    .item:first-child {
+      border-top: 0;
+    }
+
+    .item-left {
+      min-width: 0;
+      padding-right: 10px;
+    }
+
+    .item-title {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      line-height: 1.35;
+    }
+
+    .item-sub {
+      font-size: 8px;
+      color: #888;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .item-price {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .select-btn {
+      min-width: 52px;
+      height: 22px;
+      border: 0;
+      border-radius: 4px;
+      background: #111;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .select-btn.selected {
+      background: #0d4fbf;
+    }
+
+    .total-box {
+      height: 36px;
+      background: #efefef;
+      border: 1px solid #e2e2e2;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .radio-group {
+      margin: 10px 0 18px;
+      font-size: 10px;
+      color: #444;
+    }
+
+    .radio-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 5px 0;
+    }
+
+    .radio-row input[type="radio"] {
+      margin: 0;
+      transform: scale(0.85);
+    }
+
+    .hint {
+      font-size: 9px;
+      color: #999;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .bank-box {
+      background: #ededed;
+      border: 1px solid #e1e1e1;
+      border-radius: 6px;
+      padding: 12px 12px 10px;
+      margin: 8px 0 10px;
+      font-size: 10px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    .bank-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .input-label {
+      font-size: 10px;
+      font-weight: 700;
+      margin: 10px 0 6px;
+      color: #555;
+    }
+
+    .text-input {
+      width: 100%;
+      height: 32px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #f8f8f8;
+      padding: 0 10px;
+      font-size: 11px;
+      outline: none;
+    }
+
+    .text-input::placeholder {
+      color: #b1b1b1;
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 36px;
+      border: 0;
+      border-radius: 4px;
+      background: #0d4fbf;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: 100%;
+        max-width: 410px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span>세금보고 신청</span>
+      <span class="sub">GoldRush Inc.</span>
+    </div>
+    <div class="top-actions">
+      <button>돌아가기</button>
+      <button class="dark">문의하기</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="notice">궁금하시거나 모르시는게 있으시면 언제나 채널톡으로 문의 부탁드립니다.</div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-dot">1</div>
+          신청서 작성
+        </div>
+        <div class="step">
+          <div class="step-dot">2</div>
+          접수 및 검토
+        </div>
+        <div class="step">
+          <div class="step-dot">3</div>
+          세부보고서 발급
+          <small>및 서명 요청</small>
+        </div>
+        <div class="step active">
+          <div class="step-dot">4</div>
+          결제 및 입금 확인
+        </div>
+      </div>
+
+      <div class="section-kicker">STEP 4.</div>
+      <h1 class="section-title">결제 및 입금확인</h1>
+      <hr class="divider" />
+
+      <div class="label">필수 항목</div>
+      <div class="card">
+        <div class="item">
+          <div class="item-left">
+            <div class="item-title">거래량 연간 50건 이상인 경우</div>
+            <div class="item-price">$200</div>
+          </div>
+          <button class="select-btn" data-price="200">서비스 선택</button>
+        </div>
+        <div class="item">
+          <div class="item-left">
+            <div class="item-title">거래량 연간 51건 이상인 경우</div>
+            <div class="item-price">$700</div>
+          </div>
+          <button class="select-btn" data-price="700">서비스 선택</button>
+        </div>
+      </div>
+
+      <div class="label">선택 항목</div>
+      <div class="card">
+        <div class="item">
+          <div class="item-left">
+            <div class="item-title">State 보고 추가</div>
+            <div class="item-sub">per one state</div>
+            <div class="item-price">$400</div>
+          </div>
+          <button class="select-btn" data-price="400">서비스 선택</button>
+        </div>
+        <div class="item">
+          <div class="item-left">
+            <div class="item-title">Form (5472, K-1, PFIC) 추가</div>
+            <div class="item-sub">per one return</div>
+            <div class="item-price">$500</div>
+          </div>
+          <button class="select-btn" data-price="500">서비스 선택</button>
+        </div>
+      </div>
+
+      <div class="total-box">
+        <span>총 결제 금액</span>
+        <span id="totalAmount">$0</span>
+      </div>
+
+      <div class="label">결제 동의 요청</div>
+      <div class="radio-group">
+        <label class="radio-row">
+          <input type="radio" name="agree_doc" />
+          <span>전체 동의함</span>
+        </label>
+        <label class="radio-row">
+          <input type="radio" name="agree_doc" />
+          <span>전체 서류 검토서</span>
+        </label>
+      </div>
+
+      <div class="label">
+        결제 방식
+        <span class="hint">현재는 계좌이체를 통한 결제만 가능합니다.</span>
+      </div>
+      <div class="radio-group" style="margin-bottom: 8px;">
+        <label class="radio-row">
+          <input type="radio" name="payment_method" checked />
+          <span>계좌 이체</span>
+        </label>
+      </div>
+
+      <div class="bank-box">
+        <div class="bank-title">계좌이체 정보</div>
+        <div>- 국민은행 123-4567890</div>
+        <div>- 예금주 주식회사 골드러시아파트 주식회사</div>
+        <div>- 금액 $0</div>
+      </div>
+
+      <div class="input-label">입금자명</div>
+      <input class="text-input" type="text" placeholder="입금자명을 입력하세요." />
+
+      <button class="submit-btn">결제 신청</button>
+    </div>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll(".select-btn");
+    const totalAmount = document.getElementById("totalAmount");
+
+    function formatDollar(value) {
+      return "$" + value.toLocaleString("en-US");
+    }
+
+    function updateTotal() {
+      let total = 0;
+
+      buttons.forEach((btn) => {
+        if (btn.classList.contains("selected")) {
+          total += Number(btn.dataset.price || 0);
+        }
+      });
+
+      totalAmount.textContent = formatDollar(total);
+
+      const bankAmountLine = document.querySelector(".bank-box div:last-child");
+      bankAmountLine.textContent = "- 금액 " + formatDollar(total);
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.classList.toggle("selected");
+        btn.textContent = btn.classList.contains("selected")
+          ? "선택 해제"
+          : "서비스 선택";
+        updateTotal();
+      });
+    });
+
+    updateTotal();
+  </script>
+</body>
+</html>
