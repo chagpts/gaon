@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>기장 비용 입력</title>
+
+<style>
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+background:#f3f4f6;
+padding:40px;
+}
+
+.box{
+width:520px;
+margin:auto;
+background:white;
+border-radius:12px;
+padding:25px 30px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px dashed #d1d5db;
+font-size:15px;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+input{
+width:120px;
+padding:6px 8px;
+border-radius:6px;
+border:1px solid #d1d5db;
+text-align:right;
+font-size:14px;
+}
+
+.total{
+font-weight:700;
+font-size:16px;
+padding-top:18px;
+}
+
+.total span:last-child{
+font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="row">
+<span>계좌</span>
+<input type="number" id="account" value="">
+</div>
+
+<div class="row">
+<span>카드</span>
+<input type="number" id="card" value="">
+</div>
+
+<div class="row">
+<span>급여 신고</span>
+<input type="number" id="payroll" value="">
+</div>
+
+<div class="row">
+<span>투자 상품</span>
+<input type="number" id="invest" value="">
+</div>
+
+<div class="row">
+<span>기타</span>
+<input type="number" id="etc" value="">
+</div>
+
+<div class="row total">
+<span>총 결제 금액</span>
+<span id="total">$0</span>
+</div>
+
+</div>
+
+<script>
+
+function calc(){
+
+let account = Number(document.getElementById("account").value) || 0
+let card = Number(document.getElementById("card").value) || 0
+let payroll = Number(document.getElementById("payroll").value) || 0
+let invest = Number(document.getElementById("invest").value) || 0
+let etc = Number(document.getElementById("etc").value) || 0
+
+let total = account + card + payroll + invest + etc
+
+document.getElementById("total").innerText = "$" + total.toLocaleString()
+
+}
+
+document.querySelectorAll("input").forEach(i=>{
+i.addEventListener("input",calc)
+})
+
+</script>
+
+</body>
+</html>
