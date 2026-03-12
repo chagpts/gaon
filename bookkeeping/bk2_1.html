@@ -1,191 +1,228 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>결제 항목 입력</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 40px 20px;
-      background: #f3f4f6;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
-      color: #111827;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>결제 항목 입력</title>
 
-    .box {
-      max-width: 620px;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 20px 22px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    }
+<style>
 
-    .row {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 16px;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px dashed #d1d5db;
-    }
+body{
+margin:0;
+padding:40px 20px;
+background:#f3f4f6;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+color:#111827;
+}
 
-    .row:last-of-type {
-      border-bottom: none;
-    }
+.box{
+max-width:620px;
+margin:0 auto;
+background:#ffffff;
+border:1px solid #e5e7eb;
+border-radius:14px;
+padding:20px 22px;
+box-shadow:0 8px 24px rgba(0,0,0,0.04);
+}
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+.row{
+display:grid;
+grid-template-columns:1.5fr 1fr;
+gap:16px;
+align-items:center;
+padding:14px 0;
+border-bottom:1px dashed #d1d5db;
+}
 
-    .field label {
-      font-size: 12px;
-      font-weight: 700;
-      color: #6b7280;
-    }
+.field{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
 
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      height: 42px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      padding: 0 12px;
-      font-size: 14px;
-      box-sizing: border-box;
-      background: #fff;
-    }
+.field label{
+font-size:12px;
+font-weight:700;
+color:#6b7280;
+}
 
-    input[type="number"] {
-      text-align: right;
-    }
+input[type="text"],
+input[type="number"]{
+width:100%;
+height:42px;
+border:1px solid #d1d5db;
+border-radius:8px;
+padding:0 12px;
+font-size:14px;
+box-sizing:border-box;
+background:#fff;
+}
 
-    input:focus {
-      outline: none;
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-    }
+input[type="number"]{
+text-align:right;
+}
 
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 18px;
-      margin-top: 8px;
-      border-top: 1px solid #e5e7eb;
-      font-weight: 800;
-      font-size: 18px;
-    }
+input:focus{
+outline:none;
+border-color:#2563eb;
+box-shadow:0 0 0 3px rgba(37,99,235,0.12);
+}
 
-    .total-amount {
-      color: #111827;
-    }
+.total-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding-top:18px;
+margin-top:8px;
+border-top:1px solid #e5e7eb;
+font-weight:800;
+font-size:18px;
+}
 
-    .guide {
-      margin-top: 14px;
-      font-size: 12px;
-      color: #6b7280;
-      line-height: 1.6;
-    }
+.add-btn{
+margin-top:15px;
+border:1px solid #2563eb;
+background:white;
+color:#2563eb;
+padding:8px 14px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
 
-    @media (max-width: 640px) {
-      .row {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.add-btn:hover{
+background:#2563eb;
+color:white;
+}
+
+@media (max-width:640px){
+.row{
+grid-template-columns:1fr;
+}
+}
+
+</style>
 </head>
+
 <body>
-  <div class="box">
-    <div class="row">
-      <div class="field">
-        <label>항목명</label>
-        <input type="text" class="item-name" placeholder="예: 계좌" />
-      </div>
-      <div class="field">
-        <label>금액</label>
-        <input type="number" class="item-price" placeholder="예: 500" min="0" />
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="field">
-        <label>항목명</label>
-        <input type="text" class="item-name" placeholder="예: 카드" />
-      </div>
-      <div class="field">
-        <label>금액</label>
-        <input type="number" class="item-price" placeholder="예: 1000" min="0" />
-      </div>
-    </div>
+<div class="box">
 
-    <div class="row">
-      <div class="field">
-        <label>항목명</label>
-        <input type="text" class="item-name" placeholder="예: 급여 신고" />
-      </div>
-      <div class="field">
-        <label>금액</label>
-        <input type="number" class="item-price" placeholder="예: 500" min="0" />
-      </div>
-    </div>
+<div id="items">
 
-    <div class="row">
-      <div class="field">
-        <label>항목명</label>
-        <input type="text" class="item-name" placeholder="예: 투자 상품" />
-      </div>
-      <div class="field">
-        <label>금액</label>
-        <input type="number" class="item-price" placeholder="예: 200" min="0" />
-      </div>
-    </div>
+<div class="row">
+<div class="field">
+<label>항목명</label>
+<input type="text" placeholder="예: 계좌">
+</div>
+<div class="field">
+<label>금액</label>
+<input type="number" class="price" placeholder="예: 500">
+</div>
+</div>
 
-    <div class="row">
-      <div class="field">
-        <label>항목명</label>
-        <input type="text" class="item-name" placeholder="예: 기타" />
-      </div>
-      <div class="field">
-        <label>금액</label>
-        <input type="number" class="item-price" placeholder="예: 3000" min="0" />
-      </div>
-    </div>
+<div class="row">
+<div class="field">
+<label>항목명</label>
+<input type="text" placeholder="예: 카드">
+</div>
+<div class="field">
+<label>금액</label>
+<input type="number" class="price" placeholder="예: 1000">
+</div>
+</div>
 
-    <div class="total-row">
-      <span>총 결제 금액</span>
-      <span class="total-amount" id="total">$0</span>
-    </div>
+<div class="row">
+<div class="field">
+<label>항목명</label>
+<input type="text" placeholder="예: 급여 신고">
+</div>
+<div class="field">
+<label>금액</label>
+<input type="number" class="price" placeholder="예: 500">
+</div>
+</div>
 
-    <div class="guide">
-      항목명은 직접 입력하고, 금액은 숫자만 입력하면 됩니다. placeholder 예시는 입력 형식을 보여주기 위한 용도입니다.
-    </div>
-  </div>
+<div class="row">
+<div class="field">
+<label>항목명</label>
+<input type="text" placeholder="예: 투자 상품">
+</div>
+<div class="field">
+<label>금액</label>
+<input type="number" class="price" placeholder="예: 200">
+</div>
+</div>
 
-  <script>
-    const priceInputs = document.querySelectorAll(".item-price");
-    const totalEl = document.getElementById("total");
+<div class="row">
+<div class="field">
+<label>항목명</label>
+<input type="text" placeholder="예: 기타">
+</div>
+<div class="field">
+<label>금액</label>
+<input type="number" class="price" placeholder="예: 3000">
+</div>
+</div>
 
-    function updateTotal() {
-      let total = 0;
+</div>
 
-      priceInputs.forEach((input) => {
-        const value = Number(input.value) || 0;
-        total += value;
-      });
+<button class="add-btn" onclick="addRow()">+ 항목 추가</button>
 
-      totalEl.textContent = "$" + total.toLocaleString("en-US");
-    }
+<div class="total-row">
+<span>총 결제 금액</span>
+<span id="total">$0</span>
+</div>
 
-    priceInputs.forEach((input) => {
-      input.addEventListener("input", updateTotal);
-    });
+</div>
 
-    updateTotal();
-  </script>
+
+<script>
+
+function updateTotal(){
+
+let total = 0
+
+document.querySelectorAll(".price").forEach(input=>{
+total += Number(input.value) || 0
+})
+
+document.getElementById("total").innerText =
+"$" + total.toLocaleString()
+
+}
+
+function addRow(){
+
+const container = document.getElementById("items")
+
+const row = document.createElement("div")
+row.className="row"
+
+row.innerHTML = `
+<div class="field">
+<label>항목명</label>
+<input type="text" placeholder="예: 추가 항목">
+</div>
+
+<div class="field">
+<label>금액</label>
+<input type="number" class="price" placeholder="예: 500">
+</div>
+`
+
+container.appendChild(row)
+
+row.querySelector(".price")
+.addEventListener("input",updateTotal)
+
+}
+
+document.querySelectorAll(".price").forEach(input=>{
+input.addEventListener("input",updateTotal)
+})
+
+</script>
+
 </body>
 </html>
