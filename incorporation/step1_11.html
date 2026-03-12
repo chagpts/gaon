@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaon Connect</title>
+  <style>
+    :root{
+      --bg-top:#f7f8fa;
+      --bg-bottom:#ffffff;
+      --surface:#ffffff;
+      --surface-soft:rgba(255,255,255,0.92);
+      --line:#d9dee5;
+
+      --text:#1d232b;
+      --muted:#6b7280;
+      --muted-2:#8b93a1;
+
+      --brand:#2f3742;
+      --brand-strong:#232a33;
+      --brand-dark:#161b22;
+      --brand-soft:#eef1f4;
+      --brand-soft-2:#f6f8fa;
+
+      --shadow-lg:0 30px 80px rgba(15, 23, 42, 0.10);
+      --shadow-md:0 16px 40px rgba(15, 23, 42, 0.08);
+      --shadow-sm:0 8px 18px rgba(15, 23, 42, 0.06);
+
+      --success-bg:#edf7f0;
+      --success-text:#2f6a3c;
+      --pending-bg:#f8f1e8;
+      --pending-text:#9a5a1c;
+      --review-bg:#eef2f7;
+      --review-text:#556070;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 72%, rgba(47,55,66,0.035), transparent 22%),
+        radial-gradient(circle at 78% 65%, rgba(17,24,39,0.03), transparent 18%),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 56%, #ffffff 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .page{
+      width:min(1280px, calc(100% - 48px));
+      margin:0 auto;
+      padding:18px 0 80px;
+      position:relative;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:28px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, #3a4350, #232a33);
+      border:1px solid #2d3540;
+      color:#fff;
+      font-weight:800;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .brand-copy{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+
+    .brand-copy strong{
+      font-size:18px;
+      letter-spacing:-0.02em;
+      color:var(--brand-dark);
+    }
+
+    .brand-copy span{
+      font-size:11px;
+      color:var(--muted-2);
+      font-weight:700;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:20px;
+    }
+
+    .nav a{
+      font-size:14px;
+      font-weight:700;
+      color:#374151;
+    }
+
+    .nav .btn{
+      padding:11px 18px;
+      border-radius:999px;
+      background:linear-gradient(180deg, #414a57, var(--brand));
+      color:#fff;
+      box-shadow:0 12px 26px rgba(15, 23, 42, 0.14);
+      border:1px solid #3a4350;
+    }
+
+    .hero{
+      text-align:center;
+      padding-top:18px;
+    }
+
+    .hero h1{
+      font-size:clamp(42px, 5.2vw, 76px);
+      line-height:1.14;
+      letter-spacing:-0.05em;
+      font-weight:800;
+      margin-bottom:24px;
+      color:#14181f;
+    }
+
+    .hero p{
+      font-size:19px;
+      line-height:1.8;
+      color:var(--muted);
+      font-weight:500;
+      margin-bottom:28px;
+    }
+
+    .hero .main-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px 34px;
+      border-radius:999px;
+      background:linear-gradient(180deg, #414a57, var(--brand));
+      color:#fff;
+      font-weight:800;
+      box-shadow:0 18px 32px rgba(15, 23, 42, 0.14);
+      border:1px solid #3a4350;
+    }
+
+    .scene{
+      position:relative;
+      margin-top:56px;
+      min-height:720px;
+    }
+
+    .glow{
+      position:absolute;
+      left:50%;
+      top:250px;
+      transform:translateX(-50%);
+      width:520px;
+      height:220px;
+      border-radius:999px;
+      background:rgba(47,55,66,0.08);
+      filter:blur(72px);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .float-card{
+      position:absolute;
+      z-index:1;
+      background:var(--surface-soft);
+      border:1px solid rgba(217,222,229,0.96);
+      border-radius:20px;
+      box-shadow:var(--shadow-md);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .mini-card{
+      width:252px;
+      padding:18px;
+    }
+
+    .mini-card h4{
+      font-size:17px;
+      margin-bottom:14px;
+      letter-spacing:-0.02em;
+    }
+
+    .mini-card .label{
+      font-size:13px;
+      color:var(--muted);
+      display:block;
+      margin-bottom:6px;
+    }
+
+    .mini-card p{
+      font-size:12px;
+      line-height:1.55;
+      color:var(--muted-2);
+    }
+
+    .mini-card .value{
+      margin-top:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:#fff;
+      border:1px solid #e3e7ed;
+      border-radius:12px;
+      padding:12px 14px;
+      font-size:14px;
+      font-weight:800;
+      color:#1f2937;
+    }
+
+    .left-tax{
+      left:28px;
+      top:106px;
+    }
+
+    .right-form{
+      right:8px;
+      top:76px;
+      width:310px;
+      padding:18px;
+    }
+
+    .right-form h4{
+      font-size:15px;
+      margin-bottom:12px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-size:11px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .field input{
+      height:34px;
+      border:1px solid #dde3ea;
+      background:#fbfcfd;
+      border-radius:8px;
+      padding:0 10px;
+      font-size:12px;
+      outline:none;
+      color:#334155;
+    }
+
+    .field input::placeholder{
+      color:#9aa3af;
+    }
+
+    .left-report{
+      left:52px;
+      top:394px;
+      width:296px;
+      padding:18px 18px 14px;
+    }
+
+    .radio-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .radio-item{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:#4b5563;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .radio-dot{
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      border:1.5px solid #aab3bf;
+      margin-top:3px;
+      position:relative;
+      flex:0 0 auto;
+      background:#fff;
+    }
+
+    .radio-item.active .radio-dot::after{
+      content:"";
+      position:absolute;
+      inset:3px;
+      border-radius:50%;
+      background:var(--brand);
+    }
+
+    .left-close{
+      left:114px;
+      top:624px;
+      width:240px;
+      padding:18px;
+    }
+
+    .left-close .step{
+      margin-top:14px;
+      padding-top:12px;
+      border-top:1px solid #e6eaf0;
+      color:#3f4a57;
+      font-size:14px;
+      line-height:1.55;
+    }
+
+    .right-services{
+      right:40px;
+      top:452px;
+      width:262px;
+      padding:12px 0;
+      overflow:hidden;
+    }
+
+    .service-item{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:18px 18px;
+      border-top:1px solid #eaedf2;
+      font-size:15px;
+      font-weight:800;
+      color:#1f2937;
+      background:rgba(255,255,255,0.72);
+    }
+
+    .service-item:first-child{
+      border-top:none;
+    }
+
+    .icon{
+      width:30px;
+      height:30px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      background:var(--brand-soft-2);
+      color:var(--brand);
+      font-size:16px;
+      border:1px solid #e1e6ec;
+    }
+
+    .main-dashboard{
+      position:relative;
+      z-index:2;
+      width:min(760px, calc(100% - 360px));
+      margin:0 auto;
+      background:rgba(255,255,255,0.94);
+      border:1px solid rgba(217,222,229,0.98);
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .dashboard-top{
+      padding:14px 18px 0;
+      background:linear-gradient(180deg, rgba(247,248,250,0.96), rgba(255,255,255,0.92));
+    }
+
+    .dash-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:12px;
+      color:var(--muted-2);
+      font-size:13px;
+    }
+
+    .dash-mini{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:800;
+      color:#4b5563;
+    }
+
+    .dash-mini small{
+      font-size:11px;
+      color:#9aa3af;
+      font-weight:700;
+    }
+
+    .cover{
+      height:102px;
+      border-radius:16px;
+      background:linear-gradient(90deg, #1f252d 0%, #2f3742 28%, #46515f 58%, #647080 80%, #8b95a3 100%);
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .cover::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0));
+    }
+
+    .company-row{
+      display:flex;
+      align-items:flex-end;
+      gap:16px;
+      padding:0 24px;
+      transform:translateY(-22px);
+      margin-bottom:-8px;
+      position:relative;
+    }
+
+    .gaon-logo-box{
+      width:60px;
+      height:60px;
+      border-radius:16px;
+      background:#fff;
+      border:1px solid #dce2e9;
+      box-shadow:var(--shadow-sm);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
+
+    .gaon-logo-box span{
+      font-weight:900;
+      font-size:17px;
+      letter-spacing:1.1px;
+      color:var(--brand);
+    }
+
+    .company-meta{
+      padding-bottom:4px;
+    }
+
+    .company-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:7px;
+    }
+
+    .company-title h3{
+      font-size:18px;
+      letter-spacing:-0.03em;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      height:24px;
+      padding:0 9px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      background:#f4f6f8;
+      color:#4b5563;
+      border:1px solid #e1e6ec;
+    }
+
+    .dashboard-body{
+      padding:0 24px 24px;
+    }
+
+    .tabs-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #e7ebf0;
+      padding-bottom:14px;
+      margin-bottom:14px;
+    }
+
+    .tabs{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-size:14px;
+      font-weight:800;
+      color:#8b93a1;
+    }
+
+    .tabs .active{
+      color:#1d232b;
+      position:relative;
+    }
+
+    .tabs .active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-14px;
+      height:3px;
+      border-radius:999px;
+      background:var(--brand);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:18px;
+      height:18px;
+      padding:0 5px;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-size:11px;
+      font-weight:900;
+      margin-left:4px;
+    }
+
+    .request-btn{
+      height:34px;
+      padding:0 14px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(180deg, #414a57, var(--brand));
+      color:#fff;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 10px 22px rgba(15, 23, 42, 0.12);
+      border:1px solid #3a4350;
+    }
+
+    .toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
+    .search{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      width:240px;
+      height:38px;
+      padding:0 12px;
+      border-radius:10px;
+      border:1px solid #e1e6ec;
+      background:#fafbfd;
+      color:#8b93a1;
+      font-size:13px;
+    }
+
+    .filter{
+      padding:9px 12px;
+      border-radius:10px;
+      border:1px solid #e1e6ec;
+      background:#fafbfd;
+      color:#4b5563;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .list{
+      border-top:1px solid #edf1f5;
+    }
+
+    .item{
+      display:grid;
+      grid-template-columns:84px 1.1fr 1.1fr 80px 100px 58px;
+      gap:10px;
+      align-items:center;
+      padding:13px 8px;
+      border-bottom:1px solid #edf1f5;
+      font-size:12px;
+      color:#5b6472;
+    }
+
+    .item .name{
+      color:#1d232b;
+      font-weight:800;
+    }
+
+    .item .owner{
+      color:#8b93a1;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:24px;
+      min-width:42px;
+      padding:0 8px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+    }
+
+    .done{
+      background:var(--success-bg);
+      color:var(--success-text);
+    }
+
+    .wait{
+      background:var(--pending-bg);
+      color:var(--pending-text);
+    }
+
+    .plan{
+      background:var(--review-bg);
+      color:var(--review-text);
+    }
+
+    @media (max-width:1200px){
+      .scene{
+        min-height:auto;
+        display:flex;
+        flex-direction:column;
+        gap:18px;
+      }
+
+      .float-card,
+      .left-tax,
+      .right-form,
+      .left-report,
+      .left-close,
+      .right-services{
+        position:relative;
+        left:auto;
+        right:auto;
+        top:auto;
+        width:100%;
+      }
+
+      .main-dashboard{
+        width:100%;
+        order:-1;
+      }
+    }
+
+    @media (max-width:860px){
+      .page{
+        width:min(100% - 28px, 1280px);
+      }
+
+      .topbar{
+        gap:14px;
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .hero h1{
+        font-size:40px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .tabs-row,
+      .toolbar,
+      .company-row{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .search{
+        width:100%;
+      }
+
+      .item{
+        grid-template-columns:1fr;
+        gap:6px;
+        padding:14px 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">G</div>
+        <div class="brand-copy">
+          <strong>Gaon Connect</strong>
+          <span>가온 커넥트</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#">블로그</a>
+        <a href="#" class="btn">시작하기</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>미국 법인<br>설립 이후가 더 중요합니다.</h1>
+      <p>
+        설립부터 유지 관리까지, 한국에서 한국어로.<br>
+        미국 회계사가 운영하는 올인원 법인 관리 플랫폼.
+      </p>
+      <a href="#" class="main-btn">지금 시작하기</a>
+
+      <div class="scene">
+        <div class="glow"></div>
+
+        <div class="float-card mini-card left-tax">
+          <h4>Sales tax 신고 및 납부</h4>
+          <span class="label">납부 금액</span>
+          <p>Sales tax 신고에 따른 납부 금액을 안내드립니다.</p>
+          <div class="value">
+            <span>납부 금액</span>
+            <span>$650</span>
+          </div>
+        </div>
+
+        <div class="float-card right-form">
+          <h4>법인주소</h4>
+          <div class="form-grid">
+            <div class="field">
+              <label>Street Address</label>
+              <input type="text" placeholder="Street Address">
+            </div>
+            <div class="field">
+              <label>City</label>
+              <input type="text" placeholder="City">
+            </div>
+            <div class="field">
+              <label>사 이름</label>
+              <input type="text" placeholder="이름">
+            </div>
+            <div class="field">
+              <label>서명권자 직급(Title)</label>
+              <input type="text" placeholder="Title">
+            </div>
+            <div class="field full">
+              <label>서명권자 SSN</label>
+              <input type="text" placeholder="123-45-6789">
+            </div>
+          </div>
+        </div>
+
+        <div class="main-dashboard">
+          <div class="dashboard-top">
+            <div class="dash-head">
+              <div class="dash-mini">
+                <span>Gaon Connect</span>
+                <small>가온 커넥트</small>
+              </div>
+              <div>user@example.com</div>
+            </div>
+
+            <div class="cover"></div>
+          </div>
+
+          <div class="company-row">
+            <div class="gaon-logo-box">
+              <span>GAON</span>
+            </div>
+
+            <div class="company-meta">
+              <div class="company-title">
+                <h3>Gaon Inc.</h3>
+                <span class="pill">Delaware</span>
+                <span class="pill">C-corporation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-body">
+            <div class="tabs-row">
+              <div class="tabs">
+                <span>기본정보</span>
+                <span class="active">업무 관리 <span class="badge">3</span></span>
+              </div>
+              <button class="request-btn">새 업무 요청</button>
+            </div>
+
+            <div class="toolbar">
+              <div class="search">🔎 검색어 입력</div>
+              <div class="filter">모든 상태보기</div>
+            </div>
+
+            <div class="list">
+              <div class="item">
+                <div class="name">법인설립</div>
+                <div class="owner">김범수님의 요청</div>
+                <div>법인을 매입하려 합니다</div>
+                <div>1</div>
+                <div>2025년 2월 13일</div>
+                <div><span class="status done">완료</span></div>
+              </div>
+
+              <div class="item">
+                <div class="name">기장</div>
+                <div class="owner">이하늘님의 요청</div>
+                <div>세무 기장 요청</div>
+                <div>-</div>
+                <div>2025년 2월 11일</div>
+                <div><span class="status wait">접수</span></div>
+              </div>
+
+              <div class="item">
+                <div class="name">세무</div>
+                <div class="owner">김범수님의 요청</div>
+                <div>세금 보고 요청</div>
+                <div>-</div>
+                <div>2025년 2월 9일</div>
+                <div><span class="status plan">검토</span></div>
+              </div>
+
+              <div class="item">
+                <div class="name">RA 갱신</div>
+                <div class="owner">최아림님의 요청</div>
+                <div>RA 갱신 요청</div>
+                <div>-</div>
+                <div>2025년 1월 7일</div>
+                <div><span class="status done">완료</span></div>
+              </div>
+
+              <div class="item">
+                <div class="name">주정부 유지</div>
+                <div class="owner">김범수님의 요청</div>
+                <div>주정부 유지 보고 요청</div>
+                <div>-</div>
+                <div>2025년 1월 2일</div>
+                <div><span class="status done">완료</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-card left-report">
+          <h4>세금보고 신청</h4>
+          <div class="radio-list">
+            <div class="radio-item active">
+              <div class="radio-dot"></div>
+              <div>[기존 고객] 법인 결산 후 세금 보고 진행</div>
+            </div>
+            <div class="radio-item">
+              <div class="radio-dot"></div>
+              <div>[신규 고객] 세금 보고만 진행</div>
+            </div>
+            <div class="radio-item">
+              <div class="radio-dot"></div>
+              <div>[신규 고객] 세무 보고만 진행</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-card left-close">
+          <h4>법인 청산</h4>
+          <div class="step">
+            <strong>STEP 1.</strong><br>
+            신청서 작성
+          </div>
+          <div class="step">
+            <strong>STEP 2.</strong><br>
+            결제 및 진행확인
+          </div>
+        </div>
+
+        <div class="float-card right-services">
+          <div class="service-item">
+            <div class="icon">📍</div>
+            <div>미국 법인 설립 서비스</div>
+          </div>
+          <div class="service-item">
+            <div class="icon">💳</div>
+            <div>미국 법인 계좌 개설</div>
+          </div>
+          <div class="service-item">
+            <div class="icon">🚀</div>
+            <div>빠른 설립 (Expedited Filing)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
