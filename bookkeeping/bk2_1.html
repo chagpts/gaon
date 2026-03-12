@@ -1,118 +1,191 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>기장 비용 입력</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>결제 항목 입력</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: #f3f4f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      color: #111827;
+    }
 
-<style>
+    .box {
+      max-width: 620px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
 
-body{
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
-background:#f3f4f6;
-padding:40px;
-}
+    .row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px dashed #d1d5db;
+    }
 
-.box{
-width:520px;
-margin:auto;
-background:white;
-border-radius:12px;
-padding:25px 30px;
-box-shadow:0 10px 25px rgba(0,0,0,0.05);
-}
+    .row:last-of-type {
+      border-bottom: none;
+    }
 
-.row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px 0;
-border-bottom:1px dashed #d1d5db;
-font-size:15px;
-}
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
-.row:last-child{
-border-bottom:none;
-}
+    .field label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #6b7280;
+    }
 
-input{
-width:120px;
-padding:6px 8px;
-border-radius:6px;
-border:1px solid #d1d5db;
-text-align:right;
-font-size:14px;
-}
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      height: 42px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 0 12px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #fff;
+    }
 
-.total{
-font-weight:700;
-font-size:16px;
-padding-top:18px;
-}
+    input[type="number"] {
+      text-align: right;
+    }
 
-.total span:last-child{
-font-size:18px;
-}
+    input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
 
-</style>
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      margin-top: 8px;
+      border-top: 1px solid #e5e7eb;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .total-amount {
+      color: #111827;
+    }
+
+    .guide {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="box">
+    <div class="row">
+      <div class="field">
+        <label>항목명</label>
+        <input type="text" class="item-name" placeholder="예: 계좌" />
+      </div>
+      <div class="field">
+        <label>금액</label>
+        <input type="number" class="item-price" placeholder="예: 500" min="0" />
+      </div>
+    </div>
 
-<div class="box">
+    <div class="row">
+      <div class="field">
+        <label>항목명</label>
+        <input type="text" class="item-name" placeholder="예: 카드" />
+      </div>
+      <div class="field">
+        <label>금액</label>
+        <input type="number" class="item-price" placeholder="예: 1000" min="0" />
+      </div>
+    </div>
 
-<div class="row">
-<span>계좌</span>
-<input type="number" id="account" value="">
-</div>
+    <div class="row">
+      <div class="field">
+        <label>항목명</label>
+        <input type="text" class="item-name" placeholder="예: 급여 신고" />
+      </div>
+      <div class="field">
+        <label>금액</label>
+        <input type="number" class="item-price" placeholder="예: 500" min="0" />
+      </div>
+    </div>
 
-<div class="row">
-<span>카드</span>
-<input type="number" id="card" value="">
-</div>
+    <div class="row">
+      <div class="field">
+        <label>항목명</label>
+        <input type="text" class="item-name" placeholder="예: 투자 상품" />
+      </div>
+      <div class="field">
+        <label>금액</label>
+        <input type="number" class="item-price" placeholder="예: 200" min="0" />
+      </div>
+    </div>
 
-<div class="row">
-<span>급여 신고</span>
-<input type="number" id="payroll" value="">
-</div>
+    <div class="row">
+      <div class="field">
+        <label>항목명</label>
+        <input type="text" class="item-name" placeholder="예: 기타" />
+      </div>
+      <div class="field">
+        <label>금액</label>
+        <input type="number" class="item-price" placeholder="예: 3000" min="0" />
+      </div>
+    </div>
 
-<div class="row">
-<span>투자 상품</span>
-<input type="number" id="invest" value="">
-</div>
+    <div class="total-row">
+      <span>총 결제 금액</span>
+      <span class="total-amount" id="total">$0</span>
+    </div>
 
-<div class="row">
-<span>기타</span>
-<input type="number" id="etc" value="">
-</div>
+    <div class="guide">
+      항목명은 직접 입력하고, 금액은 숫자만 입력하면 됩니다. placeholder 예시는 입력 형식을 보여주기 위한 용도입니다.
+    </div>
+  </div>
 
-<div class="row total">
-<span>총 결제 금액</span>
-<span id="total">$0</span>
-</div>
+  <script>
+    const priceInputs = document.querySelectorAll(".item-price");
+    const totalEl = document.getElementById("total");
 
-</div>
+    function updateTotal() {
+      let total = 0;
 
-<script>
+      priceInputs.forEach((input) => {
+        const value = Number(input.value) || 0;
+        total += value;
+      });
 
-function calc(){
+      totalEl.textContent = "$" + total.toLocaleString("en-US");
+    }
 
-let account = Number(document.getElementById("account").value) || 0
-let card = Number(document.getElementById("card").value) || 0
-let payroll = Number(document.getElementById("payroll").value) || 0
-let invest = Number(document.getElementById("invest").value) || 0
-let etc = Number(document.getElementById("etc").value) || 0
+    priceInputs.forEach((input) => {
+      input.addEventListener("input", updateTotal);
+    });
 
-let total = account + card + payroll + invest + etc
-
-document.getElementById("total").innerText = "$" + total.toLocaleString()
-
-}
-
-document.querySelectorAll("input").forEach(i=>{
-i.addEventListener("input",calc)
-})
-
-</script>
-
+    updateTotal();
+  </script>
 </body>
 </html>
