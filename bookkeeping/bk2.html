@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>기장 신청 - 결제 및 입금확인</title>
+  <style>
+    :root {
+      --bg: #f5f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f8f9fb;
+      --line: #e5e7eb;
+      --line-strong: #d7dbe2;
+      --text: #111827;
+      --muted: #6b7280;
+      --muted-2: #9ca3af;
+      --primary: #0f4cc9;
+      --primary-dark: #0b3ea5;
+      --danger: #dc2626;
+      --shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR",
+        "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .company {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 10px;
+      border: 1px solid var(--line-strong);
+      background: #fff;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-dark {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 48px auto 72px;
+      padding: 0 20px;
+    }
+
+    .step {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0 0 24px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .service-block {
+      padding: 22px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service-block:last-child {
+      border-bottom: none;
+    }
+
+    .service-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .service-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .service-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 7px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 12px 13px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: #8eb2ff;
+      box-shadow: 0 0 0 4px rgba(15, 76, 201, 0.10);
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .help {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted-2);
+      line-height: 1.5;
+    }
+
+    .summary {
+      background: #f3f4f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin: 18px 0 26px;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 9px 0;
+      font-size: 15px;
+    }
+
+    .summary-row + .summary-row {
+      border-top: 1px dashed #d8dde6;
+    }
+
+    .summary-label {
+      color: #374151;
+      font-weight: 700;
+    }
+
+    .summary-value {
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .summary-total {
+      font-size: 18px;
+    }
+
+    .payment-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 26px 0 10px;
+    }
+
+    .payment-help {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .radio-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .bank-box {
+      background: #f3f4f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      margin-bottom: 14px;
+      color: #374151;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .bank-box strong {
+      color: #111827;
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 54px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .price-guide {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin-top: 28px;
+      }
+
+      .step {
+        font-size: 22px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .grid,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .service-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topbar {
+        padding: 14px 16px;
+      }
+
+      .topbar-left {
+        font-size: 18px;
+      }
+
+      .btn {
+        padding: 0 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div>
+        <div class="topbar-left">
+          <span>기장 신청</span>
+          <span class="company">GoldRush Inc.</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn" type="button">돌아가기</button>
+        <button class="btn btn-dark" type="button">문의하기</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="step">STEP 2.</div>
+      <h1 class="title">결제 및 입금확인</h1>
+      <div class="divider"></div>
+
+      <h2 class="section-title">선택한 서비스</h2>
+
+      <section class="card">
+        <!-- 계좌 -->
+        <div class="service-block">
+          <div class="service-header">
+            <div>
+              <div class="service-title">계좌</div>
+              <div class="service-desc">계좌 수, 월별 거래량, 적용 개월수를 기준으로 산정</div>
+            </div>
+            <div class="badge">기장 항목</div>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label for="accountCount">계좌 수</label>
+              <input type="number" id="accountCount" min="0" value="2" />
+            </div>
+            <div class="field">
+              <label for="accountMonthlyTx">월별 거래량</label>
+              <input type="number" id="accountMonthlyTx" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label for="accountMonths">월 개월수</label>
+              <input type="number" id="accountMonths" min="0" value="1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 카드 -->
+        <div class="service-block">
+          <div class="service-header">
+            <div>
+              <div class="service-title">카드</div>
+              <div class="service-desc">카드 수, 월별 카드 거래수, 적용 개월수를 기준으로 산정</div>
+            </div>
+            <div class="badge">기장 항목</div>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label for="cardCount">카드 수</label>
+              <input type="number" id="cardCount" min="0" value="1" />
+            </div>
+            <div class="field">
+              <label for="cardMonthlyTx">월별 카드 거래수</label>
+              <input type="number" id="cardMonthlyTx" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label for="cardMonths">월 개월 수</label>
+              <input type="number" id="cardMonths" min="0" value="1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 급여 신고 -->
+        <div class="service-block">
+          <div class="service-header">
+            <div>
+              <div class="service-title">급여 신고</div>
+              <div class="service-desc">급여 기본료와 급여 1인 추가료를 반영</div>
+            </div>
+            <div class="badge">추가 서비스</div>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label for="payrollBaseFee">급여 기본료 ($)</label>
+              <input type="number" id="payrollBaseFee" min="0" step="0.01" value="0" />
+            </div>
+            <div class="field">
+              <label for="payrollExtraCount">추가 인원 수</label>
+              <input type="number" id="payrollExtraCount" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label for="payrollExtraFee">급여 1인 추가료 ($)</label>
+              <input type="number" id="payrollExtraFee" min="0" step="0.01" value="0" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 투자 -->
+        <div class="service-block">
+          <div class="service-header">
+            <div>
+              <div class="service-title">투자</div>
+              <div class="service-desc">투자 수, 월별 투자 거래수, 적용 개월수를 기준으로 산정</div>
+            </div>
+            <div class="badge">기장 항목</div>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label for="investmentCount">투자 수</label>
+              <input type="number" id="investmentCount" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label for="investmentMonthlyTx">월별 투자 거래수</label>
+              <input type="number" id="investmentMonthlyTx" min="0" value="0" />
+            </div>
+            <div class="field">
+              <label for="investmentMonths">월 개월 수</label>
+              <input type="number" id="investmentMonths" min="0" value="1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 -->
+        <div class="service-block">
+          <div class="service-header">
+            <div>
+              <div class="service-title">기타</div>
+              <div class="service-desc">별도 비용 또는 특이사항 입력</div>
+            </div>
+            <div class="badge">수기 입력</div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="otherFee">기타 금액 ($)</label>
+              <input type="number" id="otherFee" min="0" step="0.01" value="0" />
+              <div class="help">수동 조정이 필요한 추가 비용을 입력하세요.</div>
+            </div>
+            <div class="field">
+              <label for="otherMemo">기타 메모</label>
+              <input type="text" id="otherMemo" placeholder="예: 정리 작업, 추가 검토, 세팅 비용 등" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <div class="summary-row">
+          <div class="summary-label">계좌 금액</div>
+          <div class="summary-value" id="accountAmount">$0</div>
+        </div>
+        <div class="summary-row">
+          <div class="summary-label">카드 금액</div>
+          <div class="summary-value" id="cardAmount">$0</div>
+        </div>
+        <div class="summary-row">
+          <div class="summary-label">급여 신고 금액</div>
+          <div class="summary-value" id="payrollAmount">$0</div>
+        </div>
+        <div class="summary-row">
+          <div class="summary-label">투자 금액</div>
+          <div class="summary-value" id="investmentAmount">$0</div>
+        </div>
+        <div class="summary-row">
+          <div class="summary-label">기타 금액</div>
+          <div class="summary-value" id="otherAmount">$0</div>
+        </div>
+        <div class="summary-row summary-total">
+          <div class="summary-label">총 결제 금액</div>
+          <div class="summary-value" id="totalAmount">$0</div>
+        </div>
+
+        <div class="price-guide">
+          현재 계산식은 예시입니다. 실제 단가 정책에 맞게 아래 JavaScript의 단가 상수를 수정하면 됩니다.
+        </div>
+      </section>
+
+      <div class="payment-title">결제 방식</div>
+      <div class="payment-help">현재는 계좌이체를 통한 결제만 가능합니다.</div>
+
+      <label class="radio-wrap">
+        <input type="radio" checked />
+        <span>계좌 이체</span>
+      </label>
+
+      <div class="bank-box">
+        <strong>입금하실 계좌</strong><br />
+        국민은행 123-4567890<br />
+        예금주 가온오버시즈매니지먼트 주식회사<br />
+        금액 <strong id="bankAmount">$0</strong>
+      </div>
+
+      <div class="field" style="margin-bottom: 16px;">
+        <label for="depositorName">입금자명</label>
+        <input type="text" id="depositorName" placeholder="입금자명을 입력하세요." />
+      </div>
+
+      <button class="submit-btn" type="button">결제 신청</button>
+    </main>
+  </div>
+
+  <script>
+    /*
+      실제 요금 정책에 맞게 아래 단가만 바꾸면 됩니다.
+      현재는 예시 계산식입니다.
+    */
+    const PRICING = {
+      account: {
+        perAccount: 20,          // 계좌 수 1개당
+        perMonthlyTx: 1.5        // 계좌 월 거래량 1건당
+      },
+      card: {
+        perCard: 15,             // 카드 수 1개당
+        perMonthlyTx: 1.0        // 카드 월 거래 1건당
+      },
+      payroll: {
+        // 기본료, 추가료는 사용자가 직접 입력
+      },
+      investment: {
+        perInvestment: 30,       // 투자 수 1개당
+        perMonthlyTx: 2.0        // 투자 월 거래 1건당
+      }
+    };
+
+    const ids = [
+      "accountCount",
+      "accountMonthlyTx",
+      "accountMonths",
+      "cardCount",
+      "cardMonthlyTx",
+      "cardMonths",
+      "payrollBaseFee",
+      "payrollExtraCount",
+      "payrollExtraFee",
+      "investmentCount",
+      "investmentMonthlyTx",
+      "investmentMonths",
+      "otherFee"
+    ];
+
+    function num(id) {
+      const value = parseFloat(document.getElementById(id).value);
+      return isNaN(value) ? 0 : value;
+    }
+
+    function money(value) {
+      return "$" + value.toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function calculate() {
+      const accountCount = num("accountCount");
+      const accountMonthlyTx = num("accountMonthlyTx");
+      const accountMonths = num("accountMonths");
+
+      const cardCount = num("cardCount");
+      const cardMonthlyTx = num("cardMonthlyTx");
+      const cardMonths = num("cardMonths");
+
+      const payrollBaseFee = num("payrollBaseFee");
+      const payrollExtraCount = num("payrollExtraCount");
+      const payrollExtraFee = num("payrollExtraFee");
+
+      const investmentCount = num("investmentCount");
+      const investmentMonthlyTx = num("investmentMonthlyTx");
+      const investmentMonths = num("investmentMonths");
+
+      const otherFee = num("otherFee");
+
+      const accountAmount =
+        (accountCount * PRICING.account.perAccount * Math.max(accountMonths, 0)) +
+        (accountMonthlyTx * PRICING.account.perMonthlyTx * Math.max(accountMonths, 0));
+
+      const cardAmount =
+        (cardCount * PRICING.card.perCard * Math.max(cardMonths, 0)) +
+        (cardMonthlyTx * PRICING.card.perMonthlyTx * Math.max(cardMonths, 0));
+
+      const payrollAmount =
+        payrollBaseFee + (payrollExtraCount * payrollExtraFee);
+
+      const investmentAmount =
+        (investmentCount * PRICING.investment.perInvestment * Math.max(investmentMonths, 0)) +
+        (investmentMonthlyTx * PRICING.investment.perMonthlyTx * Math.max(investmentMonths, 0));
+
+      const totalAmount =
+        accountAmount + cardAmount + payrollAmount + investmentAmount + otherFee;
+
+      document.getElementById("accountAmount").textContent = money(accountAmount);
+      document.getElementById("cardAmount").textContent = money(cardAmount);
+      document.getElementById("payrollAmount").textContent = money(payrollAmount);
+      document.getElementById("investmentAmount").textContent = money(investmentAmount);
+      document.getElementById("otherAmount").textContent = money(otherFee);
+      document.getElementById("totalAmount").textContent = money(totalAmount);
+      document.getElementById("bankAmount").textContent = money(totalAmount);
+    }
+
+    ids.forEach((id) => {
+      document.getElementById(id).addEventListener("input", calculate);
+    });
+
+    calculate();
+  </script>
+</body>
+</html>
