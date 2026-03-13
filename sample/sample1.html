@@ -9,33 +9,33 @@
     html, body { margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
-      color: #1b1d21;
-      background: #f4f5f7;
+      color: #191f28;
+      background: #ffffff;
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
     :root {
-      --bg: #f3f4f6;
+      --bg: #ffffff;
       --bg-soft: #f7f8fa;
-      --surface: rgba(255,255,255,0.78);
-      --surface-strong: rgba(255,255,255,0.9);
-      --card: #ffffff;
-      --text: #191b1f;
-      --text-2: #555d68;
-      --text-3: #8a9099;
-      --line: #e4e7eb;
-      --line-soft: #eef1f4;
-      --point: #3e4652;
-      --point-deep: #242a33;
-      --point-soft: #eef1f4;
-      --shadow-xl: 0 42px 90px rgba(15, 23, 42, 0.10);
-      --shadow-lg: 0 22px 60px rgba(15, 23, 42, 0.08);
-      --shadow-md: 0 14px 36px rgba(15, 23, 42, 0.06);
-      --radius-2xl: 34px;
-      --radius-xl: 28px;
-      --radius-lg: 22px;
+      --bg-deep: #eef1f4;
+      --surface: #ffffff;
+      --surface-2: #f9fafb;
+      --surface-dark: #2f3640;
+      --text: #191f28;
+      --text-2: #4e5968;
+      --text-3: #8b95a1;
+      --line: #e5e8eb;
+      --line-soft: #f2f4f6;
+      --point: #3f4652;
+      --point-deep: #272d36;
+      --point-soft: #eef2f6;
+      --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 18px 45px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 30px 70px rgba(15, 23, 42, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
       --radius-md: 18px;
       --max: 1200px;
     }
@@ -45,9 +45,8 @@
     .wrap {
       overflow: hidden;
       background:
-        radial-gradient(circle at 50% 0%, rgba(80, 86, 97, 0.06), transparent 24%),
-        radial-gradient(circle at 20% 16%, rgba(120, 126, 136, 0.06), transparent 16%),
-        linear-gradient(180deg, #eef0f3 0%, #f7f8fa 20%, #ffffff 40%, #ffffff 100%);
+        radial-gradient(circle at 50% 0%, rgba(87, 96, 110, 0.08), transparent 26%),
+        linear-gradient(180deg, #f4f5f7 0%, #ffffff 24%, #ffffff 100%);
     }
 
     .container {
@@ -56,7 +55,7 @@
     }
 
     .header {
-      height: 92px;
+      height: 88px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -65,15 +64,15 @@
     .logo {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 800;
-      letter-spacing: -0.03em;
       color: var(--text);
+      letter-spacing: -0.03em;
     }
 
     .logo-mark {
       position: relative;
-      width: 36px;
+      width: 34px;
       height: 22px;
     }
 
@@ -84,7 +83,7 @@
       top: 0;
       width: 16px;
       height: 16px;
-      border: 4px solid #3b4350;
+      border: 4px solid var(--point);
       border-radius: 999px;
     }
 
@@ -93,11 +92,10 @@
 
     .logo small {
       display: block;
-      margin-top: -1px;
       font-size: 10px;
       font-weight: 700;
-      color: #8c939d;
-      letter-spacing: 0;
+      color: #8b95a1;
+      margin-top: -2px;
     }
 
     .header-right {
@@ -105,8 +103,8 @@
       align-items: center;
       gap: 18px;
       font-size: 14px;
-      color: var(--text-2);
       font-weight: 700;
+      color: var(--text-2);
     }
 
     .btn {
@@ -128,19 +126,20 @@
     .btn-dark {
       color: #fff;
       background: var(--point-deep);
-      box-shadow: 0 12px 24px rgba(36, 42, 51, 0.18);
+      box-shadow: 0 12px 24px rgba(39, 45, 54, 0.18);
     }
 
-    .btn-dark:hover { background: #161b22; }
+    .btn-dark:hover { background: #1f242c; }
 
     .btn-light {
       color: var(--text);
-      background: #fff;
+      background: rgba(255,255,255,0.88);
       border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
     }
 
     .hero {
-      padding: 26px 0 110px;
+      padding: 26px 0 120px;
       text-align: center;
     }
 
@@ -148,24 +147,24 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 16px;
+      padding: 11px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(228,231,235,0.9);
       background: rgba(255,255,255,0.78);
-      backdrop-filter: blur(12px);
-      color: #6b7280;
+      border: 1px solid rgba(229,232,235,0.9);
+      color: #6b7684;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: -0.02em;
+      backdrop-filter: blur(10px);
     }
 
     .hero h1 {
       margin: 28px auto 22px;
-      max-width: 900px;
-      font-size: clamp(42px, 7vw, 88px);
+      max-width: 960px;
+      font-size: clamp(42px, 7vw, 92px);
       line-height: 1.04;
       font-weight: 900;
-      letter-spacing: -0.07em;
+      letter-spacing: -0.075em;
       color: var(--text);
     }
 
@@ -174,7 +173,7 @@
       max-width: 760px;
       color: var(--text-2);
       font-size: clamp(18px, 2vw, 24px);
-      line-height: 1.72;
+      line-height: 1.7;
       letter-spacing: -0.03em;
     }
 
@@ -186,381 +185,211 @@
       flex-wrap: wrap;
     }
 
-    .hero-stage {
-      position: relative;
-      margin-top: 72px;
-      min-height: 900px;
-    }
-
-    .hero-glow {
-      position: absolute;
-      left: 50%;
-      top: 210px;
-      transform: translateX(-50%);
-      width: 840px;
-      height: 320px;
-      background: radial-gradient(circle at center, rgba(90, 96, 106, 0.18), rgba(90, 96, 106, 0.08) 36%, transparent 72%);
-      filter: blur(30px);
-      pointer-events: none;
-    }
-
-    .dashboard {
-      position: absolute;
-      left: 50%;
-      top: 110px;
-      transform: translateX(-50%);
-      width: min(780px, 82vw);
-      border-radius: 32px;
-      border: 1px solid rgba(228,231,235,0.95);
-      background: var(--surface);
-      backdrop-filter: blur(18px);
-      box-shadow: var(--shadow-xl);
-      overflow: hidden;
-      text-align: left;
-    }
-
-    .dashboard-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 17px 22px;
-      border-bottom: 1px solid var(--line-soft);
-      font-size: 13px;
-      color: var(--text-3);
-    }
-
-    .dashboard-brand {
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .dashboard-banner {
-      height: 108px;
-      margin: 22px 22px 0;
-      border-radius: 18px;
-      background:
-        linear-gradient(135deg, #4a515b 0%, #2b3139 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .dashboard-banner::before {
-      content: "";
-      position: absolute;
-      inset: auto -40px -30px auto;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.07);
-    }
-
-    .dashboard-banner::after {
-      content: "법인 운영 현황을 한 곳에서";
-      position: absolute;
-      left: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(255,255,255,0.95);
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-    }
-
-    .company {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      padding: 20px 22px 12px;
-    }
-
-    .avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #5a6068, #313741);
-      position: relative;
-      box-shadow: 0 12px 24px rgba(49, 55, 65, 0.20);
-      flex: 0 0 auto;
-    }
-
-    .avatar::before {
-      content: "GC";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
-
-    .company h3 {
-      margin: 0 0 6px;
-      font-size: 34px;
-      line-height: 1.08;
-      letter-spacing: -0.05em;
-      color: var(--text);
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #f2f4f6;
-      color: #66707c;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .dash-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      padding: 0 22px 14px;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .dash-tabs {
-      display: flex;
-      gap: 22px;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text-3);
-    }
-
-    .dash-tabs .active {
-      color: var(--text);
-      position: relative;
-    }
-
-    .dash-tabs .active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -14px;
-      height: 3px;
-      border-radius: 999px;
-      background: var(--text);
-    }
-
-    .mini-btn {
-      border: 0;
-      background: var(--point-deep);
-      color: #fff;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 16px 22px 10px;
-    }
-
-    .search {
-      min-width: 320px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid #e6eaee;
-      background: #f8f9fb;
-      color: #8d95a0;
-      font-size: 13px;
-    }
-
-    .search .submit {
-      margin-left: auto;
-      border: 0;
-      background: #20242b;
-      color: #fff;
-      border-radius: 9px;
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .select {
-      min-width: 130px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      border: 1px solid #e6eaee;
-      background: #fff;
-      color: #8d95a0;
-      font-size: 13px;
-    }
-
-    .table {
-      padding: 6px 22px 24px;
-    }
-
-    .tr {
-      display: grid;
-      grid-template-columns: 1.1fr 1.35fr 1.1fr .6fr .9fr .55fr;
-      gap: 12px;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line-soft);
-      color: var(--text-2);
-      font-size: 13px;
-    }
-
-    .tr.head {
-      color: var(--text-3);
-      font-size: 12px;
-      font-weight: 800;
-      padding-top: 0;
-    }
-
-    .link-point { color: #353d49; font-weight: 800; }
-    .strong { color: var(--text); font-weight: 800; }
-
-    .status {
-      justify-self: start;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: #edf5ee;
-      color: #2f7a42;
-      font-size: 11px;
-      font-weight: 900;
-    }
-
-    .float {
-      position: absolute;
-      border-radius: 24px;
-      border: 1px solid rgba(228,231,235,0.96);
-      background: rgba(255,255,255,0.78);
-      backdrop-filter: blur(16px);
+    .hero-visual {
+      margin: 70px auto 0;
+      max-width: 1080px;
+      padding: 28px;
+      border-radius: 36px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.88) 0%, rgba(246,248,250,0.95) 100%);
+      border: 1px solid rgba(229,232,235,0.9);
       box-shadow: var(--shadow-lg);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .main-panel {
+      border-radius: 28px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
       text-align: left;
     }
 
-    .float-inner { padding: 22px; }
-
-    .float h4 {
-      margin: 0 0 12px;
-      color: var(--text);
-      font-size: 19px;
-      line-height: 1.3;
-      letter-spacing: -0.03em;
-    }
-
-    .float p,
-    .float li,
-    .float div,
-    .float label {
-      margin: 0;
-      color: var(--text-2);
+    .panel-top {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-3);
       font-size: 13px;
-      line-height: 1.7;
-      letter-spacing: -0.02em;
+      font-weight: 700;
     }
 
-    .sales { left: 0; top: 92px; width: 260px; }
-    .address { right: 0; top: 60px; width: 330px; }
-    .tax { left: 8px; top: 450px; width: 290px; }
-    .steps { left: 54px; top: 700px; width: 248px; }
-    .services { right: 14px; top: 452px; width: 290px; }
-
-    .muted-line {
-      height: 1px;
-      background: #eef1f4;
-      margin: 14px 0;
+    .panel-top strong {
+      color: var(--text);
+      font-weight: 800;
     }
 
-    .kicker {
-      display: inline-block;
-      margin-bottom: 8px;
-      color: #7c848e;
+    .panel-hero {
+      margin: 20px;
+      padding: 28px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #4a525d 0%, #2a313a 100%);
+      color: #fff;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .panel-hero .label {
       font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      color: rgba(255,255,255,0.72);
+      text-transform: uppercase;
+    }
+
+    .panel-hero h3 {
+      margin: 16px 0 0;
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
       font-weight: 900;
+    }
+
+    .panel-hero p {
+      margin: 12px 0 0;
+      max-width: 520px;
+      color: rgba(255,255,255,0.82);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .panel-body {
+      padding: 0 20px 20px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .info-card {
+      padding: 18px;
+      border-radius: 20px;
+      background: var(--surface-2);
+      border: 1px solid var(--line-soft);
+    }
+
+    .info-card .kicker {
+      color: var(--text-3);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
       letter-spacing: 0.02em;
       text-transform: uppercase;
     }
 
-    .metric {
-      font-size: 34px;
-      font-weight: 900;
+    .info-card h4 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.25;
       color: var(--text);
-      letter-spacing: -0.05em;
-      margin: 6px 0 10px;
+      letter-spacing: -0.04em;
     }
 
-    .metric-sub {
-      font-size: 13px;
+    .info-card p {
+      margin: 0;
       color: var(--text-2);
+      font-size: 14px;
+      line-height: 1.65;
     }
 
-    .field-grid {
+    .side-stack {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .side-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+    }
+
+    .side-card h4 {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: -0.04em;
+    }
+
+    .side-card p {
+      margin: 0;
+      color: var(--text-2);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .step-item {
+      padding: 14px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .step-item:first-child { border-top: 0; padding-top: 0; }
+
+    .step-no {
+      color: #7a838e;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .step-copy {
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .service-list {
+      display: grid;
       gap: 10px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      color: var(--text-3);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .input {
-      height: 40px;
-      border-radius: 12px;
-      border: 1px solid #e7ebef;
-      background: #f8fafb;
+      margin-top: 8px;
     }
 
     .service-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 14px 2px;
-      border-bottom: 1px solid var(--line-soft);
-      font-size: 15px;
-      font-weight: 800;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--line-soft);
       color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
     }
 
-    .service-item:last-child { border-bottom: 0; }
-
     .service-icon {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       display: grid;
       place-items: center;
       border-radius: 12px;
-      background: #f1f3f5;
+      background: #eceff3;
       font-size: 16px;
-    }
-
-    .step-title {
-      color: #6a717b;
-      font-size: 12px;
-      font-weight: 900;
-      margin-bottom: 3px;
-      letter-spacing: 0.02em;
-    }
-
-    .step-copy {
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 800;
+      flex: 0 0 auto;
     }
 
     .section {
@@ -577,8 +406,8 @@
       font-size: clamp(38px, 5.6vw, 76px);
       line-height: 1.12;
       letter-spacing: -0.065em;
-      font-weight: 900;
       color: var(--text);
+      font-weight: 900;
     }
 
     .section-title p {
@@ -590,20 +419,20 @@
       letter-spacing: -0.03em;
     }
 
-    .trust-panel {
+    .partner-box {
       border-radius: 36px;
-      min-height: 330px;
+      min-height: 320px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       padding: 76px 32px;
-      background: linear-gradient(135deg, #4a515a 0%, #252b34 100%);
+      background: linear-gradient(135deg, #47505d 0%, #242b34 100%);
       box-shadow: var(--shadow-md);
     }
 
-    .trust-panel h2 {
+    .partner-box h2 {
       margin: 0 0 36px;
       font-size: clamp(30px, 4vw, 58px);
       line-height: 1.2;
@@ -615,10 +444,11 @@
     .logo-row {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 28px;
+      align-items: center;
+      justify-content: center;
       color: rgba(255,255,255,0.78);
-      font-size: clamp(26px, 3vw, 48px);
+      font-size: clamp(28px, 3vw, 50px);
       font-weight: 800;
       letter-spacing: .03em;
     }
@@ -631,25 +461,26 @@
     .feature-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 38px;
+      gap: 36px;
       align-items: center;
       padding: 46px;
       border-radius: 30px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.86);
-      box-shadow: 0 20px 50px rgba(15,23,42,0.04);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
     }
 
     .feature-copy .badge {
       display: inline-block;
+      margin-bottom: 18px;
       padding: 8px 12px;
       border-radius: 999px;
       background: #f2f4f6;
-      color: #68717d;
+      color: #6b7481;
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: 0.01em;
-      margin-bottom: 18px;
+      letter-spacing: .02em;
+      text-transform: uppercase;
     }
 
     .feature-copy h3 {
@@ -657,8 +488,8 @@
       font-size: clamp(30px, 3.2vw, 56px);
       line-height: 1.15;
       letter-spacing: -0.055em;
-      font-weight: 900;
       color: var(--text);
+      font-weight: 900;
     }
 
     .feature-copy p {
@@ -673,20 +504,19 @@
     .feature-visual {
       min-height: 360px;
       border-radius: 28px;
-      border: 1px solid #e9edf2;
-      background: linear-gradient(180deg, #f9fafb 0%, #eef1f4 100%);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f5 100%);
       padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
     }
 
-    .mock-top {
+    .mock-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: #88909a;
+      color: #8b95a1;
       font-size: 13px;
       font-weight: 700;
     }
@@ -704,7 +534,7 @@
       margin-top: 18px;
       padding: 18px;
       border-radius: 20px;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.92);
       border: 1px solid #e7eaee;
       box-shadow: 0 12px 24px rgba(15,23,42,0.04);
     }
@@ -716,11 +546,12 @@
       margin-bottom: 10px;
     }
 
-    .mock-line.w1 { width: 86%; }
-    .mock-line.w2 { width: 64%; }
-    .mock-line.w3 { width: 92%; }
+    .w1 { width: 86%; }
+    .w2 { width: 64%; }
+    .w3 { width: 92%; }
+    .w4 { width: 52%; }
 
-    .mock-card-row {
+    .mock-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
@@ -735,24 +566,62 @@
       min-height: 92px;
     }
 
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .summary-card {
+      padding: 28px;
+      border-radius: 26px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .summary-card .mini {
+      color: var(--text-3);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .summary-card h4 {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .summary-card p {
+      margin: 0;
+      color: var(--text-2);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
     .cta {
-      padding: 30px 0 120px;
+      padding: 24px 0 120px;
     }
 
     .cta-box {
-      padding: 54px;
+      padding: 56px;
       border-radius: 34px;
-      background: linear-gradient(135deg, #303741 0%, #1d2229 100%);
+      background: linear-gradient(135deg, #303742 0%, #1d232a 100%);
       color: #fff;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 24px;
+      gap: 28px;
     }
 
     .cta-copy h3 {
       margin: 0 0 12px;
-      font-size: clamp(28px, 3vw, 46px);
+      font-size: clamp(30px, 3vw, 48px);
       line-height: 1.2;
       letter-spacing: -0.05em;
       font-weight: 900;
@@ -772,53 +641,42 @@
       text-align: center;
     }
 
-    @media (max-width: 1100px) {
-      .hero-stage { min-height: 980px; }
-      .sales { left: 0; }
-      .tax { left: 0; }
-      .steps { left: 10px; }
-      .address { right: 0; }
-      .services { right: 0; }
-    }
-
-    @media (max-width: 920px) {
-      .hero-stage {
-        min-height: auto;
-        display: grid;
-        gap: 18px;
-      }
-
-      .hero-glow,
-      .dashboard,
-      .float {
-        position: static;
-        transform: none;
-        width: 100%;
-      }
-
-      .dashboard { order: 1; }
-      .sales, .address, .tax, .steps, .services { width: 100%; }
+    @media (max-width: 980px) {
+      .hero-grid,
       .feature-card,
+      .summary-grid,
       .cta-box {
         grid-template-columns: 1fr;
+      }
+
+      .hero-grid,
+      .summary-grid {
         display: grid;
       }
     }
 
     @media (max-width: 720px) {
       .container { width: min(calc(100% - 24px), var(--max)); }
-      .header { height: 74px; }
+      .header { height: 76px; }
       .header-right { gap: 12px; font-size: 13px; }
       .btn { height: 42px; padding: 0 16px; font-size: 14px; }
-      .toolbar, .dash-nav { flex-direction: column; align-items: stretch; }
-      .search { min-width: 0; width: 100%; }
-      .field-grid { grid-template-columns: 1fr; }
-      .tr { grid-template-columns: 1fr 1fr; }
-      .tr.head { display: none; }
-      .trust-panel { padding: 58px 24px; min-height: 250px; }
-      .feature-card { padding: 24px; }
-      .cta-box { padding: 28px; }
+      .hero { padding: 14px 0 90px; }
       .hero-actions { flex-direction: column; align-items: center; }
+      .hero-visual { padding: 16px; border-radius: 24px; }
+      .panel-hero { min-height: 180px; padding: 22px; }
+      .info-row,
+      .mock-grid {
+        grid-template-columns: 1fr;
+      }
+      .feature-card,
+      .summary-card,
+      .cta-box {
+        padding: 24px;
+      }
+      .partner-box {
+        min-height: 240px;
+        padding: 52px 24px;
+      }
     }
   </style>
 </head>
@@ -842,10 +700,12 @@
 
       <section class="hero">
         <div class="eyebrow">미국 법인 운영을 위한 한국어 올인원 플랫폼</div>
+
         <h1>
           미국 법인,<br />
           설립보다 운영이 더 중요합니다.
         </h1>
+
         <p>
           미국 법인 설립 이후 필요한 주소지, 세무, 행정, 유지관리까지.<br />
           한국에서, 한국어로, 더 명확하고 안정적으로 관리하세요.
@@ -856,158 +716,103 @@
           <a href="#" class="btn btn-light">서비스 보기</a>
         </div>
 
-        <div class="hero-stage">
-          <div class="hero-glow"></div>
+        <div class="hero-visual">
+          <div class="hero-grid">
+            <div class="main-panel">
+              <div class="panel-top">
+                <strong>Gaon Connect Dashboard</strong>
+                <span>법인 설립 이후 운영 현황</span>
+              </div>
 
-          <div class="float sales">
-            <div class="float-inner">
-              <span class="kicker">Overview</span>
-              <div class="metric">한 곳에서</div>
-              <p class="metric-sub">
-                법인 운영에 필요한 주요 업무를 분산 없이 관리할 수 있도록 설계했습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="float address">
-            <div class="float-inner">
-              <h4>미국 공유 오피스 및 주소지 연결</h4>
-              <p>
-                법인 설립 후 필요한 미국 주소지 확보부터 우편 수령 구조까지
-                단계별로 정리된 흐름으로 연결합니다.
-              </p>
-              <div class="muted-line"></div>
-              <div class="field-grid">
-                <div class="field">
-                  Office Type
-                  <div class="input"></div>
-                </div>
-                <div class="field">
-                  State
-                  <div class="input"></div>
+              <div class="panel-hero">
+                <div class="label">Operations Overview</div>
+                <div>
+                  <h3>설립 이후 필요한 업무를<br />한 곳에서 정리합니다.</h3>
+                  <p>
+                    주소지 연결, 세무 일정 확인, 행정 요청, 서류 관리까지
+                    실무적으로 이어지는 흐름을 하나의 화면으로 보여줍니다.
+                  </p>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="dashboard">
-            <div class="dashboard-top">
-              <span class="dashboard-brand">Gaon Connect Dashboard</span>
-              <span>법인 설립 이후 운영 현황</span>
-            </div>
+              <div class="panel-body">
+                <div class="info-row">
+                  <div class="info-card">
+                    <div class="kicker">Address</div>
+                    <h4>미국 주소지 연결</h4>
+                    <p>공유 오피스 안내부터 우편 수령 구조까지 단계별로 연결합니다.</p>
+                  </div>
 
-            <div class="dashboard-banner"></div>
+                  <div class="info-card">
+                    <div class="kicker">Tax</div>
+                    <h4>세무 일정 확인</h4>
+                    <p>놓치기 쉬운 신고 일정과 필요한 관리 항목을 보기 쉽게 정리합니다.</p>
+                  </div>
+                </div>
 
-            <div class="company">
-              <div class="avatar"></div>
-              <div>
-                <h3>Gaon Connect Inc.</h3>
-                <div class="chips">
-                  <span class="chip">법인 운영</span>
-                  <span class="chip">세무 관리</span>
-                  <span class="chip">주소지 지원</span>
+                <div class="info-row">
+                  <div class="info-card">
+                    <div class="kicker">Admin</div>
+                    <h4>행정 요청 관리</h4>
+                    <p>필수 제출 정보와 서류 요청 흐름을 정돈된 방식으로 관리합니다.</p>
+                  </div>
+
+                  <div class="info-card">
+                    <div class="kicker">Support</div>
+                    <h4>전문가 연결</h4>
+                    <p>필요한 순간에 전문가 네트워크와 연결될 수 있도록 설계했습니다.</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="dash-nav">
-              <div class="dash-tabs">
-                <span class="active">운영 현황</span>
-                <span>주소지</span>
-                <span>세무</span>
-                <span>서비스</span>
-              </div>
-              <button class="mini-btn">업무 요청</button>
-            </div>
-
-            <div class="toolbar">
-              <div class="search">
-                필요한 업무를 검색해보세요
-                <button class="submit">검색</button>
-              </div>
-              <div class="select">최근 30일</div>
-            </div>
-
-            <div class="table">
-              <div class="tr head">
-                <div>업무 항목</div>
-                <div>설명</div>
-                <div>담당 영역</div>
-                <div>상태</div>
-                <div>진행일</div>
-                <div>보기</div>
+            <div class="side-stack">
+              <div class="side-card">
+                <h4>법인 운영 흐름</h4>
+                <div class="step-list">
+                  <div class="step-item">
+                    <div class="step-no">STEP 01</div>
+                    <div class="step-copy">법인 설립 정보 확인</div>
+                  </div>
+                  <div class="step-item">
+                    <div class="step-no">STEP 02</div>
+                    <div class="step-copy">주소지 및 운영 인프라 연결</div>
+                  </div>
+                  <div class="step-item">
+                    <div class="step-no">STEP 03</div>
+                    <div class="step-copy">세무·행정 유지관리 진행</div>
+                  </div>
+                </div>
               </div>
 
-              <div class="tr">
-                <div class="strong">법인 주소지 연결</div>
-                <div>공유 오피스 및 수령 구조 안내</div>
-                <div>인프라 지원</div>
-                <div class="status">완료</div>
-                <div>2026.03</div>
-                <div class="link-point">열기</div>
+              <div class="side-card">
+                <h4>연결 가능한 서비스</h4>
+                <div class="service-list">
+                  <div class="service-item">
+                    <span class="service-icon">🏢</span>
+                    <span>공유 오피스 연계</span>
+                  </div>
+                  <div class="service-item">
+                    <span class="service-icon">🧾</span>
+                    <span>세무 일정 관리</span>
+                  </div>
+                  <div class="service-item">
+                    <span class="service-icon">📁</span>
+                    <span>법인 서류 정리</span>
+                  </div>
+                  <div class="service-item">
+                    <span class="service-icon">🤝</span>
+                    <span>전문가 네트워크 연결</span>
+                  </div>
+                </div>
               </div>
 
-              <div class="tr">
-                <div class="strong">세무 등록 체크</div>
-                <div>EIN 및 유지관리 일정 확인</div>
-                <div>세무 관리</div>
-                <div class="status">진행중</div>
-                <div>2026.03</div>
-                <div class="link-point">열기</div>
-              </div>
-
-              <div class="tr">
-                <div class="strong">행정 요청</div>
-                <div>필수 제출 정보 및 서류 정리</div>
-                <div>운영 지원</div>
-                <div class="status">완료</div>
-                <div>2026.03</div>
-                <div class="link-point">열기</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="float tax">
-            <div class="float-inner">
-              <h4>세무 및 유지관리 일정 확인</h4>
-              <p>
-                놓치기 쉬운 신고 일정과 필요한 관리 항목을
-                보기 쉽게 확인할 수 있습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="float steps">
-            <div class="float-inner">
-              <div class="step-title">STEP 01</div>
-              <div class="step-copy">법인 설립 정보 확인</div>
-              <div class="muted-line"></div>
-              <div class="step-title">STEP 02</div>
-              <div class="step-copy">주소지 및 운영 인프라 연결</div>
-              <div class="muted-line"></div>
-              <div class="step-title">STEP 03</div>
-              <div class="step-copy">세무·행정 유지관리 진행</div>
-            </div>
-          </div>
-
-          <div class="float services">
-            <div class="float-inner">
-              <h4>연결 가능한 서비스</h4>
-              <div class="service-item">
-                <span class="service-icon">🏢</span>
-                <span>공유 오피스 연계</span>
-              </div>
-              <div class="service-item">
-                <span class="service-icon">🧾</span>
-                <span>세무 일정 관리</span>
-              </div>
-              <div class="service-item">
-                <span class="service-icon">📁</span>
-                <span>법인 서류 정리</span>
-              </div>
-              <div class="service-item">
-                <span class="service-icon">🤝</span>
-                <span>전문가 네트워크 연결</span>
+              <div class="side-card">
+                <h4>한국에서 바로 시작</h4>
+                <p>
+                  미국에 가지 않아도 법인 설립 이후 필요한 운영 인프라를
+                  한국어로 준비하고 연결할 수 있습니다.
+                </p>
               </div>
             </div>
           </div>
@@ -1015,9 +820,9 @@
       </section>
     </div>
 
-    <section class="section">
+    <section class="section" style="padding-top: 0;">
       <div class="container">
-        <div class="trust-panel">
+        <div class="partner-box">
           <h2>신뢰할 수 있는 전문가 네트워크와 함께합니다.</h2>
           <div class="logo-row">
             <span>UST</span>
@@ -1029,13 +834,13 @@
       </div>
     </section>
 
-    <section class="section" style="padding-top: 0;">
+    <section class="section">
       <div class="container">
         <div class="section-title">
           <h2>미국에 가지 않아도<br />한국에서 다 됩니다.</h2>
           <p>
-            주소지 확보부터 세무·운영 관리까지, 미국 법인 운영에 필요한 기반을
-            한국에서 준비하고 연결하세요.
+            법인 설립 이후 필요한 인프라와 실무 흐름을
+            한국에서 준비하고 연결할 수 있도록 설계했습니다.
           </p>
         </div>
 
@@ -1045,14 +850,14 @@
               <span class="badge">Office Infrastructure</span>
               <h3>미국 사무실 주소 확보</h3>
               <p>
-                사용 가능한 주소지가 없어도 괜찮습니다.<br />
+                사용 가능한 주소가 없어도 괜찮습니다.<br />
                 가온커넥트가 공유 오피스 안내부터 연결까지 도와드려
                 설립 이후 운영의 기본 인프라를 안정적으로 준비할 수 있습니다.
               </p>
             </div>
 
             <div class="feature-visual">
-              <div class="mock-top">
+              <div class="mock-head">
                 <span>Workspace Setup</span>
                 <span>Address · Mail · Support</span>
               </div>
@@ -1063,10 +868,11 @@
                   <div class="mock-line w1"></div>
                   <div class="mock-line w2"></div>
                   <div class="mock-line w3"></div>
+                  <div class="mock-line w4"></div>
                 </div>
               </div>
 
-              <div class="mock-card-row">
+              <div class="mock-grid">
                 <div class="mock-mini">
                   <div class="mock-line w2"></div>
                   <div class="mock-line w1"></div>
@@ -1082,16 +888,16 @@
           <div class="feature-card">
             <div class="feature-copy">
               <span class="badge">Operations & Tax</span>
-              <h3>설립 이후 필요한 운영 관리까지</h3>
+              <h3>세무와 유지관리까지<br />실무적으로 이어집니다.</h3>
               <p>
                 주소지 연결로 끝나지 않습니다.<br />
                 유지관리 일정, 세무 체크포인트, 필요한 행정 업무까지
-                실무적으로 이어지는 흐름으로 안내합니다.
+                설립 이후 운영에 필요한 흐름을 자연스럽게 이어갑니다.
               </p>
             </div>
 
             <div class="feature-visual">
-              <div class="mock-top">
+              <div class="mock-head">
                 <span>Management Flow</span>
                 <span>Dashboard</span>
               </div>
@@ -1105,7 +911,7 @@
                 </div>
               </div>
 
-              <div class="mock-card-row">
+              <div class="mock-grid">
                 <div class="mock-mini">
                   <div class="mock-line w2"></div>
                   <div class="mock-line w2"></div>
@@ -1121,13 +927,54 @@
       </div>
     </section>
 
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-title">
+          <h2>복잡한 운영을<br />더 단순하게 만듭니다.</h2>
+          <p>
+            꼭 필요한 기능만 남기고, 이해하기 쉬운 구조로 정리했습니다.
+          </p>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="mini">Simple</div>
+            <h4>한눈에 보이는 구조</h4>
+            <p>
+              필요한 정보를 복잡하게 흩어놓지 않고,
+              핵심 흐름이 보이도록 정리합니다.
+            </p>
+          </div>
+
+          <div class="summary-card">
+            <div class="mini">Reliable</div>
+            <h4>신뢰감 있는 운영 지원</h4>
+            <p>
+              전문적인 회색 톤과 정돈된 인터페이스로
+              브랜드의 진중함을 전달합니다.
+            </p>
+          </div>
+
+          <div class="summary-card">
+            <div class="mini">Connected</div>
+            <h4>실무가 이어지는 플랫폼</h4>
+            <p>
+              설립, 주소지, 세무, 행정, 전문가 연결까지
+              따로따로가 아니라 하나의 흐름으로 이어집니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="cta">
       <div class="container">
         <div class="cta-box">
           <div class="cta-copy">
-            <h3>미국 법인 운영, 이제 더 차분하고 명확하게.</h3>
+            <h3>미국 법인 운영, 더 차분하고 명확하게.</h3>
             <p>
-              설립 이후 필요한 인프라와 관리 업무를 한국어로 연결해드립니다.
+              설립 이후 필요한 인프라와 유지관리를
+              한국에서 한국어로 연결해드립니다.
             </p>
           </div>
           <a href="#" class="btn btn-light">가온커넥트 시작하기</a>
