@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaon Connect - 미국 법인 설립 이후 운영 지원 플랫폼</title>
+  <meta
+    name="description"
+    content="한국 창업자와 기업을 위한 미국 법인 설립 이후 운영 지원 플랫폼. 부동산·세무, 법인 설립·금융, VC 투자 유치, SaaS/IT 정산, 유학·이민·자산 계획까지 한 번에 연결합니다."
+  />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f6f9fc;
+      --bg-dark: #0f172a;
+      --text: #111827;
+      --text-soft: #6b7280;
+      --line: #e5e7eb;
+      --primary: #3182f6;
+      --primary-dark: #1d4ed8;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+        "Noto Sans KR", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin: 0 0 20px;
+      font-weight: 800;
+    }
+
+    .section-desc {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 18px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(49, 130, 246, 0.28);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #eef4ff;
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: #e4eeff;
+      transform: translateY(-1px);
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.75);
+    }
+
+    .header-inner {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav a {
+      color: #374151;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      border-radius: 12px;
+      background: #111827;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .menu-btn {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #f3f4f6;
+      font-size: 20px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 90px 0 70px;
+      background:
+        radial-gradient(circle at top right, rgba(49, 130, 246, 0.14), transparent 28%),
+        radial-gradient(circle at left top, rgba(99, 102, 241, 0.08), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-title {
+      margin: 0 0 24px;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+    }
+
+    .hero-desc {
+      margin: 0 0 34px;
+      max-width: 680px;
+      color: var(--text-soft);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.7;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+
+    .phone-stack {
+      position: relative;
+      height: 720px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone {
+      width: 320px;
+      border-radius: 42px;
+      padding: 14px;
+      background: linear-gradient(180deg, #161d2d 0%, #0f172a 100%);
+      box-shadow:
+        0 40px 100px rgba(15, 23, 42, 0.24),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+      position: absolute;
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 12px;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 24px;
+      border-radius: 999px;
+      background: #0a0f1d;
+      z-index: 2;
+    }
+
+    .phone.front {
+      transform: translateY(0) rotate(-6deg);
+      z-index: 2;
+    }
+
+    .phone.back {
+      transform: translate(90px, 70px) rotate(8deg) scale(0.95);
+      opacity: 0.9;
+    }
+
+    .screen {
+      position: relative;
+      overflow: hidden;
+      min-height: 660px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, #f8fbff 0%, #eff5ff 100%);
+      padding: 64px 20px 20px;
+    }
+
+    .app-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .app-brand {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .app-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      border: 1px solid #dbeafe;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #3182f6 0%, #5aa5ff 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 18px 40px rgba(49, 130, 246, 0.25);
+    }
+
+    .balance-card small {
+      opacity: 0.9;
+      font-size: 13px;
+    }
+
+    .balance-amount {
+      margin: 10px 0 18px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .balance-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mini-btn {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.18);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      backdrop-filter: blur(6px);
+    }
+
+    .list-card {
+      margin-top: 16px;
+      background: #fff;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .list-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .txn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .txn:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .txn-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: #eef4ff;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .txn-name {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .txn-time {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .txn-amount {
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* Stats */
+    .stats {
+      padding: 40px 0 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: clamp(28px, 3vw, 42px);
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .stat-card span {
+      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      gap: 26px;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 44px;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    .feature-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: #eef4ff;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 16px;
+    }
+
+    /* Split sections */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .visual-panel {
+      background: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+      border-radius: 34px;
+      padding: 28px;
+      border: 1px solid #e8eef7;
+      box-shadow: var(--shadow);
+    }
+
+    .dashboard {
+      background: #fff;
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .dash-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .bars {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 130px 1fr 90px;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #edf2f7;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #3182f6, #7db5ff);
+    }
+
+    .info-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-item {
+      background: #fff;
+      border: 1px solid #eef2f7;
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .info-label {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text-soft);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .check {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #374151;
+      font-size: 16px;
+    }
+
+    .check-mark {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #e7f1ff;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    /* Business */
+    .business {
+      background: var(--bg-soft);
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .biz-card {
+      border-radius: 24px;
+      background: #fff;
+      padding: 28px;
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .biz-card h3 {
+      margin: 18px 0 10px;
+      font-size: 21px;
+      letter-spacing: -0.03em;
+    }
+
+    .biz-card p {
+      margin: 0;
+      color: var(--text-soft);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 120px 0;
+    }
+
+    .cta-box {
+      border-radius: 36px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #0f172a 0%, #16233d 60%, #1e3a8a 100%);
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 40px 100px rgba(15, 23, 42, 0.24);
+    }
+
+    .cta-box h2 {
+      margin: 0 0 16px;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.16;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-box p {
+      margin: 0 auto 28px;
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 18px;
+    }
+
+    .cta-box .btn-group {
+      justify-content: center;
+    }
+
+    .cta-box .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 50px 0 70px;
+      background: #fff;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    .footer-brand p {
+      margin: 14px 0 0;
+      color: var(--text-soft);
+      max-width: 320px;
+      font-size: 15px;
+    }
+
+    .footer-col h4 {
+      margin: 0 0 16px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .footer-col a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.95);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .split,
+      .footer-top,
+      .stats-grid,
+      .features-grid,
+      .business-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-stack {
+        height: auto;
+        min-height: 680px;
+        margin-top: 10px;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .phone.front {
+        position: relative;
+        transform: rotate(-4deg);
+      }
+
+      .phone.back {
+        transform: translate(60px, 60px) rotate(8deg) scale(0.94);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+
+      .menu-btn {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .section {
+        padding: 84px 0;
+      }
+
+      .hero-title {
+        font-size: 46px;
+      }
+
+      .phone {
+        width: 290px;
+      }
+
+      .screen {
+        min-height: 600px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      .header-inner {
+        height: 66px;
+      }
+
+      .hero {
+        padding: 50px 0 40px;
+      }
+
+      .hero-title {
+        font-size: 38px;
+      }
+
+      .hero-desc,
+      .section-desc,
+      .cta-box p {
+        font-size: 16px;
+      }
+
+      .phone-stack {
+        min-height: 540px;
+      }
+
+      .phone {
+        width: 248px;
+        border-radius: 34px;
+        padding: 10px;
+      }
+
+      .screen {
+        min-height: 520px;
+        border-radius: 25px;
+        padding: 54px 16px 16px;
+      }
+
+      .balance-amount {
+        font-size: 26px;
+      }
+
+      .stats-grid,
+      .features-grid,
+      .business-grid,
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        padding: 42px 22px;
+        border-radius: 26px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="logo" href="#top">Gaon<span>Connect</span></a>
+
+        <nav class="nav">
+          <a href="#services">서비스</a>
+          <a href="#insights">운영 인사이트</a>
+          <a href="#business">확장 솔루션</a>
+          <a href="#security">신뢰 체계</a>
+          <a href="#download" class="nav-cta">지금 상담하기</a>
+        </nav>
+
+        <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav">
+        <a href="#services">서비스</a>
+        <a href="#insights">운영 인사이트</a>
+        <a href="#business">확장 솔루션</a>
+        <a href="#security">신뢰 체계</a>
+        <a href="#download">지금 상담하기</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">미국 진출 통합 플랫폼</span>
+          <h1 class="hero-title">
+            미국 법인 설립 이후가
+            <br />
+            더 중요합니다.
+          </h1>
+          <p class="hero-desc">
+            한국 창업자와 기업이 미국에서 회사를 세운 뒤 실제로 운영하고
+            확장하는 과정은 더 복잡합니다. 법인 운영, 금융, 세무, 부동산,
+            투자 유치, SaaS 정산, 가족의 유학·이민·자산 계획까지 하나의 흐름으로
+            연결해드립니다.
+          </p>
+
+          <div class="btn-group">
+            <a href="#download" class="btn btn-primary">지금 상담하기</a>
+            <a href="#services" class="btn btn-secondary">서비스 둘러보기</a>
+          </div>
+
+          <div class="hero-badges">
+            <span class="badge">부동산 & 세무</span>
+            <span class="badge">법인 설립 & 금융</span>
+            <span class="badge">VC 투자 유치</span>
+            <span class="badge">SaaS/IT 정산</span>
+            <span class="badge">유학 · 이민 · 자산 계획</span>
+          </div>
+        </div>
+
+        <div class="phone-stack reveal">
+          <div class="phone back">
+            <div class="screen">
+              <div class="app-top">
+                <div class="app-brand">Gaon Connect</div>
+                <div class="app-chip">Global Plan</div>
+              </div>
+
+              <div class="list-card">
+                <div class="list-title">
+                  <span>가족/자산 연계 플랜</span>
+                  <span style="color:#6b7280;font-size:13px;">진행 현황</span>
+                </div>
+
+                <div class="info-list">
+                  <div class="info-item">
+                    <div class="info-label">유학/이민 검토</div>
+                    <div class="info-value">일정 및 구조 설계</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">미국 거주 자산 계획</div>
+                    <div class="info-value">법인/개인 연계 검토</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">운영 리스크 체크</div>
+                    <div class="info-value">세무 · 송금 · 정산 점검</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="list-card">
+                <div class="list-title">
+                  <span>추천 액션</span>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">🎓</div>
+                    <div>
+                      <div class="txn-name">자녀 유학 일정 정리</div>
+                      <div class="txn-time">학교, 체류, 자산 계획 동시 검토</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">검토 필요</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">🏠</div>
+                    <div>
+                      <div class="txn-name">부동산 보유 구조 점검</div>
+                      <div class="txn-time">법인/개인 보유 방식 비교</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">추천</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone front">
+            <div class="screen">
+              <div class="app-top">
+                <div class="app-brand">Gaon Connect</div>
+                <div class="app-chip">US Operations</div>
+              </div>
+
+              <div class="balance-card">
+                <small>미국 진출 운영 대시보드</small>
+                <div class="balance-amount">5개 영역 통합 관리</div>
+
+                <div class="balance-actions">
+                  <div class="mini-btn">법인 운영</div>
+                  <div class="mini-btn">상담 예약</div>
+                </div>
+              </div>
+
+              <div class="list-card">
+                <div class="list-title">
+                  <span>핵심 지원 영역</span>
+                  <span style="color:#6b7280;font-size:13px;">전체 보기</span>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">🏢</div>
+                    <div>
+                      <div class="txn-name">법인 설립 & 금융</div>
+                      <div class="txn-time">Delaware C-Corp · 계좌 · 카드</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">기본</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">🧾</div>
+                    <div>
+                      <div class="txn-name">부동산 & 세무</div>
+                      <div class="txn-time">구조 설계 · 보고 · 운영</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">필수</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">📈</div>
+                    <div>
+                      <div class="txn-name">VC 투자 유치</div>
+                      <div class="txn-time">투자자 대응 · 자료 구조화</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">확장</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">💻</div>
+                    <div>
+                      <div class="txn-name">SaaS/IT 서비스 정산</div>
+                      <div class="txn-time">글로벌 매출 · 결제 · 정산 흐름</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">운영</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container stats">
+        <div class="stats-grid reveal">
+          <div class="stat-card">
+            <strong>5개 영역</strong>
+            <span>운영에 필요한 핵심 서비스를 통합 지원</span>
+          </div>
+          <div class="stat-card">
+            <strong>미국 진출</strong>
+            <span>설립 이후 실제 운영과 확장까지 연결</span>
+          </div>
+          <div class="stat-card">
+            <strong>한 플랫폼</strong>
+            <span>법인, 세무, 정산, 투자, 가족 계획을 한 번에</span>
+          </div>
+          <div class="stat-card">
+            <strong>맞춤 구조</strong>
+            <span>업종과 상황에 맞춰 실무 중심으로 설계</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">핵심 서비스</span>
+          <h2 class="section-title">
+            미국에서 회사를 세운 뒤
+            <br />
+            실제로 필요한 것들만 모았습니다.
+          </h2>
+          <p class="section-desc">
+            설립 자체보다 더 중요한 것은 이후 운영입니다. 사업 구조와 자금 흐름,
+            세무, 정산, 투자와 가족의 계획까지 서로 분리되지 않도록 연결합니다.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">🏠</div>
+            <h3>부동산 & 세무</h3>
+            <p>
+              미국 내 부동산 취득과 운영, 개인·법인 보유 구조, 세무보고와
+              자산 흐름을 함께 검토해 실무 리스크를 줄입니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🏢</div>
+            <h3>법인 설립 & 금융</h3>
+            <p>
+              Delaware C-Corp 설립, 은행 계좌, 카드, 초기 금융 구조까지
+              사업 시작에 필요한 기반을 일관된 흐름으로 지원합니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">💰</div>
+            <h3>VC 투자 유치</h3>
+            <p>
+              투자자 커뮤니케이션, 법인 구조 정리, 데이터룸 및 기본 자료
+              준비까지 미국 투자 유치에 필요한 실무를 연결합니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">💻</div>
+            <h3>SaaS/IT 서비스 정산</h3>
+            <p>
+              글로벌 결제, 정산, 매출 인식, 플랫폼 수수료 구조를 고려해
+              SaaS/IT 비즈니스 운영 체계를 정리합니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🎓</div>
+            <h3>유학, 이민 & 자산 계획</h3>
+            <p>
+              자녀 유학, 가족의 이주, 미국 내 생활 기반과 자산 배치를 함께
+              고려해 장기적인 계획 수립을 돕습니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🌐</div>
+            <h3>한국-미국 연결 지원</h3>
+            <p>
+              한국 본사와 미국 법인 사이의 자금, 계약, 역할 분담, 운영 흐름을
+              정리해 해외 확장을 더 안정적으로 이어갑니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="insights">
+      <div class="container split">
+        <div class="reveal">
+          <span class="eyebrow">운영 인사이트</span>
+          <h2 class="section-title">
+            사업은 설립으로 끝나지 않고
+            <br />
+            운영 구조에서 차이가 납니다.
+          </h2>
+          <p class="section-desc">
+            어떤 영역에 먼저 우선순위를 둬야 하는지, 어떤 구조가 향후 투자·정산·세무에
+            더 유리한지 한눈에 보고 판단할 수 있도록 정리합니다.
+          </p>
+
+          <div class="check-list">
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>법인 설립, 금융, 계약, 세무 흐름을 분리하지 않고 함께 검토</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>부동산·투자·가족 계획까지 사업 운영과 연결해 장기 구조 설계</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>미국 진출 이후 실제 실행 단계에서 필요한 순서를 명확히 정리</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-panel reveal">
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-title">미국 진출 운영 우선순위</div>
+              <div style="font-size:13px;color:#6b7280;font-weight:700;">초기 확장 단계 기준</div>
+            </div>
+
+            <div class="bars">
+              <div class="bar-row">
+                <span>법인/금융 구조</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+                <strong>우선</strong>
+              </div>
+              <div class="bar-row">
+                <span>세무/부동산 검토</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 74%;"></div></div>
+                <strong>중요</strong>
+              </div>
+              <div class="bar-row">
+                <span>VC 투자 준비</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 68%;"></div></div>
+                <strong>확장</strong>
+              </div>
+              <div class="bar-row">
+                <span>SaaS 정산 체계</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 79%;"></div></div>
+                <strong>필수</strong>
+              </div>
+              <div class="bar-row">
+                <span>가족/자산 계획</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 55%;"></div></div>
+                <strong>장기</strong>
+              </div>
+            </div>
+
+            <div class="info-list">
+              <div class="info-item">
+                <div class="info-label">가장 먼저</div>
+                <div class="info-value">법인 구조와 금융 흐름 정리</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">동시에 점검</div>
+                <div class="info-value">세무, 정산, 계약 구조</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">확장 시점</div>
+                <div class="info-value">VC, 가족 이주, 자산 재배치</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section business" id="business">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">확장 솔루션</span>
+          <h2 class="section-title">
+            미국 시장 확장에 맞춰
+            <br />
+            필요한 실무를 이어드립니다.
+          </h2>
+          <p class="section-desc">
+            미국 법인을 만든 후 바로 마주치는 운영 과제를 사업 단계에 맞게
+            정리하고, 각 영역이 따로 놀지 않도록 연결하는 것이 핵심입니다.
+          </p>
+        </div>
+
+        <div class="business-grid">
+          <article class="biz-card reveal">
+            <div class="feature-icon">📄</div>
+            <h3>법인 운영 체계 정리</h3>
+            <p>
+              설립 이후 필요한 문서, 계약, 금융 계정, 운영 책임 구조를 정리해
+              미국 법인이 실제로 작동할 수 있도록 기반을 만듭니다.
+            </p>
+          </article>
+
+          <article class="biz-card reveal">
+            <div class="feature-icon">💳</div>
+            <h3>글로벌 결제/정산 설계</h3>
+            <p>
+              SaaS와 IT 서비스에 필요한 매출 수납, 글로벌 결제, 환전, 정산
+              프로세스를 사업 구조에 맞춰 설계합니다.
+            </p>
+          </article>
+
+          <article class="biz-card reveal">
+            <div class="feature-icon">🤝</div>
+            <h3>투자와 확장 준비</h3>
+            <p>
+              투자 유치와 향후 확장에 필요한 구조를 미리 정리해, 성장 단계에서
+              다시 처음부터 손보는 비효율을 줄입니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="security">
+      <div class="container split">
+        <div class="visual-panel reveal">
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-title">신뢰 체계</div>
+              <div style="font-size:13px;color:#10b981;font-weight:800;">연결 운영</div>
+            </div>
+
+            <div class="info-list">
+              <div class="info-item">
+                <div class="info-label">한국-미국 관점</div>
+                <div class="info-value">양국 흐름을 함께 검토</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">운영 중심 접근</div>
+                <div class="info-value">설립 이후 실무까지 연결</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">장기 계획 반영</div>
+                <div class="info-value">투자·가족·자산까지 고려</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">확장 가능 구조</div>
+                <div class="info-value">성장 단계에 맞춘 설계</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <span class="eyebrow">신뢰 체계</span>
+          <h2 class="section-title">
+            미국 진출은
+            <br />
+            신뢰할 수 있는 구조가 중요합니다.
+          </h2>
+          <p class="section-desc">
+            미국 법인 설립만 빠르게 끝내는 것이 아니라, 이후의 자금 흐름과 세무,
+            운영, 투자, 가족 계획까지 서로 충돌하지 않도록 설계하는 것이 더 중요합니다.
+          </p>
+
+          <div class="check-list">
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>사업 운영과 개인 자산 계획을 분리하되 연결성은 유지</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>초기 설계가 향후 투자 유치와 확장에 이어지도록 구조화</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>한국과 미국의 실제 실무 흐름을 함께 고려한 전략 제안</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="download">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>
+            미국 법인 설립 이후의 운영,
+            <br />
+            지금부터 함께 설계하세요.
+          </h2>
+          <p>
+            부동산과 세무, 법인 설립과 금융, VC 투자 유치, SaaS/IT 정산,
+            유학·이민·자산 계획까지 미국 진출 이후 필요한 핵심 흐름을
+            하나의 플랫폼 관점으로 정리해드립니다.
+          </p>
+
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">지금 상담하기</a>
+            <a href="#" class="btn btn-secondary">서비스 소개서 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">Gaon<span>Connect</span></div>
+          <p>
+            한국 창업자와 기업을 위한 미국 법인 설립 이후 운영 지원 플랫폼.
+            미국 진출의 시작부터 확장까지 필요한 실무를 연결합니다.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>서비스</h4>
+          <a href="#">부동산 & 세무</a>
+          <a href="#">법인 설립 & 금융</a>
+          <a href="#">VC 투자 유치</a>
+          <a href="#">SaaS/IT 정산</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>솔루션</h4>
+          <a href="#">미국 진출 전략</a>
+          <a href="#">운영 구조 설계</a>
+          <a href="#">가족/자산 계획</a>
+          <a href="#">글로벌 확장 지원</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>문의</h4>
+          <a href="#">상담 신청</a>
+          <a href="#">서비스 소개서</a>
+          <a href="#">자주 묻는 질문</a>
+          <a href="#">문의하기</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Gaon Connect. All rights reserved.</span>
+        <span>Seoul · New York · Korea to U.S. Business Expansion</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+
+    menuBtn.addEventListener("click", () => {
+      mobileNav.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".mobile-nav a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
