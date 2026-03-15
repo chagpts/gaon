@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FluxPay - Simple Finance Landing</title>
+  <meta
+    name="description"
+    content="간편한 송금, 결제, 자산관리 서비스를 소개하는 핀테크 랜딩페이지 예시"
+  />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f6f9fc;
+      --bg-dark: #0f172a;
+      --text: #111827;
+      --text-soft: #6b7280;
+      --line: #e5e7eb;
+      --primary: #3182f6;
+      --primary-dark: #1d4ed8;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+        "Noto Sans KR", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin: 0 0 20px;
+      font-weight: 800;
+    }
+
+    .section-desc {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 18px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(49, 130, 246, 0.28);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #eef4ff;
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: #e4eeff;
+      transform: translateY(-1px);
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.75);
+    }
+
+    .header-inner {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav a {
+      color: #374151;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      border-radius: 12px;
+      background: #111827;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .menu-btn {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #f3f4f6;
+      font-size: 20px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 90px 0 70px;
+      background:
+        radial-gradient(circle at top right, rgba(49, 130, 246, 0.14), transparent 28%),
+        radial-gradient(circle at left top, rgba(99, 102, 241, 0.08), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-title {
+      margin: 0 0 24px;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+    }
+
+    .hero-desc {
+      margin: 0 0 34px;
+      max-width: 680px;
+      color: var(--text-soft);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.7;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+
+    .phone-stack {
+      position: relative;
+      height: 720px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone {
+      width: 320px;
+      border-radius: 42px;
+      padding: 14px;
+      background: linear-gradient(180deg, #161d2d 0%, #0f172a 100%);
+      box-shadow:
+        0 40px 100px rgba(15, 23, 42, 0.24),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+      position: absolute;
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 12px;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 24px;
+      border-radius: 999px;
+      background: #0a0f1d;
+      z-index: 2;
+    }
+
+    .phone.front {
+      transform: translateY(0) rotate(-6deg);
+      z-index: 2;
+    }
+
+    .phone.back {
+      transform: translate(90px, 70px) rotate(8deg) scale(0.95);
+      opacity: 0.9;
+    }
+
+    .screen {
+      position: relative;
+      overflow: hidden;
+      min-height: 660px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, #f8fbff 0%, #eff5ff 100%);
+      padding: 64px 20px 20px;
+    }
+
+    .app-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .app-brand {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .app-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      border: 1px solid #dbeafe;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #3182f6 0%, #5aa5ff 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 18px 40px rgba(49, 130, 246, 0.25);
+    }
+
+    .balance-card small {
+      opacity: 0.9;
+      font-size: 13px;
+    }
+
+    .balance-amount {
+      margin: 10px 0 18px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .balance-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mini-btn {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.18);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      backdrop-filter: blur(6px);
+    }
+
+    .list-card {
+      margin-top: 16px;
+      background: #fff;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .list-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .txn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .txn:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .txn-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: #eef4ff;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .txn-name {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .txn-time {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .txn-amount {
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* Stats */
+    .stats {
+      padding: 40px 0 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: clamp(28px, 3vw, 42px);
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .stat-card span {
+      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      gap: 26px;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 44px;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    .feature-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: #eef4ff;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 16px;
+    }
+
+    /* Split sections */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .visual-panel {
+      background: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+      border-radius: 34px;
+      padding: 28px;
+      border: 1px solid #e8eef7;
+      box-shadow: var(--shadow);
+    }
+
+    .dashboard {
+      background: #fff;
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .dash-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .bars {
+      display: grid;
+      gap: 12px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 95px 1fr 70px;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #edf2f7;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #3182f6, #7db5ff);
+    }
+
+    .info-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-item {
+      background: #fff;
+      border: 1px solid #eef2f7;
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .info-label {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .info-value {
+      font-size: 14px;
+      color: var(--text-soft);
+      font-weight: 700;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .check {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #374151;
+      font-size: 16px;
+    }
+
+    .check-mark {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #e7f1ff;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    /* Business */
+    .business {
+      background: var(--bg-soft);
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .biz-card {
+      border-radius: 24px;
+      background: #fff;
+      padding: 28px;
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .biz-card h3 {
+      margin: 18px 0 10px;
+      font-size: 21px;
+      letter-spacing: -0.03em;
+    }
+
+    .biz-card p {
+      margin: 0;
+      color: var(--text-soft);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 120px 0;
+    }
+
+    .cta-box {
+      border-radius: 36px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, #0f172a 0%, #16233d 60%, #1e3a8a 100%);
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 40px 100px rgba(15, 23, 42, 0.24);
+    }
+
+    .cta-box h2 {
+      margin: 0 0 16px;
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.16;
+      letter-spacing: -0.04em;
+    }
+
+    .cta-box p {
+      margin: 0 auto 28px;
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 18px;
+    }
+
+    .cta-box .btn-group {
+      justify-content: center;
+    }
+
+    .cta-box .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 50px 0 70px;
+      background: #fff;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    .footer-brand p {
+      margin: 14px 0 0;
+      color: var(--text-soft);
+      max-width: 320px;
+      font-size: 15px;
+    }
+
+    .footer-col h4 {
+      margin: 0 0 16px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .footer-col a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.95);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .split,
+      .footer-top,
+      .stats-grid,
+      .features-grid,
+      .business-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-stack {
+        height: auto;
+        min-height: 680px;
+        margin-top: 10px;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .phone.front {
+        position: relative;
+        transform: rotate(-4deg);
+      }
+
+      .phone.back {
+        transform: translate(60px, 60px) rotate(8deg) scale(0.94);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+
+      .menu-btn {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .section {
+        padding: 84px 0;
+      }
+
+      .hero-title {
+        font-size: 46px;
+      }
+
+      .phone {
+        width: 290px;
+      }
+
+      .screen {
+        min-height: 600px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, var(--max-width));
+      }
+
+      .header-inner {
+        height: 66px;
+      }
+
+      .hero {
+        padding: 50px 0 40px;
+      }
+
+      .hero-title {
+        font-size: 38px;
+      }
+
+      .hero-desc,
+      .section-desc,
+      .cta-box p {
+        font-size: 16px;
+      }
+
+      .phone-stack {
+        min-height: 540px;
+      }
+
+      .phone {
+        width: 248px;
+        border-radius: 34px;
+        padding: 10px;
+      }
+
+      .screen {
+        min-height: 520px;
+        border-radius: 25px;
+        padding: 54px 16px 16px;
+      }
+
+      .balance-amount {
+        font-size: 26px;
+      }
+
+      .stats-grid,
+      .features-grid,
+      .business-grid,
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        padding: 42px 22px;
+        border-radius: 26px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="logo" href="#top">Flux<span>Pay</span></a>
+
+        <nav class="nav">
+          <a href="#services">서비스</a>
+          <a href="#insights">자산관리</a>
+          <a href="#business">비즈니스</a>
+          <a href="#security">보안</a>
+          <a href="#download" class="nav-cta">앱 시작하기</a>
+        </nav>
+
+        <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
+      </div>
+
+      <div class="mobile-nav" id="mobileNav">
+        <a href="#services">서비스</a>
+        <a href="#insights">자산관리</a>
+        <a href="#business">비즈니스</a>
+        <a href="#security">보안</a>
+        <a href="#download">앱 시작하기</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">더 쉬운 금융 경험</span>
+          <h1 class="hero-title">
+            송금부터 결제,
+            <br />
+            자산관리까지
+            <br />
+            한 번에.
+          </h1>
+          <p class="hero-desc">
+            복잡한 금융 서비스를 누구나 쉽게 사용할 수 있도록 만들었습니다.
+            빠른 이체, 간편한 결제, 실시간 소비 분석, 맞춤형 금융 인사이트를
+            하나의 앱에서 경험해보세요.
+          </p>
+
+          <div class="btn-group">
+            <a href="#download" class="btn btn-primary">무료로 시작하기</a>
+            <a href="#services" class="btn btn-secondary">서비스 둘러보기</a>
+          </div>
+
+          <div class="hero-badges">
+            <span class="badge">실시간 송금</span>
+            <span class="badge">스마트 소비 분석</span>
+            <span class="badge">보안 강화 로그인</span>
+            <span class="badge">사업자 결제 지원</span>
+          </div>
+        </div>
+
+        <div class="phone-stack reveal">
+          <div class="phone back">
+            <div class="screen">
+              <div class="app-top">
+                <div class="app-brand">FluxPay</div>
+                <div class="app-chip">Insights</div>
+              </div>
+
+              <div class="list-card">
+                <div class="list-title">
+                  <span>월간 리포트</span>
+                  <span style="color:#6b7280;font-size:13px;">이번 달</span>
+                </div>
+
+                <div class="info-list">
+                  <div class="info-item">
+                    <div class="info-label">총 수입</div>
+                    <div class="info-value">₩5,250,000</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">총 지출</div>
+                    <div class="info-value">₩2,180,000</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">예상 저축</div>
+                    <div class="info-value">₩1,320,000</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="list-card">
+                <div class="list-title">
+                  <span>추천 액션</span>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">💡</div>
+                    <div>
+                      <div class="txn-name">구독 서비스 점검</div>
+                      <div class="txn-time">매달 3건 자동결제</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">절약 가능</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">📈</div>
+                    <div>
+                      <div class="txn-name">예산 초과 카테고리</div>
+                      <div class="txn-time">식비 +12%</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">확인</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone front">
+            <div class="screen">
+              <div class="app-top">
+                <div class="app-brand">FluxPay</div>
+                <div class="app-chip">Premium</div>
+              </div>
+
+              <div class="balance-card">
+                <small>총 자산</small>
+                <div class="balance-amount">₩12,480,000</div>
+
+                <div class="balance-actions">
+                  <div class="mini-btn">송금하기</div>
+                  <div class="mini-btn">충전하기</div>
+                </div>
+              </div>
+
+              <div class="list-card">
+                <div class="list-title">
+                  <span>최근 거래</span>
+                  <span style="color:#6b7280;font-size:13px;">전체 보기</span>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">🛒</div>
+                    <div>
+                      <div class="txn-name">모바일 스토어</div>
+                      <div class="txn-time">오늘 · 카드 결제</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">-₩42,000</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">☕</div>
+                    <div>
+                      <div class="txn-name">카페 라운지</div>
+                      <div class="txn-time">오늘 · 간편결제</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">-₩6,500</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">💸</div>
+                    <div>
+                      <div class="txn-name">친구에게 송금</div>
+                      <div class="txn-time">어제 · 즉시이체</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">-₩20,000</div>
+                </div>
+
+                <div class="txn">
+                  <div class="txn-left">
+                    <div class="icon">🏦</div>
+                    <div>
+                      <div class="txn-name">월급 입금</div>
+                      <div class="txn-time">3일 전 · 자동입금</div>
+                    </div>
+                  </div>
+                  <div class="txn-amount">+₩3,200,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container stats">
+        <div class="stats-grid reveal">
+          <div class="stat-card">
+            <strong>3초</strong>
+            <span>복잡한 인증 없이 빠른 송금</span>
+          </div>
+          <div class="stat-card">
+            <strong>24시간</strong>
+            <span>언제든 가능한 결제와 이체</span>
+          </div>
+          <div class="stat-card">
+            <strong>한 화면</strong>
+            <span>흩어진 금융 정보를 한 번에</span>
+          </div>
+          <div class="stat-card">
+            <strong>실시간</strong>
+            <span>소비와 잔액 변동을 즉시 확인</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">핵심 서비스</span>
+          <h2 class="section-title">
+            필요한 금융 기능만
+            <br />
+            더 직관적으로 담았습니다.
+          </h2>
+          <p class="section-desc">
+            복잡한 메뉴를 줄이고, 자주 쓰는 기능을 가장 편한 흐름으로
+            배치했습니다.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">💸</div>
+            <h3>간편 송금</h3>
+            <p>
+              계좌번호를 길게 입력하지 않아도 빠르게 이체하고, 자주 보내는
+              사람은 더 편하게 관리할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">💳</div>
+            <h3>통합 결제</h3>
+            <p>
+              온라인과 오프라인 결제를 하나의 흐름으로 연결해 결제 내역,
+              영수증, 정산 상태를 한눈에 볼 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">📊</div>
+            <h3>소비 분석</h3>
+            <p>
+              소비 패턴을 카테고리별로 정리하고, 반복 지출과 예산 초과 항목을
+              자동으로 찾아 알려줍니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🔔</div>
+            <h3>실시간 알림</h3>
+            <p>
+              결제, 입금, 출금, 자동이체 내역을 놓치지 않도록 필요한 순간에만
+              정확한 알림을 보냅니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🛡️</div>
+            <h3>강력한 보안</h3>
+            <p>
+              기기 인증, 이상 거래 탐지, 생체 로그인 등 여러 단계의 보안
+              장치를 통해 안심하고 사용할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🏢</div>
+            <h3>사업자 도구</h3>
+            <p>
+              소상공인과 기업을 위한 정산, 결제 링크, 매출 리포트 기능까지
+              폭넓게 제공합니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="insights">
+      <div class="container split">
+        <div class="reveal">
+          <span class="eyebrow">자산관리</span>
+          <h2 class="section-title">
+            돈의 흐름을 이해하면
+            <br />
+            관리가 쉬워집니다.
+          </h2>
+          <p class="section-desc">
+            어디에 얼마를 쓰는지, 이번 달 예산이 얼마나 남았는지, 어떤 항목을
+            줄이면 좋은지 직관적으로 확인할 수 있습니다.
+          </p>
+
+          <div class="check-list">
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>계좌, 카드, 결제 내역을 연결해 전체 자산을 한 번에 관리</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>소비 카테고리 자동 분류와 월간 리포트 제공</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>반복 지출과 예산 초과 패턴을 빠르게 파악</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-panel reveal">
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-title">이번 달 소비 분석</div>
+              <div style="font-size:13px;color:#6b7280;font-weight:700;">총 지출 ₩2,180,000</div>
+            </div>
+
+            <div class="bars">
+              <div class="bar-row">
+                <span>식비</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 76%;"></div></div>
+                <strong>₩540K</strong>
+              </div>
+              <div class="bar-row">
+                <span>교통</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 42%;"></div></div>
+                <strong>₩180K</strong>
+              </div>
+              <div class="bar-row">
+                <span>쇼핑</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 68%;"></div></div>
+                <strong>₩420K</strong>
+              </div>
+              <div class="bar-row">
+                <span>구독</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 31%;"></div></div>
+                <strong>₩95K</strong>
+              </div>
+              <div class="bar-row">
+                <span>생활</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 59%;"></div></div>
+                <strong>₩310K</strong>
+              </div>
+            </div>
+
+            <div class="info-list">
+              <div class="info-item">
+                <div class="info-label">절약 추천</div>
+                <div class="info-value">구독 서비스 2건 검토</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">예산 상태</div>
+                <div class="info-value">식비 예산 12% 초과</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">이번 달 저축 예상</div>
+                <div class="info-value">₩1,320,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section business" id="business">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">비즈니스 솔루션</span>
+          <h2 class="section-title">
+            개인뿐 아니라
+            <br />
+            비즈니스도 더 효율적으로.
+          </h2>
+          <p class="section-desc">
+            결제 수단 제공부터 정산 관리, 매출 리포트까지 사업 운영에 필요한
+            핵심 기능을 간결하게 담았습니다.
+          </p>
+        </div>
+
+        <div class="business-grid">
+          <article class="biz-card reveal">
+            <div class="feature-icon">🧾</div>
+            <h3>결제 링크 생성</h3>
+            <p>
+              웹사이트가 없어도 링크만으로 결제를 받을 수 있어 상담, 예약,
+              판매 업무를 더 빠르게 처리할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="biz-card reveal">
+            <div class="feature-icon">📥</div>
+            <h3>정산 관리</h3>
+            <p>
+              일별, 주별, 월별 정산 내역을 정리하고 결제 건별 상태를 쉽게
+              추적할 수 있습니다.
+            </p>
+          </article>
+
+          <article class="biz-card reveal">
+            <div class="feature-icon">📈</div>
+            <h3>매출 리포트</h3>
+            <p>
+              결제 성공률, 고객 재구매, 시간대별 매출 흐름을 분석해 더 나은
+              운영 의사결정을 돕습니다.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="security">
+      <div class="container split">
+        <div class="visual-panel reveal">
+          <div class="dashboard">
+            <div class="dash-top">
+              <div class="dash-title">보안 센터</div>
+              <div style="font-size:13px;color:#10b981;font-weight:800;">정상 상태</div>
+            </div>
+
+            <div class="info-list">
+              <div class="info-item">
+                <div class="info-label">생체 인증</div>
+                <div class="info-value">활성화됨</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">신규 기기 로그인</div>
+                <div class="info-value">즉시 알림</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">이상 거래 탐지</div>
+                <div class="info-value">실시간 모니터링</div>
+              </div>
+              <div class="info-item">
+                <div class="info-label">송금 한도 보호</div>
+                <div class="info-value">설정 가능</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <span class="eyebrow">보안</span>
+          <h2 class="section-title">
+            편리함만큼
+            <br />
+            안전함도 중요하니까.
+          </h2>
+          <p class="section-desc">
+            금융 서비스에서 가장 중요한 건 신뢰입니다. 로그인부터 송금,
+            결제까지 모든 과정에서 보안을 기본값으로 설계했습니다.
+          </p>
+
+          <div class="check-list">
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>생체 인증과 기기 기반 검증으로 접근 보호</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>의심스러운 거래 패턴 실시간 탐지</div>
+            </div>
+            <div class="check">
+              <div class="check-mark">✓</div>
+              <div>중요한 금융 활동에 대한 즉시 알림 제공</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="download">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>
+            금융을 더 가볍게,
+            <br />
+            지금 바로 시작하세요.
+          </h2>
+          <p>
+            첫 화면부터 마지막 결제까지 막힘 없는 경험을 제공하는 핀테크
+            서비스를 만들고 싶다면, 이 구조를 기반으로 원하는 브랜드에 맞게
+            확장할 수 있습니다.
+          </p>
+
+          <div class="btn-group">
+            <a href="#" class="btn btn-primary">앱 다운로드</a>
+            <a href="#" class="btn btn-secondary">도입 문의</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo">Flux<span>Pay</span></div>
+          <p>
+            더 단순하고 직관적인 금융 경험을 만드는 핀테크 서비스 예시
+            랜딩페이지입니다.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>서비스</h4>
+          <a href="#">송금</a>
+          <a href="#">결제</a>
+          <a href="#">자산관리</a>
+          <a href="#">사업자</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>회사</h4>
+          <a href="#">회사 소개</a>
+          <a href="#">채용</a>
+          <a href="#">뉴스룸</a>
+          <a href="#">파트너십</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>고객지원</h4>
+          <a href="#">자주 묻는 질문</a>
+          <a href="#">문의하기</a>
+          <a href="#">이용약관</a>
+          <a href="#">개인정보처리방침</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 FluxPay Inc. All rights reserved.</span>
+        <span>서울시 강남구 테헤란로 123 · 고객센터 1588-1234</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
+
+    menuBtn.addEventListener("click", () => {
+      mobileNav.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".mobile-nav a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
