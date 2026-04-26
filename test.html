@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Audit AI Landing</title>
+  <style>
+    :root {
+      --bg: #05070d;
+      --card: rgba(255,255,255,.08);
+      --text: #f6f7fb;
+      --muted: #9aa3b2;
+      --line: rgba(255,255,255,.14);
+      --accent: #7c5cff;
+      --accent2: #21d4fd;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Pretendard, Arial, sans-serif;
+      background:
+        radial-gradient(circle at var(--x, 50%) var(--y, 20%), rgba(124,92,255,.35), transparent 32%),
+        linear-gradient(180deg, #05070d, #0b1020 45%, #05070d);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(5,7,13,.65);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-size: 22px;
+    }
+
+    .logo span { color: var(--accent2); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 20px 50px rgba(33,212,253,.2);
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: auto;
+      padding: 90px 22px 70px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.04);
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 7vw, 86px);
+      line-height: .96;
+      letter-spacing: -.075em;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #fff, #9fdcff, #b7a8ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 26px 0 34px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 590px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .ghost {
+      background: rgba(255,255,255,.06);
+      box-shadow: none;
+    }
+
+    .visual {
+      position: relative;
+      min-height: 520px;
+    }
+
+    .orb {
+      position: absolute;
+      inset: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(33,212,253,.45), rgba(124,92,255,.2), transparent 65%);
+      filter: blur(12px);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .dashboard {
+      position: absolute;
+      inset: 35px 0 auto auto;
+      width: min(500px, 100%);
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 30px 120px rgba(0,0,0,.45);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .topbar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #ff5f57;
+    }
+
+    .dot:nth-child(2) { background: #ffbd2e; }
+    .dot:nth-child(3) { background: #28c840; }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 34px;
+      letter-spacing: -.05em;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .scan {
+      margin-top: 14px;
+      height: 160px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(transparent 49%, rgba(33,212,253,.5) 50%, transparent 51%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 24px),
+        rgba(0,0,0,.2);
+      background-size: 100% 55px, auto, auto;
+      animation: scan 2.8s linear infinite;
+    }
+
+    section {
+      max-width: 1180px;
+      margin: auto;
+      padding: 80px 22px;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 5vw, 58px);
+      letter-spacing: -.06em;
+      margin: 0 0 16px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 650px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      min-height: 230px;
+      transform: translateY(24px);
+      opacity: 0;
+      transition: .7s ease;
+    }
+
+    .card.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      margin-bottom: 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .marquee {
+      border-block: 1px solid var(--line);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 22px 0;
+      color: rgba(255,255,255,.36);
+      font-weight: 800;
+      font-size: 42px;
+      letter-spacing: -.05em;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 18s linear infinite;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .stat {
+      padding: 30px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+    }
+
+    .stat b {
+      font-size: 46px;
+      letter-spacing: -.06em;
+    }
+
+    .stat p {
+      color: var(--muted);
+      margin: 8px 0 0;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 90px 22px 110px;
+    }
+
+    .cta-box {
+      max-width: 900px;
+      margin: auto;
+      border: 1px solid var(--line);
+      border-radius: 40px;
+      padding: 70px 30px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(124,92,255,.35), transparent 45%),
+        rgba(255,255,255,.06);
+    }
+
+    .cta h2 {
+      margin: 0 0 18px;
+      font-size: clamp(38px, 6vw, 72px);
+      letter-spacing: -.07em;
+    }
+
+    footer {
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-18px) rotate(1deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(.95); opacity: .65; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+
+    @keyframes scan {
+      from { background-position: 0 -80px, 0 0, 0 0; }
+      to { background-position: 0 120px, 0 0, 0 0; }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+      }
+
+      .visual {
+        min-height: 420px;
+      }
+
+      .dashboard {
+        inset: 20px 0 auto 0;
+      }
+
+      .cards,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Veri<span>Audit</span></div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#platform">Platform</a>
+        <a href="#results">Results</a>
+      </div>
+      <a class="btn ghost" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">● AI-powered audit intelligence</div>
+        <h1>
+          Trust, compliance<br />
+          and audit-ready<br />
+          <span class="gradient">insights.</span>
+        </h1>
+        <p class="lead">
+          복잡한 감사 데이터, 리스크 신호, 내부통제 흐름을 하나의 인터랙티브 대시보드로 시각화하는 AI 기반 감사 플랫폼 컨셉입니다.
+        </p>
+        <div class="actions">
+          <a class="btn" href="#services">Explore Services</a>
+          <a class="btn ghost" href="#platform">View Platform</a>
+        </div>
+      </div>
+
+      <div class="visual" aria-hidden="true">
+        <div class="orb"></div>
+        <div class="dashboard">
+          <div class="topbar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+
+          <div class="metric-grid">
+            <div class="metric">
+              <strong class="count" data-target="98">0</strong>
+              <span>Control accuracy</span>
+            </div>
+            <div class="metric">
+              <strong class="count" data-target="72">0</strong>
+              <span>Risk signals</span>
+            </div>
+            <div class="metric">
+              <strong class="count" data-target="41">0</strong>
+              <span>Automated tests</span>
+            </div>
+            <div class="metric">
+              <strong class="count" data-target="12">0</strong>
+              <span>Open findings</span>
+            </div>
+          </div>
+
+          <div class="scan"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        AUDIT · RISK · COMPLIANCE · ASSURANCE · CONTROLS · INSIGHTS ·
+        AUDIT · RISK · COMPLIANCE · ASSURANCE · CONTROLS · INSIGHTS ·
+      </div>
+    </div>
+
+    <section id="services">
+      <h2 class="section-title">Services built for modern assurance.</h2>
+      <p class="section-desc">
+        실제 회사 사이트처럼 서비스 카드를 나누고, 스크롤 시 자연스럽게 등장하도록 구성했습니다.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <div class="icon"></div>
+          <h3>Audit Analytics</h3>
+          <p>거래 데이터와 회계 흐름을 분석해 이상 패턴과 검토 우선순위를 제안합니다.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon"></div>
+          <h3>Risk Monitoring</h3>
+          <p>내부통제, 승인, 권한 변경 등 리스크 신호를 지속적으로 모니터링합니다.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon"></div>
+          <h3>Compliance Review</h3>
+          <p>규정, 정책, 감사 기준에 맞춰 문서와 프로세스를 점검합니다.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon"></div>
+          <h3>Evidence Hub</h3>
+          <p>증빙자료, 로그, 승인 이력을 프로젝트별로 정리하고 추적합니다.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon"></div>
+          <h3>AI Reports</h3>
+          <p>검토 결과를 요약하고 경영진용 보고서 초안을 빠르게 생성합니다.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon"></div>
+          <h3>Secure Workflow</h3>
+          <p>민감한 감사 정보를 안전하게 관리하는 권한 기반 워크플로우입니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="results">
+      <h2 class="section-title">Designed to feel alive.</h2>
+      <p class="section-desc">
+        숫자 카운트업, 카드 등장, 마우스 반응 배경, 플로팅 UI를 조합하면 동적인 브랜드 사이트 느낌을 낼 수 있습니다.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <b class="count" data-target="85">0</b>
+          <p>% faster reviews</p>
+        </div>
+        <div class="stat">
+          <b class="count" data-target="120">0</b>
+          <p>control checks</p>
+        </div>
+        <div class="stat">
+          <b class="count" data-target="24">0</b>
+          <p>hour monitoring</p>
+        </div>
+        <div class="stat">
+          <b class="count" data-target="6">0</b>
+          <p>service modules</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="cta">
+      <div class="cta-box">
+        <h2>Ready for smarter audits?</h2>
+        <p class="section-desc" style="margin-inline:auto;">
+          이 영역은 문의, 데모 신청, 상담 예약 등으로 바꿔 사용할 수 있습니다.
+        </p>
+        <a class="btn" href="mailto:hello@example.com">Request Demo</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 VeriAudit-style concept. Built with HTML, CSS, and JavaScript.
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+
+    window.addEventListener("pointermove", (event) => {
+      root.style.setProperty("--x", event.clientX + "px");
+      root.style.setProperty("--y", event.clientY + "px");
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".card").forEach((card) => {
+      revealObserver.observe(card);
+    });
+
+    const counted = new WeakSet();
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || counted.has(entry.target)) return;
+
+        counted.add(entry.target);
+
+        const target = Number(entry.target.dataset.target);
+        const duration = 1200;
+        const start = performance.now();
+
+        function update(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          entry.target.textContent = Math.floor(target * eased);
+
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            entry.target.textContent = target;
+          }
+        }
+
+        requestAnimationFrame(update);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll(".count").forEach((count) => {
+      countObserver.observe(count);
+    });
+  </script>
+</body>
+</html>
