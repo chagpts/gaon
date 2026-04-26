@@ -1,0 +1,1166 @@
+from __future__ import annotations
+
+import base64
+import io
+import json
+import re
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+import pandas as pd
+import pytesseract
+import requests
+import streamlit as st
+from PIL import Image, ImageFilter, ImageOps
+
+try:
+    import fitz  # PyMuPDF
+except ImportError:
+    fitz = None
+
+
+# =========================================================
+# 기본 설정
+# =========================================================
+APP_TITLE = "영수증 AI OCR 회계 앱 (KR/US)"
+
+DEFAULT_TESSERACT_CMD = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+DEFAULT_TESSERACT_LANG = "kor+eng"
+
+DEFAULT_OLLAMA_URL = "http://localhost:11434"
+DEFAULT_VISION_MODEL = "qwen3-vl:4b"
+DEFAULT_TEXT_MODEL = "phi"
+DEFAULT_TIMEOUT = 120
+
+ACCOUNT_OPTIONS = [
+    "복리후생비",
+    "접대비",
+    "여비교통비",
+    "소모품비",
+    "회의비",
+    "통신비",
+    "교육훈련비",
+    "광고선전비",
+    "잡비",
+]
+
+PAYMENT_OPTIONS = [
+    "보통예금",
+    "현금",
+    "미지급금",
+    "법인카드",
+    "개인카드",
+]
+
+DEFAULT_ACCOUNT = "잡비"
+DEFAULT_PAYMENT = "법인카드"
+
+BASE_COLUMNS = [
+    "전표번호",
+    "거래일자",
+    "거래처",
+    "적요",
+    "계정과목",
+    "통화",
+    "공급가액",
+    "부가세",
+    "합계금액",
+    "결제수단",
+    "원본파일명",
+    "OCR원문",
+    "vision_confidence",
+    "text_confidence",
+    "receipt_type",
+    "document_count",
+]
+
+
+st.set_page_config(
+    page_title=APP_TITLE,
+    page_icon="🧾",
+    layout="wide",
+)
+
+
+# =========================================================
+# 세션 초기화
+# =========================================================
+def init_session_state() -> None:
+    if "transactions" not in st.session_state:
+        st.session_state.transactions = pd.DataFrame(columns=BASE_COLUMNS)
+
+    if "current_receipt_df" not in st.session_state:
+        st.session_state.current_receipt_df = pd.DataFrame(columns=BASE_COLUMNS)
+
+    if "last_ocr_lines" not in st.session_state:
+        st.session_state.last_ocr_lines = []
+
+    if "last_vision_result" not in st.session_state:
+        st.session_state.last_vision_result = None
+
+    if "last_text_result" not in st.session_state:
+        st.session_state.last_text_result = None
+
+    if "settings" not in st.session_state:
+        st.session_state.settings = {
+            "tesseract_cmd": DEFAULT_TESSERACT_CMD,
+            "tesseract_lang": DEFAULT_TESSERACT_LANG,
+            "ollama_url": DEFAULT_OLLAMA_URL,
+            "vision_model": DEFAULT_VISION_MODEL,
+            "text_model": DEFAULT_TEXT_MODEL,
+            "timeout": DEFAULT_TIMEOUT,
+            "use_vision_model": True,
+            "use_text_model": True,
+        }
+
+
+init_session_state()
+
+
+def get_settings() -> Dict[str, Any]:
+    return st.session_state.settings
+
+
+def apply_tesseract_cmd() -> None:
+    pytesseract.pytesseract.tesseract_cmd = get_settings()["tesseract_cmd"]
+
+
+apply_tesseract_cmd()
+
+
+# =========================================================
+# 공통 유틸
+# =========================================================
+def clean_text(text: Any) -> str:
+    return re.sub(r"[ \t]+", " ", str(text)).strip()
+
+
+def make_voucher_no() -> str:
+    return f"V{datetime.now().strftime('%Y%m%d%H%M%S%f')[:-3]}"
+
+
+def safe_float(value: Any) -> Optional[float]:
+    try:
+        if value in [None, "", "null"]:
+            return None
+        s = str(value).replace(",", "").replace("$", "").replace("₩", "").strip()
+        return float(s)
+    except Exception:
+        return None
+
+
+def format_amount(value: Any) -> float:
+    try:
+        if pd.isna(value):
+            return 0.0
+        s = str(value).replace(",", "").replace("$", "").replace("₩", "").strip()
+        return round(float(s), 2)
+    except Exception:
+        return 0.0
+
+
+def money_display(value: Any, currency: str = "") -> str:
+    amount = format_amount(value)
+    if currency == "USD":
+        return f"${amount:,.2f}"
+    if currency == "KRW":
+        return f"{amount:,.0f} 원"
+    if amount.is_integer():
+        return f"{amount:,.0f}"
+    return f"{amount:,.2f}"
+
+
+def normalize_date(value: Optional[str]) -> Optional[str]:
+    if not value:
+        return None
+
+    value = clean_text(value)
+
+    patterns = [
+        r"(20\d{2})[./-](\d{1,2})[./-](\d{1,2})",
+        r"(20\d{2})년\s*(\d{1,2})월\s*(\d{1,2})일",
+        r"(\d{2})[./-](\d{1,2})[./-](\d{1,2})",
+        r"(\d{1,2})/(\d{1,2})/(20\d{2})",
+        r"(\d{1,2})-(\d{1,2})-(20\d{2})",
+    ]
+
+    for idx, pattern in enumerate(patterns):
+        m = re.search(pattern, value)
+        if not m:
+            continue
+
+        groups = m.groups()
+
+        if idx in [0, 1, 2]:
+            y, mo, d = groups
+            if len(y) == 2:
+                y = f"20{y}"
+            return f"{y}-{int(mo):02d}-{int(d):02d}"
+
+        if idx in [3, 4]:
+            mo, d, y = groups
+            return f"{y}-{int(mo):02d}-{int(d):02d}"
+
+    return None
+
+
+def image_to_bytes(image: Image.Image, format_name: str = "PNG") -> bytes:
+    buf = io.BytesIO()
+    image.save(buf, format=format_name)
+    return buf.getvalue()
+
+
+def to_csv_bytes(df: pd.DataFrame) -> bytes:
+    return df.to_csv(index=False).encode("utf-8-sig")
+
+
+def to_excel_bytes(df: pd.DataFrame, sheet_name: str = "Sheet1") -> bytes:
+    output = io.BytesIO()
+    with pd.ExcelWriter(output, engine="openpyxl") as writer:
+        df.to_excel(writer, sheet_name=sheet_name, index=False)
+    return output.getvalue()
+
+
+# =========================================================
+# 통화 / 국가 추정
+# =========================================================
+def detect_currency(text: str) -> str:
+    lowered = text.lower()
+
+    krw_signals = [
+        "₩", "원", "부가세", "공급가액", "사업자번호", "가맹점명", "현금영수증"
+    ]
+    usd_signals = [
+        "$", "subtotal", "tax", "sales tax", "total", "change", "visa", "mastercard",
+        "starbucks", "receipt"
+    ]
+
+    krw_score = sum(1 for s in krw_signals if s.lower() in lowered)
+    usd_score = sum(1 for s in usd_signals if s.lower() in lowered)
+
+    if usd_score > krw_score:
+        return "USD"
+    return "KRW"
+
+
+# =========================================================
+# 이미지 / PDF 처리
+# =========================================================
+def pdf_first_page_to_image(file_bytes: bytes) -> Image.Image:
+    if fitz is None:
+        raise RuntimeError("PDF 처리를 위해 PyMuPDF가 필요합니다. pip install pymupdf")
+
+    doc = fitz.open(stream=file_bytes, filetype="pdf")
+    if len(doc) == 0:
+        raise RuntimeError("PDF 페이지가 없습니다.")
+
+    page = doc.load_page(0)
+    pix = page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False)
+    image = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB")
+    doc.close()
+    return image
+
+
+def uploaded_file_to_image(uploaded_file) -> Image.Image:
+    name = uploaded_file.name.lower()
+    file_bytes = uploaded_file.getvalue()
+
+    if name.endswith(".pdf"):
+        return pdf_first_page_to_image(file_bytes)
+
+    return Image.open(io.BytesIO(file_bytes)).convert("RGB")
+
+
+# =========================================================
+# OCR
+# =========================================================
+def preprocess_image_for_ocr(image: Image.Image) -> Image.Image:
+    image = image.convert("L")
+    image = ImageOps.autocontrast(image)
+    image = image.resize((image.width * 2, image.height * 2))
+    image = image.filter(ImageFilter.SHARPEN)
+    image = image.point(lambda p: 255 if p > 170 else 0)
+    return image
+
+
+def extract_text_lines_from_image(image: Image.Image, psm: int = 4) -> List[str]:
+    settings = get_settings()
+    processed = preprocess_image_for_ocr(image)
+
+    text = pytesseract.image_to_string(
+        processed,
+        lang=settings["tesseract_lang"],
+        config=f"--oem 3 --psm {psm}",
+    )
+
+    return [clean_text(line) for line in text.splitlines() if clean_text(line)]
+
+
+# =========================================================
+# 숫자/금액 추출
+# =========================================================
+def extract_number_candidates(full_text: str) -> List[float]:
+    pattern = r"(?<!\d)(\d{1,3}(?:,\d{3})+(?:\.\d{2})?|\d+\.\d{2}|\d{4,})(?!\d)"
+    raw = re.findall(pattern, full_text)
+    result: List[float] = []
+
+    for token in raw:
+        try:
+            value = float(token.replace(",", ""))
+            if value >= 0.01:
+                result.append(round(value, 2))
+        except Exception:
+            pass
+
+    return result
+
+
+# =========================================================
+# 규칙 기반 파서
+# =========================================================
+def parse_date(full_text: str) -> str:
+    candidates = re.findall(
+        r"(20\d{2}[./-]\d{1,2}[./-]\d{1,2}|20\d{2}년\s*\d{1,2}월\s*\d{1,2}일|\d{2}[./-]\d{1,2}[./-]\d{1,2}|\d{1,2}/\d{1,2}/20\d{2}|\d{1,2}-\d{1,2}-20\d{2})",
+        full_text,
+    )
+    for c in candidates:
+        nd = normalize_date(c)
+        if nd:
+            return nd
+    return datetime.now().strftime("%Y-%m-%d")
+
+
+def parse_total_amount(full_text: str) -> float:
+    patterns = [
+        r"합계\s*[₩W]?\s*([\d,]+(?:\.\d{2})?)",
+        r"총액\s*[₩W]?\s*([\d,]+(?:\.\d{2})?)",
+        r"결제금액\s*[₩W]?\s*([\d,]+(?:\.\d{2})?)",
+        r"구매금액\s*[₩W]?\s*([\d,]+(?:\.\d{2})?)",
+        r"청구금액\s*[₩W]?\s*([\d,]+(?:\.\d{2})?)",
+        r"받을금액\s*[₩W]?\s*([\d,]+(?:\.\d{2})?)",
+        r"\bgrand total\b\s*[:\-]?\s*\$?\s*([\d,]+(?:\.\d{2})?)",
+        r"\bamount due\b\s*[:\-]?\s*\$?\s*([\d,]+(?:\.\d{2})?)",
+        r"\btotal\b\s*[:\-]?\s*\$?\s*([\d,]+(?:\.\d{2})?)",
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, full_text, flags=re.IGNORECASE)
+        if m:
+            return round(float(m.group(1).replace(",", "")), 2)
+
+    candidates = extract_number_candidates(full_text)
+    return max(candidates) if candidates else 0.0
+
+
+def parse_vat(full_text: str, total: float) -> float:
+    patterns = [
+        r"부가세\s*([\d,]+(?:\.\d{2})?)",
+        r"세액\s*([\d,]+(?:\.\d{2})?)",
+        r"VAT\s*([\d,]+(?:\.\d{2})?)",
+        r"\bsales tax\b\s*[:\-]?\s*\$?\s*([\d,]+(?:\.\d{2})?)",
+        r"\btax\b\s*[:\-]?\s*\$?\s*([\d,]+(?:\.\d{2})?)",
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, full_text, flags=re.IGNORECASE)
+        if m:
+            return round(float(m.group(1).replace(",", "")), 2)
+
+    currency = detect_currency(full_text)
+    if currency == "KRW" and total > 0:
+        return round(total / 11, 2)
+
+    return 0.0
+
+
+def parse_supply_amount(full_text: str, total: float, vat: float) -> float:
+    patterns = [
+        r"과세물품가액\s*([\d,]+(?:\.\d{2})?)",
+        r"공급가액\s*([\d,]+(?:\.\d{2})?)",
+        r"과세금액\s*([\d,]+(?:\.\d{2})?)",
+        r"공급대가\s*([\d,]+(?:\.\d{2})?)",
+        r"\bsub total\b\s*[:\-]?\s*\$?\s*([\d,]+(?:\.\d{2})?)",
+        r"\bsubtotal\b\s*[:\-]?\s*\$?\s*([\d,]+(?:\.\d{2})?)",
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, full_text, flags=re.IGNORECASE)
+        if m:
+            return round(float(m.group(1).replace(",", "")), 2)
+
+    if total > 0:
+        return round(max(total - vat, 0.0), 2)
+
+    return 0.0
+
+
+def parse_store_name(lines: List[str], full_text: str) -> str:
+    vendor_patterns = [
+        r"(?:상호|가맹점명|사업자명|업체명|매장명)\s*[:]?\s*(.+)",
+        r"\bmerchant\b\s*[:\-]?\s*(.+)",
+        r"\bstore\b\s*[:\-]?\s*(.+)",
+    ]
+    for pattern in vendor_patterns:
+        m = re.search(pattern, full_text, flags=re.IGNORECASE)
+        if m:
+            value = clean_text(m.group(1))
+            if value:
+                return value[:60]
+
+    blacklist = [
+        "card", "visa", "mastercard", "receipt", "order", "subtotal", "tax",
+        "total", "change", "cash", "item", "qty", "price", "amount", "invoice",
+        "카드", "승인", "합계", "총액", "공급가액", "부가세", "사업자번호",
+        "대표자", "전화", "영수증", "고객", "포인트", "금액", "세액", "과세", "면세"
+    ]
+
+    for line in lines[:8]:
+        line_clean = clean_text(line)
+        if len(line_clean) < 2:
+            continue
+        if any(word.lower() in line_clean.lower() for word in blacklist):
+            continue
+        return line_clean[:60]
+
+    return "미확인거래처"
+
+
+def parse_items(lines: List[str]) -> str:
+    ignore_words = [
+        "합계", "총액", "공급가액", "부가세", "승인", "카드", "사업자번호",
+        "일자", "날짜", "전화", "현금영수증", "영수증", "거래일시",
+        "세액", "면세", "과세", "상품명", "단가", "수량", "금액",
+        "매출", "포인트", "결제", "승인번호",
+        "subtotal", "tax", "total", "receipt", "visa", "mastercard", "change", "amount due",
+    ]
+    candidates = []
+    for line in lines:
+        line_clean = clean_text(line)
+        if len(line_clean) < 2:
+            continue
+        if any(word.lower() in line_clean.lower() for word in ignore_words):
+            continue
+        if re.search(r"\d{4,}", line_clean):
+            continue
+        candidates.append(line_clean)
+
+    if candidates:
+        return ", ".join(candidates[:3])
+    return "영수증 비용"
+
+
+def suggest_account(store_name: str, memo: str) -> str:
+    text = f"{store_name} {memo}".lower()
+
+    rules = [
+        (["스타벅스", "투썸", "이디야", "커피", "카페", "식당", "음식", "starbucks", "coffee", "cafe", "restaurant", "burger", "chicken"], "복리후생비"),
+        (["택시", "지하철", "버스", "주유", "주차", "톨게이트", "ktx", "srt", "uber", "lyft", "taxi", "parking", "gas"], "여비교통비"),
+        (["문구", "사무", "쿠팡", "오피스", "프린트", "용지", "편의점", "다이소", "office", "supply", "target", "walmart"], "소모품비"),
+        (["회의", "미팅", "회의실", "meeting"], "회의비"),
+        (["통신", "핸드폰", "전화", "인터넷", "phone", "internet", "mobile"], "통신비"),
+        (["광고", "홍보", "배너", "마케팅", "ads", "advertising", "marketing"], "광고선전비"),
+        (["교육", "강의", "세미나", "도서", "책", "training", "course", "book"], "교육훈련비"),
+    ]
+    for keywords, account in rules:
+        if any(k in text for k in keywords):
+            return account
+
+    return DEFAULT_ACCOUNT
+
+
+def receipt_to_rule_record(file_name: str, lines: List[str]) -> Dict[str, Any]:
+    full_text = "\n".join(lines)
+    currency = detect_currency(full_text)
+    total = parse_total_amount(full_text)
+    vat = parse_vat(full_text, total)
+    supply = parse_supply_amount(full_text, total, vat)
+    date_str = parse_date(full_text)
+    store_name = parse_store_name(lines, full_text)
+    memo = parse_items(lines)
+    account = suggest_account(store_name, memo)
+
+    return {
+        "전표번호": make_voucher_no(),
+        "거래일자": date_str,
+        "거래처": store_name,
+        "적요": memo,
+        "계정과목": account,
+        "통화": currency,
+        "공급가액": supply,
+        "부가세": vat,
+        "합계금액": total,
+        "결제수단": DEFAULT_PAYMENT,
+        "원본파일명": file_name,
+        "OCR원문": full_text,
+        "vision_confidence": None,
+        "text_confidence": None,
+        "receipt_type": "불명",
+        "document_count": 1,
+    }
+
+
+# =========================================================
+# qwen3-vl Vision + phi Text
+# =========================================================
+def build_receipt_vision_prompt() -> str:
+    return """
+You extract accounting fields from receipt images from Korea or the United States.
+
+Return JSON only.
+Do not output markdown, explanations, or code fences.
+
+Output format:
+{
+  "document_count": 1,
+  "is_receipt": true,
+  "receipt_type": "normal|cancel|repayment|unknown",
+  "store_name": null,
+  "date": null,
+  "time": null,
+  "subtotal": null,
+  "vat": null,
+  "total": null,
+  "currency": null,
+  "notes": null,
+  "confidence": 0.0
+}
+
+Rules:
+- Receipt may be Korean or English.
+- If multiple receipts are visible, set document_count accordingly.
+- Return numeric amounts only.
+- Keep decimals for USD receipts.
+- For Korean receipts, vat means VAT or sales tax.
+- For U.S. receipts, vat means sales tax.
+- total means the final charged amount.
+- If uncertain, use null.
+- Starbucks and other retail receipts are valid receipts.
+""".strip()
+
+
+def build_text_accounting_prompt(record: Dict[str, Any]) -> str:
+    return f"""
+You are an accounting assistant for Korean/US receipt bookkeeping.
+
+Return JSON only.
+Do not output markdown, explanations, or code fences.
+
+Choose the best account title, memo, and payment method.
+
+Available account titles:
+{ACCOUNT_OPTIONS}
+
+Available payment methods:
+{PAYMENT_OPTIONS}
+
+Input:
+store_name: {record.get("거래처")}
+memo: {record.get("적요")}
+currency: {record.get("통화")}
+supply_amount: {record.get("공급가액")}
+vat: {record.get("부가세")}
+total: {record.get("합계금액")}
+receipt_type: {record.get("receipt_type")}
+ocr_text:
+{record.get("OCR원문")}
+
+Output format:
+{{
+  "account": null,
+  "memo": null,
+  "payment_method": null,
+  "confidence": 0.0
+}}
+
+Rules:
+- account must be exactly one of the available account titles.
+- payment_method must be exactly one of the available payment methods.
+- memo should be short and useful for bookkeeping.
+- If uncertain, use null.
+""".strip()
+
+
+def extract_json_from_text(raw_text: str) -> Optional[Dict[str, Any]]:
+    text = raw_text.strip()
+    text = text.replace("```json", "").replace("```", "").strip()
+
+    try:
+        data = json.loads(text)
+        if isinstance(data, dict):
+            return data
+    except Exception:
+        pass
+
+    match = re.search(r"\{.*\}", text, flags=re.DOTALL)
+    if match:
+        try:
+            data = json.loads(match.group(0))
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            return None
+
+    return None
+
+
+def call_vision_model(image_bytes: bytes, prompt: str) -> Optional[Dict[str, Any]]:
+    settings = get_settings()
+    image_b64 = base64.b64encode(image_bytes).decode("utf-8")
+
+    payload = {
+        "model": settings["vision_model"],
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt,
+                "images": [image_b64],
+            }
+        ],
+        "stream": False,
+    }
+
+    response = requests.post(
+        f"{settings['ollama_url']}/api/chat",
+        json=payload,
+        timeout=settings["timeout"],
+    )
+    response.raise_for_status()
+
+    data = response.json()
+    content = data.get("message", {}).get("content", "").strip()
+    if not content:
+        return None
+
+    return extract_json_from_text(content)
+
+
+def call_text_model(prompt: str) -> Optional[Dict[str, Any]]:
+    settings = get_settings()
+
+    payload = {
+        "model": settings["text_model"],
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        "stream": False,
+    }
+
+    response = requests.post(
+        f"{settings['ollama_url']}/api/chat",
+        json=payload,
+        timeout=settings["timeout"],
+    )
+    response.raise_for_status()
+
+    data = response.json()
+    content = data.get("message", {}).get("content", "").strip()
+    if not content:
+        return None
+
+    return extract_json_from_text(content)
+
+
+def merge_vision_record(rule_record: Dict[str, Any], vision_record: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    merged = rule_record.copy()
+
+    if not vision_record:
+        return merged
+
+    if vision_record.get("store_name") not in [None, "", "null"]:
+        merged["거래처"] = str(vision_record.get("store_name"))
+
+    if vision_record.get("date") not in [None, "", "null"]:
+        merged["거래일자"] = normalize_date(str(vision_record.get("date"))) or merged["거래일자"]
+
+    subtotal = safe_float(vision_record.get("subtotal"))
+    vat = safe_float(vision_record.get("vat"))
+    total = safe_float(vision_record.get("total"))
+
+    if subtotal is not None:
+        merged["공급가액"] = round(subtotal, 2)
+    if vat is not None:
+        merged["부가세"] = round(vat, 2)
+    if total is not None:
+        merged["합계금액"] = round(total, 2)
+
+    currency = vision_record.get("currency")
+    if currency not in [None, "", "null"]:
+        cur = str(currency).upper()
+        if cur in ["KRW", "USD"]:
+            merged["통화"] = cur
+
+    receipt_type = vision_record.get("receipt_type")
+    if receipt_type not in [None, "", "null"]:
+        mapping = {
+            "normal": "일반",
+            "cancel": "취소",
+            "repayment": "재결제",
+            "unknown": "불명",
+            "일반": "일반",
+            "취소": "취소",
+            "재결제": "재결제",
+            "불명": "불명",
+        }
+        merged["receipt_type"] = mapping.get(str(receipt_type).strip().lower(), str(receipt_type))
+
+    doc_count = vision_record.get("document_count")
+    try:
+        if doc_count is not None:
+            merged["document_count"] = int(doc_count)
+    except Exception:
+        pass
+
+    try:
+        conf = vision_record.get("confidence")
+        if conf is not None:
+            merged["vision_confidence"] = float(conf)
+    except Exception:
+        pass
+
+    notes = vision_record.get("notes")
+    if notes not in [None, "", "null"]:
+        current_memo = str(merged.get("적요", "")).strip()
+        merged["적요"] = f"{current_memo} | {notes}".strip(" |")
+
+    return merged
+
+
+def merge_text_record(rule_record: Dict[str, Any], text_record: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    merged = rule_record.copy()
+
+    if not text_record:
+        return merged
+
+    account = text_record.get("account")
+    if account in ACCOUNT_OPTIONS:
+        merged["계정과목"] = account
+
+    memo = text_record.get("memo")
+    if memo not in [None, "", "null"]:
+        merged["적요"] = str(memo).strip()
+
+    payment = text_record.get("payment_method")
+    if payment in PAYMENT_OPTIONS:
+        merged["결제수단"] = payment
+
+    try:
+        conf = text_record.get("confidence")
+        if conf is not None:
+            merged["text_confidence"] = float(conf)
+    except Exception:
+        pass
+
+    return merged
+
+
+def build_record_with_models(file_name: str, image: Image.Image, lines: List[str]) -> Dict[str, Any]:
+    settings = get_settings()
+    rule_record = receipt_to_rule_record(file_name, lines)
+    result = rule_record.copy()
+
+    if settings["use_vision_model"]:
+        try:
+            vision_prompt = build_receipt_vision_prompt()
+            vision_image_bytes = image_to_bytes(image, "PNG")
+            vision_result = call_vision_model(vision_image_bytes, vision_prompt)
+            st.session_state.last_vision_result = vision_result
+            result = merge_vision_record(result, vision_result)
+        except Exception as e:
+            st.warning(f"비전 모델(qwen3-vl:4b) 처리 실패: {e}")
+
+    if settings.get("use_text_model", True):
+        try:
+            text_prompt = build_text_accounting_prompt(result)
+            text_result = call_text_model(text_prompt)
+            st.session_state.last_text_result = text_result
+            result = merge_text_record(result, text_result)
+        except Exception as e:
+            st.warning(f"텍스트 모델(phi) 처리 실패: {e}")
+
+    if result.get("계정과목") in [None, "", "잡비"]:
+        result["계정과목"] = suggest_account(
+            str(result.get("거래처", "")),
+            str(result.get("적요", "")),
+        )
+
+    total = format_amount(result.get("합계금액", 0.0))
+    vat = format_amount(result.get("부가세", 0.0))
+    supply = format_amount(result.get("공급가액", 0.0))
+
+    if total > 0 and supply == 0 and vat > 0:
+        supply = round(max(total - vat, 0.0), 2)
+
+    if total > 0 and vat == 0 and supply > 0:
+        vat = round(max(total - supply, 0.0), 2)
+
+    if total == 0 and supply > 0 and vat >= 0:
+        total = round(supply + vat, 2)
+
+    result["공급가액"] = round(supply, 2)
+    result["부가세"] = round(vat, 2)
+    result["합계금액"] = round(total, 2)
+
+    return result
+
+
+# =========================================================
+# 거래 처리 / 집계
+# =========================================================
+def append_current_to_ledger(current_df: pd.DataFrame) -> None:
+    if current_df.empty:
+        return
+    tx = st.session_state.transactions.copy()
+    st.session_state.transactions = pd.concat([tx, current_df], ignore_index=True)
+
+
+def build_journal_df(transactions: pd.DataFrame) -> pd.DataFrame:
+    if transactions.empty:
+        return pd.DataFrame(
+            columns=["전표번호", "일자", "통화", "차변계정", "차변금액", "대변계정", "대변금액", "적요"]
+        )
+
+    rows = []
+    for _, row in transactions.iterrows():
+        amount = format_amount(row.get("합계금액", 0.0))
+        rows.append({
+            "전표번호": row.get("전표번호"),
+            "일자": row.get("거래일자"),
+            "통화": row.get("통화", "KRW"),
+            "차변계정": row.get("계정과목", DEFAULT_ACCOUNT),
+            "차변금액": amount,
+            "대변계정": row.get("결제수단", DEFAULT_PAYMENT),
+            "대변금액": amount,
+            "적요": row.get("적요"),
+        })
+
+    return pd.DataFrame(rows)
+
+
+def build_pnl_df(transactions: pd.DataFrame) -> pd.DataFrame:
+    if transactions.empty:
+        return pd.DataFrame(columns=["통화", "계정과목", "금액"])
+
+    grouped = (
+        transactions.assign(합계금액=transactions["합계금액"].apply(format_amount))
+        .groupby(["통화", "계정과목"], dropna=False)["합계금액"]
+        .sum()
+        .reset_index()
+        .rename(columns={"합계금액": "금액"})
+        .sort_values(["통화", "금액"], ascending=[True, False])
+    )
+    return grouped
+
+
+# =========================================================
+# 파일 처리
+# =========================================================
+def process_uploaded_files(uploaded_files: List[Any]) -> None:
+    records: List[Dict[str, Any]] = []
+
+    for uploaded_file in uploaded_files:
+        try:
+            image = uploaded_file_to_image(uploaded_file)
+            lines = extract_text_lines_from_image(image)
+            st.session_state.last_ocr_lines = lines
+
+            record = build_record_with_models(uploaded_file.name, image, lines)
+            records.append(record)
+        except Exception as e:
+            st.error(f"{uploaded_file.name} 처리 실패: {e}")
+
+    if records:
+        st.session_state.current_receipt_df = pd.DataFrame(records)
+    else:
+        st.session_state.current_receipt_df = pd.DataFrame(columns=BASE_COLUMNS)
+
+
+# =========================================================
+# UI
+# =========================================================
+st.title(APP_TITLE)
+st.caption("Tesseract OCR + qwen3-vl:4b 비전 + phi 텍스트 + KR/US 영수증 + 검수 + 거래내역 + 분개장 + 손익집계")
+
+with st.sidebar:
+    st.subheader("설정")
+
+    st.session_state.settings["tesseract_cmd"] = st.text_input(
+        "Tesseract 경로",
+        value=st.session_state.settings["tesseract_cmd"],
+    )
+    apply_tesseract_cmd()
+
+    st.session_state.settings["tesseract_lang"] = st.text_input(
+        "Tesseract 언어",
+        value=st.session_state.settings["tesseract_lang"],
+        help="한국/미국 같이 쓰면 kor+eng, 미국만 주로 쓰면 eng",
+    )
+
+    st.markdown("---")
+
+    st.session_state.settings["ollama_url"] = st.text_input(
+        "Ollama 주소",
+        value=st.session_state.settings["ollama_url"],
+    )
+
+    st.session_state.settings["vision_model"] = st.text_input(
+        "비전 모델",
+        value=st.session_state.settings["vision_model"],
+    )
+
+    st.session_state.settings["text_model"] = st.text_input(
+        "텍스트 모델",
+        value=st.session_state.settings["text_model"],
+    )
+
+    st.session_state.settings["timeout"] = st.number_input(
+        "타임아웃(초)",
+        min_value=10,
+        max_value=600,
+        value=int(st.session_state.settings["timeout"]),
+        step=10,
+    )
+
+    st.session_state.settings["use_vision_model"] = st.checkbox(
+        "비전 모델 사용",
+        value=st.session_state.settings["use_vision_model"],
+    )
+
+    st.session_state.settings["use_text_model"] = st.checkbox(
+        "텍스트 모델 사용",
+        value=st.session_state.settings["use_text_model"],
+    )
+
+    st.markdown("---")
+    st.caption("추천")
+    st.code(
+        "ollama pull qwen3-vl:4b\nollama pull phi",
+        language="bash",
+    )
+
+tab1, tab2, tab3, tab4 = st.tabs([
+    "업로드/검수",
+    "거래내역",
+    "분개장",
+    "손익집계",
+])
+
+with tab1:
+    st.subheader("영수증 업로드")
+
+    uploaded_files = st.file_uploader(
+        "이미지 또는 PDF 업로드",
+        type=["png", "jpg", "jpeg", "pdf"],
+        accept_multiple_files=True,
+    )
+
+    col_a, col_b, col_c = st.columns(3)
+
+    with col_a:
+        if st.button("OCR + AI 분석 실행", use_container_width=True):
+            if not uploaded_files:
+                st.warning("파일을 먼저 올려라.")
+            else:
+                process_uploaded_files(uploaded_files)
+                st.success("분석 완료")
+
+    with col_b:
+        if st.button("현재 검수표 초기화", use_container_width=True):
+            st.session_state.current_receipt_df = pd.DataFrame(columns=BASE_COLUMNS)
+            st.session_state.last_ocr_lines = []
+            st.session_state.last_vision_result = None
+            st.session_state.last_text_result = None
+            st.success("현재 검수표를 비웠다.")
+
+    with col_c:
+        if st.button("전체 장부 초기화", use_container_width=True):
+            st.session_state.transactions = pd.DataFrame(columns=BASE_COLUMNS)
+            st.success("전체 장부를 비웠다.")
+
+    st.markdown("---")
+
+    if uploaded_files:
+        st.subheader("업로드 미리보기")
+        preview_count = min(3, len(uploaded_files))
+        preview_cols = st.columns(preview_count)
+        for idx, f in enumerate(uploaded_files[:preview_count]):
+            with preview_cols[idx]:
+                try:
+                    img = uploaded_file_to_image(f)
+                    st.image(img, caption=f.name, use_container_width=True)
+                except Exception as e:
+                    st.error(f"{f.name} 미리보기 실패: {e}")
+
+    st.markdown("---")
+    st.subheader("검수 테이블")
+
+    current_df = st.session_state.current_receipt_df.copy()
+
+    if current_df.empty:
+        st.info("아직 분석된 데이터가 없다.")
+    else:
+        editable_df = current_df.copy()
+        for col in ["거래일자", "거래처", "적요", "계정과목", "결제수단", "receipt_type", "통화"]:
+            editable_df[col] = editable_df[col].astype(str)
+
+        edited_df = st.data_editor(
+            editable_df,
+            use_container_width=True,
+            num_rows="dynamic",
+            column_config={
+                "계정과목": st.column_config.SelectboxColumn(
+                    "계정과목",
+                    options=ACCOUNT_OPTIONS,
+                    required=True,
+                ),
+                "결제수단": st.column_config.SelectboxColumn(
+                    "결제수단",
+                    options=PAYMENT_OPTIONS,
+                    required=True,
+                ),
+                "통화": st.column_config.SelectboxColumn(
+                    "통화",
+                    options=["KRW", "USD"],
+                    required=True,
+                ),
+                "공급가액": st.column_config.NumberColumn("공급가액", step=0.01, format="%.2f"),
+                "부가세": st.column_config.NumberColumn("부가세", step=0.01, format="%.2f"),
+                "합계금액": st.column_config.NumberColumn("합계금액", step=0.01, format="%.2f"),
+                "vision_confidence": st.column_config.NumberColumn("vision_confidence", step=0.01, format="%.2f"),
+                "text_confidence": st.column_config.NumberColumn("text_confidence", step=0.01, format="%.2f"),
+                "document_count": st.column_config.NumberColumn("document_count", step=1),
+            },
+            key="receipt_editor",
+        )
+
+        st.session_state.current_receipt_df = edited_df
+
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("검수 완료 → 거래내역 저장", use_container_width=True):
+                append_current_to_ledger(st.session_state.current_receipt_df)
+                st.success("거래내역에 저장했다.")
+        with col2:
+            st.download_button(
+                "현재 검수표 CSV 다운로드",
+                data=to_csv_bytes(st.session_state.current_receipt_df),
+                file_name=f"receipt_review_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv",
+                use_container_width=True,
+            )
+
+    st.markdown("---")
+
+    col_left, col_mid, col_right = st.columns(3)
+
+    with col_left:
+        st.subheader("마지막 OCR 원문")
+        ocr_text = "\n".join(st.session_state.last_ocr_lines) if st.session_state.last_ocr_lines else ""
+        st.text_area("OCR 결과", value=ocr_text, height=320)
+
+    with col_mid:
+        st.subheader("마지막 Vision JSON")
+        st.json(st.session_state.last_vision_result or {})
+
+    with col_right:
+        st.subheader("마지막 Text JSON")
+        st.json(st.session_state.last_text_result or {})
+
+with tab2:
+    st.subheader("거래내역")
+
+    tx_df = st.session_state.transactions.copy()
+
+    if tx_df.empty:
+        st.info("저장된 거래내역이 없다.")
+    else:
+        st.dataframe(tx_df, use_container_width=True)
+
+        currency_summary = tx_df.groupby("통화")["합계금액"].sum().reset_index()
+        st.markdown("### 통화별 합계")
+        for _, row in currency_summary.iterrows():
+            st.write(f"- {row['통화']}: {money_display(row['합계금액'], row['통화'])}")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.download_button(
+                "거래내역 CSV 다운로드",
+                data=to_csv_bytes(tx_df),
+                file_name=f"transactions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv",
+                use_container_width=True,
+            )
+        with col2:
+            st.download_button(
+                "거래내역 Excel 다운로드",
+                data=to_excel_bytes(tx_df, "transactions"),
+                file_name=f"transactions_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True,
+            )
+
+with tab3:
+    st.subheader("분개장")
+
+    journal_df = build_journal_df(st.session_state.transactions)
+
+    if journal_df.empty:
+        st.info("분개장이 비어 있다.")
+    else:
+        st.dataframe(journal_df, use_container_width=True)
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.download_button(
+                "분개장 CSV 다운로드",
+                data=to_csv_bytes(journal_df),
+                file_name=f"journal_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv",
+                use_container_width=True,
+            )
+        with col2:
+            st.download_button(
+                "분개장 Excel 다운로드",
+                data=to_excel_bytes(journal_df, "journal"),
+                file_name=f"journal_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True,
+            )
+
+with tab4:
+    st.subheader("손익집계")
+
+    pnl_df = build_pnl_df(st.session_state.transactions)
+
+    if pnl_df.empty:
+        st.info("손익집계 데이터가 없다.")
+    else:
+        for currency in sorted(pnl_df["통화"].dropna().unique()):
+            sub = pnl_df[pnl_df["통화"] == currency].copy()
+
+            st.markdown(f"### {currency}")
+            total_expense = float(sub["금액"].sum())
+            st.metric(f"{currency} 총 비용", money_display(total_expense, currency))
+
+            st.dataframe(sub, use_container_width=True)
+            st.bar_chart(sub.set_index("계정과목")["금액"], use_container_width=True)
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.download_button(
+                "손익집계 CSV 다운로드",
+                data=to_csv_bytes(pnl_df),
+                file_name=f"pnl_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                mime="text/csv",
+                use_container_width=True,
+            )
+        with col2:
+            st.download_button(
+                "손익집계 Excel 다운로드",
+                data=to_excel_bytes(pnl_df, "pnl"),
+                file_name=f"pnl_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True,
+            )
+
+st.markdown("---")
+st.caption("흐름: 업로드 → OCR → qwen3-vl:4b 비전 분석 → phi 텍스트 보정 → KR/US 규칙 병합 → 검수 → 거래내역 저장 → 분개장/손익집계")
