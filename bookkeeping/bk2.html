@@ -1,32 +1,363 @@
-<script>
-  function parseMoney(text) {
-    return Number(text.replace(/[^0-9.-]+/g, "")) || 0;
-  }
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>기장 신청 - 결제 및 입금확인</title>
+  <style>
+    :root {
+      --bg: #f5f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f8f9fb;
+      --line: #e5e7eb;
+      --line-strong: #d7dbe2;
+      --text: #111827;
+      --muted: #6b7280;
+      --muted-2: #9ca3af;
+      --primary: #0f4cc9;
+      --primary-dark: #0b3ea5;
+      --danger: #dc2626;
+      --shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+      --radius: 14px;
+    }
 
-  function money(value) {
-    return "$" + value.toLocaleString("en-US", {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2
-    });
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  function calculateTotal() {
-    const accountAmount = parseMoney(document.getElementById("accountAmount").textContent);
-    const cardAmount = parseMoney(document.getElementById("cardAmount").textContent);
-    const payrollAmount = parseMoney(document.getElementById("payrollAmount").textContent);
-    const investmentAmount = parseMoney(document.getElementById("investmentAmount").textContent);
-    const otherAmount = parseMoney(document.getElementById("otherAmount").textContent);
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR",
+        "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
 
-    const totalAmount =
-      accountAmount +
-      cardAmount +
-      payrollAmount +
-      investmentAmount +
-      otherAmount;
+    .page {
+      min-height: 100vh;
+    }
 
-    document.getElementById("totalAmount").textContent = money(totalAmount);
-    document.getElementById("bankAmount").textContent = money(totalAmount);
-  }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
 
-  calculateTotal();
-</script>
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .company {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 10px;
+      border: 1px solid var(--line-strong);
+      background: #fff;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-dark {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 48px auto 72px;
+      padding: 0 20px;
+    }
+
+    .step {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 800;
+      margin: 0 0 24px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 14px;
+    }
+
+    .summary {
+      background: #f3f4f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin: 18px 0 26px;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 9px 0;
+      font-size: 15px;
+    }
+
+    .summary-row + .summary-row {
+      border-top: 1px dashed #d8dde6;
+    }
+
+    .summary-label {
+      color: #374151;
+      font-weight: 700;
+    }
+
+    .summary-value {
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .summary-total {
+      font-size: 18px;
+    }
+
+    .payment-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 26px 0 10px;
+    }
+
+    .payment-help {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .radio-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .bank-box {
+      background: #f3f4f6;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      margin-bottom: 14px;
+      color: #374151;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .bank-box strong {
+      color: #111827;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 7px;
+    }
+
+    .field input {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 12px 13px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .field input:focus {
+      border-color: #8eb2ff;
+      box-shadow: 0 0 0 4px rgba(15, 76, 201, 0.10);
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 54px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin-top: 28px;
+      }
+
+      .step {
+        font-size: 22px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .topbar {
+        padding: 14px 16px;
+      }
+
+      .topbar-left {
+        font-size: 18px;
+      }
+
+      .btn {
+        padding: 0 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div>
+        <div class="topbar-left">
+          <span>기장 신청</span>
+          <span class="company">GoldRush Inc.</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn" type="button">돌아가기</button>
+        <button class="btn btn-dark" type="button">문의하기</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="step">STEP 2.</div>
+      <h1 class="title">결제 및 입금확인</h1>
+      <div class="divider"></div>
+
+      <h2 class="section-title">선택한 서비스 수수료</h2>
+
+      <section class="summary">
+        <div class="summary-row">
+          <div class="summary-label">계좌</div>
+          <div class="summary-value service-amount" id="accountAmount">$500</div>
+        </div>
+
+        <div class="summary-row">
+          <div class="summary-label">카드</div>
+          <div class="summary-value service-amount" id="cardAmount">$1,000</div>
+        </div>
+
+        <div class="summary-row">
+          <div class="summary-label">급여 신고</div>
+          <div class="summary-value service-amount" id="payrollAmount">$500</div>
+        </div>
+
+        <div class="summary-row">
+          <div class="summary-label">투자 상품</div>
+          <div class="summary-value service-amount" id="investmentAmount">$200</div>
+        </div>
+
+        <div class="summary-row">
+          <div class="summary-label">기타</div>
+          <div class="summary-value service-amount" id="otherAmount">$3,000</div>
+        </div>
+
+        <div class="summary-row summary-total">
+          <div class="summary-label">총 결제 금액</div>
+          <div class="summary-value" id="totalAmount">$0</div>
+        </div>
+      </section>
+
+      <div class="payment-title">결제 방식</div>
+      <div class="payment-help">현재는 계좌이체를 통한 결제만 가능합니다.</div>
+
+      <label class="radio-wrap">
+        <input type="radio" checked />
+        <span>계좌 이체</span>
+      </label>
+
+      <div class="bank-box">
+        <strong>입금하실 계좌</strong><br />
+        국민은행 123-4567890<br />
+        예금주 가온오버시즈매니지먼트 주식회사<br />
+        금액 <strong id="bankAmount">$0</strong>
+      </div>
+
+      <div class="field" style="margin-bottom: 16px;">
+        <label for="depositorName">입금자명</label>
+        <input type="text" id="depositorName" placeholder="입금자명을 입력하세요." />
+      </div>
+
+      <button class="submit-btn" type="button">결제 신청</button>
+    </main>
+  </div>
+
+  <script>
+    function parseMoney(text) {
+      return Number(text.replace(/[^0-9.-]+/g, "")) || 0;
+    }
+
+    function money(value) {
+      return "$" + value.toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function calculateTotal() {
+      const serviceAmounts = document.querySelectorAll(".service-amount");
+
+      let totalAmount = 0;
+
+      serviceAmounts.forEach(function (item) {
+        totalAmount += parseMoney(item.textContent);
+      });
+
+      document.getElementById("totalAmount").textContent = money(totalAmount);
+      document.getElementById("bankAmount").textContent = money(totalAmount);
+    }
+
+    calculateTotal();
+  </script>
+</body>
+</html>
