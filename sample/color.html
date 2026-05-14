@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>미국 법인 설립 서비스</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #E8F8F4;
+      color: #12332b;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 24px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f5f4d;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 15px;
+      color: #32544c;
+    }
+
+    .nav-btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #0f5f4d;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: 90px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #0f5f4d;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(15, 95, 77, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      color: #092f27;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #45635c;
+      margin-bottom: 34px;
+      max-width: 600px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 15px 24px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .primary-btn {
+      background: #0f5f4d;
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(15, 95, 77, 0.25);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      background: #0b4d3f;
+    }
+
+    .secondary-btn {
+      background: #fff;
+      color: #0f5f4d;
+      border: 1px solid rgba(15, 95, 77, 0.15);
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 24px 70px rgba(15, 95, 77, 0.14);
+    }
+
+    .card h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #092f27;
+    }
+
+    .step {
+      padding: 18px 0;
+      border-bottom: 1px solid #e4f1ee;
+      display: flex;
+      gap: 16px;
+    }
+
+    .step:last-child {
+      border-bottom: none;
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border-radius: 50%;
+      background: #E8F8F4;
+      color: #0f5f4d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #12332b;
+    }
+
+    .step span {
+      color: #5d746e;
+      font-size: 14px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 46px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 46px);
+      letter-spacing: -1px;
+      color: #092f27;
+      margin-bottom: 14px;
+    }
+
+    .section-title p {
+      color: #54706a;
+      font-size: 17px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature {
+      background: #fff;
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow: 0 14px 40px rgba(15, 95, 77, 0.08);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #E8F8F4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .feature h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+      color: #092f27;
+    }
+
+    .feature p {
+      color: #5c746e;
+      font-size: 15px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .price-card {
+      background: #fff;
+      border-radius: 26px;
+      padding: 32px;
+      box-shadow: 0 14px 40px rgba(15, 95, 77, 0.08);
+      border: 2px solid transparent;
+    }
+
+    .price-card.popular {
+      border-color: #0f5f4d;
+      transform: translateY(-8px);
+    }
+
+    .price-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 38px;
+      font-weight: 900;
+      color: #0f5f4d;
+      margin-bottom: 18px;
+    }
+
+    .price span {
+      font-size: 15px;
+      color: #6a7f7a;
+      font-weight: 600;
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .price-card li {
+      padding: 9px 0;
+      color: #4e6761;
+    }
+
+    .price-card li::before {
+      content: "✓";
+      color: #0f5f4d;
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    .price-card a {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 14px;
+      background: #0f5f4d;
+      color: white;
+      font-weight: 800;
+    }
+
+    .cta {
+      background: #0f5f4d;
+      color: #fff;
+      border-radius: 34px;
+      padding: 60px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: #d9f5ee;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: #fff;
+      color: #0f5f4d;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    footer {
+      padding: 36px 0;
+      text-align: center;
+      color: #5d746e;
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .features,
+      .pricing {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+
+      .price-card.popular {
+        transform: none;
+      }
+
+      .cta {
+        padding: 42px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">US Launch</div>
+      <nav class="nav-links">
+        <a href="#service">서비스</a>
+        <a href="#process">절차</a>
+        <a href="#pricing">요금</a>
+        <a href="#contact">문의</a>
+      </nav>
+      <a href="#contact" class="nav-btn">무료 상담</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">미국 LLC · C-Corp 설립 대행</span>
+          <h1>미국 법인 설립,<br />복잡한 절차는 맡기세요.</h1>
+          <p>
+            델라웨어, 와이오밍, 플로리다 등 목적에 맞는 주 선택부터
+            EIN 신청, 주소지, 은행 계좌 준비까지 한 번에 도와드립니다.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="primary-btn">상담 신청하기</a>
+            <a href="#process" class="secondary-btn">절차 보기</a>
+          </div>
+        </div>
+
+        <div class="card" id="process">
+          <h3>설립 진행 절차</h3>
+
+          <div class="step">
+            <div class="num">1</div>
+            <div>
+              <strong>무료 상담</strong>
+              <span>사업 목적과 희망 주를 확인합니다.</span>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">2</div>
+            <div>
+              <strong>법인명 확인</strong>
+              <span>사용 가능한 회사명을 검토합니다.</span>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">3</div>
+            <div>
+              <strong>법인 설립 접수</strong>
+              <span>주정부에 LLC 또는 Corporation을 등록합니다.</span>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">4</div>
+            <div>
+              <strong>EIN 및 후속 업무</strong>
+              <span>세금번호, 주소, 은행 준비를 지원합니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="service">
+      <div class="container">
+        <div class="section-title">
+          <h2>필요한 업무를 한 번에</h2>
+          <p>미국 사업 시작에 필요한 핵심 절차를 체계적으로 지원합니다.</p>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <div class="icon">🏢</div>
+            <h3>미국 법인 설립</h3>
+            <p>LLC, C-Corp 등 사업 형태에 맞는 법인 설립을 진행합니다.</p>
+          </div>
+
+          <div class="feature">
+            <div class="icon">🧾</div>
+            <h3>EIN 신청</h3>
+            <p>미국 국세청 IRS 세금번호 신청 절차를 안내합니다.</p>
+          </div>
+
+          <div class="feature">
+            <div class="icon">📬</div>
+            <h3>미국 주소지</h3>
+            <p>Registered Agent 및 비즈니스 주소 준비를 도와드립니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="container">
+        <div class="section-title">
+          <h2>요금제</h2>
+          <p>사업 단계에 맞는 패키지를 선택하세요.</p>
+        </div>
+
+        <div class="pricing">
+          <div class="price-card">
+            <h3>Basic</h3>
+            <div class="price">$299 <span>부터</span></div>
+            <ul>
+              <li>LLC 설립</li>
+              <li>법인명 확인</li>
+              <li>설립 문서 제공</li>
+            </ul>
+            <a href="#contact">선택하기</a>
+          </div>
+
+          <div class="price-card popular">
+            <h3>Standard</h3>
+            <div class="price">$499 <span>부터</span></div>
+            <ul>
+              <li>LLC 또는 C-Corp 설립</li>
+              <li>EIN 신청 지원</li>
+              <li>Registered Agent</li>
+              <li>운영계약서 제공</li>
+            </ul>
+            <a href="#contact">가장 인기</a>
+          </div>
+
+          <div class="price-card">
+            <h3>Premium</h3>
+            <div class="price">$899 <span>부터</span></div>
+            <ul>
+              <li>법인 설립 전체 대행</li>
+              <li>EIN 및 주소지 지원</li>
+              <li>은행 계좌 준비 안내</li>
+              <li>1:1 맞춤 컨설팅</li>
+            </ul>
+            <a href="#contact">문의하기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta">
+          <h2>미국 법인 설립을 시작해보세요</h2>
+          <p>사업 목적에 맞는 법인 형태와 설립 주를 무료로 상담해드립니다.</p>
+          <a href="mailto:hello@example.com">무료 상담 신청</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 US Launch. All rights reserved.
+  </footer>
+
+</body>
+</html>
