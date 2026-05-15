@@ -55,7 +55,7 @@ a {
 }
 
 .hero {
-  padding: 120px 0 80px;
+  padding: 120px 0 0;
   text-align: center;
   background: linear-gradient(180deg, #ffffff 0%, #f2fffb 100%);
 }
@@ -95,16 +95,29 @@ a {
   color: #ffffff;
 }
 
-.hero-image {
+.hero-image-wrap {
+  width: 100%;
   margin-top: 72px;
-  border-radius: 28px;
+  padding-bottom: 120px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 100%;
   overflow: hidden;
   background: linear-gradient(180deg, #e9fff9, #f8fffd);
   box-shadow: 0 24px 80px rgba(0, 168, 143, 0.12);
+  transform-origin: center top;
+  transition: border-radius 0.08s linear, width 0.08s linear;
+  will-change: transform, width, border-radius;
 }
 
 .hero-image img {
   width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -206,6 +219,28 @@ a {
 
   .hero {
     padding-top: 88px;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .store-button {
+    width: 180px;
+  }
+
+  .hero-image-wrap {
+    margin-top: 48px;
+    padding-bottom: 80px;
   }
 
   .split {
