@@ -5,8 +5,6 @@
 :root {
   --mint: #00a88f;
   --mint-dark: #008f7a;
-  --mint-light: #f4fffb;
-  --mint-soft: #eafbf6;
   --text: #191f28;
   --gray-text: #4e5968;
   --line: rgba(0, 168, 143, 0.12);
@@ -66,32 +64,43 @@ a {
   color: var(--mint);
 }
 
-/* Hero */
+/* 첫 번째 화면 */
 
 .hero {
   position: relative;
-  padding: 120px 0 0;
+  min-height: 760px;
+  padding: 150px 0 180px;
   text-align: center;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 54%, rgba(0, 194, 168, 0.16), transparent 34%),
-    linear-gradient(180deg, #ffffff 0%, #f4fffb 70%, #ffffff 100%);
+  display: flex;
+  align-items: center;
 }
 
-.hero::before {
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(244, 255, 251, 0.72) 42%,
+      rgba(255, 255, 255, 0.88) 100%
+    ),
+    radial-gradient(circle at 50% 44%, rgba(0, 194, 168, 0.2), transparent 38%),
+    url("./hero-placeholder.png") center center / cover no-repeat;
+  transform: scale(1.02);
+}
+
+.hero-bg::after {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 190px;
-  width: 900px;
-  height: 900px;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(0, 168, 143, 0.11), transparent 63%);
-  pointer-events: none;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.18), transparent 34%),
+    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.58) 100%);
 }
 
-.hero-content,
-.hero-image-wrap {
+.hero-content {
   position: relative;
   z-index: 1;
 }
@@ -120,52 +129,18 @@ a {
 .store-button {
   padding: 13px 20px;
   border-radius: 999px;
-  background: rgba(0, 168, 143, 0.09);
+  background: rgba(255, 255, 255, 0.72);
   color: var(--mint-dark);
   font-size: 15px;
   font-weight: 700;
-  border: 1px solid rgba(0, 168, 143, 0.12);
+  border: 1px solid rgba(0, 168, 143, 0.14);
+  box-shadow: 0 10px 30px rgba(0, 168, 143, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 .store-button:hover {
   background: var(--mint);
   color: #ffffff;
-}
-
-/* 첫 번째 큰 이미지 */
-
-.hero-image-wrap {
-  width: 100%;
-  margin-top: 72px;
-  padding: 0 20px 120px;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero-image {
-  width: 100%;
-  max-width: 1120px;
-  padding: 14px;
-  border-radius: 32px;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.74)),
-    linear-gradient(135deg, rgba(0, 194, 168, 0.16), rgba(255, 255, 255, 0.5));
-  border: 1px solid rgba(0, 168, 143, 0.12);
-  box-shadow:
-    0 40px 100px rgba(0, 168, 143, 0.13),
-    0 10px 30px rgba(25, 31, 40, 0.06);
-  transform-origin: center top;
-  transition: border-radius 0.08s linear;
-  will-change: border-radius;
-}
-
-.hero-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 22px;
 }
 
 /* Sections */
@@ -216,7 +191,7 @@ a {
   color: var(--gray-text);
 }
 
-/* 두 번째, 세 번째 이미지 영역 */
+/* 2, 3번째 이미지 */
 
 .mockup {
   min-height: 560px;
@@ -234,12 +209,15 @@ a {
     0 8px 28px rgba(25, 31, 40, 0.05);
 }
 
-.mockup img {
-  width: 92%;
-  max-width: 92%;
-  max-height: 92%;
+.scroll-image {
+  width: 76%;
+  max-width: 96%;
   display: block;
+  transform: scale(0.86);
+  opacity: 0.85;
+  transition: transform 0.12s linear, opacity 0.12s linear;
   filter: drop-shadow(0 18px 34px rgba(25, 31, 40, 0.1));
+  will-change: transform, opacity;
 }
 
 .center {
@@ -286,7 +264,8 @@ a {
   }
 
   .hero {
-    padding-top: 88px;
+    min-height: 680px;
+    padding: 120px 0 140px;
   }
 
   .hero h1 {
@@ -304,20 +283,6 @@ a {
 
   .store-button {
     width: 180px;
-  }
-
-  .hero-image-wrap {
-    margin-top: 48px;
-    padding: 0 20px 80px;
-  }
-
-  .hero-image {
-    padding: 10px;
-    border-radius: 24px;
-  }
-
-  .hero-image img {
-    border-radius: 16px;
   }
 
   .split {
@@ -338,9 +303,8 @@ a {
     border-radius: 30px;
   }
 
-  .mockup img {
-    width: 94%;
-    max-width: 94%;
+  .scroll-image {
+    width: 86%;
   }
 
   .footer-grid {
