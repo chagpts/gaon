@@ -1,9 +1,9 @@
-const scrollImages = document.querySelectorAll(".scroll-image");
+const mockupImages = document.querySelectorAll(".mockup img");
 
-function animateImagesOnScroll() {
+function animateMockupImages() {
   const windowHeight = window.innerHeight;
 
-  scrollImages.forEach((image) => {
+  mockupImages.forEach((image) => {
     const rect = image.getBoundingClientRect();
 
     const imageCenter = rect.top + rect.height / 2;
@@ -14,16 +14,16 @@ function animateImagesOnScroll() {
 
     const progress = 1 - Math.min(distance / maxDistance, 1);
 
-    const scale = 0.86 + progress * 0.18;
-    const opacity = 0.85 + progress * 0.15;
+    const scale = 0.75 + progress * 0.35;
+    const opacity = 0.75 + progress * 0.25;
 
     image.style.transform = `scale(${scale})`;
     image.style.opacity = opacity;
   });
 }
 
-window.addEventListener("scroll", animateImagesOnScroll);
-window.addEventListener("resize", animateImagesOnScroll);
-window.addEventListener("load", animateImagesOnScroll);
+window.addEventListener("scroll", animateMockupImages);
+window.addEventListener("resize", animateMockupImages);
+window.addEventListener("load", animateMockupImages);
 
-animateImagesOnScroll();
+animateMockupImages();
