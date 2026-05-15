@@ -5,12 +5,11 @@
 :root {
   --mint: #00a88f;
   --mint-dark: #008f7a;
-  --mint-soft: #f3fffb;
-  --mint-soft-2: #eefbf7;
-  --mint-line: #dff4ee;
+  --mint-light: #f4fffb;
+  --mint-soft: #eafbf6;
   --text: #191f28;
   --gray-text: #4e5968;
-  --card: rgba(255, 255, 255, 0.78);
+  --line: rgba(0, 168, 143, 0.12);
 }
 
 body {
@@ -18,9 +17,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo",
     "Noto Sans KR", sans-serif;
   color: var(--text);
-  background:
-    radial-gradient(circle at 50% 0%, rgba(0, 194, 168, 0.1), transparent 36%),
-    linear-gradient(180deg, #ffffff 0%, #f8fffc 38%, #ffffff 68%);
+  background: #ffffff;
 }
 
 a {
@@ -33,13 +30,15 @@ a {
   margin: 0 auto;
 }
 
+/* Header */
+
 .header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.84);
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(0, 168, 143, 0.1);
+  border-bottom: 1px solid var(--line);
 }
 
 .nav {
@@ -67,24 +66,27 @@ a {
   color: var(--mint);
 }
 
+/* Hero */
+
 .hero {
   position: relative;
   padding: 120px 0 0;
   text-align: center;
-  background:
-    radial-gradient(circle at 50% 58%, rgba(0, 194, 168, 0.16), transparent 34%),
-    linear-gradient(180deg, #ffffff 0%, #f6fffc 72%, #ffffff 100%);
   overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 54%, rgba(0, 194, 168, 0.16), transparent 34%),
+    linear-gradient(180deg, #ffffff 0%, #f4fffb 70%, #ffffff 100%);
 }
 
 .hero::before {
   content: "";
   position: absolute;
-  inset: 160px auto auto 50%;
-  width: 760px;
-  height: 760px;
+  left: 50%;
+  top: 190px;
+  width: 900px;
+  height: 900px;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(0, 168, 143, 0.12), transparent 62%);
+  background: radial-gradient(circle, rgba(0, 168, 143, 0.11), transparent 63%);
   pointer-events: none;
 }
 
@@ -130,6 +132,8 @@ a {
   color: #ffffff;
 }
 
+/* 첫 번째 큰 이미지 */
+
 .hero-image-wrap {
   width: 100%;
   margin-top: 72px;
@@ -143,18 +147,18 @@ a {
   width: 100%;
   max-width: 1120px;
   padding: 14px;
-  overflow: hidden;
   border-radius: 32px;
+  overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.72)),
-    linear-gradient(135deg, rgba(0, 194, 168, 0.18), rgba(255, 255, 255, 0.5));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.74)),
+    linear-gradient(135deg, rgba(0, 194, 168, 0.16), rgba(255, 255, 255, 0.5));
   border: 1px solid rgba(0, 168, 143, 0.12);
   box-shadow:
     0 40px 100px rgba(0, 168, 143, 0.13),
     0 10px 30px rgba(25, 31, 40, 0.06);
   transform-origin: center top;
-  transition: border-radius 0.08s linear, width 0.08s linear;
-  will-change: transform, width, border-radius;
+  transition: border-radius 0.08s linear;
+  will-change: border-radius;
 }
 
 .hero-image img {
@@ -164,15 +168,17 @@ a {
   border-radius: 22px;
 }
 
+/* Sections */
+
 .section {
   padding: 140px 0;
   background: #ffffff;
 }
 
-.gray {
+.section.soft {
   background:
-    radial-gradient(circle at 80% 50%, rgba(0, 194, 168, 0.08), transparent 32%),
-    linear-gradient(180deg, #ffffff 0%, #f7fffc 50%, #ffffff 100%);
+    radial-gradient(circle at 82% 50%, rgba(0, 194, 168, 0.08), transparent 32%),
+    linear-gradient(180deg, #ffffff 0%, #f7fffc 52%, #ffffff 100%);
 }
 
 .split {
@@ -210,12 +216,14 @@ a {
   color: var(--gray-text);
 }
 
+/* 두 번째, 세 번째 이미지 영역 */
+
 .mockup {
-  min-height: 520px;
-  border-radius: 40px;
+  min-height: 560px;
+  border-radius: 42px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(247, 255, 252, 0.86)),
-    radial-gradient(circle at 50% 30%, rgba(0, 194, 168, 0.13), transparent 58%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 255, 252, 0.9)),
+    radial-gradient(circle at 50% 34%, rgba(0, 194, 168, 0.14), transparent 60%);
   border: 1px solid rgba(0, 168, 143, 0.1);
   display: flex;
   align-items: center;
@@ -227,7 +235,9 @@ a {
 }
 
 .mockup img {
-  max-width: 78%;
+  width: 92%;
+  max-width: 92%;
+  max-height: 92%;
   display: block;
   filter: drop-shadow(0 18px 34px rgba(25, 31, 40, 0.1));
 }
@@ -236,6 +246,8 @@ a {
   text-align: center;
   max-width: 760px;
 }
+
+/* Footer */
 
 .footer {
   padding: 64px 0;
@@ -265,6 +277,8 @@ a {
 .footer a:hover {
   color: var(--mint);
 }
+
+/* Mobile */
 
 @media (max-width: 768px) {
   .nav nav {
@@ -298,8 +312,8 @@ a {
   }
 
   .hero-image {
-    border-radius: 24px;
     padding: 10px;
+    border-radius: 24px;
   }
 
   .hero-image img {
@@ -320,8 +334,13 @@ a {
   }
 
   .mockup {
-    min-height: 360px;
-    border-radius: 28px;
+    min-height: 390px;
+    border-radius: 30px;
+  }
+
+  .mockup img {
+    width: 94%;
+    max-width: 94%;
   }
 
   .footer-grid {
