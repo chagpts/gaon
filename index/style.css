@@ -344,3 +344,13 @@ a {
     flex-direction: column;
   }
 }
+.scroll-text {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
