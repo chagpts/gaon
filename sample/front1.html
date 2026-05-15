@@ -26,7 +26,7 @@
     /* Header */
     .header {
       width: 100%;
-      height: 72px;
+      height: 70px;
       background: #fff;
       border-bottom: 1px solid #eee;
       position: relative;
@@ -34,9 +34,9 @@
     }
 
     .header-inner {
-      max-width: 900px;
+      max-width: 930px;
       margin: 0 auto;
-      height: 72px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -44,25 +44,32 @@
 
     .logo {
       font-size: 18px;
-      color: #555;
+      line-height: 1.15;
+      color: #333;
       font-weight: 400;
+      white-space: nowrap;
     }
 
+    /* Navigation */
     .nav {
       display: flex;
       align-items: center;
       gap: 34px;
+      height: 70px;
       font-size: 12px;
-      color: #444;
+      color: #111;
     }
 
     .nav-item {
       position: relative;
-      height: 72px;
+      height: 70px;
       display: flex;
       align-items: center;
-      cursor: pointer;
       white-space: nowrap;
+      cursor: pointer;
+      color: #111;
+      font-size: 12px;
+      line-height: 70px;
     }
 
     .nav-item.active {
@@ -82,13 +89,14 @@
     /* Dropdown */
     .dropdown {
       position: absolute;
-      top: 72px;
+      top: 70px;
       left: -16px;
-      width: 160px;
+      width: 165px;
       background: #fff;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       display: none;
       padding: 8px 0;
+      line-height: normal;
     }
 
     .nav-item:hover .dropdown {
@@ -100,6 +108,7 @@
       padding: 13px 16px;
       font-size: 13px;
       color: #666;
+      line-height: 1.3;
     }
 
     .dropdown a:hover,
@@ -111,7 +120,7 @@
     .hero {
       height: 360px;
       background:
-        linear-gradient(rgba(8, 20, 45, 0.65), rgba(8, 20, 45, 0.65)),
+        linear-gradient(rgba(8, 20, 45, 0.62), rgba(8, 20, 45, 0.62)),
         url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80");
       background-size: cover;
       background-position: center;
@@ -130,10 +139,10 @@
     }
 
     .hero-subtitle {
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.75);
       font-size: 25px;
       font-weight: 700;
-      letter-spacing: 4px;
+      letter-spacing: 8px;
     }
 
     /* Content */
@@ -180,27 +189,17 @@
       word-break: keep-all;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .header-inner {
-        max-width: 92%;
+        width: 92%;
       }
 
       .nav {
-        gap: 18px;
-      }
-
-      .content {
-        width: 92%;
-        grid-template-columns: 1fr;
-        margin-top: 60px;
-      }
-
-      .english-title {
-        margin-bottom: 35px;
+        gap: 20px;
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 760px) {
       .header {
         height: auto;
       }
@@ -210,16 +209,18 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 18px 0;
-        gap: 18px;
+        gap: 16px;
       }
 
       .nav {
+        height: auto;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 16px 22px;
       }
 
       .nav-item {
         height: auto;
+        line-height: normal;
       }
 
       .dropdown {
@@ -236,10 +237,18 @@
 
       .hero-subtitle {
         font-size: 18px;
+        letter-spacing: 4px;
+      }
+
+      .content {
+        width: 92%;
+        grid-template-columns: 1fr;
+        margin-top: 60px;
       }
 
       .english-title {
         font-size: 30px;
+        margin-bottom: 35px;
       }
 
       .korean-title {
@@ -253,10 +262,13 @@
 
   <header class="header">
     <div class="header-inner">
-      <div class="logo">US TAX Service</div>
+      <a href="#" class="logo">
+        US TAX<br>
+        Service
+      </a>
 
       <nav class="nav">
-        <div class="nav-item">ABOUT US</div>
+        <a href="#" class="nav-item">ABOUT US</a>
 
         <div class="nav-item">
           INDIVIDUAL SERVICES
@@ -272,7 +284,6 @@
             <a href="#">미국 법인 세금보고</a>
             <a href="#">미국 법인 기장</a>
             <a href="#" class="selected">미국법인 해산 및 청산</a>
-            <a href="#" class="selected">법인 플랫폼 이동</a>
           </div>
         </div>
 
@@ -281,8 +292,15 @@
           <span class="arrow"></span>
         </div>
 
-        <div class="nav-item">CONTACT US</div>
-        <div class="nav-item">법인 플랫폼</div>
+        <a href="#" class="nav-item">CONTACT US</a>
+
+        <a
+          href="https://원하는-사이트주소.com"
+          target="_blank"
+          class="nav-item"
+        >
+          법인 플랫폼
+        </a>
       </nav>
     </div>
   </header>
@@ -297,7 +315,7 @@
   <main class="content">
     <div class="content-image">
       <img
-        src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80"
+        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80"
         alt="Company building"
       />
     </div>
