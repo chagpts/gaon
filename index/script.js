@@ -7,12 +7,8 @@ if (heroImage) {
 
     const progress = Math.min(scrollY / maxScroll, 1);
 
-    const scale = 1 - progress * 0.22;
-    const borderRadius = progress * 32;
-    const width = 100 - progress * 18;
+    const borderRadius = 32 + progress * 12;
 
-    heroImage.style.transform = `scale(${scale})`;
     heroImage.style.borderRadius = `${borderRadius}px`;
-    heroImage.style.width = `${width}%`;
   });
 }
