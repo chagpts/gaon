@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US TAX SERVICE 서체 비교</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap");
+    @import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+    @import url("https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css");
+    @import url("https://cdn.jsdelivr.net/gh/leetaewook/gmarket-sans-dynamic-subset/GmarketSans.css");
+
+    :root {
+      --bg-main: #f4eee4;
+      --bg-soft: #ebe2d4;
+      --bg-card: #fffaf2;
+      --text-main: #17120d;
+      --text-sub: #6f6558;
+      --accent: #ff6a35;
+      --accent-dark: #e95420;
+      --brown: #3a2a1d;
+      --border: rgba(23, 18, 13, 0.08);
+      --shadow: rgba(61, 43, 31, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text-main);
+      background: var(--bg-main);
+      letter-spacing: -0.015em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .font-black {
+      font-family: "Black Han Sans", "Pretendard", sans-serif;
+      letter-spacing: -0.035em;
+    }
+
+    .font-wanted {
+      font-family: "Wanted Sans Variable", "Wanted Sans", sans-serif;
+    }
+
+    .font-pretendard {
+      font-family: "Pretendard", sans-serif;
+    }
+
+    .font-paperlogy {
+      font-family: "Paperlogy", sans-serif;
+    }
+
+    .font-gmarket {
+      font-family: "Gmarket Sans", "GmarketSansMedium", sans-serif;
+    }
+
+    .quick-nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quick-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 250, 242, 0.86);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      font-family: "Pretendard", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-sub);
+      box-shadow: 0 10px 30px rgba(61, 43, 31, 0.08);
+    }
+
+    .quick-nav a:hover {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .page {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 78% 24%, rgba(255, 106, 53, 0.16), transparent 30%),
+        radial-gradient(circle at 18% 80%, rgba(58, 42, 29, 0.08), transparent 32%),
+        var(--bg-main);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    nav a {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-sub);
+    }
+
+    .font-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--brown);
+      color: #fffaf2;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .font-label span {
+      color: var(--accent);
+    }
+
+    .hero-grid {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: center;
+      gap: 80px;
+      padding: 60px 0 100px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: clamp(52px, 7.6vw, 94px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .font-black h1 {
+      font-weight: 400;
+      letter-spacing: -0.045em;
+    }
+
+    p {
+      max-width: 680px;
+      margin: 0 0 36px;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--text-sub);
+    }
+
+    .store-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      padding: 0 28px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 900;
+      box-shadow: 0 18px 40px rgba(255, 106, 53, 0.28);
+      transition: 0.2s ease;
+    }
+
+    .store-button:hover {
+      transform: translateY(-3px);
+      background: var(--accent-dark);
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 480px;
+    }
+
+    .visual-card {
+      position: absolute;
+      border: 1px solid var(--border);
+      background: rgba(255, 250, 242, 0.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 28px 70px var(--shadow);
+    }
+
+    .main-card {
+      width: 340px;
+      min-height: 230px;
+      right: 70px;
+      top: 110px;
+      padding: 32px;
+      border-radius: 34px;
+      transform: rotate(-3deg);
+      z-index: 3;
+      animation: floatCard 5s ease-in-out infinite;
+    }
+
+    .card-label {
+      margin-bottom: 22px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-sub);
+    }
+
+    .card-title {
+      max-width: 240px;
+      margin-bottom: 34px;
+      font-size: 38px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-row span {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .status-row strong {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .small-card {
+      width: 190px;
+      padding: 22px;
+      border-radius: 28px;
+      z-index: 4;
+    }
+
+    .top-card {
+      right: 0;
+      top: 34px;
+      animation: floatSmall 4.5s ease-in-out infinite;
+    }
+
+    .bottom-card {
+      left: 20px;
+      bottom: 72px;
+      animation: floatSmall 5.2s ease-in-out infinite reverse;
+    }
+
+    .mini-title {
+      margin-bottom: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-sub);
+    }
+
+    .mini-value {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(23, 18, 13, 0.12);
+      z-index: 1;
+    }
+
+    .ring-one {
+      width: 360px;
+      height: 360px;
+      right: 18px;
+      top: 56px;
+    }
+
+    .ring-two {
+      width: 250px;
+      height: 250px;
+      right: 128px;
+      top: 112px;
+    }
+
+    .sample-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+      max-width: 640px;
+    }
+
+    .sample-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255, 250, 242, 0.78);
+      border: 1px solid var(--border);
+    }
+
+    .sample-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .sample-card span {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.45;
+    }
+
+    @keyframes floatCard {
+      0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      50% {
+        transform: translateY(-18px) rotate(1deg);
+      }
+    }
+
+    @keyframes floatSmall {
+      0%, 100% {
+        transform: translateY(0) rotate(3deg);
+      }
+
+      50% {
+        transform: translateY(-14px) rotate(-1deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .quick-nav {
+        left: 14px;
+        right: 14px;
+        top: auto;
+        bottom: 14px;
+        transform: none;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .quick-nav a {
+        white-space: nowrap;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+      }
+
+      .hero-content {
+        padding-top: 40px;
+      }
+
+      p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .sample-row {
+        grid-template-columns: 1fr;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-visual {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .inner {
+        width: min(100% - 28px, 1120px);
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 58px);
+      }
+
+      p {
+        font-size: 18px;
+      }
+
+      .store-button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        height: 350px;
+      }
+
+      .main-card {
+        width: 280px;
+        right: 20px;
+        top: 78px;
+        padding: 26px;
+      }
+
+      .card-title {
+        font-size: 31px;
+      }
+
+      .small-card {
+        width: 150px;
+        padding: 18px;
+      }
+
+      .bottom-card {
+        left: 0;
+        bottom: 46px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quick-nav">
+    <a href="#black">검은고딕</a>
+    <a href="#wanted">Wanted</a>
+    <a href="#pretendard">Pretendard</a>
+    <a href="#paperlogy">페이퍼로지</a>
+    <a href="#gmarket">G마켓</a>
+  </div>
+
+  <section class="page font-black" id="black">
+    <div class="inner header">
+      <div class="logo">US TAX SERVICE</div>
+      <nav>
+        <a href="#">회사 소개</a>
+        <a href="#">서비스</a>
+        <a href="#">자주 묻는 질문</a>
+        <a href="#">문의하기</a>
+      </nav>
+    </div>
+
+    <div class="inner hero-grid">
+      <div class="hero-content">
+        <div class="font-label"><span>01</span> 검은고딕</div>
+        <span class="eyebrow">US BUSINESS MANAGEMENT</span>
+        <h1>미국 법인<br />설립 이후가 더 중요합니다.</h1>
+        <p>설립부터 유지 관리까지, 한국에서 한국어로, 미국 회계사가 운영하는 올인원 법인 관리 플랫폼</p>
+        <a href="#" class="store-button">미국 법인 시작하기</a>
+
+        <div class="sample-row">
+          <div class="sample-card">
+            <strong>제목 인상</strong>
+            <span>강하고 굵은 브랜드형 인상</span>
+          </div>
+          <div class="sample-card">
+            <strong>본문 느낌</strong>
+            <span>짧은 문구 중심에 적합</span>
+          </div>
+          <div class="sample-card">
+            <strong>추천 용도</strong>
+            <span>메인 카피, 광고 배너</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card main-card">
+          <div class="card-label">Entity Status</div>
+          <div class="card-title">Delaware C-Corp</div>
+          <div class="status-row"><span></span><strong>Active</strong></div>
+        </div>
+        <div class="visual-card small-card top-card">
+          <div class="mini-title">Annual Report</div>
+          <div class="mini-value">Ready</div>
+        </div>
+        <div class="visual-card small-card bottom-card">
+          <div class="mini-title">Tax Filing</div>
+          <div class="mini-value">In Progress</div>
+        </div>
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page font-wanted" id="wanted">
+    <div class="inner header">
+      <div class="logo">US TAX SERVICE</div>
+      <nav>
+        <a href="#">회사 소개</a>
+        <a href="#">서비스</a>
+        <a href="#">자주 묻는 질문</a>
+        <a href="#">문의하기</a>
+      </nav>
+    </div>
+
+    <div class="inner hero-grid">
+      <div class="hero-content">
+        <div class="font-label"><span>02</span> Wanted Sans</div>
+        <span class="eyebrow">US BUSINESS MANAGEMENT</span>
+        <h1>미국 법인<br />설립 이후가 더 중요합니다.</h1>
+        <p>설립부터 유지 관리까지, 한국에서 한국어로, 미국 회계사가 운영하는 올인원 법인 관리 플랫폼</p>
+        <a href="#" class="store-button">미국 법인 시작하기</a>
+
+        <div class="sample-row">
+          <div class="sample-card">
+            <strong>제목 인상</strong>
+            <span>현대적이고 단정한 SaaS 느낌</span>
+          </div>
+          <div class="sample-card">
+            <strong>본문 느낌</strong>
+            <span>가독성과 브랜드감의 균형</span>
+          </div>
+          <div class="sample-card">
+            <strong>추천 용도</strong>
+            <span>스타트업, 플랫폼 서비스</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card main-card">
+          <div class="card-label">Entity Status</div>
+          <div class="card-title">Delaware C-Corp</div>
+          <div class="status-row"><span></span><strong>Active</strong></div>
+        </div>
+        <div class="visual-card small-card top-card">
+          <div class="mini-title">Annual Report</div>
+          <div class="mini-value">Ready</div>
+        </div>
+        <div class="visual-card small-card bottom-card">
+          <div class="mini-title">Tax Filing</div>
+          <div class="mini-value">In Progress</div>
+        </div>
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page font-pretendard" id="pretendard">
+    <div class="inner header">
+      <div class="logo">US TAX SERVICE</div>
+      <nav>
+        <a href="#">회사 소개</a>
+        <a href="#">서비스</a>
+        <a href="#">자주 묻는 질문</a>
+        <a href="#">문의하기</a>
+      </nav>
+    </div>
+
+    <div class="inner hero-grid">
+      <div class="hero-content">
+        <div class="font-label"><span>03</span> Pretendard</div>
+        <span class="eyebrow">US BUSINESS MANAGEMENT</span>
+        <h1>미국 법인<br />설립 이후가 더 중요합니다.</h1>
+        <p>설립부터 유지 관리까지, 한국에서 한국어로, 미국 회계사가 운영하는 올인원 법인 관리 플랫폼</p>
+        <a href="#" class="store-button">미국 법인 시작하기</a>
+
+        <div class="sample-row">
+          <div class="sample-card">
+            <strong>제목 인상</strong>
+            <span>가장 익숙하고 안정적인 인상</span>
+          </div>
+          <div class="sample-card">
+            <strong>본문 느낌</strong>
+            <span>긴 설명에도 읽기 편함</span>
+          </div>
+          <div class="sample-card">
+            <strong>추천 용도</strong>
+            <span>전반적인 웹서비스 UI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card main-card">
+          <div class="card-label">Entity Status</div>
+          <div class="card-title">Delaware C-Corp</div>
+          <div class="status-row"><span></span><strong>Active</strong></div>
+        </div>
+        <div class="visual-card small-card top-card">
+          <div class="mini-title">Annual Report</div>
+          <div class="mini-value">Ready</div>
+        </div>
+        <div class="visual-card small-card bottom-card">
+          <div class="mini-title">Tax Filing</div>
+          <div class="mini-value">In Progress</div>
+        </div>
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page font-paperlogy" id="paperlogy">
+    <div class="inner header">
+      <div class="logo">US TAX SERVICE</div>
+      <nav>
+        <a href="#">회사 소개</a>
+        <a href="#">서비스</a>
+        <a href="#">자주 묻는 질문</a>
+        <a href="#">문의하기</a>
+      </nav>
+    </div>
+
+    <div class="inner hero-grid">
+      <div class="hero-content">
+        <div class="font-label"><span>04</span> 페이퍼로지</div>
+        <span class="eyebrow">US BUSINESS MANAGEMENT</span>
+        <h1>미국 법인<br />설립 이후가 더 중요합니다.</h1>
+        <p>설립부터 유지 관리까지, 한국에서 한국어로, 미국 회계사가 운영하는 올인원 법인 관리 플랫폼</p>
+        <a href="#" class="store-button">미국 법인 시작하기</a>
+
+        <div class="sample-row">
+          <div class="sample-card">
+            <strong>제목 인상</strong>
+            <span>부드럽고 트렌디한 인상</span>
+          </div>
+          <div class="sample-card">
+            <strong>본문 느낌</strong>
+            <span>친근하고 덜 딱딱한 분위기</span>
+          </div>
+          <div class="sample-card">
+            <strong>추천 용도</strong>
+            <span>브랜드 소개, 콘텐츠 페이지</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card main-card">
+          <div class="card-label">Entity Status</div>
+          <div class="card-title">Delaware C-Corp</div>
+          <div class="status-row"><span></span><strong>Active</strong></div>
+        </div>
+        <div class="visual-card small-card top-card">
+          <div class="mini-title">Annual Report</div>
+          <div class="mini-value">Ready</div>
+        </div>
+        <div class="visual-card small-card bottom-card">
+          <div class="mini-title">Tax Filing</div>
+          <div class="mini-value">In Progress</div>
+        </div>
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page font-gmarket" id="gmarket">
+    <div class="inner header">
+      <div class="logo">US TAX SERVICE</div>
+      <nav>
+        <a href="#">회사 소개</a>
+        <a href="#">서비스</a>
+        <a href="#">자주 묻는 질문</a>
+        <a href="#">문의하기</a>
+      </nav>
+    </div>
+
+    <div class="inner hero-grid">
+      <div class="hero-content">
+        <div class="font-label"><span>05</span> G마켓 산스</div>
+        <span class="eyebrow">US BUSINESS MANAGEMENT</span>
+        <h1>미국 법인<br />설립 이후가 더 중요합니다.</h1>
+        <p>설립부터 유지 관리까지, 한국에서 한국어로, 미국 회계사가 운영하는 올인원 법인 관리 플랫폼</p>
+        <a href="#" class="store-button">미국 법인 시작하기</a>
+
+        <div class="sample-row">
+          <div class="sample-card">
+            <strong>제목 인상</strong>
+            <span>둥글고 선명한 커머스형 인상</span>
+          </div>
+          <div class="sample-card">
+            <strong>본문 느낌</strong>
+            <span>밝고 친숙한 서비스 분위기</span>
+          </div>
+          <div class="sample-card">
+            <strong>추천 용도</strong>
+            <span>CTA, 섹션 제목, 프로모션</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-card main-card">
+          <div class="card-label">Entity Status</div>
+          <div class="card-title">Delaware C-Corp</div>
+          <div class="status-row"><span></span><strong>Active</strong></div>
+        </div>
+        <div class="visual-card small-card top-card">
+          <div class="mini-title">Annual Report</div>
+          <div class="mini-value">Ready</div>
+        </div>
+        <div class="visual-card small-card bottom-card">
+          <div class="mini-title">Tax Filing</div>
+          <div class="mini-value">In Progress</div>
+        </div>
+        <div class="ring ring-one"></div>
+        <div class="ring ring-two"></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
