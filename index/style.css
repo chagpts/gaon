@@ -14,7 +14,7 @@
 
   --accent: #ff6a35;
   --accent-dark: #e95420;
-  --accent-soft: #ffe0d2;
+  --accent-soft: #ffd8c5;
 
   --border: rgba(23, 18, 13, 0.08);
   --shadow: rgba(61, 43, 31, 0.12);
@@ -51,7 +51,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(244, 238, 228, 0.86);
+  background: rgba(244, 238, 228, 0.88);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
@@ -437,7 +437,7 @@ nav a:hover {
   height: 26px;
   right: 42px;
   top: 170px;
-  background: #ffd4bf;
+  background: var(--accent-soft);
   animation: floatDot 4.2s ease-in-out infinite;
 }
 
