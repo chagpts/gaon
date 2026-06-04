@@ -3,693 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>US TAX SERVICE Font Comparison</title>
+  <title>폰트 비교 페이지</title>
 
-  <!-- Web fonts for comparison -->
-  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT/fonts/variable/woff2/SUIT-Variable.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css" />
+  <!-- Google Fonts 예시 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 100;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-1Thin.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 200;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 300;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 400;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 500;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 600;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 700;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 800;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
-    }
-    @font-face {
-      font-family: 'S-Core Dream';
-      font-weight: 900;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff') format('woff');
-    }
-
     :root {
-      --bg: #ffffff;
-      --ink: #1e1f22;
-      --muted: #707782;
-      --line: #e9ebef;
-      --soft: #f6f7f9;
-      --navy: #0f243f;
-      --blue: #1768ff;
-      --green: #13a66b;
-      --cream: #f7f1e5;
-      --shadow: 0 26px 70px rgba(20, 24, 36, 0.08);
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #2563eb;
     }
 
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
       background: var(--bg);
-      color: var(--ink);
-      font-family: Pretendard, SUIT, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    .page {
-      width: min(1810px, calc(100vw - 88px));
+    header {
+      padding: 32px 24px 20px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .hero {
-      padding: 0 0 84px;
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
     }
 
-    .eyebrow {
-      margin-top: 0;
-      padding-top: 0;
-      font-size: 14px;
-      letter-spacing: -0.02em;
-      color: #111;
-    }
-
-    .hero h1 {
-      margin: 28px 0 0;
-      max-width: 930px;
-      font-size: clamp(52px, 5vw, 96px);
-      line-height: 1.04;
-      letter-spacing: -0.075em;
-      font-weight: 850;
-    }
-
-    .hero h1 span {
-      color: #a2a8b2;
-    }
-
-    .hero-bottom {
-      margin-top: 26px;
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 40px;
-    }
-
-    .hero-desc {
-      width: min(620px, 100%);
+    .desc {
       color: var(--muted);
-      font-size: 18px;
-      line-height: 1.65;
-      word-break: keep-all;
+      margin: 0;
     }
 
     .controls {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      margin-bottom: 44px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(24, 28, 38, 0.06);
-      padding: 18px;
+      max-width: 1200px;
+      margin: 0 auto 24px;
+      padding: 20px 24px;
       display: grid;
-      grid-template-columns: 1.55fr repeat(3, minmax(140px, 0.45fr));
-      gap: 14px;
+      gap: 16px;
+      grid-template-columns: 1fr 160px 160px;
+    }
+
+    textarea,
+    select,
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+      grid-column: 1 / -1;
     }
 
     label {
       display: block;
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    textarea, input, select {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: var(--soft);
-      color: var(--ink);
-      padding: 14px 15px;
-      font: inherit;
-      outline: none;
-    }
-
-    textarea {
-      height: 104px;
-      resize: vertical;
-      line-height: 1.6;
-    }
-
-    input[type="range"] { padding: 12px 10px; }
-
-    .value {
-      margin-top: 7px;
+      margin-bottom: 6px;
       color: var(--muted);
-      font-size: 12px;
     }
 
     .font-grid {
+      max-width: 1200px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 20px;
-      padding-bottom: 60px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     }
 
     .card {
-      min-width: 0;
+      background: var(--card);
       border: 1px solid var(--line);
-      background: #fff;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-    }
-
-    .visual {
-      height: 330px;
-      position: relative;
-      overflow: hidden;
-      background: var(--soft);
-      isolation: isolate;
-    }
-
-    .visual::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(10, 15, 22, 0.02), rgba(10, 15, 22, 0.24));
-      z-index: 1;
-    }
-
-    .visual-content {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      color: #fff;
-    }
-
-    .visual-kicker {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: .92;
-    }
-
-    .visual-title {
-      font-size: 43px;
-      line-height: .92;
-      letter-spacing: -0.08em;
-      font-weight: 900;
-      max-width: 320px;
-    }
-
-    .visual-sub {
-      margin-top: 14px;
-      color: rgba(255,255,255,.72);
-      font-size: 13px;
-      line-height: 1.5;
-      max-width: 260px;
-    }
-
-    .tax-pattern {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-
-    .tax-pattern svg { width: 100%; height: 100%; display: block; }
-
-    .visual.pretendard { background: radial-gradient(circle at 20% 20%, #e8f6ff, #173153 44%, #07121f 100%); }
-    .visual.score { background: radial-gradient(circle at 20% 12%, #ffe7bd, #162844 46%, #05080e 100%); }
-    .visual.suit { background: linear-gradient(135deg, #fbfbfb, #eef5ff 45%, #dbe7ff); color: #111; }
-    .visual.paperlogy { background: radial-gradient(circle at 78% 26%, #d8fff0, #0d2d39 40%, #061013 100%); }
-
-    .visual.suit::after { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.08)); }
-    .visual.suit .visual-content { color: #0c1828; }
-    .visual.suit .visual-sub { color: rgba(12,24,40,.62); }
-
-    .mock-person {
-      position: absolute;
-      right: -56px;
-      bottom: -26px;
-      width: 285px;
-      height: 285px;
-      border-radius: 45% 55% 0 0;
-      background: linear-gradient(150deg, rgba(255,255,255,.55), rgba(255,255,255,.08));
-      opacity: .75;
-      transform: rotate(-8deg);
-      filter: blur(.2px);
-    }
-
-    .mock-document {
-      position: absolute;
-      right: 28px;
-      top: 54px;
-      width: 188px;
-      height: 238px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.93);
-      box-shadow: 0 20px 60px rgba(0,0,0,.16);
-      transform: rotate(7deg);
-      padding: 18px;
-    }
-
-    .mock-document span {
-      display: block;
-      height: 8px;
-      margin: 11px 0;
-      border-radius: 999px;
-      background: rgba(15,36,63,.18);
-    }
-
-    .mock-document span:nth-child(1) { width: 52%; height: 13px; background: rgba(15,36,63,.85); }
-    .mock-document span:nth-child(2) { width: 83%; }
-    .mock-document span:nth-child(3) { width: 70%; }
-    .mock-document span:nth-child(4) { width: 92%; }
-    .mock-document span:nth-child(5) { width: 55%; background: rgba(19,166,107,.38); }
-
-    .mock-chart {
-      position: absolute;
-      right: 28px;
-      bottom: 34px;
-      width: 205px;
-      height: 120px;
-      padding: 16px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.88);
-      box-shadow: 0 20px 55px rgba(0,0,0,.12);
-      display: flex;
-      align-items: end;
-      gap: 10px;
-    }
-
-    .mock-chart i {
-      flex: 1;
-      border-radius: 99px 99px 8px 8px;
-      background: linear-gradient(180deg, #1768ff, #9fc0ff);
-      display: block;
-    }
-    .mock-chart i:nth-child(1) { height: 35%; }
-    .mock-chart i:nth-child(2) { height: 62%; }
-    .mock-chart i:nth-child(3) { height: 48%; }
-    .mock-chart i:nth-child(4) { height: 84%; }
-    .mock-chart i:nth-child(5) { height: 70%; }
-
-    .mock-infographic {
-      position: absolute;
-      right: -18px;
-      top: 58px;
-      width: 280px;
-      height: 210px;
-      opacity: .82;
-    }
-
-    .mock-infographic::before, .mock-infographic::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.34);
-    }
-    .mock-infographic::before { inset: 10px 30px 40px 0; }
-    .mock-infographic::after { inset: 50px 0 0 72px; }
-
-    .bubble {
-      position: absolute;
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.13);
-      border: 1px solid rgba(255,255,255,.18);
-      backdrop-filter: blur(4px);
-    }
-    .bubble.one { right: 110px; top: 12px; }
-    .bubble.two { right: 26px; top: 80px; width: 118px; height: 118px; }
-    .bubble.three { right: 178px; top: 118px; width: 58px; height: 58px; }
-
-    .card-body {
-      padding: 30px 28px 34px;
-      min-height: 245px;
-    }
-
-    .category {
-      color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 12px;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
     }
 
     .font-name {
-      font-size: 31px;
-      line-height: 1.08;
-      letter-spacing: -0.055em;
-      font-weight: 850;
-      margin: 0 0 20px;
-    }
-
-    .sample-title {
-      font-size: 24px;
-      line-height: 1.16;
-      letter-spacing: -0.055em;
-      font-weight: 800;
-      margin: 0 0 14px;
-      white-space: pre-wrap;
-      word-break: keep-all;
-    }
-
-    .sample-body {
-      color: #555d67;
-      font-size: 16px;
-      line-height: 1.68;
-      letter-spacing: -0.02em;
-      white-space: pre-wrap;
-      word-break: keep-all;
-    }
-
-    .card-foot {
-      min-height: 96px;
-      border-top: 1px solid var(--line);
-      padding: 24px 28px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .byline {
-      font-size: 14px;
+    .font-name strong {
+      font-size: 16px;
+    }
+
+    .font-name span {
       color: var(--muted);
-    }
-
-    .byline b { color: #101010; }
-
-    .score-tag {
-      display: grid;
-      gap: 2px;
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .score-tag span {
       font-size: 12px;
-      color: var(--muted);
-      font-weight: 800;
-      text-transform: uppercase;
     }
 
-    .score-tag strong {
-      font-size: 34px;
-      line-height: 1;
-      letter-spacing: -0.08em;
+    .sample {
+      line-height: 1.65;
+      word-break: keep-all;
+      white-space: pre-wrap;
     }
 
-    .pretendard-font { font-family: Pretendard, system-ui, sans-serif; }
-    .score-font { font-family: 'S-Core Dream', Pretendard, system-ui, sans-serif; }
-    .suit-font { font-family: SUIT, Pretendard, system-ui, sans-serif; }
-    .paperlogy-font { font-family: Paperlogy, Pretendard, system-ui, sans-serif; }
-
-    .note {
-      margin: 0 0 100px;
-      border-top: 1px solid var(--line);
-      padding-top: 34px;
-      color: var(--muted);
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 34px;
-      line-height: 1.75;
+    .noto-sans {
+      font-family: "Noto Sans KR", sans-serif;
     }
 
-    .note strong { color: var(--ink); }
-
-    @media (max-width: 1500px) {
-      .font-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .noto-serif {
+      font-family: "Noto Serif KR", serif;
     }
 
-    @media (max-width: 920px) {
-      .page { width: min(100% - 32px, 720px); }
-      .hero { padding-bottom: 42px; }
-      .hero-bottom { display: block; }
-      .controls { position: static; grid-template-columns: 1fr; }
-      .font-grid { grid-template-columns: 1fr; }
-      .visual { height: 280px; }
-      .note { grid-template-columns: 1fr; }
+    .nanum-gothic {
+      font-family: "Nanum Gothic", sans-serif;
+    }
+
+    .nanum-myeongjo {
+      font-family: "Nanum Myeongjo", serif;
+    }
+
+    .system-sans {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .system-serif {
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    @media (max-width: 720px) {
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <main class="page">
-    <section class="hero">
-      <div class="eyebrow">US TAX SERVICE · Font Direction</div>
-      <h1>Reliable tax service<br><span>with a modern edge.</span></h1>
-      <div class="hero-bottom">
-        <p class="hero-desc">
-          미국 회계·세무 서비스를 위한 홈페이지 폰트 비교 페이지입니다. 화이트 배경을 기준으로, 신뢰감 있는 헤드라인과 지루하지 않은 서비스 이미지/인포그래픽 무드를 함께 확인할 수 있습니다.
-        </p>
+  <header>
+    <h1>폰트 비교</h1>
+    <p class="desc">문장을 입력하고 크기, 굵기, 자간을 바꿔가며 폰트를 비교해보세요.</p>
+  </header>
+
+  <section class="controls">
+    <div>
+      <label for="sampleText">비교할 문장</label>
+      <textarea id="sampleText">가나다라마바사아자차카타파하
+The quick brown fox jumps over the lazy dog.
+1234567890 !@#$%^&*()
+
+브랜드의 첫인상을 결정하는 것은 생각보다 작은 디테일입니다.</textarea>
+    </div>
+
+    <div>
+      <label for="fontSize">글자 크기</label>
+      <input id="fontSize" type="range" min="14" max="56" value="24" />
+    </div>
+
+    <div>
+      <label for="fontWeight">굵기</label>
+      <select id="fontWeight">
+        <option value="400">Regular 400</option>
+        <option value="500">Medium 500</option>
+        <option value="600">SemiBold 600</option>
+        <option value="700">Bold 700</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="letterSpacing">자간</label>
+      <input id="letterSpacing" type="range" min="-2" max="4" step="0.1" value="0" />
+    </div>
+  </section>
+
+  <main class="font-grid">
+    <article class="card">
+      <div class="font-name">
+        <strong>Noto Sans KR</strong>
+        <span>Sans-serif</span>
       </div>
-    </section>
+      <div class="sample noto-sans"></div>
+    </article>
 
-    <section class="controls" aria-label="폰트 비교 설정">
-      <div>
-        <label for="sampleText">소개 문구 / 비교할 문장</label>
-        <textarea id="sampleText">US TAX SERVICE는 개인과 비즈니스를 위한 미국 세무·회계 서비스를 제공합니다.
-정확한 신고, 체계적인 장부 관리, 실용적인 절세 전략까지 한 번에 상담하세요.</textarea>
+    <article class="card">
+      <div class="font-name">
+        <strong>Noto Serif KR</strong>
+        <span>Serif</span>
       </div>
-      <div>
-        <label for="fontSize">본문 크기</label>
-        <input id="fontSize" type="range" min="14" max="28" value="16" />
-        <div class="value"><span id="fontSizeValue">16</span>px</div>
+      <div class="sample noto-serif"></div>
+    </article>
+
+    <article class="card">
+      <div class="font-name">
+        <strong>Nanum Gothic</strong>
+        <span>Sans-serif</span>
       </div>
-      <div>
-        <label for="fontWeight">굵기</label>
-        <select id="fontWeight">
-          <option value="400">Regular 400</option>
-          <option value="500">Medium 500</option>
-          <option value="600">SemiBold 600</option>
-          <option value="700" selected>Bold 700</option>
-          <option value="800">ExtraBold 800</option>
-        </select>
-        <div class="value">제목과 소개 문구에 반영</div>
+      <div class="sample nanum-gothic"></div>
+    </article>
+
+    <article class="card">
+      <div class="font-name">
+        <strong>Nanum Myeongjo</strong>
+        <span>Serif</span>
       </div>
-      <div>
-        <label for="letterSpacing">자간</label>
-        <input id="letterSpacing" type="range" min="-1.2" max="1.2" step="0.05" value="-0.25" />
-        <div class="value"><span id="letterSpacingValue">-0.25</span>px</div>
+      <div class="sample nanum-myeongjo"></div>
+    </article>
+
+    <article class="card">
+      <div class="font-name">
+        <strong>System Sans</strong>
+        <span>Default</span>
       </div>
-    </section>
+      <div class="sample system-sans"></div>
+    </article>
 
-    <section class="font-grid">
-      <article class="card pretendard-font">
-        <div class="visual pretendard">
-          <div class="tax-pattern">
-            <svg viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="gridFade1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".25"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
-              </defs>
-              <path d="M-20 310 C120 210 230 390 365 260 S520 120 640 170" fill="none" stroke="url(#gridFade1)" stroke-width="2"/>
-              <path d="M-20 250 C110 140 225 300 360 188 S510 70 640 110" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
-              <g stroke="rgba(255,255,255,.08)"><path d="M60 0v420"/><path d="M160 0v420"/><path d="M260 0v420"/><path d="M360 0v420"/><path d="M460 0v420"/><path d="M0 80h600"/><path d="M0 180h600"/><path d="M0 280h600"/></g>
-            </svg>
-          </div>
-          <div class="mock-document"><span></span><span></span><span></span><span></span><span></span></div>
-          <div class="visual-content">
-            <div class="visual-kicker"><span>Tax Filing</span><span>2025</span></div>
-            <div>
-              <div class="visual-title">CLEAR TAX STRATEGY</div>
-              <div class="visual-sub">For individuals, founders and growing businesses.</div>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="category">Professional · Balanced</div>
-          <h2 class="font-name">프리텐다드<br>Pretendard</h2>
-          <h3 class="sample-title">US TAX SERVICE</h3>
-          <p class="sample-body"></p>
-        </div>
-        <div class="card-foot">
-          <div class="byline">추천 관점 <b>안정감 / 한영 혼용</b></div>
-          <div class="score-tag"><span>Fit</span><strong>95</strong></div>
-        </div>
-      </article>
-
-      <article class="card score-font">
-        <div class="visual score">
-          <div class="mock-infographic"><span class="bubble one"></span><span class="bubble two"></span><span class="bubble three"></span></div>
-          <div class="tax-pattern">
-            <svg viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
-              <circle cx="420" cy="110" r="170" fill="rgba(255,255,255,.08)" />
-              <circle cx="490" cy="210" r="240" fill="none" stroke="rgba(255,255,255,.13)" />
-              <path d="M70 330 L170 240 L255 270 L345 150 L475 210" fill="none" stroke="#f8b75d" stroke-width="5" stroke-linecap="round" />
-            </svg>
-          </div>
-          <div class="visual-content">
-            <div class="visual-kicker"><span>Accounting</span><span>Advisory</span></div>
-            <div>
-              <div class="visual-title">SMART BOOKKEEPING</div>
-              <div class="visual-sub">Monthly reports, clean books and business-ready insights.</div>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="category">Confident · Distinctive</div>
-          <h2 class="font-name">에스코어드림<br>S-Core Dream</h2>
-          <h3 class="sample-title">US TAX SERVICE</h3>
-          <p class="sample-body"></p>
-        </div>
-        <div class="card-foot">
-          <div class="byline">추천 관점 <b>단단함 / 존재감</b></div>
-          <div class="score-tag"><span>Fit</span><strong>87</strong></div>
-        </div>
-      </article>
-
-      <article class="card suit-font">
-        <div class="visual suit">
-          <div class="mock-chart"><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="tax-pattern">
-            <svg viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
-              <rect x="34" y="36" width="210" height="118" rx="24" fill="rgba(23,104,255,.08)" />
-              <rect x="70" y="184" width="180" height="26" rx="13" fill="rgba(15,36,63,.14)" />
-              <rect x="70" y="226" width="250" height="26" rx="13" fill="rgba(15,36,63,.1)" />
-              <circle cx="470" cy="96" r="74" fill="rgba(19,166,107,.13)" />
-              <path d="M72 322 C190 254 306 348 448 246" fill="none" stroke="rgba(23,104,255,.58)" stroke-width="6" stroke-linecap="round" />
-            </svg>
-          </div>
-          <div class="visual-content">
-            <div class="visual-kicker"><span>Payroll</span><span>Reports</span></div>
-            <div>
-              <div class="visual-title">SERVICE THAT FEELS EASY</div>
-              <div class="visual-sub">Simple guidance for complex tax and accounting decisions.</div>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="category">Clean · Friendly</div>
-          <h2 class="font-name">수트<br>SUIT</h2>
-          <h3 class="sample-title">US TAX SERVICE</h3>
-          <p class="sample-body"></p>
-        </div>
-        <div class="card-foot">
-          <div class="byline">추천 관점 <b>깔끔함 / 접근성</b></div>
-          <div class="score-tag"><span>Fit</span><strong>91</strong></div>
-        </div>
-      </article>
-
-      <article class="card paperlogy-font">
-        <div class="visual paperlogy">
-          <div class="mock-person"></div>
-          <div class="tax-pattern">
-            <svg viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M40 80h160M40 122h112M40 164h148" stroke="rgba(255,255,255,.18)" stroke-width="12" stroke-linecap="round" />
-              <path d="M0 360 C140 230 260 400 400 220 S560 130 640 180" fill="none" stroke="#7ef1c1" stroke-width="4" />
-              <circle cx="96" cy="280" r="58" fill="rgba(126,241,193,.13)" />
-              <circle cx="486" cy="104" r="96" fill="rgba(255,255,255,.08)" />
-            </svg>
-          </div>
-          <div class="visual-content">
-            <div class="visual-kicker"><span>Business Tax</span><span>CPA-ready</span></div>
-            <div>
-              <div class="visual-title">TAX PLANNING WITH CLARITY</div>
-              <div class="visual-sub">A composed visual tone with a slightly editorial character.</div>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="category">Modern · Editorial</div>
-          <h2 class="font-name">페이퍼로지<br>Paperlogy</h2>
-          <h3 class="sample-title">US TAX SERVICE</h3>
-          <p class="sample-body"></p>
-        </div>
-        <div class="card-foot">
-          <div class="byline">추천 관점 <b>세련됨 / 차별화</b></div>
-          <div class="score-tag"><span>Fit</span><strong>89</strong></div>
-        </div>
-      </article>
-    </section>
-
-    <section class="note">
-      <div><strong>이미지 반영 방향</strong><br>실제 사진이 없어도 세무 문서, 리포트 그래프, 재무 인포그래픽, 상담 실루엣을 카드 상단에 넣어 서비스 분위기를 보여주도록 구성했습니다.</div>
-      <div><strong>추후 교체 가능</strong><br>찾아주시는 사진이나 일러스트가 있으면 각 카드의 <code>.visual</code> 영역만 이미지 배경으로 교체하면 됩니다. 현재는 홈페이지 첫 화면에서 폰트 인상과 서비스 무드를 동시에 비교하기 위한 시안입니다.</div>
-    </section>
+    <article class="card">
+      <div class="font-name">
+        <strong>System Serif</strong>
+        <span>Default</span>
+      </div>
+      <div class="sample system-serif"></div>
+    </article>
   </main>
 
   <script>
-    const sampleText = document.getElementById('sampleText');
-    const fontSize = document.getElementById('fontSize');
-    const fontSizeValue = document.getElementById('fontSizeValue');
-    const fontWeight = document.getElementById('fontWeight');
-    const letterSpacing = document.getElementById('letterSpacing');
-    const letterSpacingValue = document.getElementById('letterSpacingValue');
-    const sampleTitles = document.querySelectorAll('.sample-title');
-    const sampleBodies = document.querySelectorAll('.sample-body');
+    const sampleText = document.getElementById("sampleText");
+    const fontSize = document.getElementById("fontSize");
+    const fontWeight = document.getElementById("fontWeight");
+    const letterSpacing = document.getElementById("letterSpacing");
+    const samples = document.querySelectorAll(".sample");
 
-    function update() {
-      const text = sampleText.value.trim();
-      const firstLine = text.split('\n')[0] || 'US TAX SERVICE';
-      const rest = text.split('\n').slice(1).join('\n') || text;
-      sampleTitles.forEach(title => {
-        title.textContent = firstLine;
-        title.style.fontWeight = fontWeight.value;
-        title.style.letterSpacing = `${letterSpacing.value}px`;
+    function updateSamples() {
+      samples.forEach(sample => {
+        sample.textContent = sampleText.value;
+        sample.style.fontSize = `${fontSize.value}px`;
+        sample.style.fontWeight = fontWeight.value;
+        sample.style.letterSpacing = `${letterSpacing.value}px`;
       });
-      sampleBodies.forEach(body => {
-        body.textContent = rest;
-        body.style.fontSize = `${fontSize.value}px`;
-        body.style.fontWeight = fontWeight.value;
-        body.style.letterSpacing = `${letterSpacing.value}px`;
-      });
-      fontSizeValue.textContent = fontSize.value;
-      letterSpacingValue.textContent = letterSpacing.value;
     }
 
-    [sampleText, fontSize, fontWeight, letterSpacing].forEach(el => {
-      el.addEventListener('input', update);
-      el.addEventListener('change', update);
-    });
-    update();
+    sampleText.addEventListener("input", updateSamples);
+    fontSize.addEventListener("input", updateSamples);
+    fontWeight.addEventListener("change", updateSamples);
+    letterSpacing.addEventListener("input", updateSamples);
+
+    updateSamples();
   </script>
 </body>
 </html>
