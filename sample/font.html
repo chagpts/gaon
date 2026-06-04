@@ -3,18 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Font Market Compare</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;700;900&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+  <title>US TAX SERVICE Font Compare</title>
+
+  <!-- Web fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sun-typeface/suit/fonts/static/woff2/SUIT.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css" />
+
   <style>
+    @font-face {
+      font-family: "Gmarket Sans";
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff") format("woff");
+    }
+    @font-face {
+      font-family: "Gmarket Sans";
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+    }
+    @font-face {
+      font-family: "Gmarket Sans";
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff");
+    }
+
+    @font-face {
+      font-family: "S-Core Dream";
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff") format("woff");
+    }
+    @font-face {
+      font-family: "S-Core Dream";
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff") format("woff");
+    }
+    @font-face {
+      font-family: "S-Core Dream";
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff") format("woff");
+    }
+    @font-face {
+      font-family: "S-Core Dream";
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-7ExtraBold.woff") format("woff");
+    }
+
     :root {
-      --bg: #f4f4f3;
+      --bg: #ffffff;
       --text: #111114;
-      --muted: #66666c;
-      --line: #e3e3e0;
+      --muted: #6b6b72;
+      --line: #e8e8e8;
+      --soft: #f7f7f7;
       --card: #ffffff;
-      --accent: #ff7a00;
+      --accent: #111114;
       --radius: 14px;
     }
 
@@ -24,7 +79,7 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Pretendard, SUIT, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     .page {
@@ -45,7 +100,7 @@
       grid-template-columns: minmax(380px, 760px) minmax(320px, 560px);
       gap: 48px;
       align-items: end;
-      padding: 24px 0 96px;
+      padding: 24px 0 84px;
     }
 
     h1 {
@@ -58,7 +113,7 @@
     }
 
     .panel {
-      background: rgba(255,255,255,0.7);
+      background: #fff;
       border: 1px solid var(--line);
       border-radius: 22px;
       padding: 18px;
@@ -74,7 +129,7 @@
 
     textarea {
       width: 100%;
-      min-height: 118px;
+      min-height: 132px;
       resize: vertical;
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -137,7 +192,7 @@
 
     .market-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(260px, 1fr));
+      grid-template-columns: repeat(5, minmax(220px, 1fr));
       gap: 20px;
     }
 
@@ -145,22 +200,24 @@
       background: var(--card);
       border-radius: var(--radius);
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.04);
+      border: 1px solid var(--line);
       min-height: 560px;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.035);
     }
 
     .preview {
       height: 330px;
-      padding: 32px;
+      padding: 28px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
       overflow: hidden;
-      background: #111;
-      color: #fff;
+      background: #fff;
+      color: #111;
+      border-bottom: 1px solid var(--line);
     }
 
     .preview::before {
@@ -168,19 +225,27 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 24% 12%, rgba(255,255,255,.18), transparent 28%),
-        linear-gradient(135deg, rgba(255,255,255,.10), transparent 38%);
+        linear-gradient(90deg, rgba(0,0,0,.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(0,0,0,.035) 1px, transparent 1px);
+      background-size: 34px 34px;
       pointer-events: none;
     }
 
-    .preview.orange { background: #ff7a00; color: #151515; }
-    .preview.black { background: #111; color: #f7f7f7; }
-    .preview.light { background: #f7f7f4; color: #111; border-bottom: 4px solid #111; }
-    .preview.neon { background: #191919; color: #cfff16; }
-    .preview.blue { background: #dfeaff; color: #111; }
-    .preview.green { background: #14251d; color: #d9ffe5; }
-    .preview.cream { background: #f4ead7; color: #171717; }
-    .preview.gray { background: #e8e8e4; color: #111; }
+    .visual {
+      position: absolute;
+      right: 18px;
+      bottom: 20px;
+      width: 140px;
+      height: 118px;
+      opacity: .22;
+      pointer-events: none;
+    }
+
+    .visual svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
 
     .mini-nav {
       position: relative;
@@ -198,7 +263,7 @@
       border-radius: 999px;
       padding: 7px 12px;
       font-size: 11px;
-      background: rgba(255,255,255,.12);
+      background: #fff;
     }
 
     .sample-text {
@@ -206,11 +271,12 @@
       z-index: 1;
       margin: 0;
       max-width: 95%;
-      font-size: 48px;
-      line-height: .98;
+      font-size: 46px;
+      line-height: 1.02;
       letter-spacing: -0.06em;
-      font-weight: 900;
+      font-weight: 800;
       word-break: keep-all;
+      white-space: pre-wrap;
     }
 
     .meta {
@@ -234,6 +300,14 @@
       font-weight: 800;
     }
 
+    .desc {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+
     .divider {
       height: 1px;
       background: var(--line);
@@ -251,38 +325,35 @@
 
     .author strong { font-weight: 800; }
 
-    .price {
+    .score {
       text-align: right;
       white-space: nowrap;
       line-height: 1;
     }
 
-    .price small {
+    .score small {
       display: inline-block;
       margin-right: 6px;
       font-size: 12px;
       font-weight: 800;
     }
 
-    .price b {
+    .score b {
       font-size: 36px;
       letter-spacing: -0.06em;
     }
 
-    .price span {
+    .score span {
       font-size: 12px;
       margin-left: 3px;
       color: var(--muted);
     }
 
-    .noto-sans { font-family: "Noto Sans KR", sans-serif; }
-    .noto-serif { font-family: "Noto Serif KR", serif; }
-    .nanum-gothic { font-family: "Nanum Gothic", sans-serif; }
-    .nanum-myeongjo { font-family: "Nanum Myeongjo", serif; }
-    .gowun-dodum { font-family: "Gowun Dodum", sans-serif; }
-    .gowun-batang { font-family: "Gowun Batang", serif; }
-    .black-han { font-family: "Black Han Sans", sans-serif; }
-    .system { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .gmarket { font-family: "Gmarket Sans", Pretendard, sans-serif; }
+    .pretendard { font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif; }
+    .score-dream { font-family: "S-Core Dream", Pretendard, sans-serif; }
+    .suit { font-family: SUIT, Pretendard, sans-serif; }
+    .paperlogy { font-family: Paperlogy, Pretendard, sans-serif; }
 
     .add-font {
       margin-top: 22px;
@@ -292,6 +363,7 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
+      background: #fff;
     }
 
     code {
@@ -302,13 +374,13 @@
       color: #111;
     }
 
-    @media (max-width: 1320px) {
+    @media (max-width: 1500px) {
       .market-grid { grid-template-columns: repeat(3, minmax(260px, 1fr)); }
-      .hero { grid-template-columns: 1fr; padding-bottom: 64px; }
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 1020px) {
       .page { padding-inline: 20px; }
+      .hero { grid-template-columns: 1fr; padding-bottom: 64px; }
       .market-grid { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
       .control-grid { grid-template-columns: 1fr; }
       .preview { height: 280px; }
@@ -324,28 +396,31 @@
 </head>
 <body>
   <div class="page">
-    <p class="eyebrow">Font Market</p>
+    <p class="eyebrow">US TAX SERVICE</p>
 
     <section class="hero">
-      <h1>Compare fonts for digital & physical products</h1>
+      <h1>Compare fonts for accounting & tax service</h1>
 
       <div class="panel">
         <p class="panel-title">Live font tester</p>
-        <textarea id="sampleInput">브랜드의 첫인상을 결정하는 것은 작은 디테일입니다.
-A curated marketplace for digital & physical products</textarea>
+        <textarea id="sampleInput">미국 세무와 회계를 더 정확하고 쉽게 안내합니다.
+US TAX SERVICE helps individuals and businesses file with confidence.
+1040 · 1120 · Payroll · Bookkeeping</textarea>
 
         <div class="control-grid">
           <div>
-            <label for="fontSize">Size <span id="sizeValue">48</span>px</label>
-            <input id="fontSize" type="range" min="24" max="92" value="48">
+            <label for="fontSize">Size <span id="sizeValue">46</span>px</label>
+            <input id="fontSize" type="range" min="24" max="92" value="46">
           </div>
           <div>
             <label for="fontWeight">Weight</label>
             <select id="fontWeight">
+              <option value="300">Light 300</option>
               <option value="400">Regular 400</option>
               <option value="500">Medium 500</option>
               <option value="700">Bold 700</option>
-              <option value="900" selected>Black 900</option>
+              <option value="800" selected>ExtraBold 800</option>
+              <option value="900">Black 900</option>
             </select>
           </div>
           <div>
@@ -357,55 +432,59 @@ A curated marketplace for digital & physical products</textarea>
     </section>
 
     <div class="toolbar">
-      <h2>Typeface cards</h2>
-      <span>각 카드 상단의 큰 문장이 실시간으로 바뀝니다.</span>
+      <h2>Primary font candidates</h2>
+      <span>요청하신 5개 폰트를 최상단 카드로 배치했습니다.</span>
     </div>
 
     <main class="market-grid" id="fontGrid">
-      <article class="font-card" data-font="noto-sans">
-        <div class="preview orange"><div class="mini-nav"><span>FontFlow</span><span class="chip">Preview</span></div><p class="sample-text noto-sans"></p></div>
-        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title">Noto Sans KR — Clean Product UI Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      <article class="font-card" data-font="gmarket">
+        <div class="preview">
+          <div class="mini-nav"><span>US TAX</span><span class="chip">Gmarket Sans</span></div>
+          <p class="sample-text gmarket"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><rect x="14" y="20" width="96" height="82" rx="10" stroke="currentColor" stroke-width="7"/><path d="M34 48h56M34 66h38M34 84h52" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M110 80l18 18 28-46" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Rounded Business Sans</p><h3 class="font-title gmarket">Gmarket Sans</h3><p class="desc">부드럽고 친근한 인상. 세무 서비스를 어렵지 않게 보이게 만들 때 적합합니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Approachable</strong></span><span class="score"><small>rank</small><b>01</b></span></div></div>
       </article>
 
-      <article class="font-card" data-font="black-han">
-        <div class="preview black"><div class="mini-nav"><span>BoldType</span><span class="chip">Impact</span></div><p class="sample-text black-han"></p></div>
-        <div class="meta"><p class="type">Display Font</p><h3 class="font-title">Black Han Sans — Strong Headline Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      <article class="font-card" data-font="pretendard">
+        <div class="preview">
+          <div class="mini-nav"><span>US TAX</span><span class="chip">Pretendard</span></div>
+          <p class="sample-text pretendard"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><path d="M18 104h124" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><rect x="30" y="62" width="18" height="42" rx="4" fill="currentColor"/><rect x="64" y="38" width="18" height="66" rx="4" fill="currentColor"/><rect x="98" y="20" width="18" height="84" rx="4" fill="currentColor"/><path d="M24 48l30-18 28 10 38-26" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Clean Corporate Sans</p><h3 class="font-title pretendard">프리텐다드</h3><p class="desc">가독성, 균형감, 한영 혼용 안정성이 좋아 회계·세무 회사 홈페이지에 가장 무난합니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Trust</strong></span><span class="score"><small>rank</small><b>02</b></span></div></div>
       </article>
 
-      <article class="font-card" data-font="noto-serif">
-        <div class="preview light"><div class="mini-nav"><span>Serif Lab</span><span class="chip">Classic</span></div><p class="sample-text noto-serif"></p></div>
-        <div class="meta"><p class="type">Korean Serif</p><h3 class="font-title">Noto Serif KR — Editorial Serif Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      <article class="font-card" data-font="score-dream">
+        <div class="preview">
+          <div class="mini-nav"><span>US TAX</span><span class="chip">S-Core Dream</span></div>
+          <p class="sample-text score-dream"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><circle cx="56" cy="62" r="36" stroke="currentColor" stroke-width="8"/><path d="M56 26v36h36" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M108 38h28M108 62h28M108 86h20" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Structured Sans</p><h3 class="font-title score-dream">에스코어드림</h3><p class="desc">반듯하고 단단한 인상. 전문성, 정확성, 제도권 서비스 느낌을 강조할 때 좋습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Professional</strong></span><span class="score"><small>rank</small><b>03</b></span></div></div>
       </article>
 
-      <article class="font-card" data-font="nanum-gothic">
-        <div class="preview neon"><div class="mini-nav"><span>Market TJ</span><span class="chip">Modern</span></div><p class="sample-text nanum-gothic"></p></div>
-        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title">Nanum Gothic — Reliable Web Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Naver</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      <article class="font-card" data-font="suit">
+        <div class="preview">
+          <div class="mini-nav"><span>US TAX</span><span class="chip">SUIT</span></div>
+          <p class="sample-text suit"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><rect x="20" y="28" width="120" height="76" rx="14" stroke="currentColor" stroke-width="8"/><path d="M44 52h72M44 72h46" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><circle cx="114" cy="76" r="15" stroke="currentColor" stroke-width="7"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Modern UI Sans</p><h3 class="font-title suit">수트</h3><p class="desc">현대적이고 깔끔한 UI 인상. 예약, 상담, 고객 포털 화면과 잘 어울립니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Digital</strong></span><span class="score"><small>rank</small><b>04</b></span></div></div>
       </article>
 
-      <article class="font-card" data-font="nanum-myeongjo">
-        <div class="preview cream"><div class="mini-nav"><span>Archive</span><span class="chip">Serif</span></div><p class="sample-text nanum-myeongjo"></p></div>
-        <div class="meta"><p class="type">Korean Serif</p><h3 class="font-title">Nanum Myeongjo — Warm Reading Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Naver</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
-      </article>
-
-      <article class="font-card" data-font="gowun-dodum">
-        <div class="preview blue"><div class="mini-nav"><span>Studio</span><span class="chip">Soft</span></div><p class="sample-text gowun-dodum"></p></div>
-        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title">Gowun Dodum — Soft Minimal Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
-      </article>
-
-      <article class="font-card" data-font="gowun-batang">
-        <div class="preview green"><div class="mini-nav"><span>Bookshop</span><span class="chip">Book</span></div><p class="sample-text gowun-batang"></p></div>
-        <div class="meta"><p class="type">Korean Serif</p><h3 class="font-title">Gowun Batang — Elegant Text Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
-      </article>
-
-      <article class="font-card" data-font="system">
-        <div class="preview gray"><div class="mini-nav"><span>System</span><span class="chip">Default</span></div><p class="sample-text system"></p></div>
-        <div class="meta"><p class="type">System UI</p><h3 class="font-title">System Font — Native Interface Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Browser</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      <article class="font-card" data-font="paperlogy">
+        <div class="preview">
+          <div class="mini-nav"><span>US TAX</span><span class="chip">Paperlogy</span></div>
+          <p class="sample-text paperlogy"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><path d="M34 18h66l28 28v64H34V18z" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/><path d="M98 20v30h30" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/><path d="M52 68h56M52 88h42" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Editorial Sans</p><h3 class="font-title paperlogy">페이퍼로지</h3><p class="desc">개성이 있으면서 정돈된 인상. 소개 섹션이나 브랜드 카피에 포인트로 활용하기 좋습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Distinctive</strong></span><span class="score"><small>rank</small><b>05</b></span></div></div>
       </article>
     </main>
 
     <div class="add-font">
-      로컬 폰트를 추가하려면 CSS에 <code>@font-face</code>를 추가하고, 카드의 <code>font-family</code>만 바꾸면 됩니다.
-      예: <code>@font-face { font-family: "MyFont"; src: url("./fonts/MyFont.woff2") format("woff2"); }</code>
+      모든 배경은 화이트 톤으로 정리했습니다. 실제 홈페이지 시안에 적용할 때는 <code>h1</code>, 카드 제목, 본문, 숫자 영역을 함께 보면서 한영 혼용과 숫자 가독성을 비교해보세요.
     </div>
   </div>
 
@@ -419,7 +498,7 @@ A curated marketplace for digital & physical products</textarea>
     const samples = document.querySelectorAll('.sample-text');
 
     function update() {
-      const text = sampleInput.value.trim() || 'Type something to compare fonts';
+      const text = sampleInput.value.trim() || 'US TAX SERVICE';
       samples.forEach(sample => {
         sample.textContent = text;
         sample.style.fontSize = fontSize.value + 'px';
