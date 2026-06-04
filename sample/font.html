@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>US TAX SERVICE Font Compare</title>
+  <title>US TAX SERVICE Font Comparison Site</title>
 
-  <!-- 비교용 웹폰트 -->
+  <!-- Web fonts -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sun-typeface/suit/fonts/static/woff2/SUIT.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 
   <style>
     @font-face {
@@ -35,7 +35,6 @@
       font-display: swap;
       src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff") format("woff");
     }
-
     @font-face {
       font-family: "S-Core Dream";
       font-weight: 300;
@@ -66,466 +65,939 @@
     }
 
     :root {
-      --bg: #ffffff;
-      --card: #ffffff;
-      --text: #111114;
-      --muted: #66666c;
-      --line: #e7e7e7;
-      --soft: #f8f8f8;
-      --soft-2: #f1f1f1;
-      --radius: 16px;
+      --font-current: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: #f6f4ef;
+      --paper: #ffffff;
+      --ink: #171717;
+      --muted: #6f6b63;
+      --line: rgba(23, 23, 23, 0.12);
+      --soft: #ebe6dc;
+      --accent: #1f3d2b;
+      --accent-2: #c7974b;
+      --radius: 28px;
+      --shadow: 0 24px 70px rgba(35, 31, 24, 0.1);
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       background: var(--bg);
-      color: var(--text);
-      font-family: Pretendard, SUIT, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    .page {
-      width: min(100%, 1680px);
-      margin: 0 auto;
-      padding: 0 44px 72px;
-    }
-
-    .eyebrow {
-      margin: 0;
-      padding-top: 18px;
-      font-size: 14px;
-      font-weight: 700;
+      color: var(--ink);
+      font-family: var(--font-current);
       letter-spacing: -0.02em;
+    }
+
+    button,
+    input,
+    textarea,
+    select { font: inherit; }
+
+    button { cursor: pointer; }
+
+    .app-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+    }
+
+    .control-panel {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px;
+      background: #111111;
+      color: #fff;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+
+    .control-panel h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+    }
+
+    .control-panel .sub {
+      margin: 12px 0 22px;
+      color: rgba(255,255,255,.64);
+      font-size: 14px;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+
+    .control-block {
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      background: rgba(255,255,255,.055);
+      margin-bottom: 14px;
+    }
+
+    .control-block-title {
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,.72);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .font-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .font-option {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      color: #fff;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      text-align: left;
+      transition: .18s ease;
+    }
+
+    .font-option:hover,
+    .font-option.active {
+      background: #fff;
+      color: #111;
+      transform: translateY(-1px);
+    }
+
+    .font-number {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    .font-option.active .font-number,
+    .font-option:hover .font-number {
+      background: #111;
+      color: #fff;
+    }
+
+    .font-name {
+      display: block;
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+    }
+
+    .font-desc {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      color: currentColor;
+      opacity: .62;
+      line-height: 1.35;
+    }
+
+    .font-tag {
+      font-size: 11px;
+      font-weight: 900;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 5px 8px;
+      opacity: .72;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,.7);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    textarea,
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(0,0,0,.2);
+      color: #fff;
+      padding: 12px 13px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 106px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    input[type="range"] { width: 100%; }
+
+    .reset-button {
+      width: 100%;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 16px;
+      background: #fff;
+      color: #111;
+      font-weight: 900;
+    }
+
+    .site-preview {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .preview-frame {
+      max-width: 1240px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 22px 34px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.78);
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 950;
+      letter-spacing: -0.05em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: -0.04em;
+    }
+
+    .nav {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .header-action {
+      border: 1px solid var(--line);
+      background: var(--ink);
+      color: #fff;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 900;
+      font-size: 14px;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(360px, 760px) minmax(320px, 560px);
-      gap: 48px;
-      align-items: end;
-      padding: 32px 0 70px;
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, .88fr);
+      gap: 46px;
+      align-items: center;
+      padding: 72px 54px 62px;
+      background:
+        radial-gradient(circle at top right, rgba(199,151,75,.18), transparent 34%),
+        linear-gradient(180deg, #fff, #fbfaf7);
     }
 
-    h1 {
-      margin: 0;
-      max-width: 780px;
-      font-size: clamp(46px, 5.2vw, 92px);
-      line-height: 1.04;
-      letter-spacing: -0.075em;
-      font-weight: 800;
-    }
-
-    .panel {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 18px;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.045);
-    }
-
-    .panel-title {
-      margin: 0 0 12px;
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 800;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 132px;
-      resize: vertical;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-      line-height: 1.55;
-      outline: none;
-    }
-
-    textarea:focus,
-    input:focus,
-    select:focus {
-      border-color: #111;
-    }
-
-    .control-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    label {
-      display: block;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 800;
-      margin-bottom: 7px;
-    }
-
-    input,
-    select {
-      width: 100%;
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 8px 12px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: #fff;
-      padding: 11px 12px;
-      font: inherit;
-      outline: none;
-    }
-
-    input[type="range"] {
-      padding: 0;
-      height: 42px;
-    }
-
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .toolbar h2 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: -0.04em;
-    }
-
-    .toolbar span {
-      color: var(--muted);
+      color: var(--accent);
       font-size: 13px;
+      font-weight: 900;
+      background: rgba(31,61,43,.06);
     }
 
-    .market-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(260px, 1fr));
-      gap: 20px;
+    .hero-title {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(44px, 6vw, 82px);
+      line-height: .98;
+      letter-spacing: var(--title-spacing, -0.074em);
+      font-weight: var(--title-weight, 850);
+      word-break: keep-all;
     }
 
-    .font-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      min-height: 560px;
+    .hero-copy {
+      margin: 24px 0 0;
+      max-width: 590px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.75;
+      letter-spacing: var(--body-spacing, -0.02em);
+      word-break: keep-all;
+    }
+
+    .hero-actions {
       display: flex;
-      flex-direction: column;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.035);
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
     }
 
-    .preview {
-      height: 330px;
-      padding: 28px;
+    .primary-btn,
+    .secondary-btn {
+      border-radius: 999px;
+      padding: 15px 21px;
+      font-weight: 950;
+      border: 1px solid var(--ink);
+      font-size: 15px;
+    }
+
+    .primary-btn {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .secondary-btn {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .tax-card {
+      border-radius: 28px;
+      background: #17251d;
+      color: #fff;
+      padding: 26px;
+      box-shadow: 0 30px 60px rgba(23,37,29,.18);
+      min-height: 430px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
       overflow: hidden;
-      background: #fff;
-      color: #111;
-      border-bottom: 1px solid var(--line);
+      position: relative;
     }
 
-    .preview::before {
+    .tax-card::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.035) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(0,0,0,.035) 1px, transparent 1px);
-      background-size: 34px 34px;
-      pointer-events: none;
+      inset: auto -90px -120px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(199,151,75,.45);
     }
 
-    .visual {
-      position: absolute;
-      right: 18px;
-      bottom: 18px;
-      width: 156px;
-      height: 126px;
-      opacity: .18;
-      pointer-events: none;
+    .tax-card-top,
+    .tax-card-bottom { position: relative; z-index: 1; }
+
+    .tax-card-label {
+      margin: 0;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      font-weight: 850;
     }
 
-    .visual svg {
-      width: 100%;
-      height: 100%;
+    .tax-card h3 {
+      margin: 18px 0 0;
+      max-width: 340px;
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: var(--title-spacing, -0.055em);
+      word-break: keep-all;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .metric {
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .metric strong {
       display: block;
+      font-size: 30px;
+      letter-spacing: -0.055em;
     }
 
-    .mini-nav {
-      position: relative;
-      z-index: 1;
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255,255,255,.64);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .tax-card-bottom {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      opacity: .9;
-      font-weight: 800;
-    }
-
-    .chip {
-      border: 1px solid currentColor;
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 11px;
-      background: #fff;
-    }
-
-    .sample-text {
-      position: relative;
-      z-index: 1;
-      margin: 0;
-      max-width: 96%;
-      font-size: 44px;
-      line-height: 1.06;
-      letter-spacing: -0.055em;
-      font-weight: 700;
-      word-break: keep-all;
-      white-space: pre-wrap;
-    }
-
-    .meta {
-      padding: 28px 28px 26px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .type {
-      margin: 0 0 9px;
-      color: #44444a;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .font-title {
-      margin: 0;
-      font-size: 23px;
-      line-height: 1.16;
-      letter-spacing: -0.055em;
-      font-weight: 800;
-    }
-
-    .desc {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.55;
-      word-break: keep-all;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--line);
-      margin: auto -28px 0;
-    }
-
-    .footer {
+      gap: 18px;
+      align-items: end;
+      border-top: 1px solid rgba(255,255,255,.15);
       padding-top: 20px;
+      margin-top: 40px;
+    }
+
+    .tax-card-bottom p {
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .signature {
+      font-size: 34px;
+      font-weight: 950;
+      color: var(--accent-2);
+      letter-spacing: -0.07em;
+    }
+
+    .section {
+      padding: 62px 54px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
       display: flex;
       justify-content: space-between;
       align-items: end;
-      gap: 18px;
-      font-size: 14px;
+      gap: 28px;
+      margin-bottom: 26px;
     }
 
-    .author strong { font-weight: 800; }
-
-    .score {
-      text-align: right;
-      white-space: nowrap;
-      line-height: 1;
-    }
-
-    .score small {
-      display: inline-block;
-      margin-right: 6px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .score b {
-      font-size: 36px;
-      letter-spacing: -0.06em;
-    }
-
-    .score span {
-      font-size: 12px;
-      margin-left: 3px;
-      color: var(--muted);
-    }
-
-    .gmarket { font-family: "Gmarket Sans", Pretendard, sans-serif; }
-    .pretendard { font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif; }
-    .score-dream { font-family: "S-Core Dream", Pretendard, sans-serif; }
-    .suit { font-family: SUIT, Pretendard, sans-serif; }
-    .paperlogy { font-family: Paperlogy, Pretendard, sans-serif; }
-    .noto-sans { font-family: "Noto Sans KR", Pretendard, sans-serif; }
-
-    .note {
-      margin-top: 22px;
-      padding: 18px;
-      border: 1px dashed #bdbdb8;
-      border-radius: 18px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-      background: #fff;
+    .section-heading h2 {
+      margin: 0;
+      max-width: 620px;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.05;
+      letter-spacing: var(--title-spacing, -0.065em);
       word-break: keep-all;
     }
 
-    @media (max-width: 1180px) {
-      .market-grid { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
-      .hero { grid-template-columns: 1fr; padding-bottom: 56px; }
+    .section-heading p {
+      margin: 0;
+      max-width: 390px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+      word-break: keep-all;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      min-height: 230px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      background: #fff;
+    }
+
+    .service-card b {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 15px;
+    }
+
+    .service-card h3 {
+      margin: 28px 0 10px;
+      font-size: 25px;
+      line-height: 1.15;
+      letter-spacing: var(--title-spacing, -0.05em);
+      word-break: keep-all;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+      word-break: keep-all;
+    }
+
+    .compare-section {
+      padding: 0 54px 62px;
+    }
+
+    .compare-box {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 24px;
+      border-radius: 30px;
+      padding: 28px;
+      background: #111;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .compare-box h2 {
+      margin: 0;
+      font-size: 38px;
+      line-height: 1.08;
+      letter-spacing: var(--title-spacing, -0.06em);
+      word-break: keep-all;
+    }
+
+    .compare-box p {
+      margin: 16px 0 0;
+      color: rgba(255,255,255,.64);
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    .font-spec-table {
+      display: grid;
+      gap: 10px;
+    }
+
+    .spec-row {
+      display: grid;
+      grid-template-columns: 108px 1fr;
+      gap: 18px;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .spec-row span {
+      color: rgba(255,255,255,.5);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .spec-row strong {
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .cta {
+      margin: 0 54px 54px;
+      border-radius: 32px;
+      padding: 46px;
+      background: var(--soft);
+      text-align: center;
+    }
+
+    .cta h2 {
+      margin: 0 auto;
+      max-width: 780px;
+      font-size: clamp(34px, 4.6vw, 62px);
+      line-height: 1.04;
+      letter-spacing: var(--title-spacing, -0.07em);
+      word-break: keep-all;
+    }
+
+    .cta p {
+      margin: 18px auto 0;
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 17px;
+      word-break: keep-all;
+    }
+
+    .mobile-font-bar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 10px;
+      background: #111;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .mobile-font-bar select {
+      border-radius: 999px;
+    }
+
+    @media (max-width: 1080px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .control-panel {
+        position: relative;
+        height: auto;
+        border-right: 0;
+      }
+      .font-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { grid-template-columns: 1fr; }
+      .service-grid { grid-template-columns: 1fr; }
+      .compare-box { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
-      .page { padding-inline: 20px; }
-      .market-grid { grid-template-columns: 1fr; }
-      .control-grid { grid-template-columns: 1fr; }
-      .preview { height: 290px; }
-      .sample-text { font-size: 38px; }
-      h1 { font-size: 42px; }
-      .toolbar { align-items: flex-start; flex-direction: column; }
+      .control-panel { display: none; }
+      .mobile-font-bar { display: block; }
+      .site-preview { padding: 12px; }
+      .preview-frame { border-radius: 24px; }
+      .site-header { padding: 18px; }
+      .nav, .header-action { display: none; }
+      .hero, .section { padding: 42px 22px; }
+      .hero-title { font-size: 42px; }
+      .hero-copy { font-size: 16px; }
+      .tax-card { min-height: 360px; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 14px; }
+      .compare-section { padding: 0 22px 42px; }
+      .compare-box { padding: 22px; border-radius: 24px; }
+      .spec-row { grid-template-columns: 1fr; gap: 6px; }
+      .cta { margin: 0 22px 28px; padding: 34px 22px; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <p class="eyebrow">US TAX SERVICE</p>
+  <div class="mobile-font-bar">
+    <select id="mobileFontSelect" aria-label="폰트 선택"></select>
+  </div>
 
-    <section class="hero">
-      <h1>Compare fonts for accounting & tax service</h1>
+  <div class="app-shell">
+    <aside class="control-panel" aria-label="폰트 비교 컨트롤">
+      <h1>US TAX SERVICE<br />Font Lab</h1>
+      <p class="sub">왼쪽에서 폰트를 고르면 오른쪽 실제 웹사이트 미리보기에 바로 적용됩니다. 제목, 본문, 카드, 버튼까지 한 번에 확인하세요.</p>
 
-      <div class="panel">
-        <p class="panel-title">Live font tester</p>
-        <textarea id="sampleInput">미국 세무와 회계를 더 정확하고 쉽게 안내합니다.
-US TAX SERVICE </textarea>
+      <div class="control-block">
+        <p class="control-block-title">01. Font</p>
+        <div class="font-list" id="fontList"></div>
+      </div>
 
-        <div class="control-grid">
-          <div>
-            <label for="fontSize">Size <span id="sizeValue">44</span>px</label>
-            <input id="fontSize" type="range" min="24" max="92" value="44">
-          </div>
-          <div>
-            <label for="fontWeight">Weight</label>
-            <select id="fontWeight">
-              <option value="300">Light 300</option>
-              <option value="400">Regular 400</option>
-              <option value="500">Medium 500</option>
-              <option value="700" selected>Bold 700</option>
-              <option value="900">Black 900</option>
-            </select>
-          </div>
-          <div>
-            <label for="letterSpacing">Spacing <span id="spacingValue">-0.05</span>em</label>
-            <input id="letterSpacing" type="range" min="-0.12" max="0.08" step="0.01" value="-0.05">
-          </div>
+      <div class="control-block">
+        <p class="control-block-title">02. Copy</p>
+        <div class="field">
+          <label for="heroTitle">메인 제목</label>
+          <textarea id="heroTitle">미국 세무와 회계를 더 정확하고 쉽게 안내합니다.</textarea>
+        </div>
+        <div class="field">
+          <label for="heroBody">본문 문구</label>
+          <textarea id="heroBody">개인 세금보고, 법인 회계, IRS 레터 대응까지 미국 생활과 비즈니스에 필요한 세무 서비스를 한곳에서 제공합니다.</textarea>
         </div>
       </div>
-    </section>
 
-    <div class="toolbar">
-      <h2>Font candidates</h2>
-      <span>입력한 문구가 6개 폰트 카드에 동시에 반영됩니다.</span>
-    </div>
-
-    <main class="market-grid" id="fontGrid">
-      <article class="font-card">
-        <div class="preview">
-          <div class="mini-nav"><span>01 · Gmarket Sans</span><span class="chip">Clean</span></div>
-          <p class="sample-text gmarket"></p>
-          <div class="visual" aria-hidden="true"><svg viewBox="0 0 180 140" fill="none"><rect x="18" y="12" width="104" height="116" rx="10" stroke="currentColor" stroke-width="5"/><path d="M40 42H100M40 62H100M40 82H82" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M125 104l12 12 28-36" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="control-block">
+        <p class="control-block-title">03. Type Control</p>
+        <div class="field">
+          <label for="titleWeight">제목 굵기 <span id="titleWeightValue">850</span></label>
+          <input id="titleWeight" type="range" min="400" max="900" step="50" value="850" />
         </div>
-        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title gmarket">Gmarket Sans</h3><p class="desc">둥글고 친근한 인상이 있어 상담형 서비스에 부드럽게 보입니다. 제목은 좋지만 본문은 약간 캐주얼할 수 있습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Headline</strong></span><span class="score"><small>ref</small><b>01</b></span></div></div>
-      </article>
-
-      <article class="font-card">
-        <div class="preview">
-          <div class="mini-nav"><span>02 · Pretendard</span><span class="chip">Modern</span></div>
-          <p class="sample-text pretendard"></p>
-          <div class="visual" aria-hidden="true"><svg viewBox="0 0 180 140" fill="none"><rect x="15" y="75" width="24" height="50" rx="5" stroke="currentColor" stroke-width="5"/><rect x="55" y="50" width="24" height="75" rx="5" stroke="currentColor" stroke-width="5"/><rect x="95" y="25" width="24" height="100" rx="5" stroke="currentColor" stroke-width="5"/><path d="M136 32h25M136 52h18M136 72h25" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></div>
+        <div class="field">
+          <label for="titleSpacing">제목 자간 <span id="titleSpacingValue">-0.07em</span></label>
+          <input id="titleSpacing" type="range" min="-0.12" max="0.02" step="0.01" value="-0.07" />
         </div>
-        <div class="meta"><p class="type">Korean UI Sans</p><h3 class="font-title pretendard">프리텐다드 Pretendard</h3><p class="desc">가장 안정적인 웹사이트용 후보입니다. 한글, 영문, 숫자가 균형 있게 보여 세무·회계 서비스에 잘 맞습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Website</strong></span><span class="score"><small>ref</small><b>02</b></span></div></div>
-      </article>
-
-      <article class="font-card">
-        <div class="preview">
-          <div class="mini-nav"><span>03 · S-Core Dream</span><span class="chip">Trust</span></div>
-          <p class="sample-text score-dream"></p>
-          <div class="visual" aria-hidden="true"><svg viewBox="0 0 180 140" fill="none"><path d="M90 14l64 24v38c0 32-21 50-64 61-43-11-64-29-64-61V38l64-24z" stroke="currentColor" stroke-width="5"/><path d="M61 74l20 20 42-48" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="field">
+          <label for="bodySpacing">본문 자간 <span id="bodySpacingValue">-0.02em</span></label>
+          <input id="bodySpacing" type="range" min="-0.06" max="0.04" step="0.01" value="-0.02" />
         </div>
-        <div class="meta"><p class="type">Korean Corporate Sans</p><h3 class="font-title score-dream">에스코어드림 S-Core Dream</h3><p class="desc">각이 있고 단단해서 전문성과 신뢰감이 강합니다. 타이틀과 핵심 메시지에서 힘 있게 보입니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Trust</strong></span><span class="score"><small>ref</small><b>03</b></span></div></div>
-      </article>
+      </div>
 
-      <article class="font-card">
-        <div class="preview">
-          <div class="mini-nav"><span>04 · SUIT</span><span class="chip">UI</span></div>
-          <p class="sample-text suit"></p>
-          <div class="visual" aria-hidden="true"><svg viewBox="0 0 180 140" fill="none"><rect x="20" y="20" width="140" height="100" rx="16" stroke="currentColor" stroke-width="5"/><path d="M42 50h42M42 72h78M42 94h55" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><circle cx="132" cy="52" r="10" stroke="currentColor" stroke-width="5"/></svg></div>
-        </div>
-        <div class="meta"><p class="type">Korean UI Sans</p><h3 class="font-title suit">수트 SUIT</h3><p class="desc">깔끔하고 중립적인 인상입니다. 본문, 버튼, 메뉴처럼 실제 서비스 UI에 적용하기 좋은 후보입니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>UI Text</strong></span><span class="score"><small>ref</small><b>04</b></span></div></div>
-      </article>
+      <button class="reset-button" id="resetButton">기본값으로 되돌리기</button>
+    </aside>
 
-      <article class="font-card">
-        <div class="preview">
-          <div class="mini-nav"><span>05 · Paperlogy</span><span class="chip">Editorial</span></div>
-          <p class="sample-text paperlogy"></p>
-          <div class="visual" aria-hidden="true"><svg viewBox="0 0 180 140" fill="none"><rect x="28" y="18" width="92" height="112" rx="8" stroke="currentColor" stroke-width="5"/><path d="M48 48h52M48 68h52M48 88h34" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M120 38h24a8 8 0 018 8v72" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></div>
-        </div>
-        <div class="meta"><p class="type">Korean Modern Sans</p><h3 class="font-title paperlogy">페이퍼로지 Paperlogy</h3><p class="desc">브랜드 감도가 있고 세련된 느낌입니다. 소개 섹션이나 캠페인형 페이지에서 차별화된 인상을 줄 수 있습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Brand</strong></span><span class="score"><small>ref</small><b>05</b></span></div></div>
-      </article>
+    <main class="site-preview">
+      <div class="preview-frame">
+        <header class="site-header">
+          <div class="brand"><span class="brand-mark">US</span><span>US TAX SERVICE</span></div>
+          <nav class="nav" aria-label="서비스 메뉴">
+            <span>Tax Filing</span>
+            <span>Bookkeeping</span>
+            <span>IRS Letter</span>
+          </nav>
+          <button class="header-action">상담 예약</button>
+        </header>
 
-      <article class="font-card">
-        <div class="preview">
-          <div class="mini-nav"><span>06 · Noto Sans KR</span><span class="chip">Default</span></div>
-          <p class="sample-text noto-sans"></p>
-          <div class="visual" aria-hidden="true"><svg viewBox="0 0 180 140" fill="none"><path d="M28 30h124M28 58h124M28 86h80M28 114h104" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><circle cx="138" cy="88" r="18" stroke="currentColor" stroke-width="5"/><path d="M151 101l16 16" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg></div>
-        </div>
-        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title noto-sans">Noto Sans KR</h3><p class="desc">가독성이 좋고 안정적인 기본 후보입니다. 개성은 적지만 다양한 환경에서 깨질 가능성이 낮습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Default</strong></span><span class="score"><small>ref</small><b>06</b></span></div></div>
-      </article>
+        <section class="hero">
+          <div>
+            <p class="kicker">미국 세무 · 회계 전문 서비스</p>
+            <h2 class="hero-title" id="previewHeroTitle">미국 세무와 회계를 더 정확하고 쉽게 안내합니다.</h2>
+            <p class="hero-copy" id="previewHeroBody">개인 세금보고, 법인 회계, IRS 레터 대응까지 미국 생활과 비즈니스에 필요한 세무 서비스를 한곳에서 제공합니다.</p>
+            <div class="hero-actions">
+              <button class="primary-btn">무료 상담 시작하기</button>
+              <button class="secondary-btn">서비스 보기</button>
+            </div>
+          </div>
+
+          <aside class="tax-card">
+            <div class="tax-card-top">
+              <p class="tax-card-label">2026 TAX SEASON READY</p>
+              <h3>복잡한 세금 문제도 이해하기 쉽게 정리해드립니다.</h3>
+              <div class="metric-grid">
+                <div class="metric"><strong>1040</strong><span>개인 세금보고</span></div>
+                <div class="metric"><strong>1120</strong><span>법인 세금보고</span></div>
+              </div>
+            </div>
+            <div class="tax-card-bottom">
+              <p>Deadline, deduction, IRS notice까지 꼼꼼하게 확인합니다.</p>
+              <span class="signature">Tax</span>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <h2>폰트가 바뀌면 서비스의 신뢰감도 달라집니다.</h2>
+            <p>실제 사이트 구성 안에서 제목, 본문, 숫자, 버튼, 카드의 인상을 함께 비교해보세요.</p>
+          </div>
+
+          <div class="service-grid">
+            <article class="service-card">
+              <b>01</b>
+              <h3>개인 세금보고</h3>
+              <p>W-2, 1099, 주식, 임대소득 등 개인 상황에 맞는 세금보고를 도와드립니다.</p>
+            </article>
+            <article class="service-card">
+              <b>02</b>
+              <h3>비즈니스 회계</h3>
+              <p>월별 장부정리, 급여, 매출·비용 관리까지 사업 운영에 필요한 숫자를 정리합니다.</p>
+            </article>
+            <article class="service-card">
+              <b>03</b>
+              <h3>IRS 레터 대응</h3>
+              <p>IRS에서 받은 안내문을 분석하고 필요한 서류와 답변 방향을 준비합니다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="compare-section">
+          <div class="compare-box">
+            <div>
+              <h2 id="currentFontTitle">Pretendard</h2>
+              <p id="currentFontComment">웹사이트 본문과 UI에 가장 안정적인 후보입니다.</p>
+            </div>
+            <div class="font-spec-table">
+              <div class="spec-row"><span>한글 인상</span><strong id="specKorean">균형 있고 현대적입니다.</strong></div>
+              <div class="spec-row"><span>영문/숫자</span><strong id="specEnglish">영문과 숫자가 깔끔해서 회계 서비스에 잘 맞습니다.</strong></div>
+              <div class="spec-row"><span>추천 용도</span><strong id="specUse">전체 웹사이트, 본문, 메뉴, 버튼</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta">
+          <h2>세무 서비스는 믿음이 먼저 보이는 디자인이 중요합니다.</h2>
+          <p>폰트를 바꿔보면서 가장 전문적이고 편안하게 느껴지는 조합을 선택해보세요.</p>
+        </section>
+      </div>
     </main>
-
-    <div class="note">
-      이전 파일은 카드가 들어갈 영역이 비어 있어서 실제 비교 문구가 표시되지 않았습니다. 이 버전은 6개 카드가 HTML에 직접 들어가 있고, 입력창·크기·굵기·자간 조절이 모두 연결되어 있습니다.
-    </div>
   </div>
 
   <script>
-    const sampleInput = document.querySelector('#sampleInput');
-    const fontSize = document.querySelector('#fontSize');
-    const fontWeight = document.querySelector('#fontWeight');
-    const letterSpacing = document.querySelector('#letterSpacing');
-    const sizeValue = document.querySelector('#sizeValue');
-    const spacingValue = document.querySelector('#spacingValue');
-    const samples = document.querySelectorAll('.sample-text');
+    const fonts = [
+      {
+        id: 'gmarket',
+        number: '01',
+        name: 'Gmarket Sans',
+        label: 'Friendly',
+        family: '"Gmarket Sans", Pretendard, sans-serif',
+        short: '둥글고 친근함',
+        comment: '상담형 서비스에 부드럽고 친근한 인상을 줍니다. 다만 세무·회계 본문 전체에는 조금 캐주얼하게 느껴질 수 있습니다.',
+        korean: '둥글고 편안해서 고객 상담 느낌이 강합니다.',
+        english: '영문은 부드럽지만 숫자는 약간 캐주얼합니다.',
+        use: '메인 타이틀, 이벤트 배너, 친근한 상담 섹션'
+      },
+      {
+        id: 'pretendard',
+        number: '02',
+        name: 'Pretendard',
+        label: 'Modern',
+        family: 'Pretendard, -apple-system, BlinkMacSystemFont, sans-serif',
+        short: '가장 안정적',
+        comment: '웹사이트 본문과 UI에 가장 안정적인 후보입니다. 한글, 영문, 숫자의 균형이 좋아 세무·회계 서비스에 잘 맞습니다.',
+        korean: '균형 있고 현대적입니다.',
+        english: '영문과 숫자가 깔끔해서 회계 서비스에 잘 맞습니다.',
+        use: '전체 웹사이트, 본문, 메뉴, 버튼'
+      },
+      {
+        id: 'score',
+        number: '03',
+        name: 'S-Core Dream',
+        label: 'Trust',
+        family: '"S-Core Dream", Pretendard, sans-serif',
+        short: '단단한 신뢰감',
+        comment: '각이 있고 단단해서 전문성과 신뢰감이 강합니다. 제목과 핵심 메시지에 사용하면 무게감이 생깁니다.',
+        korean: '각이 살아 있어 전문적이고 기업적인 인상입니다.',
+        english: '영문보다 한글 타이틀에서 힘이 더 좋습니다.',
+        use: '메인 제목, 섹션 제목, 신뢰 강조 문구'
+      },
+      {
+        id: 'suit',
+        number: '04',
+        name: 'SUIT',
+        label: 'UI',
+        family: 'SUIT, Pretendard, sans-serif',
+        short: '깔끔한 UI',
+        comment: '깔끔하고 중립적인 인상입니다. 메뉴, 버튼, 본문처럼 실제 서비스 UI에 적용하기 좋습니다.',
+        korean: '담백하고 정돈되어 있어 읽기 편합니다.',
+        english: '숫자와 짧은 영문 라벨이 안정적으로 보입니다.',
+        use: 'UI 텍스트, 버튼, 본문, 관리자 페이지'
+      },
+      {
+        id: 'paperlogy',
+        number: '05',
+        name: 'Paperlogy',
+        label: 'Brand',
+        family: 'Paperlogy, Pretendard, sans-serif',
+        short: '브랜드 감도',
+        comment: '브랜드 감도가 있고 세련된 느낌입니다. 차별화된 인상은 좋지만 장문 본문에는 신중하게 쓰는 편이 좋습니다.',
+        korean: '세련되고 감각적인 브랜드 톤이 있습니다.',
+        english: '짧은 문구에서는 개성이 살아납니다.',
+        use: '브랜드 섹션, 소개 페이지, 캠페인 페이지'
+      },
+      {
+        id: 'noto',
+        number: '06',
+        name: 'Noto Sans KR',
+        label: 'Default',
+        family: '"Noto Sans KR", Pretendard, sans-serif',
+        short: '무난한 기본형',
+        comment: '가독성이 좋고 안정적인 기본 후보입니다. 개성은 적지만 다양한 환경에서 깨질 가능성이 낮습니다.',
+        korean: '무난하고 안정적인 기본 고딕 인상입니다.',
+        english: '다국어와 숫자 표현에서 안정적입니다.',
+        use: '기본 본문, 다국어 페이지, 안정성이 중요한 페이지'
+      }
+    ];
 
-    function updateSamples() {
-      const text = sampleInput.value.trim() || 'US TAX SERVICE';
+    const root = document.documentElement;
+    const fontList = document.querySelector('#fontList');
+    const mobileFontSelect = document.querySelector('#mobileFontSelect');
+    const heroTitle = document.querySelector('#heroTitle');
+    const heroBody = document.querySelector('#heroBody');
+    const previewHeroTitle = document.querySelector('#previewHeroTitle');
+    const previewHeroBody = document.querySelector('#previewHeroBody');
+    const titleWeight = document.querySelector('#titleWeight');
+    const titleSpacing = document.querySelector('#titleSpacing');
+    const bodySpacing = document.querySelector('#bodySpacing');
+    const titleWeightValue = document.querySelector('#titleWeightValue');
+    const titleSpacingValue = document.querySelector('#titleSpacingValue');
+    const bodySpacingValue = document.querySelector('#bodySpacingValue');
+    const resetButton = document.querySelector('#resetButton');
 
-      samples.forEach((sample) => {
-        sample.textContent = text;
-        sample.style.fontSize = fontSize.value + 'px';
-        sample.style.fontWeight = fontWeight.value;
-        sample.style.letterSpacing = letterSpacing.value + 'em';
+    const currentFontTitle = document.querySelector('#currentFontTitle');
+    const currentFontComment = document.querySelector('#currentFontComment');
+    const specKorean = document.querySelector('#specKorean');
+    const specEnglish = document.querySelector('#specEnglish');
+    const specUse = document.querySelector('#specUse');
+
+    let activeFontId = 'pretendard';
+
+    function renderFontControls() {
+      fontList.innerHTML = fonts.map(font => `
+        <button class="font-option" type="button" data-font-id="${font.id}">
+          <span class="font-number">${font.number}</span>
+          <span>
+            <span class="font-name" style="font-family:${font.family}">${font.name}</span>
+            <span class="font-desc">${font.short}</span>
+          </span>
+          <span class="font-tag">${font.label}</span>
+        </button>
+      `).join('');
+
+      mobileFontSelect.innerHTML = fonts.map(font => `<option value="${font.id}">${font.number} · ${font.name}</option>`).join('');
+
+      fontList.querySelectorAll('.font-option').forEach(button => {
+        button.addEventListener('click', () => setFont(button.dataset.fontId));
       });
 
-      sizeValue.textContent = fontSize.value;
-      spacingValue.textContent = Number(letterSpacing.value).toFixed(2);
+      mobileFontSelect.addEventListener('change', event => setFont(event.target.value));
     }
 
-    sampleInput.addEventListener('input', updateSamples);
-    fontSize.addEventListener('input', updateSamples);
-    fontWeight.addEventListener('change', updateSamples);
-    letterSpacing.addEventListener('input', updateSamples);
+    function setFont(fontId) {
+      activeFontId = fontId;
+      const font = fonts.find(item => item.id === fontId) || fonts[1];
 
-    updateSamples();
+      root.style.setProperty('--font-current', font.family);
+      document.body.style.fontFamily = font.family;
+
+      currentFontTitle.textContent = font.name;
+      currentFontComment.textContent = font.comment;
+      specKorean.textContent = font.korean;
+      specEnglish.textContent = font.english;
+      specUse.textContent = font.use;
+
+      fontList.querySelectorAll('.font-option').forEach(button => {
+        button.classList.toggle('active', button.dataset.fontId === fontId);
+      });
+      mobileFontSelect.value = fontId;
+    }
+
+    function updateCopy() {
+      previewHeroTitle.textContent = heroTitle.value.trim() || '미국 세무와 회계를 더 정확하고 쉽게 안내합니다.';
+      previewHeroBody.textContent = heroBody.value.trim() || '개인 세금보고, 법인 회계, IRS 레터 대응까지 미국 생활과 비즈니스에 필요한 세무 서비스를 한곳에서 제공합니다.';
+    }
+
+    function updateTypeControls() {
+      root.style.setProperty('--title-weight', titleWeight.value);
+      root.style.setProperty('--title-spacing', `${Number(titleSpacing.value).toFixed(2)}em`);
+      root.style.setProperty('--body-spacing', `${Number(bodySpacing.value).toFixed(2)}em`);
+
+      titleWeightValue.textContent = titleWeight.value;
+      titleSpacingValue.textContent = `${Number(titleSpacing.value).toFixed(2)}em`;
+      bodySpacingValue.textContent = `${Number(bodySpacing.value).toFixed(2)}em`;
+    }
+
+    function resetAll() {
+      activeFontId = 'pretendard';
+      heroTitle.value = '미국 세무와 회계를 더 정확하고 쉽게 안내합니다.';
+      heroBody.value = '개인 세금보고, 법인 회계, IRS 레터 대응까지 미국 생활과 비즈니스에 필요한 세무 서비스를 한곳에서 제공합니다.';
+      titleWeight.value = 850;
+      titleSpacing.value = -0.07;
+      bodySpacing.value = -0.02;
+      updateCopy();
+      updateTypeControls();
+      setFont(activeFontId);
+    }
+
+    heroTitle.addEventListener('input', updateCopy);
+    heroBody.addEventListener('input', updateCopy);
+    titleWeight.addEventListener('input', updateTypeControls);
+    titleSpacing.addEventListener('input', updateTypeControls);
+    bodySpacing.addEventListener('input', updateTypeControls);
+    resetButton.addEventListener('click', resetAll);
+
+    renderFontControls();
+    resetAll();
   </script>
 </body>
 </html>
