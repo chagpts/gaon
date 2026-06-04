@@ -3,274 +3,438 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>폰트 비교 페이지</title>
-
-  <!-- Google Fonts 예시 -->
+  <title>Font Market Compare</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap"
-    rel="stylesheet"
-  >
-
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;700;900&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f6f7f9;
+      --bg: #f4f4f3;
+      --text: #111114;
+      --muted: #66666c;
+      --line: #e3e3e0;
       --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --accent: #2563eb;
+      --accent: #ff7a00;
+      --radius: 14px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    header {
-      padding: 32px 24px 20px;
-      max-width: 1200px;
+    .page {
+      width: min(100%, 1880px);
       margin: 0 auto;
+      padding: 0 44px 70px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      padding-top: 6px;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(380px, 760px) minmax(320px, 560px);
+      gap: 48px;
+      align-items: end;
+      padding: 24px 0 96px;
     }
 
     h1 {
-      margin: 0 0 8px;
-      font-size: 32px;
-    }
-
-    .desc {
-      color: var(--muted);
       margin: 0;
+      max-width: 760px;
+      font-size: clamp(48px, 5.1vw, 92px);
+      line-height: 1.04;
+      letter-spacing: -0.07em;
+      font-weight: 800;
     }
 
-    .controls {
-      max-width: 1200px;
-      margin: 0 auto 24px;
-      padding: 20px 24px;
-      display: grid;
-      gap: 16px;
-      grid-template-columns: 1fr 160px 160px;
-    }
-
-    textarea,
-    select,
-    input {
-      width: 100%;
+    .panel {
+      background: rgba(255,255,255,0.7);
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 15px;
-      background: white;
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.04);
+    }
+
+    .panel-title {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
     }
 
     textarea {
-      min-height: 96px;
+      width: 100%;
+      min-height: 118px;
       resize: vertical;
-      grid-column: 1 / -1;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+      font: inherit;
+      line-height: 1.5;
+      outline: none;
+    }
+
+    textarea:focus, input:focus, select:focus {
+      border-color: var(--text);
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
     }
 
     label {
       display: block;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 6px;
+      font-size: 12px;
       color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 7px;
     }
 
-    .font-grid {
-      max-width: 1200px;
-      margin: 0 auto 48px;
-      padding: 0 24px;
-      display: grid;
-      gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .card {
-      background: var(--card);
+    input, select {
+      width: 100%;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      border-radius: 999px;
+      background: #fff;
+      padding: 11px 12px;
+      font: inherit;
+      outline: none;
     }
 
-    .font-name {
+    input[type="range"] { padding: 0; height: 42px; }
+
+    .toolbar {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
       align-items: center;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line);
+      gap: 20px;
+      margin-bottom: 20px;
     }
 
-    .font-name strong {
-      font-size: 16px;
+    .toolbar h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.04em;
     }
 
-    .font-name span {
+    .toolbar span {
+      font-size: 13px;
       color: var(--muted);
-      font-size: 12px;
     }
 
-    .sample {
-      line-height: 1.65;
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .font-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.04);
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview {
+      height: 330px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      color: #fff;
+    }
+
+    .preview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 24% 12%, rgba(255,255,255,.18), transparent 28%),
+        linear-gradient(135deg, rgba(255,255,255,.10), transparent 38%);
+      pointer-events: none;
+    }
+
+    .preview.orange { background: #ff7a00; color: #151515; }
+    .preview.black { background: #111; color: #f7f7f7; }
+    .preview.light { background: #f7f7f4; color: #111; border-bottom: 4px solid #111; }
+    .preview.neon { background: #191919; color: #cfff16; }
+    .preview.blue { background: #dfeaff; color: #111; }
+    .preview.green { background: #14251d; color: #d9ffe5; }
+    .preview.cream { background: #f4ead7; color: #171717; }
+    .preview.gray { background: #e8e8e4; color: #111; }
+
+    .mini-nav {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      opacity: .88;
+      font-weight: 700;
+    }
+
+    .chip {
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 11px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .sample-text {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      max-width: 95%;
+      font-size: 48px;
+      line-height: .98;
+      letter-spacing: -0.06em;
+      font-weight: 900;
       word-break: keep-all;
-      white-space: pre-wrap;
     }
 
-    .noto-sans {
-      font-family: "Noto Sans KR", sans-serif;
+    .meta {
+      padding: 30px 30px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .noto-serif {
-      font-family: "Noto Serif KR", serif;
+    .type {
+      margin: 0 0 9px;
+      color: #3f3f46;
+      font-size: 14px;
     }
 
-    .nanum-gothic {
-      font-family: "Nanum Gothic", sans-serif;
+    .font-title {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.16;
+      letter-spacing: -0.055em;
+      font-weight: 800;
     }
 
-    .nanum-myeongjo {
-      font-family: "Nanum Myeongjo", serif;
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: auto -30px 0;
     }
 
-    .system-sans {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    .footer {
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      font-size: 14px;
     }
 
-    .system-serif {
-      font-family: Georgia, "Times New Roman", serif;
+    .author strong { font-weight: 800; }
+
+    .price {
+      text-align: right;
+      white-space: nowrap;
+      line-height: 1;
     }
 
-    @media (max-width: 720px) {
-      .controls {
-        grid-template-columns: 1fr;
-      }
+    .price small {
+      display: inline-block;
+      margin-right: 6px;
+      font-size: 12px;
+      font-weight: 800;
+    }
 
-      h1 {
-        font-size: 26px;
-      }
+    .price b {
+      font-size: 36px;
+      letter-spacing: -0.06em;
+    }
+
+    .price span {
+      font-size: 12px;
+      margin-left: 3px;
+      color: var(--muted);
+    }
+
+    .noto-sans { font-family: "Noto Sans KR", sans-serif; }
+    .noto-serif { font-family: "Noto Serif KR", serif; }
+    .nanum-gothic { font-family: "Nanum Gothic", sans-serif; }
+    .nanum-myeongjo { font-family: "Nanum Myeongjo", serif; }
+    .gowun-dodum { font-family: "Gowun Dodum", sans-serif; }
+    .gowun-batang { font-family: "Gowun Batang", serif; }
+    .black-han { font-family: "Black Han Sans", sans-serif; }
+    .system { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+    .add-font {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px dashed #bdbdb8;
+      border-radius: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    code {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      border-radius: 7px;
+      color: #111;
+    }
+
+    @media (max-width: 1320px) {
+      .market-grid { grid-template-columns: repeat(3, minmax(260px, 1fr)); }
+      .hero { grid-template-columns: 1fr; padding-bottom: 64px; }
+    }
+
+    @media (max-width: 920px) {
+      .page { padding-inline: 20px; }
+      .market-grid { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
+      .control-grid { grid-template-columns: 1fr; }
+      .preview { height: 280px; }
+      .sample-text { font-size: 40px; }
+    }
+
+    @media (max-width: 620px) {
+      .market-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 44px; }
+      .toolbar { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>폰트 비교</h1>
-    <p class="desc">문장을 입력하고 크기, 굵기, 자간을 바꿔가며 폰트를 비교해보세요.</p>
-  </header>
+  <div class="page">
+    <p class="eyebrow">Font Market</p>
 
-  <section class="controls">
-    <div>
-      <label for="sampleText">비교할 문장</label>
-      <textarea id="sampleText">가나다라마바사아자차카타파하
-The quick brown fox jumps over the lazy dog.
-1234567890 !@#$%^&*()
+    <section class="hero">
+      <h1>Compare fonts for digital & physical products</h1>
 
-브랜드의 첫인상을 결정하는 것은 생각보다 작은 디테일입니다.</textarea>
+      <div class="panel">
+        <p class="panel-title">Live font tester</p>
+        <textarea id="sampleInput">브랜드의 첫인상을 결정하는 것은 작은 디테일입니다.
+A curated marketplace for digital & physical products</textarea>
+
+        <div class="control-grid">
+          <div>
+            <label for="fontSize">Size <span id="sizeValue">48</span>px</label>
+            <input id="fontSize" type="range" min="24" max="92" value="48">
+          </div>
+          <div>
+            <label for="fontWeight">Weight</label>
+            <select id="fontWeight">
+              <option value="400">Regular 400</option>
+              <option value="500">Medium 500</option>
+              <option value="700">Bold 700</option>
+              <option value="900" selected>Black 900</option>
+            </select>
+          </div>
+          <div>
+            <label for="letterSpacing">Spacing <span id="spacingValue">-0.06</span>em</label>
+            <input id="letterSpacing" type="range" min="-0.12" max="0.08" step="0.01" value="-0.06">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <h2>Typeface cards</h2>
+      <span>각 카드 상단의 큰 문장이 실시간으로 바뀝니다.</span>
     </div>
 
-    <div>
-      <label for="fontSize">글자 크기</label>
-      <input id="fontSize" type="range" min="14" max="56" value="24" />
+    <main class="market-grid" id="fontGrid">
+      <article class="font-card" data-font="noto-sans">
+        <div class="preview orange"><div class="mini-nav"><span>FontFlow</span><span class="chip">Preview</span></div><p class="sample-text noto-sans"></p></div>
+        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title">Noto Sans KR — Clean Product UI Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="black-han">
+        <div class="preview black"><div class="mini-nav"><span>BoldType</span><span class="chip">Impact</span></div><p class="sample-text black-han"></p></div>
+        <div class="meta"><p class="type">Display Font</p><h3 class="font-title">Black Han Sans — Strong Headline Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="noto-serif">
+        <div class="preview light"><div class="mini-nav"><span>Serif Lab</span><span class="chip">Classic</span></div><p class="sample-text noto-serif"></p></div>
+        <div class="meta"><p class="type">Korean Serif</p><h3 class="font-title">Noto Serif KR — Editorial Serif Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="nanum-gothic">
+        <div class="preview neon"><div class="mini-nav"><span>Market TJ</span><span class="chip">Modern</span></div><p class="sample-text nanum-gothic"></p></div>
+        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title">Nanum Gothic — Reliable Web Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Naver</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="nanum-myeongjo">
+        <div class="preview cream"><div class="mini-nav"><span>Archive</span><span class="chip">Serif</span></div><p class="sample-text nanum-myeongjo"></p></div>
+        <div class="meta"><p class="type">Korean Serif</p><h3 class="font-title">Nanum Myeongjo — Warm Reading Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Naver</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="gowun-dodum">
+        <div class="preview blue"><div class="mini-nav"><span>Studio</span><span class="chip">Soft</span></div><p class="sample-text gowun-dodum"></p></div>
+        <div class="meta"><p class="type">Korean Sans</p><h3 class="font-title">Gowun Dodum — Soft Minimal Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="gowun-batang">
+        <div class="preview green"><div class="mini-nav"><span>Bookshop</span><span class="chip">Book</span></div><p class="sample-text gowun-batang"></p></div>
+        <div class="meta"><p class="type">Korean Serif</p><h3 class="font-title">Gowun Batang — Elegant Text Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Google Fonts</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="system">
+        <div class="preview gray"><div class="mini-nav"><span>System</span><span class="chip">Default</span></div><p class="sample-text system"></p></div>
+        <div class="meta"><p class="type">System UI</p><h3 class="font-title">System Font — Native Interface Font</h3><div class="divider"></div><div class="footer"><span class="author">By <strong>Browser</strong></span><span class="price"><small>from</small><b>0</b><span>USD</span></span></div></div>
+      </article>
+    </main>
+
+    <div class="add-font">
+      로컬 폰트를 추가하려면 CSS에 <code>@font-face</code>를 추가하고, 카드의 <code>font-family</code>만 바꾸면 됩니다.
+      예: <code>@font-face { font-family: "MyFont"; src: url("./fonts/MyFont.woff2") format("woff2"); }</code>
     </div>
-
-    <div>
-      <label for="fontWeight">굵기</label>
-      <select id="fontWeight">
-        <option value="400">Regular 400</option>
-        <option value="500">Medium 500</option>
-        <option value="600">SemiBold 600</option>
-        <option value="700">Bold 700</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="letterSpacing">자간</label>
-      <input id="letterSpacing" type="range" min="-2" max="4" step="0.1" value="0" />
-    </div>
-  </section>
-
-  <main class="font-grid">
-    <article class="card">
-      <div class="font-name">
-        <strong>Noto Sans KR</strong>
-        <span>Sans-serif</span>
-      </div>
-      <div class="sample noto-sans"></div>
-    </article>
-
-    <article class="card">
-      <div class="font-name">
-        <strong>Noto Serif KR</strong>
-        <span>Serif</span>
-      </div>
-      <div class="sample noto-serif"></div>
-    </article>
-
-    <article class="card">
-      <div class="font-name">
-        <strong>Nanum Gothic</strong>
-        <span>Sans-serif</span>
-      </div>
-      <div class="sample nanum-gothic"></div>
-    </article>
-
-    <article class="card">
-      <div class="font-name">
-        <strong>Nanum Myeongjo</strong>
-        <span>Serif</span>
-      </div>
-      <div class="sample nanum-myeongjo"></div>
-    </article>
-
-    <article class="card">
-      <div class="font-name">
-        <strong>System Sans</strong>
-        <span>Default</span>
-      </div>
-      <div class="sample system-sans"></div>
-    </article>
-
-    <article class="card">
-      <div class="font-name">
-        <strong>System Serif</strong>
-        <span>Default</span>
-      </div>
-      <div class="sample system-serif"></div>
-    </article>
-  </main>
+  </div>
 
   <script>
-    const sampleText = document.getElementById("sampleText");
-    const fontSize = document.getElementById("fontSize");
-    const fontWeight = document.getElementById("fontWeight");
-    const letterSpacing = document.getElementById("letterSpacing");
-    const samples = document.querySelectorAll(".sample");
+    const sampleInput = document.querySelector('#sampleInput');
+    const fontSize = document.querySelector('#fontSize');
+    const fontWeight = document.querySelector('#fontWeight');
+    const letterSpacing = document.querySelector('#letterSpacing');
+    const sizeValue = document.querySelector('#sizeValue');
+    const spacingValue = document.querySelector('#spacingValue');
+    const samples = document.querySelectorAll('.sample-text');
 
-    function updateSamples() {
+    function update() {
+      const text = sampleInput.value.trim() || 'Type something to compare fonts';
       samples.forEach(sample => {
-        sample.textContent = sampleText.value;
-        sample.style.fontSize = `${fontSize.value}px`;
+        sample.textContent = text;
+        sample.style.fontSize = fontSize.value + 'px';
         sample.style.fontWeight = fontWeight.value;
-        sample.style.letterSpacing = `${letterSpacing.value}px`;
+        sample.style.letterSpacing = letterSpacing.value + 'em';
       });
+      sizeValue.textContent = fontSize.value;
+      spacingValue.textContent = Number(letterSpacing.value).toFixed(2);
     }
 
-    sampleText.addEventListener("input", updateSamples);
-    fontSize.addEventListener("input", updateSamples);
-    fontWeight.addEventListener("change", updateSamples);
-    letterSpacing.addEventListener("input", updateSamples);
-
-    updateSamples();
+    sampleInput.addEventListener('input', update);
+    fontSize.addEventListener('input', update);
+    fontWeight.addEventListener('change', update);
+    letterSpacing.addEventListener('input', update);
+    update();
   </script>
 </body>
 </html>
