@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sun-typeface/suit/fonts/static/woff2/SUIT.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Paperlogy/Paperlogy.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;700;900&family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
 
   <style>
     @font-face {
@@ -354,6 +357,14 @@
     .score-dream { font-family: "S-Core Dream", Pretendard, sans-serif; }
     .suit { font-family: SUIT, Pretendard, sans-serif; }
     .paperlogy { font-family: Paperlogy, Pretendard, sans-serif; }
+    .noto-sans { font-family: "Noto Sans KR", Pretendard, sans-serif; }
+    .noto-serif { font-family: "Noto Serif KR", Georgia, serif; }
+    .nanum-gothic { font-family: "Nanum Gothic", Pretendard, sans-serif; }
+    .nanum-myeongjo { font-family: "Nanum Myeongjo", Georgia, serif; }
+    .gowun-dodum { font-family: "Gowun Dodum", Pretendard, sans-serif; }
+    .gowun-batang { font-family: "Gowun Batang", Georgia, serif; }
+    .black-han { font-family: "Black Han Sans", Pretendard, sans-serif; }
+    .system { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
 
     .add-font {
       margin-top: 22px;
@@ -433,7 +444,7 @@ US TAX SERVICE helps individuals and businesses file with confidence.
 
     <div class="toolbar">
       <h2>Primary font candidates</h2>
-      <span>요청하신 5개 폰트를 최상단 카드로 배치했습니다.</span>
+      <span>요청하신 5개 폰트는 최상단에, 기존 비교 폰트들은 그 아래에 함께 넣었습니다.</span>
     </div>
 
     <main class="market-grid" id="fontGrid">
@@ -481,10 +492,82 @@ US TAX SERVICE helps individuals and businesses file with confidence.
         </div>
         <div class="meta"><p class="type">Editorial Sans</p><h3 class="font-title paperlogy">페이퍼로지</h3><p class="desc">개성이 있으면서 정돈된 인상. 소개 섹션이나 브랜드 카피에 포인트로 활용하기 좋습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Distinctive</strong></span><span class="score"><small>rank</small><b>05</b></span></div></div>
       </article>
+
+      <article class="font-card" data-font="noto-sans">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">Noto Sans KR</span></div>
+          <p class="sample-text noto-sans"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><rect x="20" y="24" width="120" height="82" rx="12" stroke="currentColor" stroke-width="7"/><path d="M42 50h76M42 70h52M42 90h68" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Additional Korean Sans</p><h3 class="font-title noto-sans">Noto Sans KR</h3><p class="desc">가장 표준적인 웹 폰트 후보. 무난하지만 브랜드 차별성은 상대적으로 약합니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Baseline</strong></span><span class="score"><small>ref</small><b>06</b></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="black-han">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">Black Han Sans</span></div>
+          <p class="sample-text black-han"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><path d="M22 96h116" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><path d="M36 82l22-34 22 18 38-44" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Display Font</p><h3 class="font-title black-han">Black Han Sans</h3><p class="desc">강한 헤드라인용. 세무 회사 메인 폰트보다는 캠페인 문구나 강조 영역에 적합합니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Impact</strong></span><span class="score"><small>ref</small><b>07</b></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="noto-serif">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">Noto Serif KR</span></div>
+          <p class="sample-text noto-serif"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><path d="M40 18h64l24 24v70H40V18z" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/><path d="M60 58h48M60 78h36" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Additional Korean Serif</p><h3 class="font-title noto-serif">Noto Serif KR</h3><p class="desc">공식 문서, 칼럼, 전문 콘텐츠에 안정감이 있습니다. 전체 UI용으로는 다소 무거울 수 있습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Editorial</strong></span><span class="score"><small>ref</small><b>08</b></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="nanum-gothic">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">Nanum Gothic</span></div>
+          <p class="sample-text nanum-gothic"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><rect x="24" y="28" width="112" height="76" rx="10" stroke="currentColor" stroke-width="7"/><path d="M46 54h68M46 76h42" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><circle cx="116" cy="78" r="12" stroke="currentColor" stroke-width="7"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Additional Korean Sans</p><h3 class="font-title nanum-gothic">Nanum Gothic</h3><p class="desc">익숙하고 안정적인 느낌. 최신 브랜드 톤보다는 실용적인 정보 전달에 가깝습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Reliable</strong></span><span class="score"><small>ref</small><b>09</b></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="nanum-myeongjo">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">Nanum Myeongjo</span></div>
+          <p class="sample-text nanum-myeongjo"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><rect x="34" y="20" width="92" height="90" rx="8" stroke="currentColor" stroke-width="7"/><path d="M54 48h52M54 68h52M54 88h34" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Additional Korean Serif</p><h3 class="font-title nanum-myeongjo">Nanum Myeongjo</h3><p class="desc">차분한 문서형 인상. 세무 안내 글이나 긴 설명 콘텐츠에서 비교해볼 수 있습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Classic</strong></span><span class="score"><small>ref</small><b>10</b></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="gowun-dodum">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">Gowun Dodum</span></div>
+          <p class="sample-text gowun-dodum"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><circle cx="58" cy="62" r="34" stroke="currentColor" stroke-width="7"/><path d="M98 42h34M98 64h28M98 86h20" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Additional Soft Sans</p><h3 class="font-title gowun-dodum">Gowun Dodum</h3><p class="desc">부드럽고 담백한 톤. 친절한 상담형 브랜드에는 좋지만 전문성은 약하게 느껴질 수 있습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Soft</strong></span><span class="score"><small>ref</small><b>11</b></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="gowun-batang">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">Gowun Batang</span></div>
+          <p class="sample-text gowun-batang"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><path d="M34 22h92v86H34z" stroke="currentColor" stroke-width="7"/><path d="M54 48h52M54 68h52M54 88h30" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Additional Serif</p><h3 class="font-title gowun-batang">Gowun Batang</h3><p class="desc">따뜻한 문장형 폰트. 블로그, 인사이트, 세무 칼럼 영역에 서브로 활용하기 좋습니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Reading</strong></span><span class="score"><small>ref</small><b>12</b></span></div></div>
+      </article>
+
+      <article class="font-card" data-font="system">
+        <div class="preview">
+          <div class="mini-nav"><span>Reference</span><span class="chip">System UI</span></div>
+          <p class="sample-text system"></p>
+          <div class="visual" aria-hidden="true"><svg viewBox="0 0 160 130" fill="none"><rect x="22" y="26" width="116" height="76" rx="14" stroke="currentColor" stroke-width="7"/><path d="M44 54h72M44 76h46" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="meta"><p class="type">Browser Default</p><h3 class="font-title system">System Font</h3><p class="desc">별도 웹폰트 없이 빠르고 안정적입니다. 하지만 브랜드 고유의 인상은 약합니다.</p><div class="divider"></div><div class="footer"><span class="author">For <strong>Default</strong></span><span class="score"><small>ref</small><b>13</b></span></div></div>
+      </article>
     </main>
 
     <div class="add-font">
-      모든 배경은 화이트 톤으로 정리했습니다. 실제 홈페이지 시안에 적용할 때는 <code>h1</code>, 카드 제목, 본문, 숫자 영역을 함께 보면서 한영 혼용과 숫자 가독성을 비교해보세요.
+      모든 배경은 화이트 톤으로 정리했습니다. 상단 5개는 요청하신 우선 비교 폰트이고, 아래 8개는 기존 후보 및 레퍼런스 폰트입니다. 실제 홈페이지 시안에 적용할 때는 <code>h1</code>, 카드 제목, 본문, 숫자 영역을 함께 보면서 한영 혼용과 숫자 가독성을 비교해보세요.
     </div>
   </div>
 
