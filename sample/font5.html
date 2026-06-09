@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>유료/무료 서체 구분표</title>
+  <title>유료/무료 서체 한글·영어 비교</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Roboto:wght@300&family=IBM+Plex+Sans:wght@300&family=Noto+Sans+KR:wght@300&display=swap');
+
     :root {
       --bg: #f6f5f2;
       --card: #ffffff;
@@ -28,13 +30,11 @@
     }
 
     .wrap {
-      width: min(1100px, calc(100% - 32px));
+      width: min(1120px, calc(100% - 32px));
       margin: 56px auto;
     }
 
-    header {
-      margin-bottom: 28px;
-    }
+    header { margin-bottom: 28px; }
 
     h1 {
       margin: 0 0 8px;
@@ -48,6 +48,7 @@
       color: var(--muted);
       margin: 0;
       font-size: 16px;
+      word-break: keep-all;
     }
 
     .grid {
@@ -90,44 +91,76 @@
 
     .font-card {
       border-top: 1px solid var(--line);
-      padding: 18px 0;
+      padding: 22px 0;
     }
 
     .font-card:last-child { padding-bottom: 0; }
 
+    .topline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
     .name {
-      margin: 0 0 6px;
+      margin: 0;
       font-size: 26px;
       letter-spacing: -0.04em;
       line-height: 1.1;
       font-weight: 300;
     }
 
+    .license {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .sample-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fbfaf8;
+    }
+
+    .sample-label {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
     .sample {
-      margin: 8px 0 10px;
-      font-size: clamp(28px, 4vw, 44px);
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
       letter-spacing: -0.06em;
-      line-height: 1;
+      line-height: 1.05;
       font-weight: 300;
     }
 
-    .note {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    a {
-      color: inherit;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
+    .sample.ko {
+      font-size: clamp(24px, 3.2vw, 38px);
+      letter-spacing: -0.07em;
+      word-break: keep-all;
     }
 
     .links {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 14px;
     }
 
     .link-pill {
@@ -137,8 +170,17 @@
       padding: 7px 10px;
       font-size: 13px;
       text-decoration: none;
-      background: #fafafa;
+      background: #fff;
+      color: inherit;
     }
+
+    .font-helvetica-neue { font-family: "Helvetica Neue", Helvetica, "Noto Sans KR", Arial, sans-serif; }
+    .font-helvetica-now { font-family: "Helvetica Now Display", "Helvetica Now", "Helvetica Neue", Helvetica, "Noto Sans KR", Arial, sans-serif; }
+    .font-neue-haas { font-family: "Neue Haas Grotesk Display", "Neue Haas Grotesk Text", "Helvetica Neue", Helvetica, "Noto Sans KR", Arial, sans-serif; }
+    .font-inter { font-family: Inter, "Noto Sans KR", Arial, sans-serif; }
+    .font-roboto { font-family: Roboto, "Noto Sans KR", Arial, sans-serif; }
+    .font-tex { font-family: "TeX Gyre Heros", "Nimbus Sans", Helvetica, "Noto Sans KR", Arial, sans-serif; }
+    .font-ibm { font-family: "IBM Plex Sans", "Noto Sans KR", Arial, sans-serif; }
 
     .summary {
       margin-top: 22px;
@@ -148,49 +190,88 @@
       padding: 18px 20px;
       color: var(--muted);
       font-size: 14px;
+      word-break: keep-all;
+    }
+
+    @media (min-width: 900px) {
+      .compare { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 760px) {
       .wrap { margin: 34px auto; }
       .grid { grid-template-columns: 1fr; }
       .section { padding: 18px; border-radius: 18px; }
-      .section h2 { align-items: flex-start; flex-direction: column; }
+      .section h2, .topline { align-items: flex-start; flex-direction: column; }
+      .license { white-space: normal; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
     <header>
-      <h1>유료 / 무료 서체 구분</h1>
-      <p class="desc">이미지 속 Helvetica 계열 느낌과 가까운 후보들을 라이선스 기준으로 나눠 정리했습니다.</p>
+      <h1>유료 / 무료 서체 비교</h1>
+      <p class="desc">각 서체 카드 안에서 같은 서체 설정으로 영어 “US TAX SERVICE”와 한글 “미국 법인 설립 후가 중요합니다.”를 나란히 확인할 수 있습니다.</p>
     </header>
 
     <div class="grid">
       <section class="section" aria-labelledby="paid-title">
         <h2 id="paid-title">유료 서체 <span class="badge paid">상업용 라이선스 필요</span></h2>
 
-        <article class="font-card">
-          <h3 class="name">Helvetica Neue Light</h3>
-          <p class="sample">every bread is rolled with french butter</p>
-          <p class="note">Helvetica 계열 상업용 서체입니다. 보통 Monotype/Linotype 라이선스가 필요합니다.</p>
+        <article class="font-card font-helvetica-neue">
+          <div class="topline">
+            <h3 class="name">Helvetica Neue Light</h3>
+            <p class="license">보통 별도 라이선스가 필요합니다.</p>
+          </div>
+          <div class="compare">
+            <div class="sample-box">
+              <span class="sample-label">English</span>
+              <p class="sample">US TAX SERVICE</p>
+            </div>
+            <div class="sample-box">
+              <span class="sample-label">Korean</span>
+              <p class="sample ko">미국 법인 설립 후가 중요합니다.</p>
+            </div>
+          </div>
           <div class="links">
             <a class="link-pill" href="https://www.monotype.com/font-licensing-explained-designers-and-brands" target="_blank" rel="noopener">라이선스 안내</a>
           </div>
         </article>
 
-        <article class="font-card">
-          <h3 class="name">Helvetica Now Display Light</h3>
-          <p class="sample">every bread is rolled with french butter</p>
-          <p class="note">Monotype의 Helvetica Now 제품군입니다. 브랜드/웹/앱 등 사용 범위에 맞는 라이선스 확인이 필요합니다.</p>
+        <article class="font-card font-helvetica-now">
+          <div class="topline">
+            <h3 class="name">Helvetica Now Display Light</h3>
+            <p class="license">보통 별도 라이선스가 필요합니다.</p>
+          </div>
+          <div class="compare">
+            <div class="sample-box">
+              <span class="sample-label">English</span>
+              <p class="sample">US TAX SERVICE</p>
+            </div>
+            <div class="sample-box">
+              <span class="sample-label">Korean</span>
+              <p class="sample ko">미국 법인 설립 후가 중요합니다.</p>
+            </div>
+          </div>
           <div class="links">
             <a class="link-pill" href="https://www.monotype.com/fonts/helvetica-now" target="_blank" rel="noopener">Monotype 공식 페이지</a>
           </div>
         </article>
 
-        <article class="font-card">
-          <h3 class="name">Neue Haas Grotesk Display</h3>
-          <p class="sample">every bread is rolled with french butter</p>
-          <p class="note">Helvetica의 원형에 가까운 네오그로테스크 계열 상업용 서체입니다.</p>
+        <article class="font-card font-neue-haas">
+          <div class="topline">
+            <h3 class="name">Neue Haas Grotesk Display</h3>
+            <p class="license">보통 별도 라이선스가 필요합니다.</p>
+          </div>
+          <div class="compare">
+            <div class="sample-box">
+              <span class="sample-label">English</span>
+              <p class="sample">US TAX SERVICE</p>
+            </div>
+            <div class="sample-box">
+              <span class="sample-label">Korean</span>
+              <p class="sample ko">미국 법인 설립 후가 중요합니다.</p>
+            </div>
+          </div>
           <div class="links">
             <a class="link-pill" href="https://www.myfonts.com/collections/neue-haas-grotesk-font-linotype" target="_blank" rel="noopener">MyFonts 판매 페이지</a>
           </div>
@@ -200,38 +281,82 @@
       <section class="section" aria-labelledby="free-title">
         <h2 id="free-title">무료 대체 서체 <span class="badge free">무료 사용 가능</span></h2>
 
-        <article class="font-card">
-          <h3 class="name">Inter Light</h3>
-          <p class="sample">every bread is rolled with french butter</p>
-          <p class="note">깔끔한 현대 산세리프. 이미지처럼 얇고 정제된 느낌을 내기 좋습니다.</p>
+        <article class="font-card font-inter">
+          <div class="topline">
+            <h3 class="name">Inter Light</h3>
+            <p class="license">무료 라이선스 서체입니다.</p>
+          </div>
+          <div class="compare">
+            <div class="sample-box">
+              <span class="sample-label">English</span>
+              <p class="sample">US TAX SERVICE</p>
+            </div>
+            <div class="sample-box">
+              <span class="sample-label">Korean</span>
+              <p class="sample ko">미국 법인 설립 후가 중요합니다.</p>
+            </div>
+          </div>
           <div class="links">
             <a class="link-pill" href="https://rsms.me/inter/" target="_blank" rel="noopener">공식 사이트</a>
             <a class="link-pill" href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener">Google Fonts</a>
           </div>
         </article>
 
-        <article class="font-card">
-          <h3 class="name">Roboto Light</h3>
-          <p class="sample">every bread is rolled with french butter</p>
-          <p class="note">Google Fonts에서 제공되는 무료 산세리프. Helvetica보다 약간 더 기술적인 인상입니다.</p>
+        <article class="font-card font-roboto">
+          <div class="topline">
+            <h3 class="name">Roboto Light</h3>
+            <p class="license">무료 라이선스 서체입니다.</p>
+          </div>
+          <div class="compare">
+            <div class="sample-box">
+              <span class="sample-label">English</span>
+              <p class="sample">US TAX SERVICE</p>
+            </div>
+            <div class="sample-box">
+              <span class="sample-label">Korean</span>
+              <p class="sample ko">미국 법인 설립 후가 중요합니다.</p>
+            </div>
+          </div>
           <div class="links">
             <a class="link-pill" href="https://fonts.google.com/specimen/Roboto" target="_blank" rel="noopener">Google Fonts</a>
           </div>
         </article>
 
-        <article class="font-card">
-          <h3 class="name">TeX Gyre Heros</h3>
-          <p class="sample">every bread is rolled with french butter</p>
-          <p class="note">Helvetica 계열 대체로 자주 언급되는 무료 폰트입니다.</p>
+        <article class="font-card font-tex">
+          <div class="topline">
+            <h3 class="name">TeX Gyre Heros</h3>
+            <p class="license">무료 라이선스 서체입니다.</p>
+          </div>
+          <div class="compare">
+            <div class="sample-box">
+              <span class="sample-label">English</span>
+              <p class="sample">US TAX SERVICE</p>
+            </div>
+            <div class="sample-box">
+              <span class="sample-label">Korean</span>
+              <p class="sample ko">미국 법인 설립 후가 중요합니다.</p>
+            </div>
+          </div>
           <div class="links">
             <a class="link-pill" href="https://www.gust.org.pl/projects/e-foundry/tex-gyre/heros" target="_blank" rel="noopener">공식 페이지</a>
           </div>
         </article>
 
-        <article class="font-card">
-          <h3 class="name">IBM Plex Sans Light</h3>
-          <p class="sample">every bread is rolled with french butter</p>
-          <p class="note">무료 오픈소스 서체. Helvetica와 완전히 같지는 않지만 고급스럽고 정돈된 느낌입니다.</p>
+        <article class="font-card font-ibm">
+          <div class="topline">
+            <h3 class="name">IBM Plex Sans Light</h3>
+            <p class="license">무료 라이선스 서체입니다.</p>
+          </div>
+          <div class="compare">
+            <div class="sample-box">
+              <span class="sample-label">English</span>
+              <p class="sample">US TAX SERVICE</p>
+            </div>
+            <div class="sample-box">
+              <span class="sample-label">Korean</span>
+              <p class="sample ko">미국 법인 설립 후가 중요합니다.</p>
+            </div>
+          </div>
           <div class="links">
             <a class="link-pill" href="https://fonts.google.com/specimen/IBM+Plex+Sans" target="_blank" rel="noopener">Google Fonts</a>
             <a class="link-pill" href="https://github.com/IBM/plex" target="_blank" rel="noopener">GitHub</a>
@@ -241,7 +366,7 @@
     </div>
 
     <aside class="summary">
-      <strong>요약:</strong> Helvetica Neue Light, Helvetica Now Display Light, Neue Haas Grotesk Display는 유료 서체로 분류하는 것이 안전합니다. 무료로 비슷한 분위기를 내려면 Inter Light 또는 TeX Gyre Heros를 먼저 테스트해보세요. 실제 상업 작업 전에는 각 배포처의 최신 라이선스를 확인하세요.
+      <strong>표시 참고:</strong> 브라우저나 컴퓨터에 해당 영문 서체가 설치되어 있지 않거나 한글 글리프가 없는 경우, 한글은 Noto Sans KR 등 대체 서체로 표시될 수 있습니다. 실제 디자인에서는 사용할 서체의 한글 지원 여부와 라이선스를 꼭 확인하세요.
     </aside>
   </main>
 </body>
