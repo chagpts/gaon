@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>US TAX SERVICE Typeface Preview — Selected Korean Fonts</title>
+  <title>US TAX SERVICE Typeface Preview — Requested Fonts</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -155,8 +155,35 @@
       font-weight: 700; font-style: normal; font-display: swap;
     }
 
+    /* Requested font candidates */
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicL.woff2') format('woff2');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicM.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicB.woff2') format('woff2');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicEB.woff2') format('woff2');
+      font-weight: 800; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'GamulchiFreeGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/AssacomFreeGothicTTF-Regular.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+
     :root {
-      --preview-font: "Noto Sans KR", system-ui, sans-serif;
+      --preview-font: "Paperlogy", "Pretendard", "Noto Sans KR", system-ui, sans-serif;
       --ink: #171311;
       --muted: #716860;
       --line: #e8e1d8;
@@ -602,7 +629,7 @@
   <main class="app-shell">
     <aside class="control-panel" aria-label="서체 선택 패널">
       <div class="brand-lab" aria-hidden="true"><span></span><span></span><span></span></div>
-      <h1>Typeface<br>Preview</h1>
+      <h1>Font<br>Preview</h1>
       <p class="sub">첨부 이미지의 서체 후보를 반영했습니다. 서체마다 제목·본문 굵기 프리셋이 함께 적용됩니다.</p>
 
       <section class="control-block">
@@ -771,18 +798,11 @@
 
   <script>
     const fonts = [
-      { name: '노토산스', desc: '900 / 400', family: '"Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.8 },
-      { name: '프리텐다드', desc: '900 / 400', family: '"Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -5.0 },
-      { name: 'G마켓 산스', desc: '700 / 300', family: '"GmarketSans", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 700, tracking: -4.2 },
       { name: '페이퍼로지', desc: '900 / 300', family: '"Paperlogy", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 300, leadWeight: 500, navWeight: 800, cardWeight: 800, tracking: -4.8 },
-      { name: '210 옴니고딕', desc: '900 / 300', family: '"210 OmniGothic", "210 옴니고딕", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 300, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -5.2 },
-      { name: 'IBM 픽셀 산스', desc: '700 / 400', family: '"IBM Plex Sans KR", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 400, leadWeight: 500, navWeight: 700, cardWeight: 700, tracking: -3.8 },
-      { name: '레페리 베이스 타입', desc: '700 / 400', family: '"LeferiBase", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 400, leadWeight: 400, navWeight: 700, cardWeight: 700, tracking: -3.6 },
-      { name: '네오현대', desc: '900 / 400', family: '"NeoHyundai", "네오현대", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.8 },
-      { name: '에스코어드림', desc: '900 / 400', family: '"SCoreDream", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 800, tracking: -4.3 },
+      { name: '지마켓 산스', desc: '700 / 300', family: '"GmarketSans", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 700, tracking: -4.2 },
       { name: '원티드 산스', desc: '900 / 400', family: '"Wanted Sans", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.7 },
-      { name: '에스고딕', desc: '900 / 400', family: '"S Gothic", "에스고딕", "SCoreDream", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.5 },
-      { name: '윤아고딕 700', desc: '700 / 300', family: '"Yoon Gothic 700", "YoonGothic700", "윤고딕700", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 790, tracking: -4.6 }
+      { name: '남양주 고딕체', desc: '800 / 300', family: '"NamyangjuGothic", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 800, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 800, tracking: -4.6 },
+      { name: '가물치 무료고딕', desc: '700 / 400', family: '"GamulchiFreeGothic", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 400, leadWeight: 400, navWeight: 700, cardWeight: 700, tracking: -3.9 }
     ];
 
     const root = document.documentElement;
