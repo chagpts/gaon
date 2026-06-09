@@ -3,35 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>US TAX SERVICE Serif Font Comparison Site</title>
+  <title>US TAX SERVICE Font Comparison Site</title>
 
-  <!-- Web fonts: Korean serif candidates -->
+  <!-- Web fonts: accounting firm candidates, Pretendard excluded -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/gh/hyunbinseo/yeolrin@1/index.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sunghyunzz/eulyoo1945/eulyoo1945.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sun-typeface/suit@2.0.5/fonts/static/woff2/SUIT.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/static/complete/WantedSans.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-kopubworld@1.0/dotum.min.css" />
+  <link rel="stylesheet" href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css" />
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" />
 
   <style>
     @font-face {
-      font-family: 'JoseonShinmyeongjo';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.1/ChosunSm.woff') format('woff');
-      font-weight: normal;
+      font-family: 'SCoreDream';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+      font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
 
     @font-face {
-      font-family: 'KbizHanmaumMyungjo';
-      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumMyungjo.woff') format('woff');
-      font-weight: normal;
+      font-family: 'SCoreDream';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNamsan';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SeoulNamsanM.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'SeoulNamsan';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SeoulNamsanB.woff') format('woff');
+      font-weight: 700;
       font-style: normal;
       font-display: swap;
     }
 
     :root {
-      --font-current: "Yeolrin Myeongjo", "Nanum Myeongjo", serif;
+      --font-current: "SUIT", "Noto Sans KR", system-ui, sans-serif;
       --bg: #f6f1e9;
       --paper: #fffdf8;
       --ink: #2a2119;
@@ -894,8 +913,8 @@
 
   <div class="app-shell">
     <aside class="control-panel" aria-label="폰트 비교 컨트롤">
-      <h1>US TAX SERVICE<br />Font Lab</h1>
-      <p class="sub">왼쪽에서 폰트를 고르면 오른쪽 실제 웹사이트 미리보기에 바로 적용됩니다. 제목, 본문, 카드, 버튼까지 한 번에 확인하세요.</p>
+      <h1>US TAX SERVICE<br />Type Lab</h1>
+      <p class="sub">프리텐다드를 제외한 회계법인 후보 서체 10종을 실제 홈페이지 화면에서 비교합니다. 제목, 본문, 숫자, 버튼, 카드까지 한 번에 확인하세요.</p>
 
       <div class="control-block">
         <p class="control-block-title">01. Font</p>
@@ -1011,13 +1030,13 @@
         <section class="compare-section">
           <div class="compare-box">
             <div>
-              <h2 id="currentFontTitle">열린명조</h2>
-              <p id="currentFontComment">자연스럽고 단단한 명조 인상으로 전문 서비스의 신뢰감을 부드럽게 보여줍니다.</p>
+              <h2 id="currentFontTitle">수트</h2>
+              <p id="currentFontComment">기업형 웹사이트에 잘 맞는 단정한 UI 서체입니다. 숫자와 한글 본문이 안정적으로 보입니다.</p>
             </div>
             <div class="font-spec-table">
-              <div class="spec-row"><span>한글 인상</span><strong id="specKorean">부드러운 필력감과 단단한 맺음이 공존합니다.</strong></div>
-              <div class="spec-row"><span>영문/숫자</span><strong id="specEnglish">영문·숫자와 한글이 비교적 조화롭게 어울립니다.</strong></div>
-              <div class="spec-row"><span>추천 용도</span><strong id="specUse">브랜드 본문, 소개문, 신뢰형 헤드라인</strong></div>
+              <div class="spec-row"><span>한글 인상</span><strong id="specKorean">획이 깨끗하고 균형감이 좋아 전문 서비스에 적합합니다.</strong></div>
+              <div class="spec-row"><span>영문/숫자</span><strong id="specEnglish">영문·숫자 표기가 안정적이라 세무·회계 수치 표현에 유리합니다.</strong></div>
+              <div class="spec-row"><span>추천 용도</span><strong id="specUse">전체 UI, 본문, 메뉴, 카드</strong></div>
             </div>
           </div>
         </section>
@@ -1033,76 +1052,124 @@
   <script>
     const fonts = [
       {
-        id: 'yeolrin',
+        id: 'suit',
         number: '01',
-        name: '열린명조',
-        label: 'Balanced',
-        family: '"Yeolrin Myeongjo", "Nanum Myeongjo", serif',
-        short: '자연스럽고 단단함',
-        comment: '자연스러운 필력감과 단단한 맺음이 공존합니다. 전문 서비스의 신뢰감을 부드럽게 보여주기에 좋습니다.',
-        korean: '부드러운 필력감과 단단한 맺음이 공존합니다.',
-        english: '영문·숫자와 한글이 비교적 조화롭게 어울립니다.',
-        use: '브랜드 본문, 소개문, 신뢰형 헤드라인'
+        name: '수트',
+        label: 'Best UI',
+        family: '"SUIT", "Noto Sans KR", system-ui, sans-serif',
+        short: '기업형 UI에 안정적',
+        comment: '단정하고 현대적인 UI 인상이 강합니다. 회계법인 홈페이지의 메뉴, 본문, 숫자, 카드 영역을 모두 안정적으로 보여줍니다.',
+        korean: '획이 깨끗하고 균형감이 좋아 전문 서비스에 적합합니다.',
+        english: '영문·숫자 표기가 안정적이라 세무·회계 수치 표현에 유리합니다.',
+        use: '전체 UI, 본문, 메뉴, 카드'
       },
       {
-        id: 'nanum',
+        id: 'noto',
         number: '02',
-        name: '나눔명조',
-        label: 'Readable',
-        family: '"Nanum Myeongjo", "Yeolrin Myeongjo", serif',
-        short: '따뜻한 기본 명조',
-        comment: '화면용 힌팅이 안정적이고 익숙한 인상입니다. 긴 본문이나 안내문에서 부담이 적습니다.',
-        korean: '따뜻하고 익숙해서 장문 가독성이 좋습니다.',
-        english: '숫자와 영문은 정갈하지만 고딕보다 차분합니다.',
-        use: '본문, 설명문, FAQ, 안내 페이지'
+        name: '본고딕 / Noto Sans',
+        label: 'Global',
+        family: '"Noto Sans KR", "SUIT", system-ui, sans-serif',
+        short: '가장 안정적인 기본기',
+        comment: '글로벌 서비스처럼 안정적이고 중립적인 인상을 줍니다. 한국어와 영어가 함께 있는 세무·회계 사이트에 무난합니다.',
+        korean: '중립적이고 또렷해서 정보 전달력이 좋습니다.',
+        english: '영문, 숫자, 기호가 한글과 자연스럽게 섞입니다.',
+        use: '전체 사이트 기본 서체, 다국어 페이지'
       },
       {
-        id: 'eulyoo',
+        id: 'wanted',
         number: '03',
-        name: '을유1945',
-        label: 'Editorial',
-        family: '"Eulyoo1945", "Nanum Myeongjo", serif',
-        short: '문학적이고 고급스러움',
-        comment: '출판물 같은 고급스럽고 차분한 분위기가 강합니다. 브랜드 스토리나 대표 인사말처럼 격식 있는 문구에 잘 맞습니다.',
-        korean: '섬세하고 문학적인 인상이 강합니다.',
-        english: '짧은 영문과 숫자에서는 클래식한 느낌을 줍니다.',
-        use: '브랜드 스토리, 대표 인사말, 고급형 헤드라인'
+        name: 'Wanted Sans',
+        label: 'Modern',
+        family: '"Wanted Sans", "Noto Sans KR", system-ui, sans-serif',
+        short: '현대적이고 신뢰감 있음',
+        comment: '트렌디하지만 과하지 않아 젊고 전문적인 회계·컨설팅 브랜드에 잘 맞습니다. 메인 카피와 본문 모두 테스트하기 좋습니다.',
+        korean: '곧고 시원한 인상으로 디지털 서비스 느낌이 납니다.',
+        english: '숫자와 영문이 선명해 버튼·CTA에도 잘 맞습니다.',
+        use: '메인 카피, 서비스 소개, CTA 버튼'
       },
       {
-        id: 'iropke',
+        id: 'nanumsquareNeo',
         number: '04',
-        name: '이롭게 바탕체',
-        label: 'Web',
-        family: '"Iropke Batang", "Nanum Myeongjo", serif',
-        short: '웹 최적화 바탕',
-        comment: '웹 전용으로 기획된 바탕체라 화면에서 또렷하고 정돈된 느낌이 있습니다. 세무 서비스 본문 후보로 안정적입니다.',
-        korean: '디지털 화면에서 선명하고 정갈합니다.',
-        english: '한글 중심 레이아웃에서 가장 자연스럽습니다.',
-        use: '웹 본문, 서비스 설명, 블로그형 콘텐츠'
+        name: '나눔스퀘어 네오',
+        label: 'Friendly',
+        family: '"NanumSquareNeo", "Noto Sans KR", system-ui, sans-serif',
+        short: '단정하고 부드러움',
+        comment: '각진 전문성에 부드러움을 더해줍니다. 너무 딱딱한 회계법인보다 친절하고 접근성 있는 브랜드에 어울립니다.',
+        korean: '둥근 인상이 있어 신뢰감과 편안함을 같이 줍니다.',
+        english: '짧은 영문 메뉴와 숫자 표기에 무난합니다.',
+        use: '제목, 카드 UI, FAQ, 고객 안내문'
       },
       {
-        id: 'joseon',
+        id: 'kopubDotum',
         number: '05',
-        name: '조선 신명조',
-        label: 'Classic',
-        family: '"JoseonShinmyeongjo", "ChosunSm", "Nanum Myeongjo", serif',
-        short: '전통적이고 정중함',
-        comment: '전통적인 신문·문서 느낌이 있어 정중하고 단단합니다. 다만 브랜드가 너무 보수적으로 보일 수 있어 제목 위주로 테스트하는 편이 좋습니다.',
-        korean: '격식 있고 전통적인 명조 인상이 뚜렷합니다.',
-        english: '영문·숫자는 보조 폰트 fallback 영향이 있을 수 있습니다.',
-        use: '섹션 제목, 신뢰 강조 문구, 공지형 콘텐츠'
+        name: 'KoPub돋움',
+        label: 'Document',
+        family: '"KoPubWorld Dotum", "Noto Sans KR", system-ui, sans-serif',
+        short: '문서형 신뢰감',
+        comment: '공공 문서나 보고서 같은 정돈된 느낌이 있습니다. 세무 리포트, 안내 자료, 전문성 강조 페이지에 잘 맞습니다.',
+        korean: '차분하고 문서 친화적인 인상입니다.',
+        english: '숫자 정보와 표가 많은 구성에서 안정적으로 보입니다.',
+        use: '본문, 리포트형 페이지, 세무 안내 콘텐츠'
       },
       {
-        id: 'kbiz',
+        id: 'spoqa',
         number: '06',
-        name: 'KBIZ한마음명조체',
-        label: 'Formal',
-        family: '"KbizHanmaumMyungjo", "Nanum Myeongjo", serif',
-        short: '공적인 안정감',
-        comment: '공공기관 문서 같은 안정감과 단정함이 있습니다. 전문성과 신뢰를 강조하는 세무·회계 페이지에 잘 맞습니다.',
-        korean: '점잖고 공적인 인상이 강합니다.',
-        english: '숫자는 차분하지만 굵기는 다소 얇게 느껴질 수 있습니다.',
-        use: '회사 소개, 서비스 설명, 신뢰 중심 본문'
+        name: '스포카 한 산스 네오',
+        label: 'Readable',
+        family: '"Spoqa Han Sans Neo", "Noto Sans KR", system-ui, sans-serif',
+        short: '화면 가독성 우수',
+        comment: '웹과 앱에서 읽기 좋은 균형을 보여줍니다. 숫자와 짧은 문장이 많은 세무 서비스 화면에서 실용적입니다.',
+        korean: '작은 크기에서도 또렷하고 균일합니다.',
+        english: '숫자, 메뉴, 카드 제목의 밀도가 안정적입니다.',
+        use: '본문, 표, 수치 콘텐츠, 모바일 UI'
+      },
+      {
+        id: 'ibmPlex',
+        number: '07',
+        name: 'IBM Plex Sans',
+        label: 'Tech',
+        family: '"IBM Plex Sans KR", "IBM Plex Sans", "Noto Sans KR", system-ui, sans-serif',
+        short: '글로벌 테크 감성',
+        comment: '금융·테크 기업 같은 차분하고 전문적인 분위기가 납니다. 회계 자동화, CFO 서비스, 컨설팅 페이지에 잘 어울립니다.',
+        korean: '정제된 산업적 인상이 있어 전문성이 강합니다.',
+        english: '영문과 숫자가 특히 단정하고 기술적인 느낌입니다.',
+        use: '영문 병기, 컨설팅 페이지, 데이터 섹션'
+      },
+      {
+        id: 'seoulNamsan',
+        number: '08',
+        name: '서울남산체',
+        label: 'Public',
+        family: '"SeoulNamsan", "Noto Sans KR", system-ui, sans-serif',
+        short: '공신력 있고 안정적',
+        comment: '공공기관 같은 신뢰감이 느껴지는 서체입니다. 보수적이고 안정적인 회계법인 톤을 원할 때 적합합니다.',
+        korean: '정돈되고 공적인 인상이 강합니다.',
+        english: '짧은 영문과 숫자는 fallback과 함께 안정적으로 표시됩니다.',
+        use: '회사 소개, 대표 메시지, 신뢰 강조 영역'
+      },
+      {
+        id: 'maruburi',
+        number: '09',
+        name: '마루 부리',
+        label: 'Premium',
+        family: '"MaruBuri", "Noto Serif KR", serif',
+        short: '고급스러운 세리프 포인트',
+        comment: '전체 본문보다는 대표 문구나 섹션 타이틀에서 고급감을 줄 때 좋습니다. 산세리프와 조합하면 차별화 포인트가 됩니다.',
+        korean: '차분하고 품격 있는 인상이 강합니다.',
+        english: '숫자·영문은 보조 서체와 조합해 쓰는 편이 좋습니다.',
+        use: '메인 슬로건, 대표 인사말, 고급형 헤드라인'
+      },
+      {
+        id: 'scoreDream',
+        number: '10',
+        name: '에스코어드림',
+        label: 'Corporate',
+        family: '"SCoreDream", "Noto Sans KR", system-ui, sans-serif',
+        short: '단단한 기업 이미지',
+        comment: '힘 있고 정리된 기업형 인상을 줍니다. 제목에 쓰면 신뢰감과 명확성이 좋아지고, 본문에서는 약간 또렷하게 느껴집니다.',
+        korean: '획의 힘이 있어 전문성과 자신감이 보입니다.',
+        english: '숫자와 대문자 영문이 단단하게 보입니다.',
+        use: '헤드라인, 서비스 카드, 핵심 수치 영역'
       }
     ];
 
@@ -1127,7 +1194,7 @@
     const specEnglish = document.querySelector('#specEnglish');
     const specUse = document.querySelector('#specUse');
 
-    let activeFontId = 'yeolrin';
+    let activeFontId = 'suit';
 
     function renderFontControls() {
       fontList.innerHTML = fonts.map(font => `
@@ -1185,7 +1252,7 @@
     }
 
     function resetAll() {
-      activeFontId = 'yeolrin';
+      activeFontId = 'suit';
       heroTitle.value = `미국 법인\n설립 이후가 더 중요합니다.`;
       heroBody.value = '개인 세금보고, 법인 회계, IRS 레터 대응까지 미국 생활과 비즈니스에 필요한 세무 서비스를 한곳에서 제공합니다.';
       titleWeight.value = 700;
