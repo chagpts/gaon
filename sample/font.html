@@ -20,6 +20,7 @@
 
     :root {
       --font-current: "SUIT", "Noto Sans KR", system-ui, sans-serif;
+      --preview-font: "SUIT", "Noto Sans KR", system-ui, sans-serif;
       --display: "MaruBuri", Georgia, "Times New Roman", serif;
       --sans: "Wanted Sans", "SUIT", "Noto Sans KR", system-ui, sans-serif;
       --bg: #11100f;
@@ -268,6 +269,7 @@
         linear-gradient(90deg, rgba(21, 17, 13, 0.035) 1px, transparent 1px),
         var(--paper);
       background-size: 76px 76px;
+      font-family: var(--preview-font);
       box-shadow: var(--shadow);
       border: 1px solid rgba(255, 250, 242, 0.2);
     }
@@ -287,7 +289,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      font-family: var(--sans);
+      font-family: var(--preview-font);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.18em;
@@ -301,7 +303,7 @@
       height: 42px;
       color: #fffaf2;
       background: var(--ink);
-      font-family: var(--display);
+      font-family: var(--preview-font);
       font-size: 16px;
       letter-spacing: -0.04em;
       border-radius: 50%;
@@ -358,7 +360,7 @@
       left: clamp(18px, 5vw, 52px);
       top: 42px;
       z-index: 0;
-      font-family: var(--display);
+      font-family: var(--preview-font);
       font-size: clamp(78px, 17vw, 238px);
       line-height: 0.78;
       letter-spacing: -0.11em;
@@ -394,7 +396,7 @@
       margin: 0;
       max-width: 730px;
       white-space: pre-line;
-      font-family: var(--display);
+      font-family: var(--preview-font);
       font-size: clamp(62px, 9vw, 128px);
       line-height: 0.88;
       font-weight: var(--title-weight);
@@ -1098,6 +1100,7 @@
     const bodySpacingValue = document.querySelector('#bodySpacingValue');
     const resetButton = document.querySelector('#resetButton');
     const comparisonGrid = document.querySelector('#comparisonGrid');
+    const previewFrame = document.querySelector('.preview-frame');
 
     const currentFontTitle = document.querySelector('#currentFontTitle');
     const currentFontComment = document.querySelector('#currentFontComment');
@@ -1159,8 +1162,10 @@
       activeFontId = fontId;
       const font = fonts.find(item => item.id === fontId) || fonts[0];
 
-      root.style.setProperty('--font-current', font.family);
-      document.body.style.fontFamily = font.family;
+      root.style.setProperty('--preview-font', font.family);
+      if (previewFrame) {
+        previewFrame.style.fontFamily = font.family;
+      }
 
       currentFontTitle.textContent = font.name;
       currentFontComment.textContent = font.comment;
