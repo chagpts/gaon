@@ -16,6 +16,13 @@
   <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" />
 
   <style>
+    /* Official Gwangbok Lee Eun Suk font from korea815.go.kr */
+    @font-face {
+      font-family: 'GwangbokLeeEunSuk';
+      src: url('https://korea815.go.kr/cms/attach/678cf534ea4346d319c8775832fbb554/9a9db098b587ee18b321c826f3707a49') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+
 
     /* Added font candidates from the provided reference image */
     @font-face {
@@ -623,6 +630,33 @@
       transform: translateY(1px);
     }
 
+
+    /* Apply Gwangbok Lee Eun Suk only to the final CTA question */
+    .preview-frame .bottom-cta h2 {
+      font-family: 'GwangbokLeeEunSuk', 'Noto Sans KR', serif !important;
+      font-weight: 400 !important;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+    }
+
+      /* Make all font choices visible on small screens, including 광복 이은숙 */
+    @media (max-width: 1020px) {
+      .font-list {
+        flex-wrap: wrap !important;
+        overflow: visible !important;
+      }
+      .font-option {
+        min-width: 160px !important;
+        flex: 1 1 160px !important;
+      }
+      .font-meta {
+        display: block !important;
+      }
+      .font-name {
+        white-space: normal !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -802,7 +836,8 @@
       { name: '지마켓 산스', desc: '700 / 300', family: '"GmarketSans", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 700, tracking: -4.2 },
       { name: '원티드 산스', desc: '900 / 400', family: '"Wanted Sans", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.7 },
       { name: '남양주 고딕체', desc: '800 / 300', family: '"NamyangjuGothic", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 800, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 800, tracking: -4.6 },
-      { name: '가물치 무료고딕', desc: '700 / 400', family: '"GamulchiFreeGothic", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 400, leadWeight: 400, navWeight: 700, cardWeight: 700, tracking: -3.9 }
+      { name: '가물치 무료고딕', desc: '700 / 400', family: '"GamulchiFreeGothic", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 400, leadWeight: 400, navWeight: 700, cardWeight: 700, tracking: -3.9 },
+      { name: '광복 이은숙', desc: '400 / 400', family: '"GwangbokLeeEunSuk", "Noto Sans KR", serif', strongWeight: 400, lightWeight: 400, leadWeight: 400, navWeight: 400, cardWeight: 400, tracking: -2.0 }
     ];
 
     const root = document.documentElement;
