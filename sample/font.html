@@ -1102,6 +1102,181 @@
       }
     }
 
+  
+
+    /* FINAL FIX: remove the native dropdown that covered the preview and keep a visible font panel */
+    .mobile-font-bar {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      overflow: hidden !important;
+    }
+
+    .app-shell {
+      grid-template-columns: 300px minmax(0, 1fr) !important;
+      min-height: 100vh;
+    }
+
+    .control-panel {
+      display: block !important;
+      position: sticky !important;
+      top: 0 !important;
+      height: 100vh !important;
+      overflow-y: auto !important;
+      padding: 24px 22px !important;
+      background: #fffaf2 !important;
+      color: #15110d !important;
+      border-right: 1px solid rgba(21,17,13,.14) !important;
+    }
+
+    .control-panel h1 {
+      font-size: 34px !important;
+      line-height: .95 !important;
+      letter-spacing: -.055em !important;
+    }
+
+    .sub {
+      font-size: 12px !important;
+      line-height: 1.65 !important;
+    }
+
+    .font-list {
+      gap: 4px !important;
+    }
+
+    .font-option {
+      grid-template-columns: 30px 1fr !important;
+      padding: 11px 0 !important;
+      color: rgba(21,17,13,.72) !important;
+    }
+
+    .font-option .font-tag {
+      display: none !important;
+    }
+
+    .font-option.active {
+      color: #b1002f !important;
+      border-bottom-color: #b1002f !important;
+      transform: none !important;
+    }
+
+    .font-number {
+      font-size: 18px !important;
+    }
+
+    .font-name {
+      font-size: 13px !important;
+    }
+
+    .font-desc {
+      font-size: 10px !important;
+    }
+
+    .field label {
+      color: rgba(21,17,13,.68) !important;
+    }
+
+    textarea,
+    input[type="range"] {
+      color: #15110d !important;
+      background: rgba(21,17,13,.045) !important;
+      border: 1px solid rgba(21,17,13,.16) !important;
+    }
+
+    .reset-button {
+      color: #15110d !important;
+      border-color: rgba(21,17,13,.26) !important;
+      background: transparent !important;
+    }
+
+    .site-preview {
+      min-width: 0 !important;
+      height: 100vh !important;
+      overflow-y: auto !important;
+      padding: 0 !important;
+      background: #f7f0e7 !important;
+      align-items: flex-start !important;
+    }
+
+    .preview-frame {
+      width: min(100%, 640px) !important;
+      max-width: 640px !important;
+      min-height: 100vh !important;
+    }
+
+    @media (max-width: 900px) {
+      .app-shell {
+        grid-template-columns: 1fr !important;
+      }
+
+      .control-panel {
+        position: static !important;
+        height: auto !important;
+        max-height: none !important;
+        padding: 16px !important;
+        border-right: 0 !important;
+        border-bottom: 1px solid rgba(21,17,13,.14) !important;
+      }
+
+      .control-panel h1,
+      .sub,
+      .control-block:not(:first-of-type),
+      .font-desc {
+        display: none !important;
+      }
+
+      .control-block {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+      }
+
+      .control-block-title {
+        margin-bottom: 8px !important;
+      }
+
+      .font-list {
+        display: flex !important;
+        gap: 8px !important;
+        overflow-x: auto !important;
+        padding-bottom: 4px !important;
+      }
+
+      .font-option {
+        flex: 0 0 auto !important;
+        width: auto !important;
+        min-width: 126px !important;
+        grid-template-columns: 1fr !important;
+        gap: 3px !important;
+        padding: 10px 12px !important;
+        border: 1px solid rgba(21,17,13,.14) !important;
+        border-radius: 999px !important;
+        background: #fffaf2 !important;
+      }
+
+      .font-number {
+        display: none !important;
+      }
+
+      .font-name {
+        font-size: 12px !important;
+        white-space: nowrap !important;
+      }
+
+      .font-option.active {
+        background: #15110d !important;
+        color: #fffaf2 !important;
+        border-color: #15110d !important;
+      }
+
+      .site-preview {
+        height: auto !important;
+        min-height: 100vh !important;
+      }
+    }
+
   </style>
 </head>
 <body>
