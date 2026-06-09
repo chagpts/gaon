@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>US TAX SERVICE AI Video Typeface Lab</title>
+  <title>US TAX SERVICE Typeface Preview — PwC-inspired</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -17,69 +18,55 @@
     @font-face {
       font-family: 'GmarketSans';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
-      font-weight: 300;
-      font-style: normal;
-      font-display: swap;
+      font-weight: 300; font-style: normal; font-display: swap;
     }
     @font-face {
       font-family: 'GmarketSans';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
+      font-weight: 500; font-style: normal; font-display: swap;
     }
     @font-face {
       font-family: 'GmarketSans';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
+      font-weight: 700; font-style: normal; font-display: swap;
     }
     @font-face {
       font-family: 'SCoreDream';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
+      font-weight: 400; font-style: normal; font-display: swap;
     }
     @font-face {
       font-family: 'SCoreDream';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
+      font-weight: 700; font-style: normal; font-display: swap;
     }
     @font-face {
       font-family: 'SeoulNamsan';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SeoulNamsanM.woff') format('woff');
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
+      font-weight: 400; font-style: normal; font-display: swap;
     }
     @font-face {
       font-family: 'SeoulNamsan';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SeoulNamsanB.woff') format('woff');
-      font-weight: 700;
-      font-style: normal;
-      font-display: swap;
+      font-weight: 700; font-style: normal; font-display: swap;
     }
 
     :root {
       --preview-font: "SUIT", "Noto Sans KR", system-ui, sans-serif;
-      --panel: #ffffff;
-      --panel-2: #f7f7f4;
-      --ink: #151515;
-      --muted: #6f6f67;
-      --paper: #ffffff;
-      --paper-2: #fbfbf8;
-      --line: rgba(20, 20, 20, 0.12);
-      --ai-orange: #ff6a00;
-      --ai-red: #d6002a;
-      --ai-yellow: #f5a400;
-      --ai-pink: #e03075;
-      --title-weight: 760;
+      --ink: #1a1716;
+      --muted: #706862;
+      --line: #e5dfd8;
+      --white: #ffffff;
+      --off: #f7f5f1;
+      --orange: #eb8c00;
+      --red: #d93900;
+      --deep-red: #a32020;
+      --rose: #db536a;
+      --yellow: #f2b600;
+      --brown: #6b3e2e;
       --title-spacing: -0.045em;
       --body-spacing: -0.01em;
+      --title-weight: 760;
     }
 
     * { box-sizing: border-box; }
@@ -87,15 +74,15 @@
     body {
       margin: 0;
       color: var(--ink);
-      background: #f5f5f2;
+      background: #ece8e2;
       font-family: "SUIT", "Noto Sans KR", system-ui, sans-serif;
     }
-    button, textarea, input, select { font: inherit; }
+    button, textarea, input { font: inherit; }
     button { cursor: pointer; }
 
     .app-shell {
       display: grid;
-      grid-template-columns: 310px minmax(0, 1fr);
+      grid-template-columns: 300px minmax(0, 1fr);
       min-height: 100vh;
     }
 
@@ -104,609 +91,576 @@
       top: 0;
       height: 100vh;
       overflow-y: auto;
-      padding: 26px 22px;
-      color: #151515;
-      background:
-        linear-gradient(135deg, rgba(255,106,0,.08), transparent 32%),
-        linear-gradient(180deg, #ffffff 0%, #f7f7f4 100%);
-      border-right: 1px solid rgba(20,20,20,.12);
+      padding: 28px 22px;
+      background: #fff;
+      border-right: 1px solid var(--line);
     }
+    .brand-lab {
+      display: inline-grid;
+      grid-template-columns: 20px 20px 20px;
+      gap: 3px;
+      margin-bottom: 20px;
+    }
+    .brand-lab span:nth-child(1) { height: 44px; background: var(--orange); }
+    .brand-lab span:nth-child(2) { height: 32px; align-self: end; background: var(--red); }
+    .brand-lab span:nth-child(3) { height: 22px; align-self: end; background: var(--yellow); }
     .control-panel h1 {
       margin: 0;
-      font-size: 38px;
-      line-height: .92;
-      letter-spacing: -.06em;
+      font-size: 34px;
+      line-height: .95;
+      letter-spacing: -.055em;
       font-weight: 900;
     }
     .sub {
       margin: 16px 0 0;
-      color: rgba(21,21,21,.62);
+      color: #756d67;
       font-size: 12px;
       line-height: 1.7;
     }
     .control-block {
-      margin-top: 28px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(21,21,21,.08);
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
     }
     .control-block-title {
-      margin: 0 0 14px;
-      color: var(--ai-red);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-    .font-list { display: grid; gap: 4px; }
-    .font-option {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 34px 1fr;
-      gap: 12px;
-      align-items: center;
-      padding: 11px 0;
-      color: rgba(21,21,21,.58);
-      background: transparent;
-      border: 0;
-      border-bottom: 1px solid rgba(20,20,20,.08);
-      text-align: left;
-      transition: .18s ease;
-    }
-    .font-option:hover,
-    .font-option.active {
-      color: #111;
-      border-bottom-color: var(--ai-red);
-      transform: translateX(4px);
-    }
-    .font-number { font-size: 18px; font-weight: 900; color: var(--ai-orange); }
-    .font-name { display: block; font-size: 13px; font-weight: 900; }
-    .font-desc { display: block; margin-top: 3px; font-size: 10px; color: rgba(21,21,21,.42); }
-    .field { display: grid; gap: 8px; margin-top: 14px; }
-    .field label { color: rgba(21,21,21,.58); font-size: 11px; font-weight: 800; }
-    textarea {
-      width: 100%;
-      min-height: 92px;
-      resize: vertical;
-      padding: 13px;
-      color: #151515;
-      background: #ffffff;
-      border: 1px solid rgba(20,20,20,.16);
-      outline: 0;
-    }
-    input[type="range"] { width: 100%; accent-color: var(--ai-red); }
-    .reset-button {
-      width: 100%;
-      margin-top: 24px;
-      padding: 13px 16px;
-      color: #151515;
-      background: #ffffff;
-      border: 1px solid rgba(20,20,20,.18);
-      border-radius: 999px;
-    }
-
-    .site-preview {
-      height: 100vh;
-      overflow-y: auto;
-      padding: 0;
-      background: #f1f1ee;
-    }
-    .preview-frame,
-    .preview-frame *,
-    .preview-frame *::before,
-    .preview-frame *::after {
-      font-family: var(--preview-font) !important;
-    }
-    .preview-frame {
-      width: min(100%, 1180px);
-      min-height: 100vh;
-      margin: 0 auto;
-      color: var(--ink);
-      background: var(--paper);
-      overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0,0,0,.06);
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      gap: 28px;
-      align-items: center;
-      min-height: 82px;
-      padding: 0 clamp(24px, 4vw, 54px);
-      color: #151515;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(20,20,20,.12);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .brand-mark {
-      display: grid;
-      place-items: center;
-      width: 42px;
-      height: 42px;
-      color: #fff;
-      background: #ffffff;
-      border-radius: 50%;
-      letter-spacing: -.04em;
-    }
-    .nav { display: flex; gap: 24px; color: rgba(21,21,21,.62); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-    .header-action { padding: 13px 18px; color: #fff; background: #ffffff; border: 0; border-radius: 999px; font-size: 12px; font-weight: 900; }
-
-    .ai-hero {
-      position: relative;
-      min-height: 720px;
-      display: grid;
-      grid-template-columns: minmax(0, .92fr) minmax(420px, 1.08fr);
-      align-items: stretch;
-      color: #151515;
-      background: #ffffff;
-      isolation: isolate;
-    }
-    .ai-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 18% 18%, rgba(255,106,0,.12), transparent 28%),
-        radial-gradient(circle at 72% 30%, rgba(214,0,42,.09), transparent 30%),
-        radial-gradient(circle at 52% 86%, rgba(255,176,0,.10), transparent 36%),
-        linear-gradient(120deg, rgba(20,20,20,.045) 0 1px, transparent 1px 86px);
-      background-size: auto, auto, auto, 86px 86px;
-      opacity: .9;
-      z-index: -2;
-    }
-    .ai-hero-copy {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(46px, 6vw, 86px) clamp(24px, 5vw, 70px);
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      width: fit-content;
-      margin: 0 0 24px;
-      color: #d6002a;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-    }
-    .eyebrow::before { content: ""; width: 44px; height: 4px; background: var(--ai-orange); }
-    .ai-title {
-      max-width: 720px;
-      margin: 0;
-      white-space: pre-line;
-      word-break: keep-all;
-      font-size: clamp(54px, 6.4vw, 100px);
-      line-height: .96;
-      letter-spacing: max(var(--title-spacing), -.07em);
-      font-weight: var(--title-weight);
-    }
-    .ai-copy {
-      max-width: 610px;
-      margin: 28px 0 0;
-      color: rgba(21,21,21,.70);
-      font-size: clamp(16px, 1.35vw, 20px);
-      line-height: 1.8;
-      letter-spacing: var(--body-spacing);
-    }
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
-    .primary-btn, .secondary-btn { padding: 15px 19px; border-radius: 999px; font-size: 13px; font-weight: 900; }
-    .primary-btn { color: #fff; background: #d6002a; border: 1px solid #d6002a; }
-    .secondary-btn { color: #151515; background: #fff; border: 1px solid rgba(21,21,21,.28); }
-
-    .video-stage {
-      position: relative;
-      min-height: 720px;
-      overflow: hidden;
-      background: #ffffff;
-      border-left: 1px solid rgba(20,20,20,.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(24px, 4vw, 54px);
-    }
-    .video-frame-shell {
-      position: relative;
-      width: min(100%, 880px);
-      aspect-ratio: 16 / 9;
-      background: #f7f4ee;
-      border: 1px solid rgba(21,21,21,.14);
-      box-shadow: 0 24px 70px rgba(21,21,21,.10);
-      overflow: hidden;
-    }
-    .video-frame-shell iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    .video-label {
-      position: absolute;
-      left: clamp(24px, 4vw, 54px);
-      top: clamp(24px, 4vw, 54px);
-      z-index: 2;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 13px;
-      color: #151515;
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(21,21,21,.12);
-      backdrop-filter: blur(12px);
+      margin: 0 0 12px;
+      color: var(--deep-red);
       font-size: 11px;
       font-weight: 900;
       letter-spacing: .16em;
       text-transform: uppercase;
     }
-    .video-label::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--ai-red);
+    .font-list { display: grid; gap: 0; }
+    .font-option {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 0;
+      color: #817973;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #eee8e1;
+      text-align: left;
+      transition: .18s ease;
+    }
+    .font-option:hover, .font-option.active {
+      color: #111;
+      transform: translateX(4px);
+      border-bottom-color: var(--red);
+    }
+    .font-number { color: var(--orange); font-weight: 900; font-size: 16px; }
+    .font-name { display: block; font-size: 13px; font-weight: 900; }
+    .font-desc { display: block; margin-top: 3px; color: #9b9188; font-size: 10px; line-height: 1.4; }
+    .field { display: grid; gap: 8px; margin-top: 14px; }
+    .field label { color: #7b736d; font-size: 11px; font-weight: 800; }
+    textarea {
+      width: 100%;
+      min-height: 88px;
+      resize: vertical;
+      padding: 13px;
+      border: 1px solid var(--line);
+      outline: none;
+      background: #fffdf9;
+      color: #222;
+    }
+    input[type="range"] { width: 100%; accent-color: var(--red); }
+    .reset-button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 12px 16px;
+      background: #fff;
+      border: 1px solid #d8d0c8;
+      border-radius: 999px;
+      color: #222;
     }
 
-    .insight-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: #e9e9e4;
-      color: #151515;
+    .site-preview {
+      height: 100vh;
+      overflow-y: auto;
+      background: #f3f0ec;
     }
-    .insight-card {
-      min-height: 230px;
-      padding: 34px;
-      border-right: 1px solid rgba(21,21,21,.08);
+    .preview-frame, .preview-frame *, .preview-frame *::before, .preview-frame *::after {
+      font-family: var(--preview-font) !important;
     }
-    .insight-card:nth-child(1) { background: #ffffff; }
-    .insight-card:nth-child(2) { background: #faf7f2; }
-    .insight-card:nth-child(3) { background: #f3f3ee; }
-    .insight-card b { display: block; font-size: 14px; margin-bottom: 54px; }
-    .insight-card h3 { margin: 0; font-size: 28px; line-height: 1.18; letter-spacing: -.04em; }
-    .insight-card p { margin: 14px 0 0; color: rgba(21,21,21,.60); line-height: 1.7; }
+    .preview-frame {
+      width: min(100%, 1260px);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 20px 70px rgba(31, 26, 22, .08);
+      overflow: hidden;
+    }
 
-    .section {
-      padding: clamp(48px, 7vw, 92px) clamp(24px, 5vw, 70px);
-      background: var(--paper);
-      border-bottom: 1px solid var(--line);
-    }
-    .section-heading {
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, .46fr);
-      gap: 46px;
-      align-items: end;
-      margin-bottom: 46px;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 28px;
+      min-height: 76px;
+      padding: 0 clamp(24px, 4vw, 56px);
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid #e7e1da;
     }
-    .section-heading h2 {
+    .logo-wrap { display: flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: -.025em; }
+    .tile-logo { display: grid; grid-template-columns: repeat(3, 14px); gap: 2px; align-items: end; height: 34px; }
+    .tile-logo i:nth-child(1) { height: 32px; background: var(--orange); }
+    .tile-logo i:nth-child(2) { height: 24px; background: var(--red); }
+    .tile-logo i:nth-child(3) { height: 16px; background: var(--yellow); }
+    .nav { display: flex; gap: clamp(14px, 2vw, 30px); align-items: center; justify-content: center; }
+    .nav a { color: #2a2521; text-decoration: none; font-size: 14px; font-weight: 700; }
+    .header-actions { display: flex; align-items: center; gap: 18px; color: #2a2521; font-size: 14px; font-weight: 800; }
+    .menu-icon { width: 24px; height: 14px; display: grid; gap: 5px; }
+    .menu-icon span { display: block; height: 2px; background: #1d1916; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
+      min-height: 660px;
+      background: #fff;
+    }
+    .hero-copy {
+      position: relative;
+      padding: clamp(54px, 7vw, 94px) clamp(28px, 4vw, 62px) 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .accent-stack {
+      position: absolute;
+      left: clamp(28px, 4vw, 62px);
+      top: 42px;
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      opacity: .95;
+    }
+    .accent-stack i:nth-child(1) { width: 68px; height: 20px; background: var(--yellow); }
+    .accent-stack i:nth-child(2) { width: 54px; height: 40px; background: var(--orange); }
+    .accent-stack i:nth-child(3) { width: 38px; height: 58px; background: var(--red); }
+    .eyebrow {
+      margin: 88px 0 18px;
+      color: var(--deep-red);
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .hero-title {
       margin: 0;
-      max-width: 900px;
-      font-size: clamp(46px, 5.4vw, 84px);
+      max-width: 780px;
+      font-size: clamp(48px, 6.6vw, 82px);
       line-height: .98;
-      letter-spacing: -.055em;
+      letter-spacing: var(--title-spacing);
       font-weight: var(--title-weight);
     }
-    .section-heading p { margin: 0; color: var(--muted); line-height: 1.8; letter-spacing: var(--body-spacing); }
-    .solution-grid {
+    .hero-title .copy-live { display: inline; }
+    .hero-lead {
+      max-width: 560px;
+      margin: 28px 0 0;
+      color: #4d4741;
+      font-size: clamp(16px, 1.8vw, 20px);
+      line-height: 1.65;
+      letter-spacing: var(--body-spacing);
+      font-weight: 500;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 34px; }
+    .primary-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 15px 20px;
+      background: #1f1a17;
+      color: white;
+      border: 0;
+      text-decoration: none;
+      font-weight: 900;
+    }
+    .primary-cta::after { content: '›'; font-size: 24px; line-height: 0; }
+    .secondary-cta { color: #1f1a17; font-weight: 900; text-decoration: none; }
+
+    .hero-media {
+      position: relative;
+      min-height: 560px;
+      background: #f7f4ef;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      overflow: hidden;
+    }
+    .video-wrap {
+      position: absolute;
+      inset: 0;
+      background: #e9e2da;
+      overflow: hidden;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 177.78vh;
+      min-width: 100%;
+      height: 56.25vw;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      border: 0;
+      pointer-events: none;
+    }
+    .media-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.34));
+    }
+    .media-caption {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: min(420px, 84%);
+      padding: 26px 28px;
+      background: #fff;
+      border-top: 8px solid var(--orange);
+      box-shadow: 0 -20px 45px rgba(0,0,0,.08);
+    }
+    .media-caption strong { display: block; font-size: 22px; letter-spacing: -.03em; line-height: 1.22; }
+    .media-caption span { display: block; margin-top: 10px; color: #645b55; font-size: 13px; line-height: 1.55; }
+
+    .insight-bar {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-    }
-    .solution-card { min-height: 280px; padding: 30px; background: #ffffff; }
-    .solution-card b { display: block; color: var(--ai-red); font-size: 42px; margin-bottom: 50px; letter-spacing: -.06em; }
-    .solution-card h3 { margin: 0 0 14px; font-size: 23px; }
-    .solution-card p { margin: 0; color: var(--muted); line-height: 1.75; }
-
-    .type-proof {
-      display: grid;
-      grid-template-columns: minmax(260px,.48fr) 1fr;
-      gap: 1px;
-      background: #f3f3ee;
-      color: #151515;
-    }
-    .type-info { padding: clamp(34px, 5vw, 58px); background: #ffffff; }
-    .type-info h2 { margin: 0; font-size: clamp(38px, 5vw, 74px); line-height: .94; letter-spacing: -.055em; }
-    .type-info p { margin: 20px 0 0; color: rgba(21,21,21,.62); line-height: 1.75; }
-    .spec-table { display: grid; padding: clamp(30px, 5vw, 54px); background: #fbfbf8; }
-    .spec-row { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid rgba(21,21,21,.08); }
-    .spec-row span { color: #d6002a; font-size: 12px; font-weight: 900; letter-spacing: .14em; }
-    .spec-row strong { color: rgba(21,21,21,.82); font-size: 17px; line-height: 1.65; }
-
-    .cta {
-      padding: clamp(58px, 8vw, 106px) clamp(24px, 5vw, 70px);
-      color: #151515;
-      background: #ffffff;
       border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #fff;
     }
-    .cta h2 { max-width: 920px; margin: 0; font-size: clamp(48px, 7vw, 104px); line-height: .92; letter-spacing: -.06em; }
-    .cta p { max-width: 680px; margin: 22px 0 0; font-size: 18px; line-height: 1.8; }
+    .insight-card {
+      min-height: 170px;
+      padding: 28px;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .insight-card:nth-child(3) { border-right: 0; }
+    .insight-card b { font-size: 13px; color: var(--deep-red); }
+    .insight-card p { margin: 16px 0 0; font-size: 24px; line-height: 1.22; letter-spacing: -.04em; font-weight: 850; }
+    .insight-card .arrow { margin-top: 20px; color: var(--red); font-weight: 900; }
 
-    @media (max-width: 1080px) {
-      .app-shell { grid-template-columns: 1fr; }
-      .control-panel {
-        position: static;
-        height: auto;
-        padding: 16px;
-      }
-      .control-panel h1, .sub, .control-block:not(:first-of-type), .font-desc { display: none; }
-      .control-block { margin: 0; padding: 0; border: 0; }
-      .font-list { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
-      .font-option { flex: 0 0 auto; width: auto; min-width: 124px; grid-template-columns: 1fr; padding: 10px 12px; border: 1px solid rgba(20,20,20,.14); border-radius: 999px; }
-      .font-number { display: none; }
-      .site-preview { height: auto; min-height: 100vh; }
-      .ai-hero { grid-template-columns: 1fr; }
-      .video-stage { min-height: 520px; border-left: 0; border-top: 1px solid rgba(21,21,21,.08); }
-      .section-heading, .type-proof { grid-template-columns: 1fr; }
+    .feature-section {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
     }
-    @media (max-width: 760px) {
-      .site-header { grid-template-columns: 1fr auto; min-height: 70px; }
+    .feature-title {
+      padding: clamp(44px, 6vw, 76px) clamp(28px, 4vw, 56px);
+      background: #f8f5f1;
+    }
+    .feature-title h2 { margin: 0; font-size: clamp(36px, 5vw, 60px); line-height: 1; letter-spacing: -.055em; }
+    .feature-title p { margin: 22px 0 0; color: #625a55; font-size: 17px; line-height: 1.7; }
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .feature-tile { min-height: 250px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; color: #1f1a17; }
+    .feature-tile:nth-child(1) { background: var(--orange); }
+    .feature-tile:nth-child(2) { background: #fff; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .feature-tile:nth-child(3) { background: var(--deep-red); color: #fff; }
+    .feature-tile:nth-child(4) { background: var(--yellow); }
+    .feature-tile small { font-size: 13px; font-weight: 900; opacity: .75; }
+    .feature-tile h3 { margin: 32px 0 0; font-size: 28px; line-height: 1.13; letter-spacing: -.045em; }
+    .feature-tile p { margin: 14px 0 0; font-size: 14px; line-height: 1.55; opacity: .82; }
+
+    .story-section {
+      padding: clamp(44px, 6vw, 76px) clamp(28px, 4vw, 56px);
+      background: #fff;
+    }
+    .story-heading { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end; margin-bottom: 24px; }
+    .story-heading h2 { margin: 0; font-size: clamp(34px, 5vw, 56px); line-height: 1; letter-spacing: -.055em; }
+    .story-heading a { color: #1f1a17; font-weight: 900; text-decoration: none; }
+    .story-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .story-item { min-height: 240px; padding: 26px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
+    .story-item .tag { color: var(--deep-red); font-weight: 900; font-size: 12px; }
+    .story-item h3 { margin: 44px 0 0; font-size: 25px; line-height: 1.22; letter-spacing: -.04em; }
+    .story-item p { margin: 16px 0 0; color: #67605b; font-size: 14px; line-height: 1.6; }
+
+    .bottom-cta {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: clamp(44px, 6vw, 70px) clamp(28px, 4vw, 56px);
+      color: #fff;
+      background: #241f1d;
+    }
+    .bottom-cta h2 { margin: 0; font-size: clamp(34px, 4.5vw, 56px); line-height: 1.05; letter-spacing: -.05em; }
+    .bottom-cta a { color: #1f1a17; background: #fff; padding: 15px 20px; text-decoration: none; font-weight: 900; }
+
+    @media (max-width: 1020px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .control-panel { position: relative; height: auto; padding: 20px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .control-panel h1, .sub, .field, .reset-button { display: none; }
+      .brand-lab { margin-bottom: 12px; }
+      .control-block { margin-top: 0; padding-top: 0; border-top: 0; }
+      .font-list { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 6px; }
+      .font-option { min-width: 150px; grid-template-columns: 1fr; gap: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 999px; }
+      .font-number, .font-desc { display: none; }
+      .site-preview { height: auto; overflow: visible; }
+      .preview-frame { min-height: auto; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-media { min-height: 460px; }
+      .insight-bar, .feature-section, .story-list, .bottom-cta { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
       .nav { display: none; }
-      .ai-hero-copy { padding: 46px 22px; }
-      .ai-title { font-size: 48px; }
-      .video-stage { min-height: 460px; padding: 22px; }
-      .panel-1 { top: 17%; left: 5%; }
-      .panel-2 { right: 5%; bottom: 16%; }
-      .panel-3 { display: none; }
-      .insight-strip, .solution-grid { grid-template-columns: 1fr; }
-      .section, .cta { padding-inline: 22px; }
-      .spec-row { grid-template-columns: 1fr; gap: 8px; }
+    }
+    @media (max-width: 680px) {
+      .site-header { grid-template-columns: 1fr auto; min-height: 68px; padding: 0 20px; }
+      .header-actions span { display: none; }
+      .hero-copy { padding: 46px 22px 44px; }
+      .accent-stack { left: 22px; top: 24px; transform: scale(.78); transform-origin: left top; }
+      .eyebrow { margin-top: 72px; }
+      .hero-title { font-size: 42px; }
+      .hero-media { min-height: 360px; }
+      .media-caption { width: 92%; padding: 20px; }
+      .story-heading { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="control-panel" aria-label="서체 비교 컨트롤">
-      <h1>AI Service<br />Type Lab</h1>
-      <p class="sub">왼쪽에서 서체를 클릭하면 오른쪽 홈페이지 전체에 적용됩니다. AI 기반 세무 서비스처럼 보이는 첫 화면에서 제목, 본문, 버튼, 숫자, 카드의 인상을 비교하세요.</p>
+  <main class="app-shell">
+    <aside class="control-panel" aria-label="서체 선택 패널">
+      <div class="brand-lab" aria-hidden="true"><span></span><span></span><span></span></div>
+      <h1>Typeface<br>Preview</h1>
+      <p class="sub">왼쪽에서 서체를 선택하면 오른쪽 홈페이지 시안 전체에 같은 서체가 적용됩니다.</p>
 
-      <div class="control-block">
-        <p class="control-block-title">01. Typeface</p>
+      <section class="control-block">
+        <p class="control-block-title">Font candidates</p>
         <div class="font-list" id="fontList"></div>
-      </div>
+      </section>
 
-      <div class="control-block">
-        <p class="control-block-title">02. Hero Copy</p>
+      <section class="control-block">
+        <p class="control-block-title">Live headline</p>
         <div class="field">
-          <label for="heroTitle">메인 제목</label>
-          <textarea id="heroTitle">AI가 세금 문제를
-먼저 읽고 정리합니다.</textarea>
+          <label for="sampleText">히어로 제목 문구</label>
+          <textarea id="sampleText">AI가 세무 서비스를 더 빠르고 정확하게 바꿉니다.</textarea>
         </div>
         <div class="field">
-          <label for="heroBody">본문 문구</label>
-          <textarea id="heroBody">개인 세금보고, 법인 회계, IRS 레터 대응까지 AI 기반 검토와 전문가 확인을 연결해 더 빠르고 명확한 세무 서비스를 제공합니다.</textarea>
-        </div>
-      </div>
-
-      <div class="control-block">
-        <p class="control-block-title">03. Type Control</p>
-        <div class="field">
-          <label for="titleWeight">제목 굵기 <span id="titleWeightValue">760</span></label>
-          <input id="titleWeight" type="range" min="400" max="900" step="20" value="760" />
+          <label for="weightRange">제목 굵기 <span id="weightValue">760</span></label>
+          <input type="range" id="weightRange" min="400" max="900" step="10" value="760" />
         </div>
         <div class="field">
-          <label for="titleSpacing">제목 자간 <span id="titleSpacingValue">-0.045em</span></label>
-          <input id="titleSpacing" type="range" min="-0.12" max="0.04" step="0.005" value="-0.045" />
+          <label for="trackingRange">자간 <span id="trackingValue">-4.5</span></label>
+          <input type="range" id="trackingRange" min="-8" max="2" step="0.1" value="-4.5" />
         </div>
-        <div class="field">
-          <label for="bodySpacing">본문 자간 <span id="bodySpacingValue">-0.010em</span></label>
-          <input id="bodySpacing" type="range" min="-0.06" max="0.04" step="0.005" value="-0.01" />
-        </div>
-      </div>
-
-      <button class="reset-button" id="resetButton">기본값으로 되돌리기</button>
+        <button class="reset-button" id="resetButton">기본값으로 되돌리기</button>
+      </section>
     </aside>
 
-    <main class="site-preview">
-      <div class="preview-frame">
+    <section class="site-preview">
+      <div class="preview-frame" id="previewFrame">
         <header class="site-header">
-          <div class="brand"><span class="brand-mark">US</span><span>US TAX SERVICE</span></div>
-          <nav class="nav" aria-label="서비스 메뉴">
-            <span>AI Tax</span>
-            <span>Bookkeeping</span>
-            <span>IRS Response</span>
-            <span>Insights</span>
+          <div class="logo-wrap">
+            <span class="tile-logo" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>US TAX SERVICE</span>
+          </div>
+          <nav class="nav" aria-label="사이트 메뉴">
+            <a href="#">Digital</a>
+            <a href="#">Insights</a>
+            <a href="#">Services</a>
+            <a href="#">Industries</a>
+            <a href="#">About</a>
           </nav>
-          <button class="header-action">상담 예약</button>
+          <div class="header-actions">
+            <span>Search</span>
+            <span class="menu-icon" aria-label="menu"><span></span><span></span></span>
+          </div>
         </header>
 
-        <section class="ai-hero" aria-label="AI 기반 세무 서비스 소개">
-          <div class="ai-hero-copy">
-            <p class="eyebrow">AI-enabled tax service</p>
-            <h2 class="ai-title" id="previewHeroTitle">AI가 세금 문제를
-먼저 읽고 정리합니다.</h2>
-            <p class="ai-copy" id="previewHeroBody">개인 세금보고, 법인 회계, IRS 레터 대응까지 AI 기반 검토와 전문가 확인을 연결해 더 빠르고 명확한 세무 서비스를 제공합니다.</p>
-            <div class="hero-actions">
-              <button class="primary-btn">AI 서비스 보기</button>
-              <button class="secondary-btn">상담 예약</button>
+        <section class="hero">
+          <div class="hero-copy">
+            <div class="accent-stack" aria-hidden="true"><i></i><i></i><i></i></div>
+            <p class="eyebrow">AI-powered tax service</p>
+            <h1 class="hero-title"><span class="copy-live">AI가 세무 서비스를 더 빠르고 정확하게 바꿉니다.</span></h1>
+            <p class="hero-lead">개인 세금보고, 법인 회계, IRS 레터 대응, 자료 검토까지 AI 기반 분석과 전문가 검수를 결합해 미국 세무 업무의 속도와 신뢰도를 높입니다.</p>
+            <div class="hero-cta">
+              <a class="primary-cta" href="#">See how AI works</a>
+              <a class="secondary-cta" href="#">서비스 살펴보기</a>
             </div>
           </div>
 
-          <div class="video-stage" aria-label="AI 세무 서비스 소개 영상">
-            <div class="video-label">AI-enabled service film</div>
-            <div class="video-frame-shell">
+          <div class="hero-media">
+            <div class="video-wrap">
               <iframe
-                src="https://www.youtube.com/embed/RO97N0ERJ3s?autoplay=1&mute=1&loop=1&playlist=RO97N0ERJ3s&controls=1&modestbranding=1&rel=0&playsinline=1"
-                title="AI enabled service video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
+                src="https://www.youtube.com/embed/RO97N0ERJ3s?autoplay=1&mute=1&loop=1&playlist=RO97N0ERJ3s&controls=0&rel=0&modestbranding=1&playsinline=1"
+                title="AI service video"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <div class="media-overlay"></div>
+            <div class="media-caption">
+              <strong>AI가 문서를 읽고, 리스크를 찾고, 전문가가 최종 검토합니다.</strong>
+              <span>Document AI · Tax Risk Signal · Expert Review</span>
             </div>
           </div>
         </section>
 
-        <section class="insight-strip" aria-label="AI 서비스 핵심 장점">
+        <section class="insight-bar">
           <article class="insight-card">
-            <b>01</b>
-            <h3>자료 업로드 후 자동 분류</h3>
-            <p>세금보고 자료를 AI가 먼저 정리해 검토 시간을 줄입니다.</p>
+            <b>Digital Solutions</b>
+            <p>자료 업로드부터 분류, 누락 확인까지 자동화합니다.</p>
+            <span class="arrow">→</span>
           </article>
           <article class="insight-card">
-            <b>02</b>
-            <h3>전문가가 최종 확인</h3>
-            <p>자동화된 결과를 세무 전문가가 다시 확인해 신뢰도를 높입니다.</p>
+            <b>Tax Intelligence</b>
+            <p>1040, 1120-S, Payroll 이슈를 한 흐름에서 점검합니다.</p>
+            <span class="arrow">→</span>
           </article>
           <article class="insight-card">
-            <b>03</b>
-            <h3>진행 상황을 한눈에 확인</h3>
-            <p>개인·법인 세금보고 단계와 요청 자료를 명확하게 보여줍니다.</p>
+            <b>Human Assurance</b>
+            <p>AI 결과를 세무 전문가가 확인해 실행 가능한 답을 제공합니다.</p>
+            <span class="arrow">→</span>
           </article>
         </section>
 
-        <section class="section">
-          <div class="section-heading">
-            <h2>고객이 들어오자마자 디지털 세무 서비스라는 인상을 받도록.</h2>
-            <p>서체를 바꾸면 같은 AI 서비스 메시지도 더 보수적이거나, 더 혁신적이거나, 더 친근하게 느껴집니다.</p>
+        <section class="feature-section">
+          <div class="feature-title">
+            <h2>Technology that works with your tax team.</h2>
+            <p>세무 업무는 단순 자동화만으로 끝나지 않습니다. AI 분석, 실시간 상태 확인, 전문가 검토가 연결되어야 고객이 안심하고 의사결정할 수 있습니다.</p>
           </div>
-          <div class="solution-grid">
-            <article class="solution-card">
-              <b>1040</b>
-              <h3>개인 세금보고 AI 체크</h3>
-              <p>소득, 공제, 투자 내역을 정리하고 누락 가능성을 먼저 확인합니다.</p>
+          <div class="feature-grid">
+            <article class="feature-tile">
+              <small>01</small>
+              <div>
+                <h3>AI Document Review</h3>
+                <p>영수증, W-2, 1099, 법인 자료를 빠르게 읽고 분류합니다.</p>
+              </div>
             </article>
-            <article class="solution-card">
-              <b>1120</b>
-              <h3>법인 회계 데이터 검토</h3>
-              <p>월별 장부와 비용 항목을 분석해 세무 리스크를 빠르게 파악합니다.</p>
+            <article class="feature-tile">
+              <small>02</small>
+              <div>
+                <h3>Tax Risk Signal</h3>
+                <p>IRS 레터, 누락 자료, 신고 오류 가능성을 사전에 표시합니다.</p>
+              </div>
             </article>
-            <article class="solution-card">
-              <b>IRS</b>
-              <h3>레터 대응 요약</h3>
-              <p>IRS 안내문의 핵심 요구사항을 요약하고 필요한 자료를 안내합니다.</p>
+            <article class="feature-tile">
+              <small>03</small>
+              <div>
+                <h3>Expert Review</h3>
+                <p>AI가 정리한 결과를 전문가가 확인하고 고객에게 설명합니다.</p>
+              </div>
+            </article>
+            <article class="feature-tile">
+              <small>04</small>
+              <div>
+                <h3>Client Dashboard</h3>
+                <p>진행 상태와 필요한 액션을 한 화면에서 확인합니다.</p>
+              </div>
             </article>
           </div>
         </section>
 
-        <section class="type-proof">
-          <div class="type-info">
-            <h2 id="currentFontTitle">수트</h2>
-            <p id="currentFontComment">단정하고 현대적인 UI 인상이 강합니다. 회계법인 홈페이지의 메뉴, 본문, 숫자, 카드 영역을 모두 안정적으로 보여줍니다.</p>
+        <section class="story-section">
+          <div class="story-heading">
+            <h2>Featured services</h2>
+            <a href="#">View all →</a>
           </div>
-          <div class="spec-table">
-            <div class="spec-row"><span>한글 인상</span><strong id="specKorean">획이 깨끗하고 균형감이 좋아 전문 서비스에 적합합니다.</strong></div>
-            <div class="spec-row"><span>영문/숫자</span><strong id="specEnglish">영문·숫자 표기가 안정적이라 세무·회계 수치 표현에 유리합니다.</strong></div>
-            <div class="spec-row"><span>추천 용도</span><strong id="specUse">전체 UI, 본문, 메뉴, 카드</strong></div>
+          <div class="story-list">
+            <article class="story-item">
+              <span class="tag">Individual</span>
+              <h3>미국 개인 세금보고를 더 쉽게 시작합니다.</h3>
+              <p>자료 체크리스트, 누락 확인, 신고 후 대응까지 이어지는 개인 고객용 프로세스.</p>
+            </article>
+            <article class="story-item">
+              <span class="tag">Business</span>
+              <h3>법인 설립 이후 회계와 세무를 연결합니다.</h3>
+              <p>Bookkeeping, Sales Tax, Payroll, 1120-S 신고를 하나의 운영 흐름으로 관리합니다.</p>
+            </article>
+            <article class="story-item">
+              <span class="tag">IRS Response</span>
+              <h3>IRS 레터 대응을 빠르고 명확하게 준비합니다.</h3>
+              <p>문서 내용을 분석하고 필요한 증빙과 답변 방향을 전문가가 정리합니다.</p>
+            </article>
           </div>
         </section>
 
-        <section class="cta">
-          <h2>AI가 빨라 보이고, 전문가가 믿음직해 보이는 서체를 고르세요.</h2>
-          <p>왼쪽 후보 서체를 클릭하며 첫 화면의 혁신감, 본문 가독성, 숫자 신뢰감을 동시에 비교할 수 있습니다.</p>
+        <section class="bottom-cta">
+          <h2>AI와 전문가가 함께 보는 세무 서비스가 필요하신가요?</h2>
+          <a href="#">상담 요청하기</a>
         </section>
       </div>
-    </main>
-  </div>
+    </section>
+  </main>
 
   <script>
     const fonts = [
-      { id:'suit', number:'01', name:'수트', family:'"SUIT", "Noto Sans KR", system-ui, sans-serif', short:'기업형 UI에 안정적', comment:'단정하고 현대적인 UI 인상이 강합니다. 회계법인 홈페이지의 메뉴, 본문, 숫자, 카드 영역을 모두 안정적으로 보여줍니다.', korean:'획이 깨끗하고 균형감이 좋아 전문 서비스에 적합합니다.', english:'영문·숫자 표기가 안정적이라 세무·회계 수치 표현에 유리합니다.', use:'전체 UI, 본문, 메뉴, 카드' },
-      { id:'noto', number:'02', name:'본고딕 / Noto Sans', family:'"Noto Sans KR", "SUIT", system-ui, sans-serif', short:'가장 안정적인 기본기', comment:'글로벌 서비스처럼 안정적이고 중립적인 인상을 줍니다. 한국어와 영어가 함께 있는 세무·회계 사이트에 무난합니다.', korean:'중립적이고 또렷해서 정보 전달력이 좋습니다.', english:'영문, 숫자, 기호가 한글과 자연스럽게 섞입니다.', use:'전체 사이트 기본 서체, 다국어 페이지' },
-      { id:'wanted', number:'03', name:'Wanted Sans', family:'"Wanted Sans", "Noto Sans KR", system-ui, sans-serif', short:'현대적이고 신뢰감 있음', comment:'트렌디하지만 과하지 않아 젊고 전문적인 회계·컨설팅 브랜드에 잘 맞습니다. 메인 카피와 본문 모두 테스트하기 좋습니다.', korean:'곧고 시원한 인상으로 디지털 서비스 느낌이 납니다.', english:'숫자와 영문이 선명해 버튼·CTA에도 잘 맞습니다.', use:'메인 카피, 서비스 소개, CTA 버튼' },
-      { id:'nanumsquareNeo', number:'04', name:'나눔스퀘어 네오', family:'"NanumSquareNeo", "Noto Sans KR", system-ui, sans-serif', short:'단정하고 부드러움', comment:'각진 전문성에 부드러움을 더해줍니다. 너무 딱딱한 회계법인보다 친절하고 접근성 있는 브랜드에 어울립니다.', korean:'둥근 인상이 있어 신뢰감과 편안함을 같이 줍니다.', english:'짧은 영문 메뉴와 숫자 표기에 무난합니다.', use:'제목, 카드 UI, FAQ, 고객 안내문' },
-      { id:'kopubDotum', number:'05', name:'KoPub돋움', family:'"KoPubWorld Dotum", "Noto Sans KR", system-ui, sans-serif', short:'문서형 신뢰감', comment:'공공 문서나 보고서 같은 정돈된 느낌이 있습니다. 세무 리포트, 안내 자료, 전문성 강조 페이지에 잘 맞습니다.', korean:'차분하고 문서 친화적인 인상입니다.', english:'숫자 정보와 표가 많은 구성에서 안정적으로 보입니다.', use:'본문, 리포트형 페이지, 세무 안내 콘텐츠' },
-      { id:'spoqa', number:'06', name:'스포카 한 산스 네오', family:'"Spoqa Han Sans Neo", "Noto Sans KR", system-ui, sans-serif', short:'화면 가독성 우수', comment:'웹과 앱에서 읽기 좋은 균형을 보여줍니다. 숫자와 짧은 문장이 많은 세무 서비스 화면에서 실용적입니다.', korean:'작은 크기에서도 또렷하고 균일합니다.', english:'숫자, 메뉴, 카드 제목의 밀도가 안정적입니다.', use:'본문, 표, 수치 콘텐츠, 모바일 UI' },
-      { id:'ibmPlex', number:'07', name:'IBM Plex Sans', family:'"IBM Plex Sans KR", "IBM Plex Sans", "Noto Sans KR", system-ui, sans-serif', short:'글로벌 테크 감성', comment:'금융·테크 기업 같은 차분하고 전문적인 분위기가 납니다. 회계 자동화, CFO 서비스, 컨설팅 페이지에 잘 어울립니다.', korean:'정제된 산업적 인상이 있어 전문성이 강합니다.', english:'영문과 숫자가 특히 단정하고 기술적인 느낌입니다.', use:'영문 병기, 컨설팅 페이지, 데이터 섹션' },
-      { id:'seoulNamsan', number:'08', name:'서울남산체', family:'"SeoulNamsan", "Noto Sans KR", system-ui, sans-serif', short:'공신력 있고 안정적', comment:'공공기관 같은 신뢰감이 느껴지는 서체입니다. 보수적이고 안정적인 회계법인 톤을 원할 때 적합합니다.', korean:'정돈되고 공적인 인상이 강합니다.', english:'짧은 영문과 숫자는 fallback과 함께 안정적으로 표시됩니다.', use:'회사 소개, 대표 메시지, 신뢰 강조 영역' },
-      { id:'gmarketSans', number:'09', name:'Gmarket Sans', family:'"GmarketSans", "Noto Sans KR", system-ui, sans-serif', short:'선명한 브랜드 인상', comment:'둥글고 또렷한 인상으로 브랜드 카피와 서비스 안내를 밝고 명확하게 보여줍니다. 세무 서비스의 딱딱함을 줄이면서도 전문성을 유지하기 좋습니다.', korean:'획이 시원하고 형태가 안정적이라 제목과 본문 모두 또렷하게 보입니다.', english:'영문과 숫자도 깔끔해 메뉴, 버튼, 세금보고 번호 표기에 잘 맞습니다.', use:'브랜드 카피, 버튼, 서비스 카드, 숫자 영역' },
-      { id:'scoreDream', number:'10', name:'에스코어드림', family:'"SCoreDream", "Noto Sans KR", system-ui, sans-serif', short:'단단한 기업 이미지', comment:'힘 있고 정리된 기업형 인상을 줍니다. 제목에 쓰면 신뢰감과 명확성이 좋아지고, 본문에서는 약간 또렷하게 느껴집니다.', korean:'획의 힘이 있어 전문성과 자신감이 보입니다.', english:'숫자와 대문자 영문이 단단하게 보입니다.', use:'헤드라인, 서비스 카드, 핵심 수치 영역' }
+      { name: '수트', desc: 'Best UI', family: '"SUIT", "Noto Sans KR", system-ui, sans-serif' },
+      { name: '본고딕 / Noto Sans', desc: 'Global', family: '"Noto Sans KR", system-ui, sans-serif' },
+      { name: 'Wanted Sans', desc: 'Modern', family: '"Wanted Sans", "Noto Sans KR", system-ui, sans-serif' },
+      { name: '나눔스퀘어 네오', desc: 'Friendly', family: '"NanumSquareNeo", "Noto Sans KR", system-ui, sans-serif' },
+      { name: 'KoPub돋움', desc: 'Document', family: '"KoPubWorldDotum", "Noto Sans KR", system-ui, sans-serif' },
+      { name: '스포카 한 산스 네오', desc: 'Readable', family: '"Spoqa Han Sans Neo", "Noto Sans KR", system-ui, sans-serif' },
+      { name: 'IBM Plex Sans', desc: 'Tech', family: '"IBM Plex Sans KR", "Noto Sans KR", system-ui, sans-serif' },
+      { name: '서울남산체', desc: 'Public', family: '"SeoulNamsan", "Noto Sans KR", system-ui, sans-serif' },
+      { name: 'Gmarket Sans', desc: 'Digital', family: '"GmarketSans", "Noto Sans KR", system-ui, sans-serif' },
+      { name: '에스코어드림', desc: 'Corporate', family: '"SCoreDream", "Noto Sans KR", system-ui, sans-serif' }
     ];
 
     const root = document.documentElement;
-    const fontList = document.querySelector('#fontList');
-    const heroTitle = document.querySelector('#heroTitle');
-    const heroBody = document.querySelector('#heroBody');
-    const previewHeroTitle = document.querySelector('#previewHeroTitle');
-    const previewHeroBody = document.querySelector('#previewHeroBody');
-    const titleWeight = document.querySelector('#titleWeight');
-    const titleSpacing = document.querySelector('#titleSpacing');
-    const bodySpacing = document.querySelector('#bodySpacing');
-    const titleWeightValue = document.querySelector('#titleWeightValue');
-    const titleSpacingValue = document.querySelector('#titleSpacingValue');
-    const bodySpacingValue = document.querySelector('#bodySpacingValue');
-    const resetButton = document.querySelector('#resetButton');
-    const currentFontTitle = document.querySelector('#currentFontTitle');
-    const currentFontComment = document.querySelector('#currentFontComment');
-    const specKorean = document.querySelector('#specKorean');
-    const specEnglish = document.querySelector('#specEnglish');
-    const specUse = document.querySelector('#specUse');
-    let activeFontId = 'suit';
+    const fontList = document.getElementById('fontList');
+    const sampleText = document.getElementById('sampleText');
+    const weightRange = document.getElementById('weightRange');
+    const weightValue = document.getElementById('weightValue');
+    const trackingRange = document.getElementById('trackingRange');
+    const trackingValue = document.getElementById('trackingValue');
+    const resetButton = document.getElementById('resetButton');
+    const liveCopies = document.querySelectorAll('.copy-live');
 
-    function renderFontControls() {
-      fontList.innerHTML = fonts.map(font => `
-        <button class="font-option" type="button" data-font-id="${font.id}">
-          <span class="font-number">${font.number}</span>
-          <span>
-            <span class="font-name" style="font-family:${font.family}">${font.name}</span>
-            <span class="font-desc">${font.short}</span>
-          </span>
-        </button>
-      `).join('');
-      fontList.querySelectorAll('.font-option').forEach(button => button.addEventListener('click', () => setFont(button.dataset.fontId)));
-    }
-
-    function setFont(fontId) {
-      activeFontId = fontId;
-      const font = fonts.find(item => item.id === fontId) || fonts[0];
+    function selectFont(index) {
+      const font = fonts[index];
       root.style.setProperty('--preview-font', font.family);
-      currentFontTitle.textContent = font.name;
-      currentFontComment.textContent = font.comment;
-      specKorean.textContent = font.korean;
-      specEnglish.textContent = font.english;
-      specUse.textContent = font.use;
-      fontList.querySelectorAll('.font-option').forEach(button => button.classList.toggle('active', button.dataset.fontId === fontId));
+      document.querySelectorAll('.font-option').forEach((button, buttonIndex) => {
+        button.classList.toggle('active', buttonIndex === index);
+        button.setAttribute('aria-pressed', buttonIndex === index ? 'true' : 'false');
+      });
     }
 
-    function updateCopy() {
-      previewHeroTitle.textContent = heroTitle.value.trim() || `AI가 세금 문제를\n먼저 읽고 정리합니다.`;
-      previewHeroBody.textContent = heroBody.value.trim() || '개인 세금보고, 법인 회계, IRS 레터 대응까지 AI 기반 검토와 전문가 확인을 연결해 더 빠르고 명확한 세무 서비스를 제공합니다.';
-    }
+    fonts.forEach((font, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'font-option' + (index === 0 ? ' active' : '');
+      button.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+      button.innerHTML = `
+        <span class="font-number">${String(index + 1).padStart(2, '0')}</span>
+        <span><span class="font-name">${font.name}</span><span class="font-desc">${font.desc}</span></span>
+      `;
+      button.addEventListener('click', () => selectFont(index));
+      fontList.appendChild(button);
+    });
 
-    function updateTypeControls() {
-      const titleSpacingValueNum = Number(titleSpacing.value).toFixed(3);
-      const bodySpacingValueNum = Number(bodySpacing.value).toFixed(3);
-      root.style.setProperty('--title-weight', titleWeight.value);
-      root.style.setProperty('--title-spacing', `${titleSpacingValueNum}em`);
-      root.style.setProperty('--body-spacing', `${bodySpacingValueNum}em`);
-      titleWeightValue.textContent = titleWeight.value;
-      titleSpacingValue.textContent = `${titleSpacingValueNum}em`;
-      bodySpacingValue.textContent = `${bodySpacingValueNum}em`;
-    }
+    sampleText.addEventListener('input', () => {
+      const value = sampleText.value.trim() || 'AI가 세무 서비스를 더 빠르고 정확하게 바꿉니다.';
+      liveCopies.forEach(copy => { copy.textContent = value; });
+    });
 
-    function resetAll() {
-      heroTitle.value = `AI가 세금 문제를\n먼저 읽고 정리합니다.`;
-      heroBody.value = '개인 세금보고, 법인 회계, IRS 레터 대응까지 AI 기반 검토와 전문가 확인을 연결해 더 빠르고 명확한 세무 서비스를 제공합니다.';
-      titleWeight.value = 760;
-      titleSpacing.value = -0.045;
-      bodySpacing.value = -0.01;
-      updateCopy();
-      updateTypeControls();
-      setFont('suit');
-    }
+    weightRange.addEventListener('input', () => {
+      weightValue.textContent = weightRange.value;
+      root.style.setProperty('--title-weight', weightRange.value);
+    });
 
-    heroTitle.addEventListener('input', updateCopy);
-    heroBody.addEventListener('input', updateCopy);
-    titleWeight.addEventListener('input', updateTypeControls);
-    titleSpacing.addEventListener('input', updateTypeControls);
-    bodySpacing.addEventListener('input', updateTypeControls);
-    resetButton.addEventListener('click', resetAll);
+    trackingRange.addEventListener('input', () => {
+      trackingValue.textContent = trackingRange.value;
+      root.style.setProperty('--title-spacing', `${trackingRange.value / 100}em`);
+    });
 
-    renderFontControls();
-    resetAll();
+    resetButton.addEventListener('click', () => {
+      sampleText.value = 'AI가 세무 서비스를 더 빠르고 정확하게 바꿉니다.';
+      liveCopies.forEach(copy => { copy.textContent = sampleText.value; });
+      weightRange.value = 760;
+      weightValue.textContent = '760';
+      trackingRange.value = -4.5;
+      trackingValue.textContent = '-4.5';
+      root.style.setProperty('--title-weight', '760');
+      root.style.setProperty('--title-spacing', '-0.045em');
+      selectFont(0);
+    });
   </script>
 </body>
 </html>
