@@ -274,6 +274,14 @@
       border: 1px solid rgba(255, 250, 242, 0.2);
     }
 
+    /* 선택한 서체가 오른쪽 미리보기의 모든 텍스트에 적용되도록 강제 적용 */
+    .preview-frame,
+    .preview-frame *,
+    .preview-frame *::before,
+    .preview-frame *::after {
+      font-family: var(--preview-font) !important;
+    }
+
     .site-header {
       display: grid;
       grid-template-columns: 1fr auto auto;
@@ -1126,6 +1134,9 @@
       root.style.setProperty('--preview-font', font.family);
       if (previewFrame) {
         previewFrame.style.fontFamily = font.family;
+        previewFrame.querySelectorAll('*').forEach(element => {
+          element.style.fontFamily = font.family;
+        });
       }
 
       currentFontTitle.textContent = font.name;
