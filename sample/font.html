@@ -23,7 +23,7 @@
       --preview-font: "SUIT", "Noto Sans KR", system-ui, sans-serif;
       --display: "MaruBuri", Georgia, "Times New Roman", serif;
       --sans: "Wanted Sans", "SUIT", "Noto Sans KR", system-ui, sans-serif;
-      --bg: #11100f;
+      --bg: #f7f0e7;
       --paper: #f7f0e7;
       --paper-2: #fffaf2;
       --ink: #15110d;
@@ -34,7 +34,7 @@
       --accent-2: #d9bfa8;
       --champagne: #ead8c6;
       --radius: 0px;
-      --shadow: 0 34px 90px rgba(0, 0, 0, 0.22);
+      --shadow: 0 24px 80px rgba(84, 62, 42, 0.12);
       --title-weight: 700;
       --title-spacing: -0.04em;
       --body-spacing: -0.01em;
@@ -55,9 +55,9 @@
       color: var(--ink);
       font-family: var(--font-current);
       background:
-        radial-gradient(circle at 12% 8%, rgba(177, 0, 47, 0.24), transparent 30%),
-        radial-gradient(circle at 88% 0%, rgba(217, 191, 168, 0.22), transparent 32%),
-        linear-gradient(135deg, #090807 0%, #211a17 48%, #0f0e0d 100%);
+        radial-gradient(circle at 12% 8%, rgba(177, 0, 47, 0.10), transparent 30%),
+        radial-gradient(circle at 88% 0%, rgba(217, 191, 168, 0.18), transparent 32%),
+        var(--paper);
       letter-spacing: var(--body-spacing);
     }
 
@@ -66,10 +66,10 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.17;
+      opacity: 0.45;
       background-image:
-        linear-gradient(rgba(255,255,255,0.09) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+        linear-gradient(rgba(21,17,13,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21,17,13,0.045) 1px, transparent 1px);
       background-size: 56px 56px;
       mask-image: linear-gradient(to bottom, #000, transparent 78%);
     }
@@ -103,11 +103,11 @@
       height: 100vh;
       overflow-y: auto;
       padding: 34px 28px;
-      color: #fffaf2;
+      color: var(--ink);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), transparent 22%),
-        #11100f;
-      border-right: 1px solid var(--line-dark);
+        linear-gradient(180deg, rgba(255,255,255,0.62), rgba(247,240,231,0.86)),
+        var(--paper);
+      border-right: 1px solid var(--line);
     }
 
     .control-panel h1 {
@@ -125,7 +125,7 @@
       display: block;
       margin-top: 16px;
       padding-top: 16px;
-      border-top: 1px solid var(--line-dark);
+      border-top: 1px solid var(--line);
       font-family: var(--sans);
       font-size: 11px;
       line-height: 1;
@@ -135,7 +135,7 @@
 
     .sub {
       margin: 0 0 28px;
-      color: rgba(255, 250, 242, 0.64);
+      color: var(--muted);
       font-size: 13px;
       line-height: 1.8;
     }
@@ -143,7 +143,7 @@
     .control-block {
       margin-top: 26px;
       padding-top: 22px;
-      border-top: 1px solid var(--line-dark);
+      border-top: 1px solid var(--line);
     }
 
     .control-block-title {
@@ -167,17 +167,17 @@
       gap: 12px;
       align-items: center;
       padding: 13px 0;
-      color: rgba(255, 250, 242, 0.78);
+      color: rgba(21, 17, 13, 0.78);
       background: transparent;
       border: 0;
-      border-bottom: 1px solid rgba(255, 250, 242, 0.12);
+      border-bottom: 1px solid rgba(21, 17, 13, 0.12);
       text-align: left;
       transition: 0.22s ease;
     }
 
     .font-option:hover,
     .font-option.active {
-      color: #fffaf2;
+      color: var(--ink);
       border-bottom-color: rgba(177, 0, 47, 0.75);
       transform: translateX(4px);
     }
@@ -198,17 +198,17 @@
       display: block;
       margin-top: 4px;
       font-size: 11px;
-      color: rgba(255, 250, 242, 0.48);
+      color: rgba(21, 17, 13, 0.54);
     }
 
     .font-tag {
       padding: 5px 8px;
-      border: 1px solid rgba(255, 250, 242, 0.22);
+      border: 1px solid rgba(21, 17, 13, 0.20);
       border-radius: 999px;
       font-size: 9px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255, 250, 242, 0.62);
+      color: rgba(21, 17, 13, 0.62);
     }
 
     .field {
@@ -245,16 +245,16 @@
       width: 100%;
       margin-top: 24px;
       padding: 14px 16px;
-      color: #fffaf2;
+      color: var(--ink);
       background: transparent;
-      border: 1px solid rgba(255, 250, 242, 0.22);
+      border: 1px solid var(--line);
       letter-spacing: 0.08em;
       transition: 0.22s ease;
     }
 
     .reset-button:hover {
-      background: #fffaf2;
-      color: #11100f;
+      background: var(--ink);
+      color: #fffaf2;
     }
 
     .site-preview {
@@ -346,8 +346,8 @@
     .hero {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.76fr);
-      min-height: 720px;
+      grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.72fr);
+      min-height: 690px;
       padding: clamp(34px, 6vw, 74px) clamp(24px, 5vw, 58px) 58px;
       gap: clamp(28px, 5vw, 70px);
       align-items: end;
@@ -394,13 +394,15 @@
 
     .hero-title {
       margin: 0;
-      max-width: 730px;
+      max-width: 680px;
       white-space: pre-line;
+      word-break: keep-all;
+      overflow-wrap: normal;
       font-family: var(--preview-font);
-      font-size: clamp(62px, 9vw, 128px);
-      line-height: 0.88;
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: 1.08;
       font-weight: var(--title-weight);
-      letter-spacing: var(--title-spacing);
+      letter-spacing: max(var(--title-spacing), -0.035em);
     }
 
     .hero-copy {
@@ -437,9 +439,10 @@
       grid-template-rows: 1fr auto;
       color: #fffaf2;
       background:
-        linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.86)),
+        linear-gradient(180deg, rgba(255,250,242,0.12), rgba(21,17,13,0.18)),
         var(--story-photo) center / cover;
       isolation: isolate;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.36);
     }
 
     .tax-card::before {
@@ -470,10 +473,11 @@
       max-width: 360px;
       margin: 0;
       font-family: var(--display);
-      font-size: clamp(32px, 4.2vw, 56px);
-      line-height: 0.98;
-      letter-spacing: -0.07em;
+      font-size: clamp(30px, 3.6vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
       font-weight: 400;
+      word-break: keep-all;
     }
 
     .metric-grid {
@@ -485,9 +489,9 @@
 
     .metric {
       padding: 18px;
-      background: rgba(255, 250, 242, 0.1);
-      border: 1px solid rgba(255, 250, 242, 0.2);
-      backdrop-filter: blur(6px);
+      background: transparent;
+      border: 1px solid rgba(255, 250, 242, 0.42);
+      backdrop-filter: none;
     }
 
     .metric strong {
@@ -509,7 +513,7 @@
       align-items: end;
       justify-content: space-between;
       gap: 20px;
-      border-top: 1px solid rgba(255, 250, 242, 0.24);
+      border-top: 1px solid rgba(255, 250, 242, 0.36);
     }
 
     .tax-card-bottom p {
@@ -937,22 +941,6 @@
         </section>
 
 
-        <section class="comparison-lab" aria-label="전체 서체 비교표">
-          <div class="comparison-lab-header">
-            <div>
-              <p class="eyebrow">Typeface Comparison</p>
-              <h2>10 Fonts,<br>One Brand Voice.</h2>
-            </div>
-            <p>왼쪽에서 하나씩 바꾸는 방식뿐 아니라, 모든 후보 서체를 같은 문장·같은 숫자·같은 조건으로 동시에 비교할 수 있습니다. 카드를 클릭하면 위쪽 미리보기 전체에도 해당 서체가 적용됩니다.</p>
-          </div>
-          <div class="comparison-toolbar">
-            <span>Same copy</span>
-            <span>Headline · Body · Numbers · Use case</span>
-            <span>Click to preview</span>
-          </div>
-          <div class="comparison-grid" id="comparisonGrid"></div>
-        </section>
-
         <section class="cta">
           <h2>세무 서비스는 믿음이 먼저 보이는 디자인이 중요합니다.</h2>
           <p>폰트를 바꿔보면서 가장 전문적이고 편안하게 느껴지는 조합을 선택해보세요.</p>
@@ -1099,7 +1087,6 @@
     const titleSpacingValue = document.querySelector('#titleSpacingValue');
     const bodySpacingValue = document.querySelector('#bodySpacingValue');
     const resetButton = document.querySelector('#resetButton');
-    const comparisonGrid = document.querySelector('#comparisonGrid');
     const previewFrame = document.querySelector('.preview-frame');
 
     const currentFontTitle = document.querySelector('#currentFontTitle');
@@ -1110,32 +1097,6 @@
 
     let activeFontId = 'suit';
 
-
-    function renderComparisonGrid() {
-      comparisonGrid.innerHTML = fonts.map(font => `
-        <article class="font-sample-card" data-font-id="${font.id}" style="font-family:${font.family}">
-          <div class="sample-meta"><span>${font.number}</span><span>${font.label}</span></div>
-          <h3 class="sample-font-name">${font.name}</h3>
-          <p class="sample-title">${escapeHtml(previewHeroTitle.textContent)}</p>
-          <p class="sample-body">${escapeHtml(previewHeroBody.textContent)}</p>
-          <div class="sample-numbers"><span>1040</span><span>1120-S</span><span>$25,430</span></div>
-          <span class="sample-use">추천: ${font.use}</span>
-        </article>
-      `).join('');
-
-      comparisonGrid.querySelectorAll('.font-sample-card').forEach(card => {
-        card.addEventListener('click', () => setFont(card.dataset.fontId));
-      });
-    }
-
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
 
     function renderFontControls() {
       fontList.innerHTML = fonts.map(font => `
@@ -1178,17 +1139,11 @@
       });
       mobileFontSelect.value = fontId;
 
-      if (comparisonGrid) {
-        comparisonGrid.querySelectorAll('.font-sample-card').forEach(card => {
-          card.classList.toggle('active', card.dataset.fontId === fontId);
-        });
-      }
     }
 
     function updateCopy() {
       previewHeroTitle.textContent = heroTitle.value.trim() || `미국 법인\n설립 이후가 더 중요합니다.`;
       previewHeroBody.textContent = heroBody.value.trim() || '개인 세금보고, 법인 회계, IRS 레터 대응까지 미국 생활과 비즈니스에 필요한 세무 서비스를 한곳에서 제공합니다.';
-      if (comparisonGrid) renderComparisonGrid();
       setFont(activeFontId);
     }
 
@@ -1222,7 +1177,6 @@
     resetButton.addEventListener('click', resetAll);
 
     renderFontControls();
-    renderComparisonGrid();
     resetAll();
   </script>
 </body>
