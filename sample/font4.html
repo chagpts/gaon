@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>US TAX SERVICE Typeface Preview — Selected Korean Fonts</title>
+  <title>US TAX SERVICE Typeface Preview — Requested Fonts</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -155,8 +155,35 @@
       font-weight: 700; font-style: normal; font-display: swap;
     }
 
+    /* Requested font candidates */
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicL.woff2') format('woff2');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicM.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicB.woff2') format('woff2');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'NamyangjuGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2510-2@1.0/NYJGothicEB.woff2') format('woff2');
+      font-weight: 800; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'GamulchiFreeGothic';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2410-1@1.0/AssacomFreeGothicTTF-Regular.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+
     :root {
-      --preview-font: "Noto Sans KR", system-ui, sans-serif;
+      --preview-font: "Paperlogy", "Pretendard", "Noto Sans KR", system-ui, sans-serif;
       --ink: #171311;
       --muted: #716860;
       --line: #e8e1d8;
@@ -171,6 +198,8 @@
       --title-spacing: -0.045em;
       --body-spacing: -0.01em;
       --title-weight: 900;
+      --title-strong-weight: 900;
+      --title-light-weight: 400;
       --lead-weight: 500;
       --nav-weight: 800;
       --card-title-weight: 850;
@@ -241,10 +270,10 @@
     .font-option {
       width: 100%;
       display: grid;
-      grid-template-columns: 32px 1fr;
+      grid-template-columns: 28px 1fr;
       gap: 12px;
       align-items: start;
-      padding: 12px 0;
+      padding: 13px 0;
       color: #817973;
       background: transparent;
       border: 0;
@@ -258,8 +287,12 @@
       border-bottom-color: var(--red);
     }
     .font-number { color: var(--orange); font-weight: 900; font-size: 16px; }
-    .font-name { display: block; font-size: 13px; font-weight: 900; }
-    .font-desc { display: block; margin-top: 3px; color: #9b9188; font-size: 10px; line-height: 1.4; }
+    .font-sample { display: block; color: #15110f; font-size: 22px; line-height: 1.03; letter-spacing: -0.055em; word-break: keep-all; }
+    .font-sample .sample-strong { font-weight: var(--font-sample-strong, 900); }
+    .font-sample .sample-light { font-weight: var(--font-sample-light, 400); }
+    .font-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: 6px; }
+    .font-name { display: block; color: #1600ff; font-size: 12px; line-height: 1.1; font-weight: 900; letter-spacing: -0.06em; white-space: nowrap; }
+    .font-desc { display: block; margin-top: 0; color: #9b9188; font-size: 10px; line-height: 1.4; text-align: right; }
     .field { display: grid; gap: 8px; margin-top: 14px; }
     .field label { color: #7b736d; font-size: 11px; font-weight: 800; }
     textarea {
@@ -364,9 +397,11 @@
       font-size: clamp(48px, 6.6vw, 82px);
       line-height: .98;
       letter-spacing: var(--title-spacing);
-      font-weight: var(--title-weight);
+      font-weight: var(--title-light-weight);
     }
     .hero-title .copy-live { display: inline; white-space: pre-line; }
+    .hero-title .copy-strong { font-weight: var(--title-strong-weight); }
+    .hero-title .copy-light { font-weight: var(--title-light-weight); }
     .hero-lead {
       max-width: 560px;
       margin: 28px 0 0;
@@ -418,6 +453,7 @@
     .media-overlay {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.34));
     }
     .media-caption {
@@ -593,7 +629,7 @@
   <main class="app-shell">
     <aside class="control-panel" aria-label="서체 선택 패널">
       <div class="brand-lab" aria-hidden="true"><span></span><span></span><span></span></div>
-      <h1>Typeface<br>Preview</h1>
+      <h1>Font<br>Preview</h1>
       <p class="sub">첨부 이미지의 서체 후보를 반영했습니다. 서체마다 제목·본문 굵기 프리셋이 함께 적용됩니다.</p>
 
       <section class="control-block">
@@ -610,8 +646,12 @@
 설립 이후가 더 중요합니다.</textarea>
         </div>
         <div class="field">
-          <label for="weightRange">제목 굵기 <span id="weightValue">900</span></label>
-          <input type="range" id="weightRange" min="100" max="900" step="10" value="900" />
+          <label for="strongWeightRange">앞부분 굵기 <span id="strongWeightValue">900</span></label>
+          <input type="range" id="strongWeightRange" min="100" max="900" step="10" value="900" />
+        </div>
+        <div class="field">
+          <label for="lightWeightRange">나머지 굵기 <span id="lightWeightValue">400</span></label>
+          <input type="range" id="lightWeightRange" min="100" max="900" step="10" value="400" />
         </div>
         <div class="field">
           <label for="trackingRange">자간 <span id="trackingValue">-4.8</span></label>
@@ -644,8 +684,8 @@
         <section class="hero">
           <div class="hero-copy">
             <p class="eyebrow">AI-powered tax service</p>
-            <h1 class="hero-title"><span class="copy-live">미국 법인
-설립 이후가 더 중요합니다.</span></h1>
+            <h1 class="hero-title"><span class="copy-live"><span class="copy-strong">미국 법인</span><span class="copy-light">
+설립 이후가 더 중요합니다.</span></span></h1>
             <p class="hero-lead">개인 세금보고, 법인 회계, IRS 레터 대응, 자료 검토까지 AI 기반 분석과 전문가 검수를 결합해 미국 세무 업무의 속도와 신뢰도를 높입니다.</p>
             <div class="hero-cta">
               <a class="primary-cta" href="#">See how AI works</a>
@@ -758,39 +798,65 @@
 
   <script>
     const fonts = [
-      { name: '노토산스', desc: 'Title 900 · Body 500', family: '"Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.8 },
-      { name: '프리텐다드', desc: 'Title 900 · Body 500', family: '"Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -5.0 },
-      { name: 'G마켓 산스', desc: 'Title 700 · Body 500', family: '"GmarketSans", "Noto Sans KR", system-ui, sans-serif', titleWeight: 700, leadWeight: 500, navWeight: 700, cardWeight: 700, tracking: -4.2 },
-      { name: '페이퍼로지', desc: 'Title 900 · Body 500', family: '"Paperlogy", "Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 800, tracking: -4.8 },
-      { name: '210 옴니고딕', desc: 'Local font · Title 900', family: '"210 OmniGothic", "210 옴니고딕", "Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -5.2 },
-      { name: 'IBM 픽셀 산스', desc: 'Title 700 · Body 500', family: '"IBM Plex Sans KR", "Noto Sans KR", system-ui, sans-serif', titleWeight: 700, leadWeight: 500, navWeight: 700, cardWeight: 700, tracking: -3.8 },
-      { name: '레페리 베이스 타입', desc: 'Title 700 · Body 400', family: '"LeferiBase", "Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 700, leadWeight: 400, navWeight: 700, cardWeight: 700, tracking: -3.6 },
-      { name: '네오현대', desc: 'Local font · Title 900', family: '"NeoHyundai", "네오현대", "Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.8 },
-      { name: '에스코어드림', desc: 'Title 900 · Body 500', family: '"SCoreDream", "Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 800, tracking: -4.3 },
-      { name: '원티드 산스', desc: 'Title 900 · Body 500', family: '"Wanted Sans", "Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.7 },
-      { name: '에스고딕', desc: 'Local font · Title 900', family: '"S Gothic", "에스고딕", "SCoreDream", "Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 900, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.5 },
-      { name: '윤아고딕 700', desc: 'Local font · Title 790', family: '"Yoon Gothic 700", "YoonGothic700", "윤고딕700", "Pretendard", "Noto Sans KR", system-ui, sans-serif', titleWeight: 790, leadWeight: 500, navWeight: 780, cardWeight: 790, tracking: -4.6 }
+      { name: '페이퍼로지', desc: '900 / 300', family: '"Paperlogy", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 300, leadWeight: 500, navWeight: 800, cardWeight: 800, tracking: -4.8 },
+      { name: '지마켓 산스', desc: '700 / 300', family: '"GmarketSans", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 700, tracking: -4.2 },
+      { name: '원티드 산스', desc: '900 / 400', family: '"Wanted Sans", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 900, lightWeight: 400, leadWeight: 500, navWeight: 800, cardWeight: 850, tracking: -4.7 },
+      { name: '남양주 고딕체', desc: '800 / 300', family: '"NamyangjuGothic", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 800, lightWeight: 300, leadWeight: 500, navWeight: 700, cardWeight: 800, tracking: -4.6 },
+      { name: '가물치 무료고딕', desc: '700 / 400', family: '"GamulchiFreeGothic", "Pretendard", "Noto Sans KR", system-ui, sans-serif', strongWeight: 700, lightWeight: 400, leadWeight: 400, navWeight: 700, cardWeight: 700, tracking: -3.9 }
     ];
 
     const root = document.documentElement;
     const fontList = document.getElementById('fontList');
     const sampleText = document.getElementById('sampleText');
-    const weightRange = document.getElementById('weightRange');
-    const weightValue = document.getElementById('weightValue');
+    const strongWeightRange = document.getElementById('strongWeightRange');
+    const strongWeightValue = document.getElementById('strongWeightValue');
+    const lightWeightRange = document.getElementById('lightWeightRange');
+    const lightWeightValue = document.getElementById('lightWeightValue');
     const trackingRange = document.getElementById('trackingRange');
     const trackingValue = document.getElementById('trackingValue');
     const resetButton = document.getElementById('resetButton');
     const liveCopies = document.querySelectorAll('.copy-live');
 
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function renderMixedHeadline(value) {
+      const fallback = '미국 법인\n설립 이후가 더 중요합니다.';
+      const clean = value.trim() || fallback;
+      const key = '미국 법인';
+      let strongPart = key;
+      let lightPart = clean;
+      if (clean.startsWith(key)) {
+        strongPart = key;
+        lightPart = clean.slice(key.length);
+      } else {
+        const firstSpace = clean.indexOf(' ');
+        const splitAt = firstSpace > 0 ? firstSpace : Math.min(clean.length, 4);
+        strongPart = clean.slice(0, splitAt);
+        lightPart = clean.slice(splitAt);
+      }
+      const html = `<span class="copy-strong">${escapeHtml(strongPart)}</span><span class="copy-light">${escapeHtml(lightPart)}</span>`;
+      liveCopies.forEach(copy => { copy.innerHTML = html; });
+    }
+
     function applyFontPreset(font) {
       root.style.setProperty('--preview-font', font.family);
-      root.style.setProperty('--title-weight', font.titleWeight);
+      root.style.setProperty('--title-strong-weight', font.strongWeight);
+      root.style.setProperty('--title-light-weight', font.lightWeight);
       root.style.setProperty('--lead-weight', font.leadWeight);
       root.style.setProperty('--nav-weight', font.navWeight);
       root.style.setProperty('--card-title-weight', font.cardWeight);
       root.style.setProperty('--title-spacing', `${font.tracking / 100}em`);
-      weightRange.value = font.titleWeight;
-      weightValue.textContent = font.titleWeight;
+      strongWeightRange.value = font.strongWeight;
+      strongWeightValue.textContent = font.strongWeight;
+      lightWeightRange.value = font.lightWeight;
+      lightWeightValue.textContent = font.lightWeight;
       trackingRange.value = font.tracking;
       trackingValue.textContent = font.tracking;
     }
@@ -809,24 +875,35 @@
       button.type = 'button';
       button.className = 'font-option' + (index === 0 ? ' active' : '');
       button.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+      button.style.setProperty('--font-sample-strong', font.strongWeight);
+      button.style.setProperty('--font-sample-light', font.lightWeight);
+      button.style.fontFamily = font.family;
       button.innerHTML = `
         <span class="font-number">${String(index + 1).padStart(2, '0')}</span>
-        <span><span class="font-name">${font.name}</span><span class="font-desc">${font.desc}</span></span>
+        <span>
+          <span class="font-sample"><span class="sample-strong">미국 법인</span> <span class="sample-light">설립 이후가 더 중요합니다</span></span>
+          <span class="font-meta"><span class="font-name">${font.name}</span><span class="font-desc">${font.desc}</span></span>
+        </span>
       `;
       button.addEventListener('click', () => selectFont(index));
       fontList.appendChild(button);
     });
 
     selectFont(0);
+    renderMixedHeadline(sampleText.value);
 
     sampleText.addEventListener('input', () => {
-      const value = sampleText.value.trim() || '미국 법인\n설립 이후가 더 중요합니다.';
-      liveCopies.forEach(copy => { copy.textContent = value; });
+      renderMixedHeadline(sampleText.value);
     });
 
-    weightRange.addEventListener('input', () => {
-      weightValue.textContent = weightRange.value;
-      root.style.setProperty('--title-weight', weightRange.value);
+    strongWeightRange.addEventListener('input', () => {
+      strongWeightValue.textContent = strongWeightRange.value;
+      root.style.setProperty('--title-strong-weight', strongWeightRange.value);
+    });
+
+    lightWeightRange.addEventListener('input', () => {
+      lightWeightValue.textContent = lightWeightRange.value;
+      root.style.setProperty('--title-light-weight', lightWeightRange.value);
     });
 
     trackingRange.addEventListener('input', () => {
@@ -836,7 +913,7 @@
 
     resetButton.addEventListener('click', () => {
       sampleText.value = '미국 법인\n설립 이후가 더 중요합니다.';
-      liveCopies.forEach(copy => { copy.textContent = sampleText.value; });
+      renderMixedHeadline(sampleText.value);
       selectFont(0);
     });
   </script>
