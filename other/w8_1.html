@@ -1,104 +1,553 @@
-<div class="income-file-group" data-income-file="dividend">
-  <div class="file-box">
-    <div class="file-info">
-      <span class="file-name">배당 소득 관련 서류</span>
-      <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>신청서 작성</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #111827;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      padding-top: 124px;
+    }
+
+    .container {
+      width: 768px;
+      margin: 0 auto;
+    }
+
+    .notice {
+      height: 40px;
+      border-radius: 8px;
+      background: #fafafa;
+      color: #697386;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-bottom: 48px;
+    }
+
+    .steps {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: start;
+      margin-bottom: 64px;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: 10px;
+      height: 1px;
+      background: #e7e9ee;
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+      min-height: 42px;
+      color: #a2a8b3;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .step:nth-child(1) { text-align: left; }
+    .step:nth-child(2), .step:nth-child(3) { text-align: center; }
+    .step:nth-child(4) { text-align: right; }
+
+    .badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #d7dbe2;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .step.active { color: #111827; }
+    .step.active .badge { background: #0048b4; }
+
+    .form-head {
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      color: #0048b4;
+      font-weight: 800;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .pill {
+      border: 1px solid #e4e7ec;
+      color: #6b7280;
+      border-radius: 4px;
+      padding: 3px 7px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #fff;
+    }
+
+    .desc {
+      margin: 0;
+      color: #697386;
+      font-size: 13px;
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid #e5e7eb;
+      margin: 28px 0 24px;
+    }
+
+    .field {
+      margin-bottom: 28px;
+    }
+
+    label,
+    .section-label {
+      display: block;
+      color: #374151;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    select,
+    .file-box {
+      width: 100%;
+      border: 1px solid #e1e5ea;
+      border-radius: 7px;
+      background: #fff;
+      color: #111827;
+      font-size: 14px;
+      outline: none;
+    }
+
+    select {
+      height: 42px;
+      padding: 0 14px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2399a1ad' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+    }
+
+    .required-title,
+    .income-section-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0 0 14px;
+    }
+
+    .file-box {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+    }
+
+    .file-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .file-name {
+      color: #111827;
+      font-size: 14px;
+    }
+
+    .file-hint {
+      color: #697386;
+      font-size: 12px;
+    }
+
+    .file-input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .file-button {
+      flex-shrink: 0;
+      height: 32px;
+      padding: 0 16px;
+      border: 1px solid #d6dbe3;
+      border-radius: 5px;
+      background: #fff;
+      color: #111827;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .file-button:hover {
+      background: #f9fafb;
+    }
+
+    .file-list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: #374151;
+      font-size: 13px;
+    }
+
+    .file-list li {
+      margin-bottom: 4px;
+      word-break: break-all;
+    }
+
+    .income-section {
+      margin-bottom: 28px;
+    }
+
+    .income-file-group {
+      display: none;
+      margin-bottom: 16px;
+    }
+
+    .income-file-group.active {
+      display: block;
+    }
+
+    .submit {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 6px;
+      background: #0048b4;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        padding: 72px 20px 40px;
+      }
+
+      .container {
+        width: 100%;
+      }
+
+      .steps {
+        margin-bottom: 48px;
+      }
+
+      .step {
+        font-size: 11px;
+      }
+
+      .file-box {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .file-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="container">
+      <div class="notice">궁금하거나 모르시는게 있으시다면 언제나 채널톡으로 문의 부탁드립니다.</div>
+
+      <div class="steps" aria-label="신청 단계">
+        <div class="step active">
+          <div class="badge">1</div><br />
+          신청서 작성
+        </div>
+        <div class="step">
+          <div class="badge">2</div><br />
+          결제 및 입금확인
+        </div>
+        <div class="step">
+          <div class="badge">3</div><br />
+          접수 및 검토
+        </div>
+        <div class="step">
+          <div class="badge">4</div><br />
+          신청 처리 완료
+        </div>
+      </div>
+
+      <section class="form-head">
+        <div class="eyebrow">STEP 1.</div>
+        <div class="title-row">
+          <h1>신청서 작성</h1>
+          <span class="pill">신청 즉시</span>
+        </div>
+        <p class="desc">해당 사항이 없으면 공란으로 두세요.</p>
+      </section>
+
+      <hr class="divider" />
+
+      <form method="post" enctype="multipart/form-data">
+        <div class="field">
+          <label for="service">희망 서비스</label>
+          <select id="service" name="service">
+            <option>기타 행정 업무</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <select id="form-type" name="form_type" aria-label="신청 양식">
+            <option>W-8ben-E</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <h2 class="required-title">제출 필수 서류</h2>
+
+          <div class="file-box">
+            <div class="file-info">
+              <span class="file-name">한국 영문 사업자 등록증</span>
+              <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
+            </div>
+
+            <input
+              class="file-input"
+              id="business-files"
+              name="business_files[]"
+              type="file"
+              multiple
+            />
+
+            <label class="file-button" for="business-files">파일 선택</label>
+          </div>
+
+          <ul class="file-list" id="business-file-list"></ul>
+        </div>
+
+        <div class="income-section">
+          <h2 class="income-section-title">소득</h2>
+
+          <div class="field">
+            <label for="income-type">소득 종류</label>
+            <select id="income-type" name="income_type" required>
+              <option value="">소득 종류를 선택하세요</option>
+              <option value="dividend">Dividend (배당)</option>
+              <option value="interest">Interest (이자)</option>
+              <option value="royalty">Royalty (로열티)</option>
+              <option value="business_income">Business Income (사업 소득)</option>
+              <option value="other_income">기타소득</option>
+            </select>
+          </div>
+
+          <div class="income-file-group" data-income-file="dividend">
+            <div class="file-box">
+              <div class="file-info">
+                <span class="file-name">배당 소득 관련 서류</span>
+                <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
+              </div>
+
+              <input
+                class="file-input"
+                id="dividend-files"
+                name="dividend_files[]"
+                type="file"
+                multiple
+              />
+
+              <label class="file-button" for="dividend-files">파일 선택</label>
+            </div>
+
+            <ul class="file-list" id="dividend-file-list"></ul>
+          </div>
+
+          <div class="income-file-group" data-income-file="interest">
+            <div class="file-box">
+              <div class="file-info">
+                <span class="file-name">이자 소득 관련 서류</span>
+                <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
+              </div>
+
+              <input
+                class="file-input"
+                id="interest-files"
+                name="interest_files[]"
+                type="file"
+                multiple
+              />
+
+              <label class="file-button" for="interest-files">파일 선택</label>
+            </div>
+
+            <ul class="file-list" id="interest-file-list"></ul>
+          </div>
+
+          <div class="income-file-group" data-income-file="royalty">
+            <div class="file-box">
+              <div class="file-info">
+                <span class="file-name">로열티 소득 관련 서류</span>
+                <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
+              </div>
+
+              <input
+                class="file-input"
+                id="royalty-files"
+                name="royalty_files[]"
+                type="file"
+                multiple
+              />
+
+              <label class="file-button" for="royalty-files">파일 선택</label>
+            </div>
+
+            <ul class="file-list" id="royalty-file-list"></ul>
+          </div>
+
+          <div class="income-file-group" data-income-file="business_income">
+            <div class="file-box">
+              <div class="file-info">
+                <span class="file-name">사업 소득 관련 서류</span>
+                <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
+              </div>
+
+              <input
+                class="file-input"
+                id="business-income-files"
+                name="business_income_files[]"
+                type="file"
+                multiple
+              />
+
+              <label class="file-button" for="business-income-files">파일 선택</label>
+            </div>
+
+            <ul class="file-list" id="business-income-file-list"></ul>
+          </div>
+
+          <div class="income-file-group" data-income-file="other_income">
+            <div class="file-box">
+              <div class="file-info">
+                <span class="file-name">기타 소득 관련 서류</span>
+                <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
+              </div>
+
+              <input
+                class="file-input"
+                id="other-income-files"
+                name="other_income_files[]"
+                type="file"
+                multiple
+              />
+
+              <label class="file-button" for="other-income-files">파일 선택</label>
+            </div>
+
+            <ul class="file-list" id="other-income-file-list"></ul>
+          </div>
+        </div>
+
+        <button class="submit" type="submit">제출하기</button>
+      </form>
     </div>
+  </main>
 
-    <input
-      class="file-input"
-      id="dividend-files"
-      name="dividend_files[]"
-      type="file"
-      multiple
-    />
+  <script>
+    function renderSelectedFiles(inputId, listId) {
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
 
-    <label class="file-button" for="dividend-files">파일 선택</label>
-  </div>
+      input.addEventListener("change", function () {
+        list.innerHTML = "";
 
-  <ul class="file-list" id="dividend-file-list"></ul>
-</div>
+        const files = Array.from(this.files);
 
-<div class="income-file-group" data-income-file="interest">
-  <div class="file-box">
-    <div class="file-info">
-      <span class="file-name">이자 소득 관련 서류</span>
-      <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
-    </div>
+        files.forEach(function (file) {
+          const li = document.createElement("li");
+          li.textContent = file.name;
+          list.appendChild(li);
+        });
+      });
+    }
 
-    <input
-      class="file-input"
-      id="interest-files"
-      name="interest_files[]"
-      type="file"
-      multiple
-    />
+    function showSelectedIncomeFileUpload() {
+      const incomeTypeSelect = document.getElementById("income-type");
+      const incomeFileGroups = document.querySelectorAll(".income-file-group");
 
-    <label class="file-button" for="interest-files">파일 선택</label>
-  </div>
+      incomeTypeSelect.addEventListener("change", function () {
+        const selectedIncome = this.value;
 
-  <ul class="file-list" id="interest-file-list"></ul>
-</div>
+        incomeFileGroups.forEach(function (group) {
+          const fileInput = group.querySelector('input[type="file"]');
+          const fileList = group.querySelector(".file-list");
 
-<div class="income-file-group" data-income-file="royalty">
-  <div class="file-box">
-    <div class="file-info">
-      <span class="file-name">로열티 소득 관련 서류</span>
-      <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
-    </div>
+          group.classList.remove("active");
 
-    <input
-      class="file-input"
-      id="royalty-files"
-      name="royalty_files[]"
-      type="file"
-      multiple
-    />
+          if (fileInput) {
+            fileInput.value = "";
+          }
 
-    <label class="file-button" for="royalty-files">파일 선택</label>
-  </div>
+          if (fileList) {
+            fileList.innerHTML = "";
+          }
 
-  <ul class="file-list" id="royalty-file-list"></ul>
-</div>
+          if (group.dataset.incomeFile === selectedIncome) {
+            group.classList.add("active");
+          }
+        });
+      });
+    }
 
-<div class="income-file-group" data-income-file="business_income">
-  <div class="file-box">
-    <div class="file-info">
-      <span class="file-name">사업 소득 관련 서류</span>
-      <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
-    </div>
+    renderSelectedFiles("business-files", "business-file-list");
+    renderSelectedFiles("dividend-files", "dividend-file-list");
+    renderSelectedFiles("interest-files", "interest-file-list");
+    renderSelectedFiles("royalty-files", "royalty-file-list");
+    renderSelectedFiles("business-income-files", "business-income-file-list");
+    renderSelectedFiles("other-income-files", "other-income-file-list");
 
-    <input
-      class="file-input"
-      id="business-income-files"
-      name="business_income_files[]"
-      type="file"
-      multiple
-    />
-
-    <label class="file-button" for="business-income-files">파일 선택</label>
-  </div>
-
-  <ul class="file-list" id="business-income-file-list"></ul>
-</div>
-
-<div class="income-file-group" data-income-file="other_income">
-  <div class="file-box">
-    <div class="file-info">
-      <span class="file-name">기타 소득 관련 서류</span>
-      <span class="file-hint">여러 파일을 선택할 수 있습니다.</span>
-    </div>
-
-    <input
-      class="file-input"
-      id="other-income-files"
-      name="other_income_files[]"
-      type="file"
-      multiple
-    />
-
-    <label class="file-button" for="other-income-files">파일 선택</label>
-  </div>
-
-  <ul class="file-list" id="other-income-file-list"></ul>
-</div>
+    showSelectedIncomeFileUpload();
+  </script>
+</body>
+</html>
