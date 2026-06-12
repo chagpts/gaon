@@ -246,6 +246,51 @@
       margin-bottom: 28px;
     }
 
+    .income-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .income-option {
+      position: relative;
+    }
+
+    .income-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .income-option span {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border: 1px solid #e1e5ea;
+      border-radius: 7px;
+      background: #fff;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+      user-select: none;
+    }
+
+    .income-option input:checked + span {
+      border-color: #0048b4;
+      background: #eef5ff;
+      color: #0048b4;
+      box-shadow: inset 0 0 0 1px #0048b4;
+    }
+
+    .income-option input:focus-visible + span {
+      outline: 2px solid #99c2ff;
+      outline-offset: 2px;
+    }
+
     .income-file-group {
       margin-bottom: 16px;
     }
@@ -369,6 +414,37 @@
 
         <div class="income-section">
           <h2 class="income-section-title">소득</h2>
+
+          <div class="field">
+            <span class="section-label">무슨 소득으로 보고할 건가요?</span>
+
+            <div class="income-options" role="group" aria-label="소득 종류 단일 선택">
+              <label class="income-option">
+                <input type="radio" name="income_type" value="dividend" required />
+                <span>Dividend (배당)</span>
+              </label>
+
+              <label class="income-option">
+                <input type="radio" name="income_type" value="interest" />
+                <span>Interest (이자)</span>
+              </label>
+
+              <label class="income-option">
+                <input type="radio" name="income_type" value="royalty" />
+                <span>Royalty (로열티)</span>
+              </label>
+
+              <label class="income-option">
+                <input type="radio" name="income_type" value="business_income" />
+                <span>Business Income (사업 소득)</span>
+              </label>
+
+              <label class="income-option">
+                <input type="radio" name="income_type" value="other_income" />
+                <span>기타소득</span>
+              </label>
+            </div>
+          </div>
 
           <div class="income-file-group">
             <div class="file-box">
