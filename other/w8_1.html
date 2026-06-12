@@ -246,57 +246,13 @@
       margin-bottom: 28px;
     }
 
-    .income-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .income-option {
-      position: relative;
-    }
-
-    .income-option input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .income-option span {
-      min-height: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 16px;
-      border: 1px solid #e1e5ea;
-      border-radius: 7px;
-      background: #fff;
-      color: #374151;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: border-color .15s ease, background-color .15s ease, color .15s ease;
-      user-select: none;
-    }
-
-    .income-option input:checked + span {
-      border-color: #0048b4;
-      background: #eef5ff;
-      color: #0048b4;
-      box-shadow: inset 0 0 0 1px #0048b4;
-    }
-
-    .income-option input:focus-visible + span {
-      outline: 2px solid #99c2ff;
-      outline-offset: 2px;
-    }
-
     .income-file-group {
+      display: none;
       margin-bottom: 16px;
     }
 
-    .income-file-group:last-child {
-      margin-bottom: 0;
+    .income-file-group.active {
+      display: block;
     }
 
     .submit {
@@ -416,37 +372,18 @@
           <h2 class="income-section-title">소득</h2>
 
           <div class="field">
-            <span class="section-label">무슨 소득으로 보고할 건가요?</span>
-
-            <div class="income-options" role="group" aria-label="소득 종류 단일 선택">
-              <label class="income-option">
-                <input type="radio" name="income_type" value="dividend" required />
-                <span>Dividend (배당)</span>
-              </label>
-
-              <label class="income-option">
-                <input type="radio" name="income_type" value="interest" />
-                <span>Interest (이자)</span>
-              </label>
-
-              <label class="income-option">
-                <input type="radio" name="income_type" value="royalty" />
-                <span>Royalty (로열티)</span>
-              </label>
-
-              <label class="income-option">
-                <input type="radio" name="income_type" value="business_income" />
-                <span>Business Income (사업 소득)</span>
-              </label>
-
-              <label class="income-option">
-                <input type="radio" name="income_type" value="other_income" />
-                <span>기타소득</span>
-              </label>
-            </div>
+            <label for="income-type">소득 종류</label>
+            <select id="income-type" name="income_type" required>
+              <option value="">소득 종류를 선택하세요</option>
+              <option value="dividend">Dividend (배당)</option>
+              <option value="interest">Interest (이자)</option>
+              <option value="royalty">Royalty (로열티)</option>
+              <option value="business_income">Business Income (사업 소득)</option>
+              <option value="other_income">기타소득</option>
+            </select>
           </div>
 
-          <div class="income-file-group">
+          <div class="income-file-group" data-income-file="dividend">
             <div class="file-box">
               <div class="file-info">
                 <span class="file-name">배당 소득 서류</span>
@@ -467,7 +404,7 @@
             <ul class="file-list" id="dividend-file-list"></ul>
           </div>
 
-          <div class="income-file-group">
+          <div class="income-file-group" data-income-file="interest">
             <div class="file-box">
               <div class="file-info">
                 <span class="file-name">이자 소득 서류</span>
@@ -488,7 +425,7 @@
             <ul class="file-list" id="interest-file-list"></ul>
           </div>
 
-          <div class="income-file-group">
+          <div class="income-file-group" data-income-file="royalty">
             <div class="file-box">
               <div class="file-info">
                 <span class="file-name">로열티 소득 서류</span>
@@ -509,7 +446,7 @@
             <ul class="file-list" id="royalty-file-list"></ul>
           </div>
 
-          <div class="income-file-group">
+          <div class="income-file-group" data-income-file="business_income">
             <div class="file-box">
               <div class="file-info">
                 <span class="file-name">사업 소득 서류</span>
@@ -530,7 +467,7 @@
             <ul class="file-list" id="business-income-file-list"></ul>
           </div>
 
-          <div class="income-file-group">
+          <div class="income-file-group" data-income-file="other_income">
             <div class="file-box">
               <div class="file-info">
                 <span class="file-name">기타소득 서류</span>
@@ -575,12 +512,42 @@
       });
     }
 
+    function showSelectedIncomeFileUpload() {
+      const incomeTypeSelect = document.getElementById("income-type");
+      const incomeFileGroups = document.querySelectorAll(".income-file-group");
+
+      incomeTypeSelect.addEventListener("change", function () {
+        const selectedIncome = this.value;
+
+        incomeFileGroups.forEach(function (group) {
+          const fileInput = group.querySelector('input[type="file"]');
+          const fileList = group.querySelector(".file-list");
+
+          group.classList.remove("active");
+
+          if (fileInput) {
+            fileInput.value = "";
+          }
+
+          if (fileList) {
+            fileList.innerHTML = "";
+          }
+
+          if (group.dataset.incomeFile === selectedIncome) {
+            group.classList.add("active");
+          }
+        });
+      });
+    }
+
     renderSelectedFiles("business-files", "business-file-list");
     renderSelectedFiles("dividend-files", "dividend-file-list");
     renderSelectedFiles("interest-files", "interest-file-list");
     renderSelectedFiles("royalty-files", "royalty-file-list");
     renderSelectedFiles("business-income-files", "business-income-file-list");
     renderSelectedFiles("other-income-files", "other-income-file-list");
+
+    showSelectedIncomeFileUpload();
   </script>
 </body>
 </html>
