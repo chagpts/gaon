@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>접수 및 검토</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #ffffff;
+      color: #222;
+      font-size: 14px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 18px 10px 40px;
+    }
+
+    .notice-top {
+      width: 100%;
+      height: 34px;
+      background: #f7f7f7;
+      border-radius: 6px;
+      color: #6b7280;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 44px;
+    }
+
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      color: #999;
+      font-size: 12px;
+      margin-bottom: 68px;
+    }
+
+    .stepper::before {
+      content: "";
+      position: absolute;
+      top: 9px;
+      left: 12px;
+      right: 12px;
+      height: 1px;
+      background: #dcdcdc;
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+      width: 25%;
+      text-align: center;
+    }
+
+    .circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ddd;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      margin-bottom: 9px;
+    }
+
+    .step.active {
+      color: #111;
+      font-weight: 700;
+    }
+
+    .step.active .circle {
+      background: #0046ad;
+    }
+
+    .content-title {
+      color: #0046ad;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .divider {
+      border-top: 1px solid #e5e5e5;
+      margin: 28px 0 20px;
+    }
+
+    .alert-box {
+      border: 1px solid #ffb000;
+      background: #fff8df;
+      border-radius: 7px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: #222;
+      min-height: 58px;
+    }
+
+    .alert-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ffc14d;
+      color: #222;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 14px 10px 30px;
+      }
+
+      .notice-top {
+        font-size: 11px;
+        text-align: center;
+        padding: 0 8px;
+      }
+
+      .stepper {
+        font-size: 11px;
+        margin-bottom: 50px;
+      }
+
+      .alert-box {
+        font-size: 13px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="notice-top">
+      궁금하거나 모르시는게 있으시다면 언제나 채널톡으로 문의 부탁드립니다.
+    </div>
+
+    <div class="stepper">
+      <div class="step">
+        <div class="circle">1</div>
+        <div>신청서 작성</div>
+      </div>
+
+      <div class="step active">
+        <div class="circle">2</div>
+        <div>접수 및 검토</div>
+      </div>
+
+      <div class="step">
+        <div class="circle">3</div>
+        <div>세금 보고서 발급<br />및 서명 요청</div>
+      </div>
+
+      <div class="step">
+        <div class="circle">4</div>
+        <div>결제 및 입금 확인</div>
+      </div>
+    </div>
+
+    <div class="content-title">STEP 2.</div>
+    <h2>접수 및 검토</h2>
+
+    <div class="divider"></div>
+
+    <div class="alert-box">
+      <span class="alert-icon">!</span>
+      <span>신청 접수가 완료되어 담당자가 검토중입니다.</span>
+    </div>
+  </div>
+</body>
+</html>
