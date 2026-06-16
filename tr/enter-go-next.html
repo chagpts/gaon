@@ -388,27 +388,22 @@
     </form>
   </div>
 
-  <script>
-    const form = document.getElementById("taxForm");
-    const nextBtn = document.getElementById("nextBtn");
+<script>
+  const form = document.getElementById("taxForm");
+  const nextBtn = document.getElementById("nextBtn");
 
-    function goNextPage() {
-      alert("다음 페이지로 이동합니다.");
+  function goNextPage() {
+    location.href = "./step2.html";
+  }
 
-      // 실제 페이지 이동 시 사용
-      // location.href = "step2.html";
+  nextBtn.addEventListener("click", goNextPage);
 
-      // React/Vue라면 여기서 setStep(2) 같은 함수 실행
+  form.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      goNextPage();
     }
-
-    nextBtn.addEventListener("click", goNextPage);
-
-    form.addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        goNextPage();
-      }
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
