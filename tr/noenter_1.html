@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>신청서 작성 - Enter 막기</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #ffffff;
+      color: #222;
+      font-size: 14px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 10px 24px;
+    }
+
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      padding: 12px 0 28px;
+      color: #999;
+      font-size: 12px;
+    }
+
+    .stepper::before {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 20px;
+      right: 20px;
+      height: 1px;
+      background: #dcdcdc;
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+      width: 25%;
+      text-align: center;
+    }
+
+    .circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ddd;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+
+    .step.active {
+      color: #111;
+      font-weight: 600;
+    }
+
+    .step.active .circle {
+      background: #0046ad;
+    }
+
+    .content-title {
+      margin-top: 8px;
+      color: #0046ad;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    h2 {
+      margin: 4px 0 8px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .desc {
+      margin: 0 0 26px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .divider {
+      border-top: 1px solid #e5e5e5;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-weight: 700;
+      margin: 18px 0 12px;
+      font-size: 14px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    label {
+      cursor: pointer;
+    }
+
+    input[type="radio"] {
+      margin-right: 7px;
+      vertical-align: middle;
+    }
+
+    .form-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 18px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: #333;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      height: 36px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0 12px;
+      color: #333;
+      outline: none;
+      background: #fafafa;
+    }
+
+    input::placeholder {
+      color: #b6b6b6;
+    }
+
+    select {
+      color: #999;
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, #aaa 50%),
+                        linear-gradient(135deg, #aaa 50%, transparent 50%);
+      background-position: calc(100% - 18px) 15px, calc(100% - 13px) 15px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+    }
+
+    .full {
+      grid-column: 1 / 3;
+    }
+
+    .yn-group {
+      display: flex;
+      gap: 24px;
+      margin: 8px 0 24px;
+    }
+
+    .guardian-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    .guardian-title {
+      font-weight: 700;
+    }
+
+    .help {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #777;
+      color: #fff;
+      font-size: 10px;
+      margin-left: 4px;
+    }
+
+    .count {
+      background: #f2f2f2;
+      color: #555;
+      border-radius: 4px;
+      padding: 4px 7px;
+      font-size: 12px;
+    }
+
+    .guardian-select {
+      margin-bottom: 14px;
+    }
+
+    .add-btn {
+      width: 100%;
+      height: 36px;
+      border: none;
+      border-radius: 6px;
+      background: #f1f4fa;
+      color: #0046ad;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 36px;
+    }
+
+    .next-btn {
+      width: 100%;
+      height: 44px;
+      border: none;
+      border-radius: 5px;
+      background: #0046ad;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .next-btn:hover {
+      background: #003c96;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: 1;
+      }
+
+      .stepper {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="stepper">
+      <div class="step active">
+        <div class="circle">1</div>
+        <div>신청서 작성</div>
+      </div>
+
+      <div class="step">
+        <div class="circle">2</div>
+        <div>접수 및 검토</div>
+      </div>
+
+      <div class="step">
+        <div class="circle">3</div>
+        <div>세금 보고서 발급<br />및 서명 요청</div>
+      </div>
+
+      <div class="step">
+        <div class="circle">4</div>
+        <div>결제 및 입금 확인</div>
+      </div>
+    </div>
+
+    <form id="taxForm">
+      <div class="content-title">STEP 1.</div>
+      <h2>신청서 작성</h2>
+      <p class="desc">해당 사항이 없으면 공란으로 두세요.</p>
+
+      <div class="divider"></div>
+
+      <div class="section-title">신청 유형</div>
+
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="type" />
+          [기존 고객] 연 결산 포함 법인세 신고
+        </label>
+
+        <label>
+          <input type="radio" name="type" />
+          [신규 고객] 연 결산 포함 법인세 신고
+        </label>
+
+        <label>
+          <input type="radio" name="type" />
+          [신규 고객] 회장 재무제표 기준 법인세 신고
+        </label>
+      </div>
+
+      <div class="section-title" style="margin-top: 28px;">
+        세금 보고서에 필요한 정보 입력
+      </div>
+
+      <div class="form-card">
+        <div class="grid">
+          <div class="field">
+            <label>Street Address</label>
+            <input type="text" placeholder="Street Address" />
+          </div>
+
+          <div class="field">
+            <label>City</label>
+            <input type="text" placeholder="City" />
+          </div>
+
+          <div class="field">
+            <label>State</label>
+            <select>
+              <option>State</option>
+              <option>CA</option>
+              <option>NY</option>
+              <option>TX</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Zip Code</label>
+            <input type="text" placeholder="Zip Code" />
+          </div>
+
+          <div class="field">
+            <label>서명권자 이름</label>
+            <input type="text" placeholder="서명권자 이름" />
+          </div>
+
+          <div class="field">
+            <label>서명권자 직급</label>
+            <input type="text" placeholder="서명권자 직급" />
+          </div>
+
+          <div class="field full">
+            <label>서명권자 SSN</label>
+            <input type="text" placeholder="서명권자 SSN" />
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">특수 관계자 정보 변동 여부</div>
+      <div class="yn-group">
+        <label><input type="radio" name="change" />Y</label>
+        <label><input type="radio" name="change" />N</label>
+      </div>
+
+      <div class="section-title">가상 자산 보유 여부</div>
+      <div class="yn-group">
+        <label><input type="radio" name="crypto" />Y</label>
+        <label><input type="radio" name="crypto" />N</label>
+      </div>
+
+      <div class="guardian-header">
+        <div class="guardian-title">
+          특수 관계자 정보 <span class="help">?</span>
+        </div>
+        <div class="count">등록된 특수 관계자 : 0</div>
+      </div>
+
+      <select class="guardian-select">
+        <option>특수 관계자 선택</option>
+      </select>
+
+      <button type="button" class="add-btn">
+        ＋ 특수 관계자 추가
+      </button>
+
+      <button type="button" id="nextBtn" class="next-btn">
+        다음
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("taxForm");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function goNextPage() {
+      alert("다음 버튼을 클릭했기 때문에 이동합니다.");
+
+      // 실제 페이지 이동 시 사용
+      // location.href = "step2.html";
+
+      // React/Vue라면 여기서 setStep(2) 같은 함수 실행
+    }
+
+    nextBtn.addEventListener("click", goNextPage);
+
+    form.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        return false;
+      }
+    });
+  </script>
+</body>
+</html>
