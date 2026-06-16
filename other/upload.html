@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>필수 요청 서류</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .divider {
+      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 28px;
+    }
+
+    .upload-box {
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      padding: 0 22px;
+      background-color: #fff;
+    }
+
+    .upload-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .upload-row:last-child {
+      border-bottom: none;
+    }
+
+    .label-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .label-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .label-sub {
+      font-size: 13px;
+      color: #999;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .file-button {
+      display: inline-block;
+      padding: 10px 22px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #333;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .file-button:hover {
+      background-color: #f7f7f7;
+    }
+
+    .submit-button {
+      width: 100%;
+      height: 56px;
+      margin-top: 46px;
+      border: none;
+      border-radius: 8px;
+      background-color: #064aad;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: #003f96;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>필수 요청 서류</h2>
+    <div class="divider"></div>
+
+    <form action="#" method="post" enctype="multipart/form-data">
+      <div class="upload-box">
+
+        <div class="upload-row">
+          <div class="label-wrap">
+            <span class="label-title">Articles of Organization</span>
+          </div>
+          <label class="file-button">
+            파일 선택
+            <input class="file-input" type="file" name="articles_of_organization" />
+          </label>
+        </div>
+
+        <div class="upload-row">
+          <div class="label-wrap">
+            <span class="label-title">EIN Letter</span>
+          </div>
+          <label class="file-button">
+            파일 선택
+            <input class="file-input" type="file" name="ein_letter" />
+          </label>
+        </div>
+
+        <div class="upload-row">
+          <div class="label-wrap">
+            <span class="label-title">Meeting minutes</span>
+          </div>
+          <label class="file-button">
+            파일 선택
+            <input class="file-input" type="file" name="meeting_minutes" />
+          </label>
+        </div>
+
+        <div class="upload-row">
+          <div class="label-wrap">
+            <span class="label-title">Corporate bylaws</span>
+          </div>
+          <label class="file-button">
+            파일 선택
+            <input class="file-input" type="file" name="corporate_bylaws" />
+          </label>
+        </div>
+
+        <div class="upload-row">
+          <div class="label-wrap">
+            <span class="label-title">기타</span>
+          </div>
+          <label class="file-button">
+            파일 선택
+            <input class="file-input" type="file" name="etc_files" multiple />
+          </label>
+        </div>
+
+      </div>
+
+      <button type="submit" class="submit-button">등록하기</button>
+    </form>
+  </div>
+</body>
+</html>
