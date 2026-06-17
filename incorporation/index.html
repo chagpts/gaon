@@ -80,6 +80,7 @@
             <span>설립 법인명(영문)</span>
             <input type="text" name="companyName" placeholder="설립할 법인명(영문)을 입력하세요." />
           </label>
+
           <label class="field">
             <span>법인격 표시(Designator)</span>
             <select name="designator">
@@ -101,6 +102,7 @@
         </div>
 
         <h2>미국 내 사업장 주소</h2>
+
         <div class="grid two">
           <label class="field">
             <span>Street Address</span>
@@ -125,6 +127,7 @@
             <span>미국 내 사업장 전화번호</span>
             <input type="tel" name="usPhone" placeholder="+1" />
           </label>
+
           <label class="checkbox-inline">
             <input type="checkbox" name="noUsPhone" />
             현재 미국 내 전화번호가 없습니다
@@ -138,6 +141,7 @@
         <p class="step-label">STEP 2.</p>
         <h1>주가 정보</h1>
         <p class="helper-text">해당 사항이 없다면 공란으로 두세요.</p>
+
         <hr />
 
         <div class="grid two">
@@ -146,6 +150,7 @@
             <input type="number" name="parValue" min="0" step="0.01" placeholder="0" />
             <b>USD</b>
           </label>
+
           <label class="field with-unit">
             <span>총 주식 수</span>
             <input type="number" name="totalShares" min="0" step="1" placeholder="0" />
@@ -166,6 +171,7 @@
         </label>
 
         <div id="shareholderList" class="shareholder-list empty">등록된 주주 정보가 없습니다.</div>
+
         <button type="button" id="openShareholderBtn" class="secondary-btn">＋ 주주 정보 추가</button>
 
         <div class="button-row">
@@ -176,15 +182,21 @@
 
       <section class="step-page" data-step="3">
         <p class="step-label">STEP 3.</p>
-        <h1>사업장 소재지 등록 / 공유 오피스 계약 <span class="tooltip" title="공유 오피스 계약 관련 안내">?</span></h1>
+        <h1>
+          사업장 소재지 등록 / 공유 오피스 계약
+          <span class="tooltip" title="공유 오피스 계약 관련 안내">?</span>
+        </h1>
+
         <hr />
 
         <div class="field-group">
           <label class="group-title">공유 오피스 신청</label>
+
           <label class="radio-row">
             <input type="radio" name="virtualOffice" value="예, 신청합니다." />
             예, 신청합니다.
           </label>
+
           <label class="radio-row">
             <input type="radio" name="virtualOffice" value="아니요, 신청하지 않습니다." checked />
             아니요, 신청하지 않습니다.
@@ -207,14 +219,17 @@
         <p class="step-label">STEP 4.</p>
         <h1>미국 법인 계좌 개설 정보 기입</h1>
         <p class="helper-text">해당 사항이 없으면 공란으로 두세요.</p>
+
         <hr />
 
         <div class="field-group">
           <label class="group-title">미국 법인 계좌 개설 지원 서비스 신청 여부</label>
+
           <label class="radio-row">
             <input type="radio" name="bankAccountService" value="신청합니다" />
             신청합니다
           </label>
+
           <label class="radio-row">
             <input type="radio" name="bankAccountService" value="신청하지 않습니다" checked />
             신청하지 않습니다
@@ -242,6 +257,97 @@
           <button type="button" id="reviewBtn" class="primary-btn">입력 내용 확인</button>
         </div>
       </section>
+
+      <section class="step-page" data-step="5">
+        <h1>결제 및 입금확인</h1>
+        <p class="helper-text">해당 사항이 없으면 공란으로 두세요.</p>
+
+        <hr />
+
+        <h2>서비스 선택</h2>
+
+        <div class="service-list">
+          <div class="service-item">
+            <div class="service-icon">📍</div>
+            <div class="service-info">
+              <strong>미국 법인 설립 서비스</strong>
+              <p></p>
+              <b>$0</b>
+            </div>
+            <button type="button" class="service-btn" data-service-name="미국 법인 설립 서비스" data-service-price="0">서비스 신청</button>
+          </div>
+
+          <div class="service-item">
+            <div class="service-icon">💳</div>
+            <div class="service-info">
+              <strong>미국 법인 계좌 개설 <span class="tooltip small" title="미국 법인 계좌 개설 안내">?</span></strong>
+              <p>계좌 개설 서류 안내 및 정보 작성 도움드리고 있습니다.</p>
+              <b>$1,000</b>
+            </div>
+            <button type="button" class="service-btn" data-service-name="미국 법인 계좌 개설" data-service-price="1000">서비스 신청</button>
+          </div>
+
+          <div class="service-item">
+            <div class="service-icon">🚀</div>
+            <div class="service-info">
+              <strong>빠른 설립 (Expedited Filing)</strong>
+              <p>영업일 안에 법인 설립 완료됩니다.</p>
+              <b>$0</b>
+            </div>
+            <button type="button" class="service-btn" data-service-name="빠른 설립 (Expedited Filing)" data-service-price="0">서비스 신청</button>
+          </div>
+        </div>
+
+        <div class="total-box">
+          <strong>총 결제 금액</strong>
+          <b id="totalAmount">$0</b>
+        </div>
+
+        <div class="field-group">
+          <label class="group-title">결제 증빙 요청</label>
+
+          <label class="radio-row">
+            <input type="radio" name="receiptType" value="현금 영수증" />
+            현금 영수증
+          </label>
+
+          <label class="radio-row">
+            <input type="radio" name="receiptType" value="전자 세금 계산서" />
+            전자 세금 계산서
+          </label>
+        </div>
+
+        <div class="field-group">
+          <label class="group-title">
+            결제 방식
+            <span class="muted">현재는 계좌이체를 통한 결제만 가능합니다.</span>
+          </label>
+
+          <label class="radio-row">
+            <input type="radio" name="paymentMethod" value="계좌 이체" checked />
+            계좌 이체
+          </label>
+
+          <div class="bank-box">
+            <strong>입금하실 계좌</strong>
+            <p>
+              국민은행 123-4567890<br />
+              예금주 카운터비즈니스매니지먼트 주식회사<br />
+              금액 <span id="bankAmount">$0</span>
+            </p>
+          </div>
+        </div>
+
+        <label class="field full">
+          <span>입금자명</span>
+          <input type="text" name="depositorName" placeholder="입금자명을 입력하세요." />
+        </label>
+
+        <div class="button-row">
+          <button type="button" class="ghost-btn" id="backToReviewBtn">이전</button>
+          <button type="button" class="primary-btn" id="submitPaymentBtn">결제 신청</button>
+        </div>
+      </section>
     </form>
   </main>
 
@@ -258,26 +364,32 @@
             <option>법인</option>
           </select>
         </label>
+
         <label class="field">
           <span>주주명</span>
           <input id="shName" type="text" placeholder="주주명" />
         </label>
+
         <label class="field">
           <span>보유 주식 수</span>
           <input id="shShares" type="number" min="0" placeholder="0" />
         </label>
+
         <label class="field">
           <span>지분율(%)</span>
           <input id="shPercent" type="number" min="0" max="100" step="0.01" placeholder="0" />
         </label>
+
         <label class="field full">
           <span>주소</span>
           <input id="shAddress" type="text" placeholder="주소" />
         </label>
+
         <label class="field">
           <span>이메일</span>
           <input id="shEmail" type="email" placeholder="email@example.com" />
         </label>
+
         <label class="field">
           <span>전화번호</span>
           <input id="shPhone" type="tel" placeholder="전화번호" />
@@ -293,7 +405,8 @@
       <button class="modal-close" type="button" data-close-review>×</button>
       <p class="step-label">REVIEW</p>
       <h2 id="reviewModalTitle">입력 내용 확인</h2>
-      <p class="helper-text">아래 내용이 맞으면 데모 결제 화면으로 이동하세요.</p>
+      <p class="helper-text">아래 내용이 맞으면 결제 및 입금확인 화면으로 이동하세요.</p>
+
       <div id="reviewContent" class="review-content"></div>
 
       <div class="button-row sticky-actions">
@@ -303,34 +416,7 @@
     </div>
   </div>
 
-  <div id="paymentModal" class="modal" aria-hidden="true">
-    <div class="modal-panel payment" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
-      <button class="modal-close" type="button" data-close-payment>×</button>
-      <h2 id="paymentModalTitle">데모 결제창</h2>
-      <p class="helper-text">실제 결제는 진행되지 않습니다. 고객 시연용 목업 화면입니다.</p>
-
-      <div class="payment-box">
-        <div>
-          <span>서비스명</span>
-          <strong>미국 법인 설립 신청</strong>
-        </div>
-        <div>
-          <span>결제금액</span>
-          <strong>견적 확인 후 별도 안내</strong>
-        </div>
-      </div>
-
-      <div class="pay-methods">
-        <button type="button">신용/체크카드</button>
-        <button type="button">계좌이체</button>
-        <button type="button">간편결제</button>
-      </div>
-
-      <button type="button" class="primary-btn" id="finishDemoBtn">데모 결제 완료</button>
-    </div>
-  </div>
-
-  <div id="toast" class="toast">데모 결제가 완료되었습니다.</div>
+  <div id="toast" class="toast">결제 신청이 완료되었습니다.</div>
 
   <script src="script.js"></script>
 </body>
