@@ -62,7 +62,9 @@ function collectFormData() {
       '안내 사항': '계좌 개설 은행에 대한 자세한 사항은 별도 안내를 통해 진행될 예정입니다.'
     },
     payment: {
-      '선택 서비스': data.selectedServices.length ? data.selectedServices.join(', ') : '선택된 서비스 없음',
+      '선택 서비스': data.selectedServices.length
+        ? data.selectedServices.join(', ')
+        : '선택된 서비스 없음',
       '총 결제 금액': `$${selectedTotal.toLocaleString()}`,
       '결제 증빙 요청': value('receiptType'),
       '결제 방식': value('paymentMethod'),
@@ -81,7 +83,10 @@ function showStep(step) {
   progressBar.style.width = `${Math.min(currentStep, 4) * 25}%`;
 
   progressSteps.forEach(item => {
-    item.classList.toggle('active', Number(item.dataset.progressStep) <= Math.min(currentStep, 4));
+    item.classList.toggle(
+      'active',
+      Number(item.dataset.progressStep) <= Math.min(currentStep, 4)
+    );
   });
 
   window.scrollTo({
@@ -307,9 +312,9 @@ document.querySelectorAll('.service-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const serviceName = btn.dataset.serviceName || '';
     const price = Number(btn.dataset.servicePrice || 0);
-    const isSelected = btn.classList.toggle('selected');
+    const selected = btn.classList.toggle('selected');
 
-    if (isSelected) {
+    if (selected) {
       selectedTotal += price;
       btn.textContent = '신청 취소';
 
