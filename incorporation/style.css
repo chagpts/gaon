@@ -8,15 +8,13 @@
   --danger: #dc2626;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
   color: var(--text);
-  background: #ffffff;
+  background: #fff;
   font-size: 14px;
 }
 
@@ -25,10 +23,7 @@ body {
   margin: 28px auto 60px;
 }
 
-/* Progress bar */
-.progress-wrap {
-  margin-bottom: 22px;
-}
+.progress-wrap { margin-bottom: 22px; }
 
 .progress-line {
   height: 4px;
@@ -41,7 +36,7 @@ body {
   height: 100%;
   width: 25%;
   background: var(--blue);
-  transition: width 0.25s ease;
+  transition: width .25s ease;
 }
 
 .progress-steps {
@@ -60,34 +55,24 @@ body {
   place-items: center;
   font-size: 12px;
   font-weight: 700;
-  border: 3px solid #ffffff;
+  border: 3px solid #fff;
 }
 
 .progress-step.active {
   background: var(--blue);
-  color: #ffffff;
+  color: #fff;
 }
 
-/* Page */
-.step-page {
-  display: none;
-}
+.step-page { display: none; }
 
 .step-page.active {
   display: block;
-  animation: fade 0.18s ease;
+  animation: fade .18s ease;
 }
 
 @keyframes fade {
-  from {
-    opacity: 0.4;
-    transform: translateY(4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  from { opacity: .4; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
 }
 
 .step-label {
@@ -120,9 +105,7 @@ hr {
   margin: 22px 0 28px;
 }
 
-/* Form groups */
 .field-group {
-  display: block;
   margin: 0 0 28px;
 }
 
@@ -132,43 +115,25 @@ hr {
   margin-bottom: 12px;
 }
 
-/* Radio row fixed */
 .radio-row {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 8px !important;
-  width: fit-content !important;
-  max-width: 100% !important;
-  min-height: 24px !important;
-  margin: 10px 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
   color: #374151;
-  cursor: pointer;
-  white-space: normal;
 }
 
-.radio-row input[type="radio"] {
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
-  max-width: 14px !important;
-  flex: 0 0 14px !important;
-  margin: 0 !important;
-  padding: 0 !important;
+.radio-row input,
+input[type="checkbox"] {
   accent-color: var(--blue);
 }
 
-.radio-row span {
-  display: inline-block !important;
-  line-height: 1.4 !important;
+.muted { color: var(--muted); }
+
+.compact input {
+  margin-bottom: 10px;
 }
 
-.muted {
-  color: var(--muted);
-}
-
-/* Grid */
 .grid {
   display: grid;
   gap: 18px;
@@ -194,11 +159,7 @@ hr {
   color: #374151;
 }
 
-/* Text inputs only */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="number"],
+input,
 select {
   width: 100%;
   height: 42px;
@@ -206,7 +167,7 @@ select {
   border-radius: 7px;
   padding: 0 13px;
   font: inherit;
-  background: #ffffff;
+  background: #fff;
   color: var(--text);
   outline: none;
 }
@@ -215,29 +176,10 @@ input::placeholder {
   color: #a1a1aa;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="number"]:focus,
+input:focus,
 select:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(0, 70, 184, 0.1);
-}
-
-/* Checkbox fixed */
-input[type="checkbox"] {
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
-  max-width: 14px !important;
-  flex: 0 0 14px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  accent-color: var(--blue);
-}
-
-.compact input {
-  margin-bottom: 10px;
+  box-shadow: 0 0 0 3px rgba(0,70,184,.1);
 }
 
 .with-unit {
@@ -274,14 +216,8 @@ input[type="checkbox"] {
   white-space: nowrap;
   font-size: 13px;
   color: #374151;
-  cursor: pointer;
 }
 
-.checkbox-inline span {
-  line-height: 1.4;
-}
-
-/* Buttons */
 .primary-btn,
 .secondary-btn,
 .ghost-btn {
@@ -289,15 +225,15 @@ input[type="checkbox"] {
   border-radius: 7px;
   font-weight: 800;
   cursor: pointer;
+  border: 0;
   font: inherit;
 }
 
 .primary-btn {
   width: 100%;
   margin-top: 28px;
-  border: 0;
   background: var(--blue);
-  color: #ffffff;
+  color: #fff;
 }
 
 .primary-btn:hover {
@@ -306,18 +242,17 @@ input[type="checkbox"] {
 
 .secondary-btn {
   width: 100%;
-  margin-top: 14px;
-  border: 0;
   background: #f1f5f9;
   color: var(--blue);
+  margin-top: 14px;
 }
 
 .ghost-btn {
   width: 38%;
-  margin-top: 28px;
+  background: #fff;
   border: 1px solid var(--border);
-  background: #ffffff;
   color: #374151;
+  margin-top: 28px;
 }
 
 .button-row {
@@ -334,7 +269,6 @@ input[type="checkbox"] {
   margin-top: 34px;
 }
 
-/* Shareholders */
 .shareholder-head {
   display: flex;
   align-items: center;
@@ -356,7 +290,7 @@ input[type="checkbox"] {
   border-radius: 7px;
   padding: 12px;
   margin-top: 12px;
-  background: #ffffff;
+  background: #fff;
 }
 
 .shareholder-list.empty {
@@ -383,7 +317,6 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-/* Step 3 */
 .tooltip {
   display: inline-grid;
   place-items: center;
@@ -391,7 +324,7 @@ input[type="checkbox"] {
   height: 18px;
   border-radius: 50%;
   background: #6b7280;
-  color: #ffffff;
+  color: #fff;
   font-size: 12px;
   vertical-align: middle;
 }
@@ -405,7 +338,6 @@ input[type="checkbox"] {
   line-height: 1.7;
 }
 
-/* Step 4 */
 .card-box {
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -417,50 +349,22 @@ input[type="checkbox"] {
 }
 
 .radio-field {
-  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-.radio-field > span {
+.radio-field span {
   width: 100%;
-}
-
-.radio-field label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-.radio-field input[type="radio"] {
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
-  max-width: 14px !important;
-  flex: 0 0 14px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  accent-color: var(--blue);
 }
 
 .mini-check {
   float: right;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
   font-weight: 500;
   color: #374151;
-  cursor: pointer;
 }
 
-.mini-check span {
-  font-weight: 500;
-}
-
-/* Modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -468,7 +372,7 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(15, 23, 42, 0.52);
+  background: rgba(15, 23, 42, .52);
   z-index: 50;
 }
 
@@ -480,11 +384,11 @@ input[type="checkbox"] {
   width: min(860px, 100%);
   max-height: 88vh;
   overflow: auto;
-  background: #ffffff;
+  background: #fff;
   border-radius: 14px;
   padding: 28px;
   position: relative;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 24px 80px rgba(0,0,0,.25);
 }
 
 .modal-panel.small {
@@ -550,7 +454,7 @@ input[type="checkbox"] {
 .sticky-actions {
   position: sticky;
   bottom: -28px;
-  background: #ffffff;
+  background: #fff;
   padding-top: 10px;
 }
 
@@ -579,14 +483,14 @@ input[type="checkbox"] {
 .pay-methods {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 9px;
+  gap: 10px;
 }
 
 .pay-methods button {
   height: 52px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: #ffffff;
+  background: #fff;
   cursor: pointer;
   font-weight: 700;
 }
@@ -603,10 +507,10 @@ input[type="checkbox"] {
   transform: translateX(-50%) translateY(20px);
   opacity: 0;
   background: #111827;
-  color: #ffffff;
+  color: #fff;
   padding: 12px 18px;
   border-radius: 999px;
-  transition: 0.2s ease;
+  transition: .2s ease;
   z-index: 80;
 }
 
@@ -620,10 +524,9 @@ input[type="checkbox"] {
   width: 1px;
   height: 1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip: rect(0,0,0,0);
 }
 
-/* Mobile */
 @media (max-width: 720px) {
   .app-shell {
     width: min(100% - 24px, 940px);
