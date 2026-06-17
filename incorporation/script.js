@@ -4,9 +4,11 @@ const progressBar = document.getElementById('progressBar');
 const progressSteps = [...document.querySelectorAll('[data-progress-step]')];
 
 let currentStep = 1;
+let selectedTotal = 0;
 
 const data = {
-  shareholders: []
+  shareholders: [],
+  selectedServices: []
 };
 
 function value(name) {
@@ -58,21 +60,28 @@ function collectFormData() {
       'DBA (Fictitious Business Name)': value('dbaName'),
       'Website or Company Email': value('websiteOrEmail'),
       '안내 사항': '계좌 개설 은행에 대한 자세한 사항은 별도 안내를 통해 진행될 예정입니다.'
+    },
+    payment: {
+      '선택 서비스': data.selectedServices.length ? data.selectedServices.join(', ') : '선택된 서비스 없음',
+      '총 결제 금액': `$${selectedTotal.toLocaleString()}`,
+      '결제 증빙 요청': value('receiptType'),
+      '결제 방식': value('paymentMethod'),
+      '입금자명': value('depositorName')
     }
   };
 }
 
 function showStep(step) {
-  currentStep = Math.max(1, Math.min(4, step));
+  currentStep = Math.max(1, Math.min(5, step));
 
   pages.forEach(page => {
     page.classList.toggle('active', Number(page.dataset.step) === currentStep);
   });
 
-  progressBar.style.width = `${currentStep * 25}%`;
+  progressBar.style.width = `${Math.min(currentStep, 4) * 25}%`;
 
   progressSteps.forEach(item => {
-    item.classList.toggle('active', Number(item.dataset.progressStep) <= currentStep);
+    item.classList.toggle('active', Number(item.dataset.progressStep) <= Math.min(currentStep, 4));
   });
 
   window.scrollTo({
@@ -95,7 +104,6 @@ document.querySelectorAll('.prev-btn').forEach(btn => {
 
 const shareholderModal = document.getElementById('shareholderModal');
 const reviewModal = document.getElementById('reviewModal');
-const paymentModal = document.getElementById('paymentModal');
 const shareholderCount = document.getElementById('shareholderCount');
 const shareholderList = document.getElementById('shareholderList');
 const shareholderSelect = document.getElementById('shareholderSelect');
@@ -126,13 +134,7 @@ document.querySelectorAll('[data-close-review]').forEach(btn => {
   });
 });
 
-document.querySelectorAll('[data-close-payment]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    closeModal(paymentModal);
-  });
-});
-
-[shareholderModal, reviewModal, paymentModal].forEach(modal => {
+[shareholderModal, reviewModal].forEach(modal => {
   modal.addEventListener('click', event => {
     if (event.target === modal) {
       closeModal(modal);
@@ -293,13 +295,56 @@ document.getElementById('reviewBtn').addEventListener('click', () => {
 
 document.getElementById('demoPayBtn').addEventListener('click', () => {
   closeModal(reviewModal);
-  openModal(paymentModal);
+  showStep(5);
 });
 
-document.getElementById('finishDemoBtn').addEventListener('click', () => {
-  closeModal(paymentModal);
+function updatePaymentAmount() {
+  document.getElementById('totalAmount').textContent = `$${selectedTotal.toLocaleString()}`;
+  document.getElementById('bankAmount').textContent = `$${selectedTotal.toLocaleString()}`;
+}
+
+document.querySelectorAll('.service-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const serviceName = btn.dataset.serviceName || '';
+    const price = Number(btn.dataset.servicePrice || 0);
+    const isSelected = btn.classList.toggle('selected');
+
+    if (isSelected) {
+      selectedTotal += price;
+      btn.textContent = '신청 취소';
+
+      if (serviceName && !data.selectedServices.includes(serviceName)) {
+        data.selectedServices.push(serviceName);
+      }
+    } else {
+      selectedTotal -= price;
+      btn.textContent = '서비스 신청';
+      data.selectedServices = data.selectedServices.filter(item => item !== serviceName);
+    }
+
+    if (selectedTotal < 0) {
+      selectedTotal = 0;
+    }
+
+    updatePaymentAmount();
+  });
+});
+
+document.getElementById('backToReviewBtn').addEventListener('click', () => {
+  document.getElementById('reviewContent').innerHTML = buildReview();
+  openModal(reviewModal);
+});
+
+document.getElementById('submitPaymentBtn').addEventListener('click', () => {
+  const depositorName = value('depositorName');
+
+  if (!depositorName) {
+    alert('입금자명을 입력해주세요.');
+    return;
+  }
 
   const toast = document.getElementById('toast');
+  toast.textContent = '결제 신청이 완료되었습니다.';
   toast.classList.add('show');
 
   setTimeout(() => {
