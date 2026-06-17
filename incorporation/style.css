@@ -365,6 +365,12 @@ button:disabled {
   vertical-align: middle;
 }
 
+.tooltip.small {
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+}
+
 .notice-box {
   border: 1px solid var(--border);
   background: #f9fafb;
@@ -401,6 +407,98 @@ button:disabled {
   color: #374151;
 }
 
+.service-list {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 24px;
+  margin-bottom: 22px;
+}
+
+.service-item {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.service-item:last-child {
+  border-bottom: 0;
+}
+
+.service-icon {
+  font-size: 22px;
+}
+
+.service-info strong {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.service-info p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.service-info b {
+  display: block;
+  font-size: 15px;
+}
+
+.service-btn {
+  border: 0;
+  background: #111827;
+  color: #fff;
+  border-radius: 6px;
+  height: 36px;
+  padding: 0 18px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.service-btn.selected {
+  background: var(--blue);
+}
+
+.total-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f9fafb;
+  padding: 18px 22px;
+  margin: 22px 0 28px;
+}
+
+.total-box b {
+  font-size: 18px;
+}
+
+.bank-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f9fafb;
+  padding: 18px;
+  margin-top: 12px;
+  color: #374151;
+}
+
+.bank-box strong {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.bank-box p {
+  margin: 0;
+  line-height: 1.65;
+}
+
 .modal {
   position: fixed;
   inset: 0;
@@ -429,10 +527,6 @@ button:disabled {
 
 .modal-panel.small {
   width: min(680px, 100%);
-}
-
-.modal-panel.payment {
-  width: min(520px, 100%);
 }
 
 .modal-close {
@@ -492,48 +586,6 @@ button:disabled {
   bottom: -28px;
   background: #fff;
   padding-top: 10px;
-}
-
-.payment-box {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin: 18px 0;
-}
-
-.payment-box div {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px;
-  border-bottom: 1px solid var(--border);
-}
-
-.payment-box div:last-child {
-  border-bottom: 0;
-}
-
-.payment-box span {
-  color: var(--muted);
-}
-
-.pay-methods {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.pay-methods button {
-  height: 52px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: #fff;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.pay-methods button:hover {
-  border-color: var(--blue);
-  color: var(--blue);
 }
 
 .toast {
@@ -597,8 +649,18 @@ button:disabled {
     width: 100%;
   }
 
-  .pay-methods {
-    grid-template-columns: 1fr;
+  .service-list {
+    padding: 0 16px;
+  }
+
+  .service-item {
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+  }
+
+  .service-btn {
+    grid-column: 1 / -1;
+    width: 100%;
   }
 
   .review-table th,
