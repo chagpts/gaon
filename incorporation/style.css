@@ -380,33 +380,6 @@ button:disabled {
   line-height: 1.7;
 }
 
-.card-box {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.card-box h2 {
-  margin-top: 0;
-}
-
-.radio-field {
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.radio-field span {
-  width: 100%;
-}
-
-.mini-check {
-  float: right;
-  font-weight: 500;
-  color: #374151;
-}
-
 .service-list {
   border: 1px solid var(--border);
   border-radius: 8px;
