@@ -8,7 +8,9 @@
   --danger: #dc2626;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -23,7 +25,9 @@ body {
   margin: 28px auto 60px;
 }
 
-.progress-wrap { margin-bottom: 22px; }
+.progress-wrap {
+  margin-bottom: 22px;
+}
 
 .progress-line {
   height: 4px;
@@ -63,7 +67,9 @@ body {
   color: #fff;
 }
 
-.step-page { display: none; }
+.step-page {
+  display: none;
+}
 
 .step-page.active {
   display: block;
@@ -71,8 +77,15 @@ body {
 }
 
 @keyframes fade {
-  from { opacity: .4; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: .4;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .step-label {
@@ -119,6 +132,7 @@ hr {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: fit-content;
   margin: 10px 0;
   color: #374151;
 }
@@ -128,7 +142,9 @@ input[type="checkbox"] {
   accent-color: var(--blue);
 }
 
-.muted { color: var(--muted); }
+.muted {
+  color: var(--muted);
+}
 
 .compact input {
   margin-bottom: 10px;
@@ -172,6 +188,16 @@ select {
   outline: none;
 }
 
+/* radio / checkbox가 width:100%를 먹지 않도록 분리 */
+input[type="radio"],
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
 input::placeholder {
   color: #a1a1aa;
 }
@@ -180,6 +206,12 @@ input:focus,
 select:focus {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px rgba(0,70,184,.1);
+}
+
+input:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
 }
 
 .with-unit {
@@ -253,6 +285,11 @@ select:focus {
   border: 1px solid var(--border);
   color: #374151;
   margin-top: 28px;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .button-row {
