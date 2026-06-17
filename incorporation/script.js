@@ -2,6 +2,7 @@ const form = document.getElementById('applicationForm');
 const pages = [...document.querySelectorAll('.step-page')];
 const progressBar = document.getElementById('progressBar');
 const progressSteps = [...document.querySelectorAll('[data-progress-step]')];
+
 let currentStep = 1;
 
 const data = {
@@ -18,7 +19,9 @@ function value(name) {
     return checked ? checked.value : '';
   }
 
-  if (field.type === 'checkbox') return field.checked;
+  if (field.type === 'checkbox') {
+    return field.checked;
+  }
 
   return field.value?.trim?.() ?? field.value ?? '';
 }
@@ -38,7 +41,9 @@ function collectFormData() {
       '미국 사업장 City': value('usCity'),
       '미국 사업장 State': value('usState'),
       '미국 사업장 Zip Code': value('usZip'),
-      '미국 내 사업장 전화번호': value('noUsPhone') ? '현재 미국 내 전화번호가 없습니다' : value('usPhone')
+      '미국 내 사업장 전화번호': value('noUsPhone')
+        ? '현재 미국 내 전화번호가 없습니다'
+        : value('usPhone')
     },
     step2: {
       '한 주당 액면가': value('parValue') ? `${value('parValue')} USD` : '',
@@ -49,16 +54,10 @@ function collectFormData() {
       '공유 오피스 신청': value('virtualOffice')
     },
     step4: {
-      '한국 거주 주소 Street Address': value('krStreet'),
-      '한국 거주 주소 City': value('krCity'),
-      '한국 거주 주소 State': value('krState'),
-      '한국 거주 주소 Zip Code': value('krZip'),
-      'Primary country of residence': value('residenceCountry'),
-      '미국 영주권 / 시민권 유무': value('usStatus'),
-      'Cell phone': value('noCellPhone') ? '없음' : value('cellPhone'),
-      'International Phone': value('internationalPhone'),
-      'Email address': value('email'),
-      "Mother's maiden name": value('motherMaidenName') ? '입력됨 / 리뷰 화면 비공개' : ''
+      '미국 법인 계좌 개설 지원 서비스 신청 여부': value('bankAccountService'),
+      'DBA (Fictitious Business Name)': value('dbaName'),
+      'Website or Company Email': value('websiteOrEmail'),
+      '안내 사항': '계좌 개설 은행에 대한 자세한 사항은 별도 안내를 통해 진행될 예정입니다.'
     }
   };
 }
@@ -76,15 +75,22 @@ function showStep(step) {
     item.classList.toggle('active', Number(item.dataset.progressStep) <= currentStep);
   });
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
 }
 
 document.querySelectorAll('.next-btn').forEach(btn => {
-  btn.addEventListener('click', () => showStep(currentStep + 1));
+  btn.addEventListener('click', () => {
+    showStep(currentStep + 1);
+  });
 });
 
 document.querySelectorAll('.prev-btn').forEach(btn => {
-  btn.addEventListener('click', () => showStep(currentStep - 1));
+  btn.addEventListener('click', () => {
+    showStep(currentStep - 1);
+  });
 });
 
 const shareholderModal = document.getElementById('shareholderModal');
@@ -109,25 +115,34 @@ document.getElementById('openShareholderBtn').addEventListener('click', () => {
 });
 
 document.querySelectorAll('[data-close-shareholder]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(shareholderModal));
+  btn.addEventListener('click', () => {
+    closeModal(shareholderModal);
+  });
 });
 
 document.querySelectorAll('[data-close-review]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(reviewModal));
+  btn.addEventListener('click', () => {
+    closeModal(reviewModal);
+  });
 });
 
 document.querySelectorAll('[data-close-payment]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(paymentModal));
+  btn.addEventListener('click', () => {
+    closeModal(paymentModal);
+  });
 });
 
 [shareholderModal, reviewModal, paymentModal].forEach(modal => {
   modal.addEventListener('click', event => {
-    if (event.target === modal) closeModal(modal);
+    if (event.target === modal) {
+      closeModal(modal);
+    }
   });
 });
 
 function shareholderField(id) {
-  return document.getElementById(id).value.trim();
+  const el = document.getElementById(id);
+  return el ? String(el.value || '').trim() : '';
 }
 
 function clearShareholderFields() {
@@ -182,7 +197,9 @@ function renderShareholders() {
     <div class="shareholder-item">
       <div>
         <strong>${escapeHtml(item.name)}</strong>
-        <div class="helper-text">${escapeHtml(item.type)} · ${escapeHtml(item.shares || '-')}주 · ${escapeHtml(item.percent || '-')}%</div>
+        <div class="helper-text">
+          ${escapeHtml(item.type)} · ${escapeHtml(item.shares || '-')}주 · ${escapeHtml(item.percent || '-')}%
+        </div>
       </div>
       <button type="button" onclick="removeShareholder(${index})">삭제</button>
     </div>
@@ -292,12 +309,10 @@ document.getElementById('finishDemoBtn').addEventListener('click', () => {
 
 form.elements.noUsPhone.addEventListener('change', e => {
   form.elements.usPhone.disabled = e.target.checked;
-  if (e.target.checked) form.elements.usPhone.value = '';
-});
 
-form.elements.noCellPhone.addEventListener('change', e => {
-  form.elements.cellPhone.disabled = e.target.checked;
-  if (e.target.checked) form.elements.cellPhone.value = '';
+  if (e.target.checked) {
+    form.elements.usPhone.value = '';
+  }
 });
 
 showStep(1);
