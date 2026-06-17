@@ -25,6 +25,50 @@ body {
   margin: 28px auto 60px;
 }
 
+/* Progress bar */
+.progress-wrap {
+  margin-bottom: 22px;
+}
+
+.progress-line {
+  height: 4px;
+  background: #eef2f7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 25%;
+  background: var(--blue);
+  transition: width 0.25s ease;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -12px;
+}
+
+.progress-step {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 3px solid #ffffff;
+}
+
+.progress-step.active {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+/* Page */
 .step-page {
   display: none;
 }
@@ -76,6 +120,7 @@ hr {
   margin: 22px 0 28px;
 }
 
+/* Form groups */
 .field-group {
   display: block;
   margin: 0 0 28px;
@@ -87,44 +132,43 @@ hr {
   margin-bottom: 12px;
 }
 
-/* 핵심: 라디오 버튼 정렬 */
+/* Radio row fixed */
 .radio-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  width: fit-content;
-  min-height: 24px;
-  margin: 10px 0;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  min-height: 24px !important;
+  margin: 10px 0 !important;
   color: #374151;
   cursor: pointer;
+  white-space: normal;
 }
 
 .radio-row input[type="radio"] {
-  width: 14px;
-  height: 14px;
-  min-width: 14px;
-  max-width: 14px;
-  flex: 0 0 14px;
-  margin: 0;
-  padding: 0;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  max-width: 14px !important;
+  flex: 0 0 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
   accent-color: var(--blue);
 }
 
 .radio-row span {
-  display: inline-block;
-  line-height: 1.4;
+  display: inline-block !important;
+  line-height: 1.4 !important;
 }
 
 .muted {
   color: var(--muted);
 }
 
-.compact input {
-  margin-bottom: 10px;
-}
-
+/* Grid */
 .grid {
   display: grid;
   gap: 18px;
@@ -150,7 +194,7 @@ hr {
   color: #374151;
 }
 
-/* 일반 텍스트 인풋과 셀렉트에만 100% 적용 */
+/* Text inputs only */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -180,16 +224,20 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(0, 70, 184, 0.1);
 }
 
-/* 체크박스도 100% 금지 */
+/* Checkbox fixed */
 input[type="checkbox"] {
-  width: 14px;
-  height: 14px;
-  min-width: 14px;
-  max-width: 14px;
-  flex: 0 0 14px;
-  margin: 0;
-  padding: 0;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  max-width: 14px !important;
+  flex: 0 0 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
   accent-color: var(--blue);
+}
+
+.compact input {
+  margin-bottom: 10px;
 }
 
 .with-unit {
@@ -233,6 +281,7 @@ input[type="checkbox"] {
   line-height: 1.4;
 }
 
+/* Buttons */
 .primary-btn,
 .secondary-btn,
 .ghost-btn {
@@ -285,6 +334,7 @@ input[type="checkbox"] {
   margin-top: 34px;
 }
 
+/* Shareholders */
 .shareholder-head {
   display: flex;
   align-items: center;
@@ -333,6 +383,7 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+/* Step 3 */
 .tooltip {
   display: inline-grid;
   place-items: center;
@@ -354,6 +405,7 @@ input[type="checkbox"] {
   line-height: 1.7;
 }
 
+/* Step 4 */
 .card-box {
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -384,13 +436,13 @@ input[type="checkbox"] {
 }
 
 .radio-field input[type="radio"] {
-  width: 14px;
-  height: 14px;
-  min-width: 14px;
-  max-width: 14px;
-  flex: 0 0 14px;
-  margin: 0;
-  padding: 0;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  max-width: 14px !important;
+  flex: 0 0 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
   accent-color: var(--blue);
 }
 
@@ -408,6 +460,7 @@ input[type="checkbox"] {
   font-weight: 500;
 }
 
+/* Modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -562,6 +615,15 @@ input[type="checkbox"] {
   transform: translateX(-50%) translateY(0);
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* Mobile */
 @media (max-width: 720px) {
   .app-shell {
     width: min(100% - 24px, 940px);
