@@ -1,303 +1,613 @@
-const form = document.getElementById('applicationForm');
-const pages = [...document.querySelectorAll('.step-page')];
-const progressBar = document.getElementById('progressBar');
-const progressSteps = [...document.querySelectorAll('[data-progress-step]')];
-let currentStep = 1;
+:root {
+  --blue: #0046b8;
+  --blue-dark: #003a9a;
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --soft: #f8fafc;
+  --danger: #dc2626;
+}
 
-const data = {
-  shareholders: []
-};
+* {
+  box-sizing: border-box;
+}
 
-function value(name) {
-  const field = form.elements[name];
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+  color: var(--text);
+  background: #ffffff;
+  font-size: 14px;
+}
 
-  if (!field) return '';
+.app-shell {
+  width: min(940px, calc(100% - 32px));
+  margin: 28px auto 60px;
+}
 
-  if (field instanceof RadioNodeList) {
-    const checked = [...field].find(item => item.checked);
-    return checked ? checked.value : '';
+.step-page {
+  display: none;
+}
+
+.step-page.active {
+  display: block;
+  animation: fade 0.18s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+    transform: translateY(4px);
   }
 
-  if (field.type === 'checkbox') return field.checked;
-
-  return field.value?.trim?.() ?? field.value ?? '';
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-function collectFormData() {
-  return {
-    step1: {
-      '법인의 소유주': value('ownerType'),
-      '설립 법인 형태': value('entityType'),
-      '사업장 소재 주(State)': value('businessState'),
-      '설립 법인명(영문)': value('companyName'),
-      '법인격 표시(Designator)': value('designator'),
-      '임원진 1순위 후보': value('officer1'),
-      '임원진 2순위 후보': value('officer2'),
-      '임원진 3순위 후보': value('officer3'),
-      '미국 사업장 Street Address': value('usStreet'),
-      '미국 사업장 City': value('usCity'),
-      '미국 사업장 State': value('usState'),
-      '미국 사업장 Zip Code': value('usZip'),
-      '미국 내 사업장 전화번호': value('noUsPhone') ? '현재 미국 내 전화번호가 없습니다' : value('usPhone')
-    },
-    step2: {
-      '한 주당 액면가': value('parValue') ? `${value('parValue')} USD` : '',
-      '총 주식 수': value('totalShares') ? `${value('totalShares')} 주` : '',
-      '등록된 주주 수': `${data.shareholders.length}명`
-    },
-    step3: {
-      '공유 오피스 신청': value('virtualOffice')
-    },
-    step4: {
-      '한국 거주 주소 Street Address': value('krStreet'),
-      '한국 거주 주소 City': value('krCity'),
-      '한국 거주 주소 State': value('krState'),
-      '한국 거주 주소 Zip Code': value('krZip'),
-      'Primary country of residence': value('residenceCountry'),
-      '미국 영주권 / 시민권 유무': value('usStatus'),
-      'Cell phone': value('noCellPhone') ? '없음' : value('cellPhone'),
-      'International Phone': value('internationalPhone'),
-      'Email address': value('email'),
-      "Mother's maiden name": value('motherMaidenName') ? '입력됨 / 리뷰 화면 비공개' : ''
-    }
-  };
+.step-label {
+  color: var(--blue);
+  font-weight: 800;
+  margin: 0 0 5px;
+  font-size: 13px;
 }
 
-function showStep(step) {
-  currentStep = Math.max(1, Math.min(4, step));
-
-  pages.forEach(page => {
-    page.classList.toggle('active', Number(page.dataset.step) === currentStep);
-  });
-
-  progressBar.style.width = `${currentStep * 25}%`;
-
-  progressSteps.forEach(item => {
-    item.classList.toggle('active', Number(item.dataset.progressStep) <= currentStep);
-  });
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+h1 {
+  font-size: 25px;
+  line-height: 1.25;
+  margin: 0 0 8px;
 }
 
-document.querySelectorAll('.next-btn').forEach(btn => {
-  btn.addEventListener('click', () => showStep(currentStep + 1));
-});
-
-document.querySelectorAll('.prev-btn').forEach(btn => {
-  btn.addEventListener('click', () => showStep(currentStep - 1));
-});
-
-const shareholderModal = document.getElementById('shareholderModal');
-const reviewModal = document.getElementById('reviewModal');
-const paymentModal = document.getElementById('paymentModal');
-const shareholderCount = document.getElementById('shareholderCount');
-const shareholderList = document.getElementById('shareholderList');
-const shareholderSelect = document.getElementById('shareholderSelect');
-
-function openModal(modal) {
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
+h2 {
+  font-size: 15px;
+  margin: 26px 0 14px;
 }
 
-function closeModal(modal) {
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden', 'true');
+.helper-text {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 18px;
 }
 
-document.getElementById('openShareholderBtn').addEventListener('click', () => {
-  openModal(shareholderModal);
-});
-
-document.querySelectorAll('[data-close-shareholder]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(shareholderModal));
-});
-
-document.querySelectorAll('[data-close-review]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(reviewModal));
-});
-
-document.querySelectorAll('[data-close-payment]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(paymentModal));
-});
-
-[shareholderModal, reviewModal, paymentModal].forEach(modal => {
-  modal.addEventListener('click', event => {
-    if (event.target === modal) closeModal(modal);
-  });
-});
-
-function shareholderField(id) {
-  return document.getElementById(id).value.trim();
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 22px 0 28px;
 }
 
-function clearShareholderFields() {
-  ['shName', 'shShares', 'shPercent', 'shAddress', 'shEmail', 'shPhone'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-
-  document.getElementById('shType').value = '개인';
+.field-group {
+  display: block;
+  margin: 0 0 28px;
 }
 
-document.getElementById('saveShareholderBtn').addEventListener('click', () => {
-  const shareholder = {
-    type: shareholderField('shType'),
-    name: shareholderField('shName'),
-    shares: shareholderField('shShares'),
-    percent: shareholderField('shPercent'),
-    address: shareholderField('shAddress'),
-    email: shareholderField('shEmail'),
-    phone: shareholderField('shPhone')
-  };
+.group-title {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
 
-  if (!shareholder.name) {
-    alert('주주명을 입력해주세요.');
-    return;
+/* 핵심: 라디오 버튼 정렬 */
+.radio-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: fit-content;
+  min-height: 24px;
+  margin: 10px 0;
+  color: #374151;
+  cursor: pointer;
+}
+
+.radio-row input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  flex: 0 0 14px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--blue);
+}
+
+.radio-row span {
+  display: inline-block;
+  line-height: 1.4;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.compact input {
+  margin-bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* 일반 텍스트 인풋과 셀렉트에만 100% 적용 */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select {
+  width: 100%;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0 13px;
+  font: inherit;
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
+}
+
+input::placeholder {
+  color: #a1a1aa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(0, 70, 184, 0.1);
+}
+
+/* 체크박스도 100% 금지 */
+input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  flex: 0 0 14px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--blue);
+}
+
+.with-unit {
+  position: relative;
+}
+
+.with-unit input {
+  padding-right: 58px;
+}
+
+.with-unit b {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  font-size: 12px;
+  color: #374151;
+}
+
+.phone-row {
+  display: flex;
+  align-items: end;
+  gap: 18px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.checkbox-inline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 42px;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.checkbox-inline span {
+  line-height: 1.4;
+}
+
+.primary-btn,
+.secondary-btn,
+.ghost-btn {
+  height: 52px;
+  border-radius: 7px;
+  font-weight: 800;
+  cursor: pointer;
+  font: inherit;
+}
+
+.primary-btn {
+  width: 100%;
+  margin-top: 28px;
+  border: 0;
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.primary-btn:hover {
+  background: var(--blue-dark);
+}
+
+.secondary-btn {
+  width: 100%;
+  margin-top: 14px;
+  border: 0;
+  background: #f1f5f9;
+  color: var(--blue);
+}
+
+.ghost-btn {
+  width: 38%;
+  margin-top: 28px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: #374151;
+}
+
+.button-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.button-row .primary-btn {
+  flex: 1;
+}
+
+.top-gap {
+  margin-top: 34px;
+}
+
+.shareholder-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #f3f4f6;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.shareholder-list {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 12px;
+  margin-top: 12px;
+  background: #ffffff;
+}
+
+.shareholder-list.empty {
+  color: var(--muted);
+  background: var(--soft);
+}
+
+.shareholder-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.shareholder-item:last-child {
+  border-bottom: 0;
+}
+
+.shareholder-item button {
+  border: 0;
+  background: transparent;
+  color: var(--danger);
+  cursor: pointer;
+}
+
+.tooltip {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #6b7280;
+  color: #ffffff;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.notice-box {
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 20px;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.card-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.card-box h2 {
+  margin-top: 0;
+}
+
+.radio-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.radio-field > span {
+  width: 100%;
+}
+
+.radio-field label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.radio-field input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  flex: 0 0 14px;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--blue);
+}
+
+.mini-check {
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+}
+
+.mini-check span {
+  font-weight: 500;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.52);
+  z-index: 50;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-panel {
+  width: min(860px, 100%);
+  max-height: 88vh;
+  overflow: auto;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.modal-panel.small {
+  width: min(680px, 100%);
+}
+
+.modal-panel.payment {
+  width: min(520px, 100%);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 0;
+  background: #f3f4f6;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.review-content {
+  display: grid;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.review-section {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.review-section h3 {
+  margin: 0;
+  padding: 13px 16px;
+  background: #f8fafc;
+  font-size: 15px;
+}
+
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.review-table th,
+.review-table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.review-table th {
+  width: 32%;
+  color: #4b5563;
+  font-weight: 700;
+  background: #fcfcfd;
+}
+
+.sticky-actions {
+  position: sticky;
+  bottom: -28px;
+  background: #ffffff;
+  padding-top: 10px;
+}
+
+.payment-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 18px 0;
+}
+
+.payment-box div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.payment-box div:last-child {
+  border-bottom: 0;
+}
+
+.payment-box span {
+  color: var(--muted);
+}
+
+.pay-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.pay-methods button {
+  height: 52px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.pay-methods button:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  background: #111827;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  transition: 0.2s ease;
+  z-index: 80;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    width: min(100% - 24px, 940px);
+    margin-top: 18px;
   }
 
-  data.shareholders.push(shareholder);
-  renderShareholders();
-  clearShareholderFields();
-  closeModal(shareholderModal);
-});
-
-function renderShareholders() {
-  shareholderCount.textContent = `등록된 주주: ${data.shareholders.length}명`;
-  shareholderSelect.innerHTML = '<option value="">주주 선택</option>';
-
-  data.shareholders.forEach((item, index) => {
-    const option = document.createElement('option');
-    option.value = String(index);
-    option.textContent = `${index + 1}. ${item.name}`;
-    shareholderSelect.appendChild(option);
-  });
-
-  if (!data.shareholders.length) {
-    shareholderList.className = 'shareholder-list empty';
-    shareholderList.textContent = '등록된 주주 정보가 없습니다.';
-    return;
+  h1 {
+    font-size: 22px;
   }
 
-  shareholderList.className = 'shareholder-list';
-  shareholderList.innerHTML = data.shareholders.map((item, index) => `
-    <div class="shareholder-item">
-      <div>
-        <strong>${escapeHtml(item.name)}</strong>
-        <div class="helper-text">${escapeHtml(item.type)} · ${escapeHtml(item.shares || '-')}주 · ${escapeHtml(item.percent || '-')}%</div>
-      </div>
-      <button type="button" onclick="removeShareholder(${index})">삭제</button>
-    </div>
-  `).join('');
+  .grid.two {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .checkbox-inline {
+    height: auto;
+    white-space: normal;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .ghost-btn,
+  .button-row .primary-btn {
+    width: 100%;
+  }
+
+  .pay-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .review-table th,
+  .review-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .review-table td {
+    border-top: 0;
+    padding-top: 0;
+  }
 }
-
-window.removeShareholder = function(index) {
-  data.shareholders.splice(index, 1);
-  renderShareholders();
-};
-
-function escapeHtml(text) {
-  return String(text ?? '')
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
-
-function displayValue(v) {
-  if (v === true) return '예';
-  if (v === false) return '아니요';
-  return escapeHtml(v || '-');
-}
-
-function makeTable(rows) {
-  return `
-    <table class="review-table">
-      <tbody>
-        ${Object.entries(rows).map(([key, val]) => `
-          <tr>
-            <th>${escapeHtml(key)}</th>
-            <td>${displayValue(val)}</td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-}
-
-function buildReview() {
-  const collected = collectFormData();
-
-  const shareholdersRows = data.shareholders.length
-    ? data.shareholders.map((item, index) => `
-      <tr>
-        <th>${index + 1}. ${escapeHtml(item.name)}</th>
-        <td>
-          유형: ${escapeHtml(item.type || '-')}<br />
-          보유 주식 수: ${escapeHtml(item.shares || '-')}주<br />
-          지분율: ${escapeHtml(item.percent || '-')}%<br />
-          주소: ${escapeHtml(item.address || '-')}<br />
-          이메일: ${escapeHtml(item.email || '-')}<br />
-          전화번호: ${escapeHtml(item.phone || '-')}
-        </td>
-      </tr>
-    `).join('')
-    : '<tr><th>주주 명부</th><td>등록된 주주 정보가 없습니다.</td></tr>';
-
-  return `
-    <section class="review-section">
-      <h3>STEP 1. 설립 법인 정보</h3>
-      ${makeTable(collected.step1)}
-    </section>
-
-    <section class="review-section">
-      <h3>STEP 2. 주가 정보</h3>
-      ${makeTable(collected.step2)}
-      <table class="review-table">
-        <tbody>${shareholdersRows}</tbody>
-      </table>
-    </section>
-
-    <section class="review-section">
-      <h3>STEP 3. 사업장 소재지 등록 / 공유 오피스 계약</h3>
-      ${makeTable(collected.step3)}
-    </section>
-
-    <section class="review-section">
-      <h3>STEP 4. 미국 법인 계좌 개설 정보</h3>
-      ${makeTable(collected.step4)}
-    </section>
-  `;
-}
-
-document.getElementById('reviewBtn').addEventListener('click', () => {
-  document.getElementById('reviewContent').innerHTML = buildReview();
-  openModal(reviewModal);
-});
-
-document.getElementById('demoPayBtn').addEventListener('click', () => {
-  closeModal(reviewModal);
-  openModal(paymentModal);
-});
-
-document.getElementById('finishDemoBtn').addEventListener('click', () => {
-  closeModal(paymentModal);
-
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2500);
-});
-
-form.elements.noUsPhone.addEventListener('change', e => {
-  form.elements.usPhone.disabled = e.target.checked;
-  if (e.target.checked) form.elements.usPhone.value = '';
-});
-
-form.elements.noCellPhone.addEventListener('change', e => {
-  form.elements.cellPhone.disabled = e.target.checked;
-  if (e.target.checked) form.elements.cellPhone.value = '';
-});
-
-showStep(1);
