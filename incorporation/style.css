@@ -8,13 +8,15 @@
   --danger: #dc2626;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
   color: var(--text);
-  background: #fff;
+  background: #ffffff;
   font-size: 14px;
 }
 
@@ -23,7 +25,9 @@ body {
   margin: 28px auto 60px;
 }
 
-.progress-wrap { margin-bottom: 22px; }
+.progress-wrap {
+  margin-bottom: 22px;
+}
 
 .progress-line {
   height: 4px;
@@ -36,7 +40,7 @@ body {
   height: 100%;
   width: 25%;
   background: var(--blue);
-  transition: width .25s ease;
+  transition: width 0.25s ease;
 }
 
 .progress-steps {
@@ -55,24 +59,33 @@ body {
   place-items: center;
   font-size: 12px;
   font-weight: 700;
-  border: 3px solid #fff;
+  border: 3px solid #ffffff;
 }
 
 .progress-step.active {
   background: var(--blue);
-  color: #fff;
+  color: #ffffff;
 }
 
-.step-page { display: none; }
+.step-page {
+  display: none;
+}
 
 .step-page.active {
   display: block;
-  animation: fade .18s ease;
+  animation: fade 0.18s ease;
 }
 
 @keyframes fade {
-  from { opacity: .4; transform: translateY(4px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0.4;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .step-label {
@@ -118,17 +131,22 @@ hr {
 .radio-row {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 8px;
+  width: fit-content;
+  min-height: 24px;
   margin: 10px 0;
   color: #374151;
+  cursor: pointer;
 }
 
-.radio-row input,
-input[type="checkbox"] {
-  accent-color: var(--blue);
+.radio-row input {
+  flex: 0 0 auto;
 }
 
-.muted { color: var(--muted); }
+.muted {
+  color: var(--muted);
+}
 
 .compact input {
   margin-bottom: 10px;
@@ -167,7 +185,7 @@ select {
   border-radius: 7px;
   padding: 0 13px;
   font: inherit;
-  background: #fff;
+  background: #ffffff;
   color: var(--text);
   outline: none;
 }
@@ -179,7 +197,17 @@ input::placeholder {
 input:focus,
 select:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(0,70,184,.1);
+  box-shadow: 0 0 0 3px rgba(0, 70, 184, 0.1);
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  accent-color: var(--blue);
 }
 
 .with-unit {
@@ -216,6 +244,14 @@ select:focus {
   white-space: nowrap;
   font-size: 13px;
   color: #374151;
+  cursor: pointer;
+}
+
+.checkbox-inline input,
+.mini-check input {
+  width: auto;
+  height: auto;
+  flex: 0 0 auto;
 }
 
 .primary-btn,
@@ -225,15 +261,15 @@ select:focus {
   border-radius: 7px;
   font-weight: 800;
   cursor: pointer;
-  border: 0;
   font: inherit;
 }
 
 .primary-btn {
   width: 100%;
   margin-top: 28px;
+  border: 0;
   background: var(--blue);
-  color: #fff;
+  color: #ffffff;
 }
 
 .primary-btn:hover {
@@ -242,17 +278,18 @@ select:focus {
 
 .secondary-btn {
   width: 100%;
+  margin-top: 14px;
+  border: 0;
   background: #f1f5f9;
   color: var(--blue);
-  margin-top: 14px;
 }
 
 .ghost-btn {
   width: 38%;
-  background: #fff;
-  border: 1px solid var(--border);
-  color: #374151;
   margin-top: 28px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: #374151;
 }
 
 .button-row {
@@ -290,7 +327,7 @@ select:focus {
   border-radius: 7px;
   padding: 12px;
   margin-top: 12px;
-  background: #fff;
+  background: #ffffff;
 }
 
 .shareholder-list.empty {
@@ -324,7 +361,7 @@ select:focus {
   height: 18px;
   border-radius: 50%;
   background: #6b7280;
-  color: #fff;
+  color: #ffffff;
   font-size: 12px;
   vertical-align: middle;
 }
@@ -349,6 +386,7 @@ select:focus {
 }
 
 .radio-field {
+  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
@@ -359,10 +397,21 @@ select:focus {
   width: 100%;
 }
 
+.radio-field label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
 .mini-check {
   float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-weight: 500;
   color: #374151;
+  cursor: pointer;
 }
 
 .modal {
@@ -372,7 +421,7 @@ select:focus {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(15, 23, 42, .52);
+  background: rgba(15, 23, 42, 0.52);
   z-index: 50;
 }
 
@@ -384,11 +433,11 @@ select:focus {
   width: min(860px, 100%);
   max-height: 88vh;
   overflow: auto;
-  background: #fff;
+  background: #ffffff;
   border-radius: 14px;
   padding: 28px;
   position: relative;
-  box-shadow: 0 24px 80px rgba(0,0,0,.25);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
 }
 
 .modal-panel.small {
@@ -454,7 +503,7 @@ select:focus {
 .sticky-actions {
   position: sticky;
   bottom: -28px;
-  background: #fff;
+  background: #ffffff;
   padding-top: 10px;
 }
 
@@ -483,14 +532,14 @@ select:focus {
 .pay-methods {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 9px;
 }
 
 .pay-methods button {
   height: 52px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: #fff;
+  background: #ffffff;
   cursor: pointer;
   font-weight: 700;
 }
@@ -507,10 +556,10 @@ select:focus {
   transform: translateX(-50%) translateY(20px);
   opacity: 0;
   background: #111827;
-  color: #fff;
+  color: #ffffff;
   padding: 12px 18px;
   border-radius: 999px;
-  transition: .2s ease;
+  transition: 0.2s ease;
   z-index: 80;
 }
 
@@ -524,7 +573,7 @@ select:focus {
   width: 1px;
   height: 1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
 }
 
 @media (max-width: 720px) {
