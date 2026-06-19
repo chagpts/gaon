@@ -75,12 +75,8 @@
       inset: 0;
       z-index: -3;
       pointer-events: none;
-      opacity: 0.42;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(90, 80, 70, 0.15) 0 1px, transparent 1px),
-        radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.34) 0 1px, transparent 1px),
-        radial-gradient(circle at 40% 80%, rgba(90, 80, 70, 0.10) 0 1px, transparent 1px);
-      background-size: 13px 13px, 17px 17px, 23px 23px;
+      opacity: 0;
+      background-image: none;
     }
 
     body::after {
@@ -89,23 +85,8 @@
       inset: 0;
       z-index: -2;
       pointer-events: none;
-      opacity: 0.34;
-      background-image:
-        repeating-linear-gradient(
-          90deg,
-          rgba(70, 60, 50, 0.035) 0px,
-          rgba(70, 60, 50, 0.035) 1px,
-          transparent 1px,
-          transparent 5px
-        ),
-        repeating-linear-gradient(
-          0deg,
-          rgba(255, 255, 255, 0.20) 0px,
-          rgba(255, 255, 255, 0.20) 1px,
-          transparent 1px,
-          transparent 7px
-        );
-      mix-blend-mode: multiply;
+      opacity: 0;
+      background-image: none;
     }
 
     .wall-glow {
@@ -249,9 +230,9 @@
       inset: 0;
       z-index: 0;
       overflow: hidden;
-      opacity: 0.36;
-      filter: blur(1.2px) saturate(0.9) contrast(1.12);
-      transform: scale(1.04);
+      opacity: 0.68;
+      filter: saturate(1.08) contrast(1.08) brightness(1.02);
+      transform: scale(1.02);
     }
 
     .hero-video-bg iframe {
@@ -274,33 +255,14 @@
       background:
         linear-gradient(
           90deg,
-          rgba(246,239,228,0.94) 0%,
-          rgba(246,239,228,0.82) 42%,
-          rgba(246,239,228,0.50) 100%
-        ),
-        radial-gradient(circle at 18% 24%, rgba(77,114,255,0.18), transparent 34%),
-        radial-gradient(circle at 82% 12%, rgba(157,114,245,0.14), transparent 34%);
+          rgba(246,239,228,0.82) 0%,
+          rgba(246,239,228,0.60) 40%,
+          rgba(246,239,228,0.22) 100%
+        );
     }
 
     .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      opacity: 0.42;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(70, 60, 50, 0.14) 0 1px, transparent 1px),
-        radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.34) 0 1px, transparent 1px),
-        repeating-linear-gradient(
-          90deg,
-          rgba(70, 60, 50, 0.035) 0px,
-          rgba(70, 60, 50, 0.035) 1px,
-          transparent 1px,
-          transparent 5px
-        );
-      background-size: 13px 13px, 17px 17px, auto;
-      mix-blend-mode: multiply;
+      content: none;
     }
 
     .motion-layer {
@@ -1060,7 +1022,7 @@
       }
 
       .hero-video-bg {
-        opacity: 0.22;
+        opacity: 0.54;
       }
 
       .motion-layer {
@@ -1124,6 +1086,262 @@
         padding-bottom: 86px;
       }
     }
+
+
+    /* Clean motion graphic + refined buttons */
+    body::before,
+    body::after {
+      content: none !important;
+    }
+
+    .wall-glow {
+      opacity: 0.58;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.34), rgba(255,255,255,0.05)),
+        radial-gradient(circle at 56% 4%, rgba(255,255,255,0.30), transparent 48%);
+    }
+
+    .hero-video-bg {
+      opacity: 0.76;
+      filter: saturate(1.12) contrast(1.12) brightness(1.04);
+      transform: scale(1.015);
+    }
+
+    .hero::before {
+      background:
+        linear-gradient(90deg, rgba(246,239,228,0.80) 0%, rgba(246,239,228,0.56) 42%, rgba(246,239,228,0.18) 100%),
+        linear-gradient(180deg, rgba(246,239,228,0.10), rgba(246,239,228,0.22));
+    }
+
+    .hero::after,
+    .orb,
+    .scan-line,
+    .circuit,
+    .dot,
+    .data-card {
+      display: none !important;
+    }
+
+    .motion-layer {
+      z-index: 3;
+      opacity: 0.88;
+    }
+
+    .motion-rail {
+      position: absolute;
+      height: 120px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.36);
+      background:
+        linear-gradient(90deg, transparent, rgba(255,255,255,0.26), transparent),
+        linear-gradient(135deg, rgba(77,114,255,0.13), rgba(66,183,200,0.10));
+      box-shadow: 0 24px 70px rgba(77,114,255,0.10);
+      transform: rotate(-14deg);
+      animation: gentleDrift 10s ease-in-out infinite;
+    }
+
+    .rail-1 {
+      width: 460px;
+      right: -90px;
+      top: 160px;
+    }
+
+    .rail-2 {
+      width: 340px;
+      right: 110px;
+      bottom: 100px;
+      opacity: 0.66;
+      animation-delay: -4s;
+    }
+
+    .motion-orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.36);
+      background: radial-gradient(circle at 38% 34%, rgba(255,255,255,0.28), rgba(77,114,255,0.08) 42%, transparent 68%);
+      animation: softOrbit 12s ease-in-out infinite;
+    }
+
+    .orbit-1 {
+      width: 230px;
+      height: 230px;
+      right: 12%;
+      top: 17%;
+    }
+
+    .orbit-2 {
+      width: 130px;
+      height: 130px;
+      right: 34%;
+      bottom: 18%;
+      opacity: 0.7;
+      animation-delay: -5s;
+    }
+
+    .motion-card {
+      position: absolute;
+      min-width: 116px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.30);
+      border: 1px solid rgba(255,255,255,0.54);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 42px rgba(40, 48, 60, 0.12), inset 0 1px 0 rgba(255,255,255,0.68);
+      animation: cardBreath 7.5s ease-in-out infinite;
+    }
+
+    .motion-card small {
+      display: block;
+      color: rgba(77,114,255,0.86);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      margin-bottom: 2px;
+    }
+
+    .motion-card strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: #171514;
+    }
+
+    .motion-card-1 {
+      right: 16%;
+      top: 31%;
+    }
+
+    .motion-card-2 {
+      right: 8%;
+      bottom: 25%;
+      animation-delay: -2.7s;
+    }
+
+    @keyframes gentleDrift {
+      0%, 100% { transform: rotate(-14deg) translate3d(0, 0, 0); opacity: 0.48; }
+      50% { transform: rotate(-14deg) translate3d(-18px, 12px, 0); opacity: 0.72; }
+    }
+
+    @keyframes softOrbit {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.52; }
+      50% { transform: translate3d(12px, -10px, 0) scale(1.04); opacity: 0.72; }
+    }
+
+    @keyframes cardBreath {
+      0%, 100% { transform: translateY(0); opacity: 0.88; }
+      50% { transform: translateY(-8px); opacity: 1; }
+    }
+
+    .nav-cta,
+    .btn,
+    .floating a {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border-radius: 999px;
+      letter-spacing: -0.025em;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .nav-cta::after,
+    .btn::after,
+    .floating a::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 8px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.72), transparent);
+      opacity: 0;
+      transform: translateX(-18px);
+      transition: opacity 0.22s ease, transform 0.45s ease;
+      pointer-events: none;
+    }
+
+    .nav-cta:hover::after,
+    .btn:hover::after,
+    .floating a:hover::after {
+      opacity: 0.86;
+      transform: translateX(18px);
+    }
+
+    .nav-cta,
+    .btn-primary,
+    .floating a:first-child {
+      background: linear-gradient(135deg, #4d72ff 0%, #42b7c8 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.28);
+      box-shadow: 0 14px 34px rgba(77,114,255,0.24), inset 0 1px 0 rgba(255,255,255,0.32);
+    }
+
+    .nav-cta:hover,
+    .btn-primary:hover,
+    .floating a:first-child:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 42px rgba(77,114,255,0.30), inset 0 1px 0 rgba(255,255,255,0.38);
+    }
+
+    .btn {
+      min-height: 54px;
+      padding: 0 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 900;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-light,
+    .floating a:not(:first-child) {
+      background: rgba(255,255,255,0.64);
+      border: 1px solid rgba(255,255,255,0.78);
+      color: #354151;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 30px rgba(60,55,50,0.10), inset 0 1px 0 rgba(255,255,255,0.88);
+    }
+
+    .btn-light:hover,
+    .floating a:not(:first-child):hover {
+      border-color: rgba(77,114,255,0.24);
+      box-shadow: 0 16px 36px rgba(60,55,50,0.13), inset 0 1px 0 rgba(255,255,255,0.92);
+    }
+
+    .btn:active,
+    .nav-cta:active,
+    .floating a:active {
+      transform: translateY(0);
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .floating a {
+      padding: 14px 18px;
+      font-weight: 900;
+      backdrop-filter: blur(14px);
+    }
+
+    @media (max-width: 1024px) {
+      .motion-rail,
+      .motion-orbit,
+      .motion-card {
+        display: none;
+      }
+    }
+
   </style>
 </head>
 
@@ -1171,40 +1389,23 @@
         </iframe>
       </div>
 
-      <div class="motion-layer">
-        <span class="orb orb-1"></span>
-        <span class="orb orb-2"></span>
-        <span class="orb orb-3"></span>
-
-        <div class="scan-line"></div>
-
-        <div class="data-card data-card-1">
+      <div class="motion-layer" aria-hidden="true">
+        <span class="motion-rail rail-1"></span>
+        <span class="motion-rail rail-2"></span>
+        <span class="motion-orbit orbit-1"></span>
+        <span class="motion-orbit orbit-2"></span>
+        <span class="motion-card motion-card-1">
           <small>ENTITY</small>
           <strong>ACTIVE</strong>
-        </div>
-
-        <div class="data-card data-card-2">
+        </span>
+        <span class="motion-card motion-card-2">
           <small>TAX</small>
           <strong>READY</strong>
-        </div>
-
-        <div class="data-card data-card-3">
-          <small>REPORT</small>
-          <strong>SYNC</strong>
-        </div>
-
-        <div class="circuit circuit-1"></div>
-        <div class="circuit circuit-2"></div>
-        <div class="circuit circuit-3"></div>
+        </span>
       </div>
 
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">
-            <span class="dot"></span>
-            US Company Lifecycle Service
-          </div>
-
           <h1>
             <span class="grad">미국 법인 설립 이후가</span><br />
             더 중요합니다.
