@@ -1420,6 +1420,34 @@
       object-position: center center !important;
     }
 
+
+    /* Hero text: solid color for clearer client-facing message */
+    .hero h1 {
+      color: #111318 !important;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .hero .grad {
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      color: #111318 !important;
+    }
+
+    .hero-sub {
+      color: #252320 !important;
+      font-weight: 800;
+    }
+
+    .hero-desc {
+      color: #5c554e !important;
+      font-weight: 600;
+    }
+
+    .hero::before {
+      background: linear-gradient(90deg, rgba(246,239,228,0.88) 0%, rgba(246,239,228,0.64) 45%, rgba(246,239,228,0.22) 100%) !important;
+    }
+
   </style>
 </head>
 
