@@ -127,22 +127,18 @@
     }
 
     .logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-size: 21px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 0;
     }
 
-    .logo-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--blue), var(--cyan), var(--violet));
-      box-shadow: 0 12px 28px rgba(77, 114, 255, 0.26);
-      flex-shrink: 0;
+    .logo-img {
+      display: block;
+      width: auto;
+      height: 42px;
+      max-width: 230px;
+      object-fit: contain;
     }
 
     .menu {
@@ -1009,8 +1005,9 @@
         height: 66px;
       }
 
-      .logo {
-        font-size: 18px;
+      .logo-img {
+        height: 34px;
+        max-width: 190px;
       }
 
       .nav-cta {
@@ -1456,9 +1453,13 @@
 
   <header>
     <div class="container nav">
-      <a href="#" class="logo">
-        <span class="logo-icon"></span>
-        US TAX SERVICE
+      <a href="#" class="logo" aria-label="US TAX SERVICE 홈">
+        <img
+          class="logo-img"
+          src="../logo1.svg"
+          alt="US TAX SERVICE"
+          onerror="this.onerror=null; this.src='../logo1.png';"
+        />
       </a>
 
       <nav class="menu">
