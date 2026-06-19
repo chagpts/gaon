@@ -230,8 +230,8 @@
       inset: 0;
       z-index: 0;
       overflow: hidden;
-      opacity: 0.68;
-      filter: saturate(1.08) contrast(1.08) brightness(1.02);
+      opacity: 0.62;
+      filter: saturate(1.02) contrast(1.02) brightness(0.96);
       transform: scale(1.02);
     }
 
@@ -255,9 +255,9 @@
       background:
         linear-gradient(
           90deg,
-          rgba(246,239,228,0.82) 0%,
-          rgba(246,239,228,0.60) 40%,
-          rgba(246,239,228,0.22) 100%
+          rgba(246,239,228,0.88) 0%,
+          rgba(246,239,228,0.68) 42%,
+          rgba(246,239,228,0.18) 100%
         );
     }
 
@@ -1377,74 +1377,6 @@
       margin-bottom: 0;
     }
 
-
-    /* Final readability pass: soften video and make hero copy primary */
-    .hero-video-bg {
-      opacity: 0.48 !important;
-      filter: blur(2.2px) saturate(0.92) contrast(0.94) brightness(0.86) !important;
-      transform: scale(1.035) !important;
-    }
-
-    .hero::before {
-      background:
-        linear-gradient(90deg, rgba(246,239,228,0.96) 0%, rgba(246,239,228,0.86) 45%, rgba(246,239,228,0.42) 100%),
-        linear-gradient(180deg, rgba(255,255,255,0.20), rgba(246,239,228,0.24)) !important;
-    }
-
-    .hero-copy {
-      max-width: 820px;
-      width: fit-content;
-      padding: 34px 38px 36px;
-      border-radius: 34px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.74), rgba(246,239,228,0.52));
-      border: 1px solid rgba(255,255,255,0.72);
-      box-shadow:
-        0 28px 80px rgba(45, 42, 38, 0.13),
-        inset 0 1px 0 rgba(255,255,255,0.82);
-      backdrop-filter: blur(18px);
-    }
-
-    .hero-copy h1,
-    .hero-copy .hero-sub,
-    .hero-copy .hero-desc {
-      text-shadow: 0 1px 0 rgba(255,255,255,0.70), 0 14px 32px rgba(35,31,27,0.08);
-    }
-
-    .hero-copy h1 {
-      margin-bottom: 22px;
-    }
-
-    .hero-copy .grad {
-      background: linear-gradient(135deg, #11100f 0%, #2f55d8 52%, #138fa2 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      color: #201d19 !important;
-      font-weight: 900 !important;
-    }
-
-    .hero-desc {
-      color: #474039 !important;
-      font-weight: 700;
-      max-width: 650px;
-    }
-
-    @media (max-width: 640px) {
-      .hero-copy {
-        width: 100%;
-        padding: 26px 22px 28px;
-        border-radius: 26px;
-      }
-
-      .hero-video-bg {
-        opacity: 0.40 !important;
-        filter: blur(2.6px) saturate(0.88) contrast(0.92) brightness(0.84) !important;
-      }
-    }
-
   </style>
 </head>
 
@@ -1484,8 +1416,8 @@
     <section class="hero">
       <div class="hero-video-bg">
         <iframe
-          src="https://www.youtube.com/embed/jqm1i_FSr8Y?autoplay=1&mute=1&controls=0&loop=1&playlist=jqm1i_FSr8Y&modestbranding=1&playsinline=1&rel=0"
-          title="AI server room background video"
+          src="https://www.youtube.com/embed/zCoWw6vdaZU?autoplay=1&mute=1&controls=0&loop=1&playlist=zCoWw6vdaZU&modestbranding=1&playsinline=1&rel=0"
+          title="NYC ferry ride to Wall Street background video"
           frameborder="0"
           allow="autoplay; encrypted-media"
           allowfullscreen>
