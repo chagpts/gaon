@@ -15,11 +15,9 @@
       --cyan: #06b6d4;
       --violet: #8b5cf6;
       --green: #10b981;
-      --bg: #f8fbff;
       --white: #ffffff;
       --shadow: 0 24px 70px rgba(37, 99, 235, 0.13);
       --soft-shadow: 0 14px 40px rgba(15, 23, 42, 0.07);
-      --radius: 28px;
     }
 
     * {
@@ -86,6 +84,7 @@
       border-radius: 13px;
       background: linear-gradient(135deg, var(--blue), var(--cyan), var(--violet));
       box-shadow: 0 12px 28px rgba(37, 99, 235, 0.24);
+      flex-shrink: 0;
     }
 
     .menu {
@@ -163,9 +162,13 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
       gap: 56px;
       align-items: center;
+    }
+
+    .hero-copy {
+      min-width: 0;
     }
 
     .eyebrow {
@@ -180,6 +183,7 @@
       font-size: 14px;
       font-weight: 900;
       margin-bottom: 22px;
+      word-break: keep-all;
     }
 
     .dot {
@@ -188,20 +192,26 @@
       border-radius: 99px;
       background: var(--green);
       box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.14);
+      flex-shrink: 0;
     }
 
     h1 {
-      font-size: clamp(42px, 6vw, 76px);
-      line-height: 1.02;
-      letter-spacing: -0.075em;
+      font-size: clamp(42px, 5.4vw, 72px);
+      line-height: 1.08;
+      letter-spacing: -0.06em;
       margin-bottom: 24px;
+      word-break: keep-all;
+      overflow-wrap: normal;
+      white-space: normal;
     }
 
     .grad {
+      display: inline;
       background: linear-gradient(135deg, #111827 0%, var(--blue) 45%, var(--cyan) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      word-break: keep-all;
     }
 
     .hero-sub {
@@ -237,6 +247,9 @@
       border-radius: 999px;
       font-weight: 900;
       transition: 0.2s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
     }
 
     .btn:hover {
@@ -263,6 +276,7 @@
       color: #475467;
       font-size: 13px;
       font-weight: 800;
+      word-break: keep-all;
     }
 
     .portal {
@@ -272,6 +286,7 @@
       border-radius: 34px;
       padding: 24px;
       box-shadow: var(--shadow);
+      min-width: 0;
     }
 
     .portal-head {
@@ -357,9 +372,6 @@
     }
 
     button {
-      border: 0;
-      cursor: pointer;
-      font-family: inherit;
       width: 100%;
     }
 
@@ -390,6 +402,7 @@
       line-height: 1.12;
       letter-spacing: -0.065em;
       margin-bottom: 14px;
+      word-break: keep-all;
     }
 
     .section-desc {
@@ -398,7 +411,6 @@
       word-break: keep-all;
     }
 
-    /* Customer Questions */
     .question-section {
       background:
         radial-gradient(circle at 14% 18%, rgba(6, 182, 212, 0.13), transparent 28%),
@@ -435,6 +447,7 @@
       font-size: 13px;
       font-weight: 950;
       margin-bottom: 28px;
+      word-break: keep-all;
     }
 
     .question-main h3 {
@@ -442,6 +455,7 @@
       line-height: 1.12;
       letter-spacing: -0.065em;
       margin-bottom: 18px;
+      word-break: keep-all;
     }
 
     .question-main p {
@@ -512,12 +526,6 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .card-grid-5 {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-    }
-
     .card-grid-3 {
       display: grid;
       grid-template-columns: 1fr 1.25fr 1fr;
@@ -528,6 +536,12 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
+    }
+
+    .card-grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
     }
 
     .card {
@@ -549,6 +563,7 @@
       font-size: 22px;
       letter-spacing: -0.05em;
       margin-bottom: 10px;
+      word-break: keep-all;
     }
 
     .card p {
@@ -578,6 +593,7 @@
       font-size: 26px;
       letter-spacing: -0.05em;
       margin-bottom: 16px;
+      word-break: keep-all;
     }
 
     .service ul {
@@ -590,6 +606,7 @@
 
     .service li {
       list-style: none;
+      word-break: keep-all;
     }
 
     .service li::before {
@@ -649,6 +666,7 @@
       color: var(--muted);
       font-size: 18px;
       font-weight: 700;
+      word-break: keep-all;
     }
 
     footer {
@@ -706,17 +724,21 @@
         grid-template-columns: 1fr;
       }
 
-      .card-grid-5 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .card-grid-3,
       .card-grid-4 {
         grid-template-columns: 1fr 1fr;
       }
 
+      .card-grid-5 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .service.main {
         transform: none;
+      }
+
+      h1 {
+        font-size: clamp(40px, 7vw, 64px);
       }
     }
 
@@ -742,14 +764,20 @@
         padding: 60px 0 56px;
       }
 
+      h1 {
+        font-size: clamp(38px, 11vw, 54px);
+        line-height: 1.12;
+        letter-spacing: -0.055em;
+      }
+
       section {
         padding: 60px 0;
       }
 
       .metrics,
-      .card-grid-5,
       .card-grid-3,
-      .card-grid-4 {
+      .card-grid-4,
+      .card-grid-5 {
         grid-template-columns: 1fr;
       }
 
@@ -827,10 +855,9 @@
   </header>
 
   <main>
-    <!-- Hero -->
     <section class="hero">
       <div class="container hero-grid">
-        <div>
+        <div class="hero-copy">
           <div class="eyebrow">
             <span class="dot"></span>
             US Company Lifecycle Service
@@ -913,7 +940,6 @@
       </div>
     </section>
 
-    <!-- Customer Questions -->
     <section class="question-section" id="questions">
       <div class="container">
         <div class="section-head center">
@@ -972,52 +998,6 @@
       </div>
     </section>
 
-    <!-- Use Case -->
-    <section class="panel">
-      <div class="container">
-        <div class="section-head">
-          <div class="kicker">Who We Help</div>
-          <h2>필요한 고객만 명확하게.</h2>
-          <p class="section-desc">
-            투자, 사업, 자산관리 목적에 따라 필요한 세무·회계 서비스가 달라집니다.
-          </p>
-        </div>
-
-        <div class="card-grid-5">
-          <div class="card">
-            <span>Real Estate</span>
-            <h3>부동산 투자자</h3>
-            <p>취득 · 임대소득 · 양도소득 · FIRPTA</p>
-          </div>
-
-          <div class="card">
-            <span>Commerce</span>
-            <h3>이커머스 사업자</h3>
-            <p>Amazon · Shopify · B2B · 결제 시스템</p>
-          </div>
-
-          <div class="card">
-            <span>Startup</span>
-            <h3>스타트업</h3>
-            <p>Delaware C-Corp · VC 투자 · 스톡옵션</p>
-          </div>
-
-          <div class="card">
-            <span>SaaS / IT</span>
-            <h3>SaaS·IT</h3>
-            <p>미국 결제 · 세금 · 인보이스 · 회계</p>
-          </div>
-
-          <div class="card">
-            <span>Asset</span>
-            <h3>자산관리 고객</h3>
-            <p>자산 이전 · 상속·증여 · Estate Planning</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services -->
     <section id="services">
       <div class="container">
         <div class="section-head">
@@ -1066,7 +1046,6 @@
       </div>
     </section>
 
-    <!-- Why -->
     <section class="panel">
       <div class="container">
         <div class="section-head">
@@ -1108,7 +1087,6 @@
       </div>
     </section>
 
-    <!-- Process -->
     <section>
       <div class="container">
         <div class="section-head">
@@ -1144,7 +1122,6 @@
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="cta">
       <div class="container">
         <div class="cta-box">
