@@ -1564,61 +1564,92 @@
     }
 
 
-    /* Text hierarchy: mix lighter words with bold emphasis inside each sentence */
-    .text-light {
-      font-weight: 400;
-      color: inherit;
+    /* Important text accents: use only on key messages */
+    .key-gradient {
+      background: linear-gradient(135deg, #111318 0%, #4d72ff 54%, #42b7c8 100%) !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      color: transparent !important;
+      text-shadow: none !important;
     }
 
-    .text-mid {
-      font-weight: 600;
-      color: inherit;
+    .key-underline {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
     }
 
-    .text-strong {
+    .key-underline::after {
+      content: "";
+      position: absolute;
+      left: 0.03em;
+      right: 0.03em;
+      bottom: 0.08em;
+      height: 0.24em;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(77,114,255,0.24), rgba(66,183,200,0.26));
+      z-index: -1;
+    }
+
+    .soft-highlight {
+      display: inline;
+      padding: 0 0.18em;
+      border-radius: 0.32em;
+      background: linear-gradient(180deg, transparent 48%, rgba(77,114,255,0.18) 48%, rgba(66,183,200,0.20) 100%);
+      color: #252320;
       font-weight: 900;
+    }
+
+    .accent-title {
+      color: var(--blue);
+      text-shadow: 0 10px 28px rgba(77,114,255,0.16);
+    }
+
+    .blue-emphasis {
+      display: inline-block;
+      color: var(--blue);
+      letter-spacing: -0.055em;
+      text-shadow: 0 14px 30px rgba(77,114,255,0.18);
+    }
+
+    .step-word {
+      display: inline-block;
+      padding-right: 0.08em;
+    }
+
+    .step-word:nth-child(1) {
       color: #111318;
     }
 
-    .text-accent {
-      font-weight: 900;
+    .step-word:nth-child(2) {
       color: var(--blue);
     }
 
-    .hero h1 .text-light,
-    h2 .text-light,
-    h3 .text-light {
-      color: #2b2a28;
+    .step-word:nth-child(3) {
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .hero-sub,
-    .section-desc,
-    .question-main p,
-    .package-card p,
-    .contact-box p,
-    .cta-box p {
-      font-weight: 400 !important;
+    .package-emphasis {
+      display: inline-block;
+      padding: 0.03em 0.18em 0.08em;
+      border-radius: 0.32em;
+      background: linear-gradient(135deg, rgba(77,114,255,0.12), rgba(66,183,200,0.14));
+      color: #182033;
+      box-shadow: inset 0 -2px 0 rgba(77,114,255,0.20);
     }
 
-    .bubble p {
-      font-weight: 500;
-    }
+    @media (max-width: 640px) {
+      .key-underline::after {
+        bottom: 0.04em;
+        height: 0.20em;
+      }
 
-    .service li,
-    .package-card li {
-      font-weight: 500;
-    }
-
-    .service h3,
-    .package-card h3,
-    .card h3 {
-      font-weight: 700;
-    }
-
-    .service h3 .text-strong,
-    .package-card h3 .text-strong,
-    .card h3 .text-strong {
-      font-weight: 900;
+      .blue-emphasis {
+        letter-spacing: -0.045em;
+      }
     }
 
   </style>
@@ -1662,7 +1693,7 @@
         <a href="#contact-section" class="menu-item">Contact us</a>
       </nav>
 
-      <a href="#contact-section" class="nav-cta">무료 상담</a>
+      <a href="#contact-section" class="nav-cta">상담</a>
     </div>
   </header>
 
@@ -1683,16 +1714,16 @@
       <div class="container hero-grid">
         <div class="hero-copy">
           <h1>
-            <span class="text-light">미국 법인 설립</span> <span class="text-strong">이후가</span><br />
-            <span class="text-strong">더 중요합니다.</span>
+            <span class="grad key-gradient">미국 법인 설립 이후가</span><br />
+            <span class="key-underline">더 중요합니다.</span>
           </h1>
 
           <p class="hero-sub">
-            <span class="text-light">미국 법인 설립부터</span> <span class="text-strong">세무, 회계 운영 및 청산까지.</span>
+            미국 법인 설립부터 <span class="soft-highlight">세무, 회계 운영 및 청산</span>까지.
           </p>
 
           <p class="hero-desc">
-            <span class="text-light">미국 법인을 만들고, 운영하고, 정리하는</span> <span class="text-strong">모든 과정을 하나로 관리합니다.</span>
+            미국 법인을 만들고, 운영하고, 정리하는 모든 과정을 하나로 관리합니다.
           </p>
 
         </div>
@@ -1702,9 +1733,9 @@
     <section class="question-section" id="questions">
       <div class="container">
         <div class="section-head center">
-          <h2><span class="text-light">미국 법인으로</span> <span class="text-strong">고민이 있으신가요?</span></h2>
+          <h2><span class="accent-title">미국 법인</span>으로 고민이 있으신가요?</h2>
           <p class="section-desc">
-            <span class="text-light">미국 법인을 만들기 전,</span> <span class="text-strong">내 상황에 맞는 구조와 세무 전략</span><span class="text-light">부터 확인하세요.</span>
+            미국 법인을 만들기 전, 내 상황에 맞는 구조와 세무 전략부터 확인하세요.
           </p>
         </div>
 
@@ -1712,12 +1743,12 @@
           <div class="question-main">
             <div>
               <h3>
-                <span class="text-light">“미국 법인,</span><br />
-                <span class="text-strong">내 상황에도 필요할까?</span><span class="text-light">”</span>
+                “미국 법인,<br />
+                <span class="blue-emphasis">내 상황에도 필요할까?</span>”
               </h3>
 
               <p>
-                <span class="text-light">투자, 사업, 자산관리 목적에 따라</span> <span class="text-strong">필요한 설립 방식과 운영 관리</span><span class="text-light">가 달라집니다.</span>
+                투자, 사업, 자산관리 목적에 따라 필요한 설립 방식과 운영 관리가 달라집니다.
               </p>
             </div>
 
@@ -1726,23 +1757,23 @@
 
           <div class="question-bubbles">
             <div class="bubble">
-              <p><span class="text-light">미국 부동산 투자,</span> <span class="text-strong">법인 구조</span><span class="text-light">를 어떻게 설계해야 할까?</span></p>
+              <p>미국 부동산 투자, 법인 구조를 어떻게 설계해야 할까?</p>
             </div>
 
             <div class="bubble">
-              <p><span class="text-light">SaaS·이커머스 사업,</span> <span class="text-strong">미국 법인</span><span class="text-light">이 필요할까?</span></p>
+              <p>SaaS·이커머스 사업, 미국 법인이 필요할까?</p>
             </div>
 
             <div class="bubble">
-              <p><span class="text-light">미국 시장 진출,</span> <span class="text-strong">세금과 구조</span><span class="text-light">는 어떻게 준비해야 할까?</span></p>
+              <p>미국 시장 진출, 세금과 구조는 어떻게 준비해야 할까?</p>
             </div>
 
             <div class="bubble">
-              <p><span class="text-light">스타트업 투자,</span> <span class="text-strong">미국 법인</span><span class="text-light">으로 진행하는 것이 맞을까?</span></p>
+              <p>스타트업 투자, 미국 법인으로 진행하는 것이 맞을까?</p>
             </div>
 
             <div class="bubble">
-              <p><span class="text-light">자산 이전과</span> <span class="text-strong">절세 전략</span><span class="text-light">까지 함께 설계할 수 있을까?</span></p>
+              <p>자산 이전과 절세 전략까지 함께 설계할 수 있을까?</p>
             </div>
           </div>
         </div>
@@ -1752,15 +1783,15 @@
     <section id="services">
       <div class="container">
         <div class="section-head">
-          <h2><span class="text-strong">설립.</span> <span class="text-light">운영.</span> <span class="text-strong">청산.</span></h2>
+          <h2><span class="step-word">설립.</span> <span class="step-word">운영.</span> <span class="step-word">청산.</span></h2>
           <p class="section-desc">
-            <span class="text-light">미국 법인의</span> <span class="text-strong">전체 흐름</span><span class="text-light">을 한곳에서 관리합니다.</span>
+            미국 법인의 전체 흐름을 한곳에서 관리합니다.
           </p>
         </div>
 
         <div class="card-grid-3">
           <article class="service" id="formation">
-            <h3><span class="text-light">미국 법인</span> <span class="text-strong">설립</span></h3>
+            <h3>미국 법인 설립</h3>
             <ul>
               <li>법인 설립 상담</li>
               <li>설립 주 검토</li>
@@ -1771,7 +1802,7 @@
           </article>
 
           <article class="service main" id="maintenance">
-            <h3><span class="text-strong">운영</span> <span class="text-light">및</span> <span class="text-strong">유지</span></h3>
+            <h3>운영 및 유지</h3>
             <ul>
               <li id="bookkeeping">기장</li>
               <li id="tax">법인 세금 보고</li>
@@ -1783,7 +1814,7 @@
           </article>
 
           <article class="service" id="dissolution">
-            <h3><span class="text-light">미국 법인</span> <span class="text-strong">청산</span></h3>
+            <h3>미국 법인 청산</h3>
             <ul>
               <li>법인 상태 확인</li>
               <li>미납 보고 검토</li>
@@ -1797,10 +1828,10 @@
         <div class="package-grid">
           <article class="package-card" id="bank-account">
             <div class="package-label">Package 01</div>
-            <h3><span class="text-light">법인 계좌</span> <span class="text-strong">개설</span></h3>
+            <h3>법인 계좌 개설</h3>
             <p>
-              <span class="text-light">미국 법인 설립 이후 필요한</span> <span class="text-strong">법인 계좌 개설 절차</span><span class="text-light">를 안내하고,</span>
-              <span class="text-strong">은행 제출 자료 준비</span><span class="text-light">를 함께 지원합니다.</span>
+              미국 법인 설립 이후 필요한 법인 계좌 개설 절차를 안내하고,
+              은행 제출 자료 준비를 함께 지원합니다.
             </p>
             <ul>
               <li>법인 계좌 개설 상담</li>
@@ -1813,10 +1844,10 @@
 
           <article class="package-card featured" id="formation-bookkeeping">
             <div class="package-label">Package 02</div>
-            <h3><span class="text-light">법인 계좌 개설</span> <span class="text-strong">+ 기장</span></h3>
+            <h3><span class="package-emphasis">법인 계좌 개설 + 기장</span></h3>
             <p>
-              <span class="text-light">법인 계좌 개설부터 이후</span> <span class="text-strong">회계 자료 정리와 기장 관리</span><span class="text-light">까지</span>
-              <span class="text-strong">운영 초기 단계</span><span class="text-light">에 필요한 절차를 함께 관리합니다.</span>
+              법인 계좌 개설부터 이후 회계 자료 정리와 기장 관리까지
+              운영 초기 단계에 필요한 절차를 함께 관리합니다.
             </p>
             <ul>
               <li>법인 계좌 개설 지원</li>
@@ -1833,37 +1864,37 @@
     <section class="panel">
       <div class="container">
         <div class="section-head">
-          <h2><span class="text-light">한국에서도</span> <span class="text-strong">미국 법인을 쉽게 관리</span><span class="text-light">할 수 있습니다.</span></h2>
+          <h2>한국에서도 <span class="accent-title">미국 법인</span>을 쉽게 관리할 수 있습니다.</h2>
         </div>
 
         <div class="card-grid-5">
           <div class="card feature">
             <span>01</span>
-            <h3><span class="text-strong">한국에서</span> <span class="text-light">진행</span></h3>
+            <h3>한국에서 진행</h3>
             <p>미국 방문 없이 진행</p>
           </div>
 
           <div class="card feature">
             <span>02</span>
-            <h3><span class="text-strong">빠른</span> <span class="text-light">한국어 상담</span></h3>
+            <h3>빠른 한국어 상담</h3>
             <p>실시간 채팅 응대</p>
           </div>
 
           <div class="card feature">
             <span>03</span>
-            <h3><span class="text-strong">고객 전용</span> <span class="text-light">페이지</span></h3>
+            <h3>고객 전용 페이지</h3>
             <p>자료와 진행 상황 통합 관리</p>
           </div>
 
           <div class="card feature">
             <span>04</span>
-            <h3><span class="text-strong">은행 자료</span> <span class="text-light">제출</span></h3>
+            <h3>은행 자료 제출</h3>
             <p>회계 자료 간편 제출</p>
           </div>
 
           <div class="card feature">
             <span>05</span>
-            <h3><span class="text-strong">One-Stop</span></h3>
+            <h3>One-Stop</h3>
             <p>설립부터 청산까지</p>
           </div>
         </div>
@@ -1875,9 +1906,9 @@
         <div class="contact-box">
           <div>
             <div class="kicker">Contact Us</div>
-            <h2><span class="text-light">무료</span> <span class="text-strong">상담 신청</span></h2>
+            <h2>상담 신청</h2>
             <p>
-              <span class="text-light">현재 상황을 남겨주시면</span> <span class="text-strong">필요한 서비스</span><span class="text-light">부터 안내드립니다.</span>
+              현재 상황을 남겨주시면 필요한 서비스부터 안내드립니다.
             </p>
           </div>
 
@@ -1908,11 +1939,11 @@
       <div class="container">
         <div class="cta-box">
           <div>
-            <h2><span class="text-light">미국 법인,</span> <span class="text-strong">지금 점검하세요.</span></h2>
-            <p><span class="text-light">설립부터 운영,</span> <span class="text-strong">세금 보고, 청산까지</span> <span class="text-light">한 번에.</span></p>
+            <h2>미국 법인, <span class="key-underline">지금 점검하세요.</span></h2>
+            <p>설립부터 운영, 세금 보고, 청산까지 한 번에.</p>
           </div>
 
-          <a href="#contact-section" class="btn btn-primary">무료 상담 신청</a>
+          <a href="#contact-section" class="btn btn-primary">상담 신청</a>
         </div>
       </div>
     </section>
@@ -1938,7 +1969,7 @@
   </footer>
 
   <div class="floating">
-    <a href="#contact-section">무료 상담</a>
+    <a href="#contact-section">상담</a>
     <a href="#contact-section">Contact</a>
   </div>
 </body>
