@@ -249,9 +249,9 @@
       inset: 0;
       z-index: 0;
       overflow: hidden;
-      opacity: 0.28;
-      filter: blur(1.5px) saturate(0.9) contrast(1.05);
-      transform: scale(1.03);
+      opacity: 0.36;
+      filter: blur(1.2px) saturate(0.9) contrast(1.12);
+      transform: scale(1.04);
     }
 
     .hero-video-bg iframe {
@@ -272,7 +272,12 @@
       inset: 0;
       z-index: 1;
       background:
-        linear-gradient(90deg, rgba(246,239,228,0.94) 0%, rgba(246,239,228,0.82) 42%, rgba(246,239,228,0.54) 100%),
+        linear-gradient(
+          90deg,
+          rgba(246,239,228,0.94) 0%,
+          rgba(246,239,228,0.82) 42%,
+          rgba(246,239,228,0.50) 100%
+        ),
         radial-gradient(circle at 18% 24%, rgba(77,114,255,0.18), transparent 34%),
         radial-gradient(circle at 82% 12%, rgba(157,114,245,0.14), transparent 34%);
     }
@@ -283,10 +288,10 @@
       inset: 0;
       z-index: 2;
       pointer-events: none;
-      opacity: 0.38;
+      opacity: 0.42;
       background-image:
-        radial-gradient(circle at 20% 30%, rgba(70, 60, 50, 0.13) 0 1px, transparent 1px),
-        radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.36) 0 1px, transparent 1px),
+        radial-gradient(circle at 20% 30%, rgba(70, 60, 50, 0.14) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.34) 0 1px, transparent 1px),
         repeating-linear-gradient(
           90deg,
           rgba(70, 60, 50, 0.035) 0px,
@@ -298,9 +303,204 @@
       mix-blend-mode: multiply;
     }
 
+    .motion-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.9), rgba(77,114,255,0.22) 38%, transparent 68%);
+      opacity: 0.72;
+      animation: floatOrb 9s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 220px;
+      height: 220px;
+      right: 12%;
+      top: 16%;
+    }
+
+    .orb-2 {
+      width: 140px;
+      height: 140px;
+      right: 30%;
+      bottom: 18%;
+      animation-delay: -3s;
+    }
+
+    .orb-3 {
+      width: 90px;
+      height: 90px;
+      left: 8%;
+      bottom: 20%;
+      animation-delay: -5s;
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(77,114,255,0.72), transparent);
+      opacity: 0.56;
+      animation: scanMove 5.8s linear infinite;
+    }
+
+    .data-card {
+      position: absolute;
+      min-width: 118px;
+      padding: 13px 15px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.28);
+      border: 1px solid rgba(255,255,255,0.48);
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 18px 44px rgba(60,55,50,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+      animation: floatCard 7s ease-in-out infinite;
+    }
+
+    .data-card small {
+      display: block;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+
+    .data-card strong {
+      display: block;
+      color: #171514;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .data-card-1 {
+      right: 16%;
+      top: 30%;
+    }
+
+    .data-card-2 {
+      right: 8%;
+      bottom: 26%;
+      animation-delay: -2.2s;
+    }
+
+    .data-card-3 {
+      right: 34%;
+      bottom: 14%;
+      animation-delay: -4s;
+    }
+
+    .circuit {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(77,114,255,0.58), rgba(66,183,200,0.48), transparent);
+      opacity: 0.62;
+      transform-origin: left;
+      animation: circuitPulse 4.2s ease-in-out infinite;
+    }
+
+    .circuit::before,
+    .circuit::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(77,114,255,0.9);
+      box-shadow: 0 0 18px rgba(77,114,255,0.62);
+      transform: translateY(-50%);
+    }
+
+    .circuit::before {
+      left: 18%;
+    }
+
+    .circuit::after {
+      right: 12%;
+    }
+
+    .circuit-1 {
+      width: 420px;
+      right: 10%;
+      top: 42%;
+    }
+
+    .circuit-2 {
+      width: 320px;
+      right: 18%;
+      top: 58%;
+      animation-delay: -1.5s;
+    }
+
+    .circuit-3 {
+      width: 260px;
+      left: 6%;
+      bottom: 28%;
+      animation-delay: -2.6s;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(18px, -22px, 0) scale(1.08);
+      }
+    }
+
+    @keyframes scanMove {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      12% {
+        opacity: 0.6;
+      }
+      85% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(760px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatCard {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    @keyframes circuitPulse {
+      0%, 100% {
+        opacity: 0.24;
+        transform: scaleX(0.88);
+      }
+      50% {
+        opacity: 0.78;
+        transform: scaleX(1);
+      }
+    }
+
     .hero .container {
       position: relative;
-      z-index: 3;
+      z-index: 5;
     }
 
     .hero-grid {
@@ -817,6 +1017,20 @@
         transform: none;
       }
 
+      .data-card,
+      .circuit {
+        display: none;
+      }
+
+      .orb-1 {
+        right: -40px;
+        top: 20%;
+      }
+
+      .orb-2 {
+        right: 20%;
+      }
+
       h1 {
         font-size: clamp(40px, 7vw, 64px);
       }
@@ -843,6 +1057,24 @@
       .hero {
         min-height: 660px;
         padding: 64px 0 56px;
+      }
+
+      .hero-video-bg {
+        opacity: 0.22;
+      }
+
+      .motion-layer {
+        opacity: 0.72;
+      }
+
+      .orb-1 {
+        width: 170px;
+        height: 170px;
+      }
+
+      .orb-2,
+      .orb-3 {
+        display: none;
       }
 
       h1 {
@@ -931,12 +1163,39 @@
     <section class="hero">
       <div class="hero-video-bg">
         <iframe
-          src="https://www.youtube.com/embed/gld-5U82rx0?autoplay=1&mute=1&controls=0&loop=1&playlist=gld-5U82rx0&modestbranding=1&playsinline=1&rel=0"
-          title="Hero background video"
+          src="https://www.youtube.com/embed/jqm1i_FSr8Y?autoplay=1&mute=1&controls=0&loop=1&playlist=jqm1i_FSr8Y&modestbranding=1&playsinline=1&rel=0"
+          title="AI server room background video"
           frameborder="0"
           allow="autoplay; encrypted-media"
           allowfullscreen>
         </iframe>
+      </div>
+
+      <div class="motion-layer">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+
+        <div class="scan-line"></div>
+
+        <div class="data-card data-card-1">
+          <small>ENTITY</small>
+          <strong>ACTIVE</strong>
+        </div>
+
+        <div class="data-card data-card-2">
+          <small>TAX</small>
+          <strong>READY</strong>
+        </div>
+
+        <div class="data-card data-card-3">
+          <small>REPORT</small>
+          <strong>SYNC</strong>
+        </div>
+
+        <div class="circuit circuit-1"></div>
+        <div class="circuit circuit-2"></div>
+        <div class="circuit circuit-3"></div>
       </div>
 
       <div class="container hero-grid">
