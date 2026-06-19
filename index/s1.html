@@ -235,7 +235,8 @@
       transform: scale(1.02);
     }
 
-    .hero-video-bg iframe {
+    .hero-video-bg iframe,
+    .hero-video-bg video {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -245,6 +246,7 @@
       min-height: 120%;
       transform: translate(-50%, -50%);
       pointer-events: none;
+      object-fit: cover;
     }
 
     .hero::before {
@@ -1369,6 +1371,15 @@
       transform: scale(1.01);
     }
 
+    .hero-video-bg video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
     .hero::before {
       background: linear-gradient(90deg, rgba(246,239,228,0.86) 0%, rgba(246,239,228,0.62) 45%, rgba(246,239,228,0.24) 100%) !important;
     }
@@ -1415,13 +1426,15 @@
   <main>
     <section class="hero">
       <div class="hero-video-bg">
-        <iframe
-          src="https://www.youtube.com/embed/zCoWw6vdaZU?autoplay=1&mute=1&controls=0&loop=1&playlist=zCoWw6vdaZU&modestbranding=1&playsinline=1&rel=0"
-          title="NYC ferry ride to Wall Street background video"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen>
-        </iframe>
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          title="NYC ferry view of Manhattan skyline background video">
+          <source src="https://www.pexels.com/download/video/35585142/" type="video/mp4" />
+        </video>
       </div>
 
       <div class="container hero-grid">
