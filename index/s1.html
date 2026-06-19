@@ -928,6 +928,21 @@
       color: var(--text);
     }
 
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      line-height: 0;
+      margin-bottom: 8px;
+    }
+
+    .footer-logo-img {
+      display: block;
+      width: auto;
+      height: 38px;
+      max-width: 220px;
+      object-fit: contain;
+    }
+
     .floating {
       position: fixed;
       right: 22px;
@@ -1520,7 +1535,6 @@
     <section class="question-section" id="questions">
       <div class="container">
         <div class="section-head center">
-          <div class="kicker">Customer Questions</div>
           <h2>미국 법인으로 고민이 있으신가요?</h2>
           <p class="section-desc">
             미국 법인을 만들기 전, 내 상황에 맞는 구조와 세무 전략부터 확인하세요.
@@ -1530,8 +1544,6 @@
         <div class="question-layout">
           <div class="question-main">
             <div>
-              <div class="question-badge">방문자들이 가장 많이 묻는 질문</div>
-
               <h3>
                 “미국 법인,<br />
                 내 상황에도 필요할까?”
@@ -1547,27 +1559,22 @@
 
           <div class="question-bubbles">
             <div class="bubble">
-              <span>Real Estate</span>
               <p>미국 부동산 투자, 법인 구조를 어떻게 설계해야 할까?</p>
             </div>
 
             <div class="bubble">
-              <span>SaaS / Commerce</span>
               <p>SaaS·이커머스 사업, 미국 법인이 필요할까?</p>
             </div>
 
             <div class="bubble">
-              <span>Expansion</span>
               <p>미국 시장 진출, 세금과 구조는 어떻게 준비해야 할까?</p>
             </div>
 
             <div class="bubble">
-              <span>Startup</span>
               <p>스타트업 투자, 미국 법인으로 진행하는 것이 맞을까?</p>
             </div>
 
             <div class="bubble">
-              <span>Asset Planning</span>
               <p>자산 이전과 절세 전략까지 함께 설계할 수 있을까?</p>
             </div>
           </div>
@@ -1578,7 +1585,6 @@
     <section id="services">
       <div class="container">
         <div class="section-head">
-          <div class="kicker">Services</div>
           <h2>설립. 운영. 청산.</h2>
           <p class="section-desc">
             미국 법인의 전체 흐름을 한곳에서 관리합니다.
@@ -1626,7 +1632,6 @@
     <section class="panel">
       <div class="container">
         <div class="section-head">
-          <div class="kicker">Why Us</div>
           <h2>한국에서도 미국 법인을 쉽게 관리할 수 있습니다.</h2>
         </div>
 
@@ -1715,7 +1720,14 @@
   <footer>
     <div class="container footer-inner">
       <div>
-        <strong>US TAX SERVICE</strong><br />
+        <a href="#" class="footer-logo" aria-label="US TAX SERVICE 홈">
+          <img
+            class="footer-logo-img"
+            src="../logo1.svg"
+            alt="US TAX SERVICE"
+            onerror="this.onerror=null; this.src='../logo1.png';"
+          />
+        </a><br />
         미국 법인 설립 · 운영 및 유지 · 청산
       </div>
 
