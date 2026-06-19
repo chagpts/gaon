@@ -828,6 +828,89 @@
       font-weight: 900;
     }
 
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .package-card {
+      border-radius: 28px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.76), rgba(244,238,229,0.54));
+      border: 1px solid rgba(255,255,255,0.74);
+      box-shadow:
+        0 16px 44px rgba(60, 55, 50, 0.10),
+        inset 0 1px 0 rgba(255,255,255,0.84);
+      backdrop-filter: blur(14px);
+    }
+
+    .package-card.featured {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.84), rgba(234,242,255,0.62)),
+        radial-gradient(circle at 88% 12%, rgba(77,114,255,0.16), transparent 34%);
+      box-shadow:
+        0 26px 70px rgba(77, 114, 255, 0.15),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .package-label {
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.58);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,0.72);
+    }
+
+    .package-card h3 {
+      font-size: 26px;
+      letter-spacing: -0.05em;
+      margin-bottom: 12px;
+      word-break: keep-all;
+      font-weight: 900;
+    }
+
+    .package-card p {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 700;
+      word-break: keep-all;
+      margin-bottom: 20px;
+    }
+
+    .package-card ul {
+      display: grid;
+      gap: 10px;
+      color: #5c554e;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .package-card li {
+      list-style: none;
+      word-break: keep-all;
+    }
+
+    .package-card li::before {
+      content: "✓";
+      color: var(--blue);
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    .package-card a {
+      color: var(--blue);
+      font-weight: 900;
+    }
+
     .feature span {
       width: 42px;
       height: 42px;
@@ -986,6 +1069,10 @@
 
       .card-grid-5 {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .package-grid {
+        grid-template-columns: 1fr;
       }
 
       .service.main {
@@ -1477,7 +1564,14 @@
       </a>
 
       <nav class="menu">
-        <a href="#services" class="menu-item">미국 법인 설립</a>
+        <div class="menu-item">
+          <a href="#formation">미국 법인 설립</a>
+          <div class="dropdown">
+            <a href="#formation">미국 법인 설립</a>
+            <a href="#bank-account">법인 계좌 개설</a>
+            <a href="#formation-bookkeeping">법인 계좌 개설 + 기장</a>
+          </div>
+        </div>
 
         <div class="menu-item">
           <a href="#maintenance">운영 및 유지</a>
@@ -1591,7 +1685,7 @@
         </div>
 
         <div class="card-grid-3">
-          <article class="service">
+          <article class="service" id="formation">
             <h3>미국 법인 설립</h3>
             <ul>
               <li>법인 설립 상담</li>
@@ -1623,6 +1717,40 @@
               <li>청산 절차 지원</li>
             </ul>
             <a href="#contact-section">청산 상담 →</a>
+          </article>
+        </div>
+
+        <div class="package-grid">
+          <article class="package-card" id="bank-account">
+            <div class="package-label">Package 01</div>
+            <h3>법인 계좌 개설</h3>
+            <p>
+              미국 법인 설립 이후 필요한 법인 계좌 개설 절차를 안내하고,
+              은행 제출 자료 준비를 함께 지원합니다.
+            </p>
+            <ul>
+              <li>법인 계좌 개설 상담</li>
+              <li>은행 제출 자료 안내</li>
+              <li>필요 서류 검토</li>
+              <li>계좌 개설 진행 지원</li>
+            </ul>
+            <a href="#contact-section">패키지 상담 →</a>
+          </article>
+
+          <article class="package-card featured" id="formation-bookkeeping">
+            <div class="package-label">Package 02</div>
+            <h3>법인 계좌 개설 + 기장</h3>
+            <p>
+              법인 계좌 개설부터 이후 회계 자료 정리와 기장 관리까지
+              운영 초기 단계에 필요한 절차를 함께 관리합니다.
+            </p>
+            <ul>
+              <li>법인 계좌 개설 지원</li>
+              <li>회계 자료 제출 안내</li>
+              <li>월별 또는 분기별 기장 관리</li>
+              <li>세금 보고 준비 자료 정리</li>
+            </ul>
+            <a href="#contact-section">패키지 상담 →</a>
           </article>
         </div>
       </div>
