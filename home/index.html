@@ -54,62 +54,59 @@
       margin:36px auto 0;
       width:min(650px,100%);
       height:300px;
-      border-radius:24px;
-      overflow:visible;
+      border-radius:30px;
+      overflow:hidden;
       position:relative;
       isolation:isolate;
-      padding:12px;
-      background:
-        linear-gradient(145deg, rgba(255,250,244,.92), rgba(247,242,234,.48) 46%, rgba(232,222,209,.56)),
-        radial-gradient(circle at 16% 8%, rgba(255,218,171,.85), transparent 42%),
-        radial-gradient(circle at 88% 14%, rgba(222,202,182,.65), transparent 44%);
-      border:1px solid rgba(255,255,255,.82);
-      box-shadow:
-        0 34px 86px rgba(69,49,33,.14),
-        0 12px 28px rgba(32,32,32,.06),
-        inset 0 1px 0 rgba(255,255,255,.9);
+      padding:0;
+      background:transparent;
+      border:0;
+      box-shadow:0 26px 70px rgba(86,62,38,.07);
       display:flex;align-items:stretch;justify-content:center;
     }
     .hero .visual::before{
       content:"";
       position:absolute;
-      inset:-34px -40px -48px;
+      inset:-36px -44px -50px;
       z-index:-2;
       background:
-        radial-gradient(ellipse at 18% 20%, rgba(255,218,171,.46), transparent 44%),
-        radial-gradient(ellipse at 82% 24%, rgba(232,216,196,.42), transparent 46%),
-        radial-gradient(ellipse at 50% 105%, rgba(204,178,150,.22), transparent 54%);
-      filter:blur(20px);
-      opacity:.96;
+        radial-gradient(ellipse at 18% 18%, rgba(255,218,171,.34), transparent 46%),
+        radial-gradient(ellipse at 84% 22%, rgba(232,216,196,.30), transparent 48%),
+        radial-gradient(ellipse at 50% 105%, rgba(204,178,150,.18), transparent 56%);
+      filter:blur(24px);
+      opacity:.86;
     }
     .hero .visual::after{
       content:"";
       position:absolute;
-      inset:12px;
+      inset:0;
       z-index:4;
       pointer-events:none;
-      border-radius:18px;
+      border-radius:30px;
       background:
-        linear-gradient(180deg, rgba(251,246,237,.45) 0%, rgba(251,246,237,.12) 24%, transparent 45%, rgba(65,48,33,.18) 100%),
-        linear-gradient(120deg, transparent 6%, rgba(255,255,255,.16) 34%, transparent 54%),
-        radial-gradient(circle at 50% 0%, rgba(255,250,244,.28), transparent 48%);
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);
-      opacity:.82;
+        linear-gradient(180deg, rgba(251,246,237,.30) 0%, rgba(251,246,237,.08) 25%, transparent 48%, rgba(247,242,234,.30) 100%),
+        linear-gradient(90deg, rgba(247,242,234,.30), transparent 18%, transparent 82%, rgba(247,242,234,.30)),
+        radial-gradient(ellipse at center, transparent 48%, rgba(247,242,234,.38) 100%);
+      opacity:.84;
+    }
+    .hero .visual .video-wrap{
+      width:100%;height:100%;position:relative;overflow:hidden;border-radius:30px;background:transparent;
+      box-shadow:none;
     }
     .hero .visual video{
       width:100%;height:100%;display:block;object-fit:cover;
       filter:saturate(.88) contrast(.96) brightness(.98) sepia(.08);
-      opacity:.92;
+      opacity:.90;
       mix-blend-mode:multiply;
-      transform:scale(1.018);
+      transform:scale(1.025);
     }
     .hero .visual .video-caption{display:none;}
     .hero .visual .video-vignette{
       position:absolute;inset:0;z-index:3;pointer-events:none;
       background:
-        radial-gradient(ellipse at center, transparent 42%, rgba(95,72,48,.24) 100%),
-        linear-gradient(180deg, rgba(251,246,237,.28), transparent 30%, rgba(247,242,234,.34)),
-        linear-gradient(90deg, rgba(247,242,234,.18), transparent 22%, transparent 78%, rgba(247,242,234,.18));
+        radial-gradient(ellipse at center, transparent 46%, rgba(247,242,234,.42) 100%),
+        linear-gradient(180deg, rgba(251,246,237,.22), transparent 32%, rgba(247,242,234,.36)),
+        linear-gradient(90deg, rgba(247,242,234,.28), transparent 24%, transparent 76%, rgba(247,242,234,.28));
     }
 
     .section{text-align:center;padding:30px 0 42px}
@@ -191,7 +188,6 @@
       <p>미국 법인 운영부터 세무, 회계, 관리까지 안정적으로 도와드립니다.</p>
       <a class="btn" href="#services">알아보기</a>
       <div class="visual">
-        <div class="browserbar" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="video-wrap">
           <video src="./1.mp4" autoplay muted loop playsinline></video>
           <div class="video-vignette"></div>
