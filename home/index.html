@@ -114,22 +114,22 @@
     h2{font-size:30px;line-height:1.16;letter-spacing:-.055em;margin:0 0 26px;font-weight:900}
 
     .audience{
-      width:min(650px,100%);
-      margin:0 auto 18px;
+      width:min(760px,100%);
+      margin:0 auto 28px;
       position:relative;
-      padding-bottom:220px;
+      padding-bottom:360px;
     }
     .aud-card{
       position:sticky;
-      top:88px;
-      height:128px;
+      top:92px;
+      height:178px;
       display:grid;
-      grid-template-columns:minmax(0,1fr) 188px;
-      gap:8px;
+      grid-template-columns:minmax(0,1fr) 270px;
+      gap:12px;
       align-items:stretch;
-      padding:8px;
-      margin:0 0 22px;
-      border-radius:18px;
+      padding:10px;
+      margin:0 0 30px;
+      border-radius:22px;
       background:rgba(255,250,244,.70);
       border:1px solid rgba(255,255,255,.60);
       box-shadow:0 18px 42px rgba(68,50,34,.10);
@@ -155,21 +155,24 @@
     .aud-card:nth-child(5){z-index:5;margin-bottom:0}
     .aud-card:hover{transform:translateY(-3px);box-shadow:0 22px 48px rgba(68,50,34,.14)}
     .aud-copy{
-      background:rgba(255,255,255,.78);
-      border-radius:13px;
+      background:rgba(255,255,255,.82);
+      border-radius:16px;
       text-align:left;
-      padding:15px 17px;
+      padding:24px 26px;
       position:relative;
       overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
-    .aud-copy h3{margin:0 0 6px;font-size:17px;letter-spacing:-.045em;line-height:1.15}
-    .aud-copy p{margin:0;color:#3f3933;font-size:9.5px;line-height:1.42;font-weight:700;max-width:350px}
-    .aud-copy .icon{position:absolute;left:17px;bottom:9px;color:#c8bfb5;font-size:16px}
+    .aud-copy h3{margin:0 0 11px;font-size:23px;letter-spacing:-.05em;line-height:1.12}
+    .aud-copy p{margin:0;color:#3f3933;font-size:13px;line-height:1.55;font-weight:750;max-width:410px;word-break:keep-all}
+    .aud-copy .icon{position:absolute;right:24px;bottom:17px;color:#c8bfb5;font-size:24px;opacity:.70}
     .photo{
-      border-radius:13px;
+      border-radius:16px;
       overflow:hidden;
       position:relative;
-      min-height:108px;
+      min-height:158px;
       background:#e8ded2;
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);
     }
@@ -249,7 +252,7 @@
     footer{background:#292929;color:#fff;margin-top:18px;padding:48px 0 42px}.foot{width:min(740px,calc(100% - 38px));margin:0 auto}.foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:34px}.foot .logo{font-size:24px}.foot p,.foot a{font-size:10px;line-height:1.8;color:#d7d7d7;font-weight:600}.foot h4{font-size:12px;margin:0 0 12px}.copyright{border-top:1px solid rgba(255,255,255,.18);margin-top:34px;padding-top:22px;text-align:center;font-size:9px;color:#c7c7c7}
 
     @media (max-width:760px){
-      header{top:8px} nav{display:none}.hero{padding-top:56px}.eyebrow{font-size:12px}h1{font-size:32px}.hero .visual{height:230px}.audience{padding-bottom:0}.aud-card{top:68px!important;grid-template-columns:1fr;height:auto;min-height:0;margin-bottom:12px}.photo{height:150px;order:-1}.aud-copy{padding:16px 18px 38px}.service-track{animation-duration:22s}.svc{flex-basis:138px}.case-card{grid-template-columns:1fr}.case-img{height:210px}.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > div:first-child{grid-column:1/-1}
+      header{top:8px} nav{display:none}.hero{padding-top:56px}.eyebrow{font-size:12px}h1{font-size:32px}.hero .visual{height:230px}.audience{padding-bottom:0;width:min(100%, calc(100vw - 38px))}.aud-card{top:68px!important;grid-template-columns:1fr;height:auto;min-height:0;margin-bottom:16px;padding:10px}.photo{height:210px;order:-1}.aud-copy{padding:22px 20px 48px}.aud-copy h3{font-size:22px}.aud-copy p{font-size:12.5px;line-height:1.55}.service-track{animation-duration:22s}.svc{flex-basis:138px}.case-card{grid-template-columns:1fr}.case-img{height:210px}.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > div:first-child{grid-column:1/-1}
     }
   </style>
 </head>
@@ -279,7 +282,7 @@
     </section>
 
     <section class="section container" id="target">
-      <span class="tag">TARGET CUSTOMERS.</span>
+      <span class="tag">TARGET CUSTOMERS</span>
       <h2>이런 분들께<br>US TAX SERVICE가 필요합니다</h2>
       <div class="audience">
         <article class="aud-card"><div class="aud-copy"><h3>미국 부동산 투자자</h3><p>매입, 임대수익, 양도세, 신고까지 복잡한 미국 세무를 한 번에 관리하고 싶으신가요?</p><div class="icon">⌂</div></div><div class="photo"><img src="./d.jpg" alt="미국 부동산 투자자"></div></article>
