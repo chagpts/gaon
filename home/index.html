@@ -122,36 +122,77 @@
     .aud-card{
       position:sticky;
       top:88px;
-      height:118px;
+      height:128px;
       display:grid;
-      grid-template-columns:minmax(0,1fr) 176px;
-      gap:7px;
+      grid-template-columns:minmax(0,1fr) 188px;
+      gap:8px;
       align-items:stretch;
-      padding:7px;
+      padding:8px;
       margin:0 0 22px;
-      border-radius:14px;
-      background:linear-gradient(120deg, rgba(255,170,150,.62), rgba(200,225,255,.56), rgba(255,255,255,.76));
-      box-shadow:0 14px 32px rgba(50,38,30,.09);
+      border-radius:18px;
+      background:rgba(255,250,244,.70);
+      border:1px solid rgba(255,255,255,.60);
+      box-shadow:0 18px 42px rgba(68,50,34,.10);
+      backdrop-filter:blur(14px);
       transition:transform .25s ease, box-shadow .25s ease;
       will-change:transform;
+      overflow:hidden;
+    }
+    .aud-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255,225,181,.34), transparent 36%),
+        radial-gradient(circle at 88% 22%, rgba(235,217,195,.24), transparent 40%);
+      pointer-events:none;
     }
     .aud-card:nth-child(1){z-index:1}
     .aud-card:nth-child(2){z-index:2}
     .aud-card:nth-child(3){z-index:3}
     .aud-card:nth-child(4){z-index:4}
     .aud-card:nth-child(5){z-index:5;margin-bottom:0}
-    .aud-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(50,38,30,.13)}
-    .aud-copy{background:rgba(255,255,255,.84);border-radius:10px;text-align:left;padding:12px 15px;position:relative;overflow:hidden}
-    .aud-copy h3{margin:0 0 5px;font-size:17px;letter-spacing:-.045em;line-height:1.15}
-    .aud-copy p{margin:0;color:#333;font-size:9px;line-height:1.34;font-weight:700;max-width:340px}
-    .aud-copy .icon{position:absolute;left:15px;bottom:7px;color:#bbb;font-size:16px}
-    .photo{border-radius:10px;overflow:hidden;position:relative;background:#ddd;min-height:100px}
-    .photo:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.08))}
-    .house{background:linear-gradient(135deg,#e6f5ff,#88b073 42%,#f8f3e4 43%,#d8d0ba 63%,#6d8a63 64%)}
-    .desk{background:linear-gradient(135deg,#e7d2bd,#f8f4ea 38%,#314a58 39%,#ca9d75 64%,#eee 65%)}
-    .startup{background:linear-gradient(135deg,#77bfd6,#eaf3f4 38%,#24485f 39%,#eda65f 68%,#223344 69%)}
-    .tech{background:linear-gradient(135deg,#0f2432,#183d58 35%,#6da9c4 36%,#182431 64%,#0a1118 65%)}
-    .consult{background:linear-gradient(135deg,#664a2c,#d6b486 36%,#f2eadf 37%,#1e3431 70%,#9a6d43 71%)}
+    .aud-card:hover{transform:translateY(-3px);box-shadow:0 22px 48px rgba(68,50,34,.14)}
+    .aud-copy{
+      background:rgba(255,255,255,.78);
+      border-radius:13px;
+      text-align:left;
+      padding:15px 17px;
+      position:relative;
+      overflow:hidden;
+    }
+    .aud-copy h3{margin:0 0 6px;font-size:17px;letter-spacing:-.045em;line-height:1.15}
+    .aud-copy p{margin:0;color:#3f3933;font-size:9.5px;line-height:1.42;font-weight:700;max-width:350px}
+    .aud-copy .icon{position:absolute;left:17px;bottom:9px;color:#c8bfb5;font-size:16px}
+    .photo{
+      border-radius:13px;
+      overflow:hidden;
+      position:relative;
+      min-height:108px;
+      background:#e8ded2;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);
+    }
+    .photo img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      object-position:center;
+      filter:saturate(.94) contrast(.96) brightness(.96);
+      transform:scale(1.025);
+    }
+    .photo::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(247,242,234,.10), rgba(80,56,34,.10)),
+        radial-gradient(circle at 20% 0%, rgba(255,245,232,.24), transparent 52%);
+      mix-blend-mode:soft-light;
+    }
 
     .services-wrap{padding:42px 0 62px;text-align:center}
     .service-strip{width:100vw;margin-left:calc(50% - 50vw);display:grid;grid-template-columns:repeat(11, minmax(126px,1fr));gap:12px;padding:0 0;margin-top:22px}
@@ -199,11 +240,11 @@
       <span class="tag">TARGET CUSTOMERS</span>
       <h2>이런 분들께<br>US TAX SERVICE가 필요합니다</h2>
       <div class="audience">
-        <article class="aud-card"><div class="aud-copy"><h3>미국 부동산 투자자</h3><p>매입, 임대수익, 양도세, 신고까지 복잡한 미국 세무를 한 번에 관리하고 싶으신가요?</p><div class="icon">⌂</div></div><div class="photo house"></div></article>
-        <article class="aud-card"><div class="aud-copy"><h3>미국 이커머스·무역 사업자</h3><p>Amazon, Shopify, Sales Tax, 매출 정산과 회계 처리를 체계화하고 싶으신가요?</p><div class="icon">◎</div></div><div class="photo desk"></div></article>
-        <article class="aud-card"><div class="aud-copy"><h3>스타트업·벤처 기업</h3><p>Delaware C-Corp 설립 이후, 투자 유치와 세무 컴플라이언스를 준비하고 계신가요?</p><div class="icon">↗</div></div><div class="photo startup"></div></article>
-        <article class="aud-card"><div class="aud-copy"><h3>SaaS·IT 서비스 기업</h3><p>미국 고객 과금, 해외 결제, 판매세, 정산 구조까지 효율적으로 설계하고 싶으신가요?</p><div class="icon">♙</div></div><div class="photo tech"></div></article>
-        <article class="aud-card"><div class="aud-copy"><h3>유학·이민·자산관리 고객</h3><p>미국 거주자/비거주자 세무, 계좌 신고, 자산 이전 이슈를 안전하게 관리하세요.</p><div class="icon">✈</div></div><div class="photo consult"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>미국 부동산 투자자</h3><p>매입, 임대수익, 양도세, 신고까지 복잡한 미국 세무를 한 번에 관리하고 싶으신가요?</p><div class="icon">⌂</div></div><div class="photo"><img src="./d.jpg" alt="미국 부동산 투자자"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>미국 이커머스·무역 사업자</h3><p>Amazon, Shopify, Sales Tax, 매출 정산과 회계 처리를 체계화하고 싶으신가요?</p><div class="icon">◎</div></div><div class="photo"><img src="./b.jpg" alt="미국 이커머스·무역 사업자"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>스타트업·벤처 기업</h3><p>Delaware C-Corp 설립 이후, 투자 유치와 세무 컴플라이언스를 준비하고 계신가요?</p><div class="icon">↗</div></div><div class="photo"><img src="./f.jpg" alt="스타트업·벤처 기업"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>SaaS·IT 서비스 기업</h3><p>미국 고객 과금, 해외 결제, 판매세, 정산 구조까지 효율적으로 설계하고 싶으신가요?</p><div class="icon">♙</div></div><div class="photo"><img src="./h.jpg" alt="SaaS·IT 서비스 기업"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>유학·이민·자산관리 고객</h3><p>미국 거주자/비거주자 세무, 계좌 신고, 자산 이전 이슈를 안전하게 관리하세요.</p><div class="icon">✈</div></div><div class="photo"><img src="./j.jpg" alt="유학·이민·자산관리 고객"></div></article>
       </div>
     </section>
 
