@@ -98,7 +98,7 @@
       filter:saturate(.88) contrast(.96) brightness(.98) sepia(.08);
       opacity:.90;
       mix-blend-mode:multiply;
-      transform:scale(1.025);
+      transform:scale(1.04);
     }
     .hero .visual .video-caption{display:none;}
     .hero .visual .video-vignette{
@@ -114,22 +114,22 @@
     h2{font-size:30px;line-height:1.16;letter-spacing:-.055em;margin:0 0 26px;font-weight:900}
 
     .audience{
-      width:min(760px,100%);
-      margin:0 auto 28px;
+      width:min(880px,100%);
+      margin:0 auto 34px;
       position:relative;
-      padding-bottom:360px;
+      padding-bottom:460px;
     }
     .aud-card{
       position:sticky;
       top:92px;
-      height:178px;
+      height:240px;
       display:grid;
-      grid-template-columns:minmax(0,1fr) 270px;
-      gap:12px;
+      grid-template-columns:minmax(0,1fr) 390px;
+      gap:16px;
       align-items:stretch;
-      padding:10px;
-      margin:0 0 30px;
-      border-radius:22px;
+      padding:12px;
+      margin:0 0 34px;
+      border-radius:26px;
       background:rgba(255,250,244,.70);
       border:1px solid rgba(255,255,255,.60);
       box-shadow:0 18px 42px rgba(68,50,34,.10);
@@ -158,21 +158,21 @@
       background:rgba(255,255,255,.82);
       border-radius:16px;
       text-align:left;
-      padding:24px 26px;
+      padding:30px 34px;
       position:relative;
       overflow:hidden;
       display:flex;
       flex-direction:column;
       justify-content:center;
     }
-    .aud-copy h3{margin:0 0 11px;font-size:23px;letter-spacing:-.05em;line-height:1.12}
-    .aud-copy p{margin:0;color:#3f3933;font-size:13px;line-height:1.55;font-weight:750;max-width:410px;word-break:keep-all}
-    .aud-copy .icon{position:absolute;right:24px;bottom:17px;color:#c8bfb5;font-size:24px;opacity:.70}
+    .aud-copy h3{margin:0 0 14px;font-size:28px;letter-spacing:-.052em;line-height:1.12}
+    .aud-copy p{margin:0;color:#3f3933;font-size:15.5px;line-height:1.62;font-weight:750;max-width:430px;word-break:keep-all}
+    .aud-copy .icon{position:absolute;right:28px;bottom:22px;color:#c8bfb5;font-size:28px;opacity:.62}
     .photo{
-      border-radius:16px;
+      border-radius:20px;
       overflow:hidden;
       position:relative;
-      min-height:158px;
+      min-height:216px;
       background:#e8ded2;
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);
     }
@@ -251,8 +251,16 @@
 
     footer{background:#292929;color:#fff;margin-top:18px;padding:48px 0 42px}.foot{width:min(740px,calc(100% - 38px));margin:0 auto}.foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:34px}.foot .logo{font-size:24px}.foot p,.foot a{font-size:10px;line-height:1.8;color:#d7d7d7;font-weight:600}.foot h4{font-size:12px;margin:0 0 12px}.copyright{border-top:1px solid rgba(255,255,255,.18);margin-top:34px;padding-top:22px;text-align:center;font-size:9px;color:#c7c7c7}
 
+    @media (max-width:920px) and (min-width:761px){
+      .audience{width:min(100%, calc(100vw - 38px));padding-bottom:430px}
+      .aud-card{grid-template-columns:minmax(0,1fr) 46%;height:226px}
+      .aud-copy{padding:28px 28px}
+      .aud-copy h3{font-size:25px}
+      .aud-copy p{font-size:14.5px;line-height:1.6}
+    }
+
     @media (max-width:760px){
-      header{top:8px} nav{display:none}.hero{padding-top:56px}.eyebrow{font-size:12px}h1{font-size:32px}.hero .visual{height:230px}.audience{padding-bottom:0;width:min(100%, calc(100vw - 38px))}.aud-card{top:68px!important;grid-template-columns:1fr;height:auto;min-height:0;margin-bottom:16px;padding:10px}.photo{height:210px;order:-1}.aud-copy{padding:22px 20px 48px}.aud-copy h3{font-size:22px}.aud-copy p{font-size:12.5px;line-height:1.55}.service-track{animation-duration:22s}.svc{flex-basis:138px}.case-card{grid-template-columns:1fr}.case-img{height:210px}.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > div:first-child{grid-column:1/-1}
+      header{top:8px} nav{display:none}.hero{padding-top:56px}.eyebrow{font-size:12px}h1{font-size:32px}.hero .visual{height:230px}.audience{padding-bottom:0;width:min(100%, calc(100vw - 32px))}.aud-card{top:68px!important;grid-template-columns:1fr;height:auto;min-height:0;margin-bottom:18px;padding:12px;border-radius:24px}.photo{height:280px;order:-1;border-radius:18px}.aud-copy{padding:26px 22px 54px}.aud-copy h3{font-size:25px;line-height:1.16}.aud-copy p{font-size:14.5px;line-height:1.65;max-width:none}.service-track{animation-duration:22s}.svc{flex-basis:138px}.case-card{grid-template-columns:1fr}.case-img{height:210px}.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > div:first-child{grid-column:1/-1}
     }
   </style>
 </head>
@@ -260,7 +268,7 @@
   <header>
     <a class="logo" href="#">UXST</a>
     <nav>
-      <a href="#target">미국 법인 설립</a>
+      <a href="https://chagpts.github.io/gaon/home/formation">미국 법인 설립</a>
       <a href="#services">고객 맞춤 서비스</a>
       <a href="#chart">미국 TAX SERVICE</a>
     </nav>
