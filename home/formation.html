@@ -1,1 +1,337 @@
 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNIST - 미국 법인 설립</title>
+  <style>
+    :root {
+      --bg: #fbf6ed;
+      --card: #f3eee6;
+      --card-border: #d8d1c5;
+      --brown: #6f5730;
+      --text: #1f1f1f;
+      --muted: #383838;
+      --button: #202326;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .page {
+      width: min(1200px, calc(100% - 80px));
+      margin: 0 auto;
+      padding-bottom: 80px;
+    }
+
+    .navbar {
+      height: 84px;
+      margin-top: 0;
+      padding: 0 24px;
+      border-radius: 0 0 18px 18px;
+      background: rgba(255, 252, 246, 0.92);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .logo .dot {
+      color: #00a79d;
+      margin: 0 1px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .nav-menu a {
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .chevron {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-left: 8px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg) translateY(-3px);
+    }
+
+    .cta {
+      padding: 16px 22px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--button);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    main {
+      padding-top: 52px;
+    }
+
+    .section-title {
+      padding: 26px 24px;
+      border-radius: 16px;
+      background: var(--brown);
+      color: #fff;
+    }
+
+    .section-title h1 {
+      margin: 0 0 14px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title p {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .steps {
+      margin-top: 14px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .step-card {
+      min-height: 124px;
+      padding: 24px;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .step-card h2 {
+      margin: 0 0 16px;
+      font-size: 27px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .step-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.55;
+    }
+
+    .hero-visual {
+      margin-top: 28px;
+      padding: 18px;
+      height: 760px;
+      border-radius: 20px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255, 180, 118, 0.55), transparent 33%),
+        radial-gradient(circle at 20% 88%, rgba(229, 89, 156, 0.55), transparent 30%),
+        radial-gradient(circle at 72% 55%, rgba(255, 147, 103, 0.45), transparent 38%),
+        linear-gradient(135deg, #ba9f98, #f2c09c 32%, #d9d9d5 62%, #efb89b);
+    }
+
+    .hero-inner {
+      height: 100%;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 16px),
+        rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-inner span {
+      font-size: 18px;
+      font-weight: 800;
+      color: #2a2a2a;
+    }
+
+    .entity-list {
+      margin-top: 92px;
+      display: grid;
+      gap: 30px;
+    }
+
+    .entity-card {
+      min-height: 205px;
+      padding: 38px;
+      border-radius: 16px;
+      background: var(--card);
+    }
+
+    .entity-card h3 {
+      margin: 0 0 28px;
+      font-size: 31px;
+      line-height: 1.1;
+      letter-spacing: -0.7px;
+    }
+
+    .entity-card p {
+      margin: 0 0 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .entity-card strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .floating-edit {
+      position: fixed;
+      right: 0;
+      top: 52%;
+      width: 32px;
+      height: 36px;
+      border-radius: 18px 0 0 18px;
+      background: #4b4b4b;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 15px;
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100% - 32px, 1200px);
+      }
+
+      .navbar {
+        height: auto;
+        padding: 18px;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .nav-menu {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 14px;
+      }
+
+      main {
+        padding-top: 32px;
+      }
+
+      .section-title h1,
+      .step-card h2 {
+        font-size: 23px;
+      }
+
+      .hero-visual {
+        height: 420px;
+      }
+
+      .entity-list {
+        margin-top: 48px;
+      }
+
+      .entity-card {
+        padding: 28px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="navbar">
+      <div class="logo" aria-label="UNIST logo">U<span class="dot">·</span>NST</div>
+
+      <nav class="nav-menu" aria-label="주요 메뉴">
+        <a href="#">미국 법인 설립</a>
+        <a href="#">운영 및 유지 <span class="chevron" aria-hidden="true"></span></a>
+        <a href="#">미국 법인 청산</a>
+      </nav>
+
+      <button class="cta" type="button">상담 신청</button>
+    </header>
+
+    <main>
+      <section class="section-title">
+        <h1>법인 형태 선택</h1>
+        <p>사업 모델과 성장 계획에 맞는 구조를 선택해 주세요.</p>
+      </section>
+
+      <section class="steps" aria-label="법인 설립 단계">
+        <article class="step-card">
+          <h2>법인명 결정</h2>
+          <p>주(State)별로 중복 등록이 불가하므로 3 개 이상의 후보명을 준비해 주세요.</p>
+        </article>
+
+        <article class="step-card">
+          <h2>법인 주소지 확보</h2>
+          <p>사용 가능한 주소를 확인하시거나, 없으시면 공유 오피스 연결을 안내 및 연결 서비스를 제공해 드립니다.</p>
+        </article>
+
+        <article class="step-card">
+          <h2>설립 주 선택</h2>
+          <p>실제 영업 주 또는 사업 특성에 맞는 주를 검토해 주세요.</p>
+        </article>
+      </section>
+
+      <section class="hero-visual" aria-label="웹앱 법인 설립 서비스 이미지 영역">
+        <div class="hero-inner">
+          <span>웹앱 법인 설립 서비스</span>
+        </div>
+      </section>
+
+      <section class="entity-list" aria-label="법인 형태 목록">
+        <article class="entity-card">
+          <h3>C-Corp</h3>
+          <p>외국인 설립 가능, 투자 유치에 유리</p>
+          <strong>법인세와 배당 과세로 이중과세</strong>
+        </article>
+
+        <article class="entity-card">
+          <h3>LLC</h3>
+          <p>구조가 유연하고 Pass-through 과세 가능</p>
+          <strong>미국 시민권자 및 영주권자 제외한 외국인 단독 소유 시 신고가 복잡할 수 있음</strong>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <a class="floating-edit" href="#" aria-label="수정">✎</a>
+</body>
+</html>
