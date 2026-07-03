@@ -1,386 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UNIST - 미국 법인 설립</title>
+  <title>미국 법인 설립 | UST</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #fbf6ed;
-      --card: #f3eee6;
-      --card-border: #d8d1c5;
-      --brown: #6f5730;
-      --text: #1f1f1f;
-      --muted: #383838;
-      --button: #202326;
+    :root{
+      --bg:#f8f3eb;
+      --card:#f2eee6;
+      --line:#ded8cf;
+      --text:#22201d;
+      --muted:#5f5a52;
+      --brown:#765f33;
+      --dark:#1f1f1f;
+      --white:#fffdf9;
+      --radius:14px;
+      --max:1120px;
     }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Pretendard, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
     }
-
-    .page {
-      width: min(1200px, calc(100% - 80px));
-      margin: 0 auto;
-      padding-bottom: 80px;
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.35;
+      background:repeating-linear-gradient(135deg, rgba(160,120,80,.06) 0 2px, transparent 2px 12px);
     }
-
-    .navbar {
-      height: 84px;
-      padding: 0 24px;
-      border-radius: 0 0 18px 18px;
-      background: rgba(255, 252, 246, 0.92);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max), calc(100% - 48px)); margin:0 auto; position:relative}
+    .navbar{
+      position:sticky; top:14px; z-index:5;
+      width:min(var(--max), calc(100% - 48px));
+      margin:14px auto 0;
+      height:58px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 12px 0 22px;
+      background:rgba(255,253,249,.86);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:20px;
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 30px rgba(30,25,15,.07);
     }
-
-    .logo {
-      font-size: 34px;
-      font-weight: 900;
-      letter-spacing: -1px;
-      line-height: 1;
+    .logo{font-weight:900;font-size:24px;letter-spacing:-.06em}
+    .logo span{color:#14615d}
+    .navlinks{display:flex;gap:36px;font-size:14px;font-weight:700;color:#202020}
+    .navlinks a:after{content:"⌄";font-size:12px;margin-left:7px;color:#555}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:44px;padding:0 20px;border-radius:12px;
+      background:#222;color:white;font-weight:800;font-size:14px;
+      border:0;cursor:pointer;
     }
-
-    .logo .dot {
-      color: #00a79d;
-      margin: 0 1px;
+    .hero{padding:112px 0 188px;text-align:center}
+    .hero h1{font-size:56px;line-height:1.05;margin:0 0 26px;font-weight:900;letter-spacing:-.07em}
+    .hero p{max-width:650px;margin:0 auto 30px;color:#34302a;font-weight:600;font-size:15px;letter-spacing:-.03em}
+    .section{padding:0 0 112px}
+    .eyebrow{
+      display:inline-flex;margin-bottom:18px;padding:4px 8px;border:1px solid #cfc8bd;border-radius:4px;
+      color:#55514b;background:#faf7f1;font-size:10px;font-weight:800;letter-spacing:.02em;
     }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 56px;
-      font-size: 16px;
-      font-weight: 700;
+    .section-title{text-align:center;margin-bottom:60px}
+    .section-title h2{margin:0;font-size:42px;line-height:1.1;font-weight:900;letter-spacing:-.07em}
+    .before-grid{display:grid;grid-template-columns:1fr 1.08fr;gap:22px;align-items:stretch}
+    .check-list{display:grid;gap:12px}
+    .check-item{
+      padding:22px 24px;border:1px solid var(--line);border-radius:12px;background:rgba(255,253,249,.44);
     }
-
-    .nav-menu a {
-      color: var(--text);
-      text-decoration: none;
-      white-space: nowrap;
+    .check-item.active{background:var(--brown);color:white;border-color:var(--brown)}
+    .check-item h3{margin:0 0 7px;font-size:20px;font-weight:900;letter-spacing:-.05em}
+    .check-item p{margin:0;font-size:14px;font-weight:700;color:#4d473f;letter-spacing:-.04em}
+    .check-item.active p{color:white}
+    .image-panel{
+      min-height:390px;border-radius:16px;padding:18px;background:#e8dfd4;overflow:hidden;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.45);
     }
-
-    .chevron {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      margin-left: 8px;
-      border-right: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(45deg) translateY(-3px);
+    .image-placeholder{
+      height:100%;border-radius:10px;display:grid;place-items:center;text-align:center;font-weight:900;color:#2b241e;
+      background:
+        linear-gradient(135deg, rgba(234,121,80,.38), rgba(255,255,255,.45)),
+        repeating-linear-gradient(135deg, rgba(255,255,255,.15) 0 2px, transparent 2px 14px),
+        linear-gradient(120deg,#ddd0c4,#f2b08c);
     }
-
-    .cta {
-      padding: 16px 22px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--button);
-      color: #fff;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    main { padding-top: 52px; }
-
-    .step-trigger {
-      width: 100%;
-      border: 0;
-      text-align: left;
-      font: inherit;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-    }
-
-    .step-trigger:focus-visible {
-      outline: 3px solid rgba(111, 87, 48, 0.35);
-      outline-offset: 4px;
-    }
-
-    .section-title {
-      padding: 26px 24px;
-      border-radius: 16px;
-      background: var(--brown);
-      color: #fff;
-    }
-
-    .section-title h1 {
-      margin: 0 0 14px;
-      font-size: 28px;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-    }
-
-    .section-title p {
-      margin: 0;
-      font-size: 17px;
-      font-weight: 700;
-    }
-
-    .section-title:hover,
-    .section-title.is-active {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 36px rgba(72, 54, 26, 0.2);
-    }
-
-    .steps {
-      margin-top: 14px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .step-card {
-      min-height: 124px;
-      padding: 24px;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      background: var(--card);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .step-card:hover,
-    .step-card.is-active {
-      transform: translateY(-2px);
-      border-color: rgba(111, 87, 48, 0.45);
-      box-shadow: 0 18px 34px rgba(72, 54, 26, 0.12);
-    }
-
-    .step-card.is-active {
-      background: #eee5d7;
-    }
-
-    .step-card h2 {
-      margin: 0 0 16px;
-      font-size: 27px;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-    }
-
-    .step-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 1.55;
-    }
-
-    .image-stage {
-      margin-top: 28px;
-      height: 760px;
-      border-radius: 20px;
-      overflow: hidden;
-      background: #151515;
-      box-shadow: 0 26px 60px rgba(30, 24, 18, 0.18);
-      position: relative;
-    }
-
-    .nyc-image {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      opacity: 1;
-      transition: opacity 0.28s ease, transform 0.45s ease;
-      transform: scale(1.01);
-    }
-
-    .nyc-image.is-changing {
-      opacity: 0;
-      transform: scale(1.04);
-    }
-
-    .image-stage::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.02) 42%, rgba(0,0,0,0.22));
-    }
-
-    .entity-list {
-      margin-top: 92px;
-      display: grid;
-      gap: 30px;
-    }
-
-    .entity-card {
-      min-height: 205px;
-      padding: 38px;
-      border-radius: 16px;
-      background: var(--card);
-    }
-
-    .entity-card h3 {
-      margin: 0 0 28px;
-      font-size: 31px;
-      line-height: 1.1;
-      letter-spacing: -0.7px;
-    }
-
-    .entity-card p {
-      margin: 0 0 24px;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .entity-card strong {
-      display: block;
-      font-size: 16px;
-      line-height: 1.55;
-    }
-
-    .floating-edit {
-      position: fixed;
-      right: 0;
-      top: 52%;
-      width: 32px;
-      height: 36px;
-      border-radius: 18px 0 0 18px;
-      background: #4b4b4b;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: 15px;
-      text-decoration: none;
-    }
-
-    @media (max-width: 760px) {
-      .page { width: min(100% - 32px, 1200px); }
-
-      .navbar {
-        height: auto;
-        padding: 18px;
-        gap: 18px;
-        flex-wrap: wrap;
-      }
-
-      .nav-menu {
-        order: 3;
-        width: 100%;
-        justify-content: space-between;
-        gap: 12px;
-        font-size: 14px;
-      }
-
-      main { padding-top: 32px; }
-
-      .section-title h1,
-      .step-card h2 { font-size: 23px; }
-
-      .image-stage { height: 420px; }
-
-      .entity-list { margin-top: 48px; }
-
-      .entity-card { padding: 28px 24px; }
-    }
+    .entity-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:70px}
+    .entity-card{background:#f2eee6;border-radius:12px;padding:30px 28px;min-height:142px}
+    .entity-card h3{font-size:22px;margin:0 0 16px;font-weight:900;letter-spacing:-.04em}
+    .entity-card p{margin:0 0 8px;font-size:13px;font-weight:700;color:#4a453e}.entity-card strong{display:block;font-size:14px;color:#111}
+    .support{padding-top:40px}.support-grid{display:grid;gap:54px}.support-row{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:52px}.support-row:nth-child(even) .support-copy{order:2}.support-copy h3{font-size:24px;margin:0 0 12px;font-weight:900;letter-spacing:-.06em}.support-copy p{margin:0;color:#3f3a34;font-size:13px;font-weight:700}.photo{height:210px;border-radius:12px;padding:10px;background:#f0ece5;overflow:hidden}.photo-img{width:100%;height:100%;border-radius:8px;background-size:cover;background-position:center}.photo.one .photo-img{background-image:linear-gradient(135deg,rgba(50,35,20,.08),rgba(255,255,255,.18)),url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80')}.photo.two .photo-img{background-image:linear-gradient(135deg,rgba(50,35,20,.08),rgba(255,255,255,.18)),url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80')}.photo.three .photo-img{background-image:linear-gradient(135deg,rgba(50,35,20,.08),rgba(255,255,255,.18)),url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=900&q=80')}.divider{height:1px;background:#d7d0c7;margin:78px 0 26px}.notice{max-width:720px;margin:0 auto;text-align:center;font-size:11px;font-weight:700;color:#4c463f}.cta-card{margin:90px 0 0;background:#f1eee7;border-radius:16px;padding:14px}.cta-inner{display:grid;grid-template-columns:1fr .9fr;gap:28px;min-height:270px;background:#fff9f0;border-radius:10px;overflow:hidden}.cta-copy{padding:38px}.cta-copy .tag{display:inline-block;margin-bottom:18px;padding:4px 8px;border-radius:3px;background:#eee8de;font-size:10px;font-weight:900;color:#5d574e}.cta-copy h2{font-size:36px;line-height:1.05;margin:0 0 18px;font-weight:900;letter-spacing:-.06em}.cta-copy p{font-size:13px;color:#4a453f;font-weight:600;margin:0 0 22px}.cta-img{display:grid;place-items:center;margin:18px;border-radius:6px;background:linear-gradient(135deg,rgba(180,80,65,.16),rgba(255,255,255,.45)),repeating-linear-gradient(135deg,rgba(255,255,255,.2) 0 2px,transparent 2px 13px),#d9d0c5;font-weight:900;color:#544d45}
+    @media (max-width: 860px){.navlinks{display:none}.hero{padding:88px 0 120px}.hero h1{font-size:42px}.section-title h2{font-size:34px}.before-grid,.support-row,.cta-inner{grid-template-columns:1fr}.entity-cards{grid-template-columns:1fr}.support-row:nth-child(even) .support-copy{order:0}.image-panel{min-height:280px}.wrap,.navbar{width:min(100% - 28px, var(--max))}}
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="navbar">
-      <div class="logo" aria-label="UNIST logo">U<span class="dot">·</span>NST</div>
+  <header class="navbar">
+    <a href="#" class="logo">U<span>▴</span>ST</a>
+    <nav class="navlinks" aria-label="주요 메뉴">
+      <a href="#before">미국 법인 설립</a>
+      <a href="#support">운영 및 유지</a>
+      <a href="#cta">미국 법인 청산</a>
+    </nav>
+    <a class="btn" href="#contact">상담 신청</a>
+  </header>
 
-      <nav class="nav-menu" aria-label="주요 메뉴">
-        <a href="#">미국 법인 설립</a>
-        <a href="#">운영 및 유지 <span class="chevron" aria-hidden="true"></span></a>
-        <a href="#">미국 법인 청산</a>
-      </nav>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>미국 법인 설립</h1>
+        <p>미국에 법인이나 지사 설립을 고려 중이시거나, 이미 법인을 설립했지만 이후 세금 신고와 영업 절차가 막막하다면 초기 구도 설계가 중요합니다. US TAX SERVICE가 법인 형태 선택부터 설립 후 운영 관리까지 함께합니다.</p>
+        <a href="#contact" class="btn">상담 신청</a>
+      </div>
+    </section>
 
-      <button class="cta" type="button">상담 신청</button>
-    </header>
+    <section id="before" class="section">
+      <div class="wrap">
+        <div class="section-title">
+          <span class="eyebrow">BEFORE</span>
+          <h2>설립 전 확인 사항</h2>
+        </div>
+        <div class="before-grid">
+          <div class="check-list">
+            <article class="check-item active"><h3>법인 형태 선택</h3><p>사업 모델과 성장 계획에 맞는 구조를 선택해 주세요.</p></article>
+            <article class="check-item"><h3>법인명 결정</h3><p>주(State)별로 중복 등록이 불가하므로 3개 이상의 후보명을 준비해 주세요.</p></article>
+            <article class="check-item"><h3>법인 주소지 확보</h3><p>상주 가능한 주소를 확인하시거나, 필요시 오피스 연결 및 관련 서비스를 제공해 드립니다.</p></article>
+            <article class="check-item"><h3>설립 주 선택</h3><p>실제 영업 주 또는 사업 특성에 맞는 주를 검토해 주세요.</p></article>
+          </div>
+          <div class="image-panel"><div class="image-placeholder">법인 설립 서비스</div></div>
+        </div>
+        <div class="entity-cards">
+          <article class="entity-card"><h3>C-Corp</h3><p>의료업 설립 가능, 투자 및 IPO에 유리</p><strong>법인세와 배당 과세로 이중과세</strong></article>
+          <article class="entity-card"><h3>LLC</h3><p>구조가 유연하고 Pass-through 과세 가능</p><strong>미국 시민권자 및 영주권자 제외 외국인 단독 소유 시 신고가 복잡할 수 있음</strong></article>
+          <article class="entity-card"><h3>S-Corp</h3><p>미국 거주자 중심의 Pass-through 구조</p><strong>미국 시민권자 및 영주권자 제외 외국인은 일반적으로 불가</strong></article>
+        </div>
+      </div>
+    </section>
 
-    <main>
-      <button class="section-title step-trigger is-active" type="button" data-image="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1800&q=85" aria-pressed="true">
-        <h1>법인 형태 선택</h1>
-        <p>사업 모델과 성장 계획에 맞는 구조를 선택해 주세요.</p>
-      </button>
+    <section id="support" class="section support">
+      <div class="wrap">
+        <div class="section-title">
+          <span class="eyebrow">AFTER</span>
+          <h2>설립 후 추가 지원</h2>
+        </div>
+        <div class="support-grid">
+          <article class="support-row"><div class="support-copy"><h3>Business License 발급 대행</h3><p>업종과 지역별로 필요한 사업자 라이선스 발급 절차를 지원해 드립니다.</p></div><div class="photo one"><div class="photo-img"></div></div></article>
+          <article class="support-row"><div class="support-copy"><h3>DBA 등록</h3><p>법인명 외 다른 상호를 사용할 경우 주와 카운티 등록을 도와드립니다.</p></div><div class="photo two"><div class="photo-img"></div></div></article>
+          <article class="support-row"><div class="support-copy"><h3>법인 은행 계좌 개설 준비</h3><p>은행 미팅에 필요한 서류와 절차를 사전에 준비해 계좌 개설을 지원해 드립니다.</p></div><div class="photo three"><div class="photo-img"></div></div></article>
+        </div>
+        <div class="divider"></div>
+        <p class="notice">위 내용은 일반적 설명으로, 실제 절차와 필요 서류는 설립 주와 사업 형태에 따라 달라질 수 있습니다. US TAX SERVICE는 고객의 상황에 맞는 절차를 안내해 드립니다.</p>
 
-      <section class="steps" aria-label="법인 설립 단계">
-        <button class="step-card step-trigger" type="button" data-image="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1800&q=85" aria-pressed="false">
-          <h2>법인명 결정</h2>
-          <p>주(State)별로 중복 등록이 불가하므로 3 개 이상의 후보명을 준비해 주세요.</p>
-        </button>
-
-        <button class="step-card step-trigger" type="button" data-image="https://images.unsplash.com/photo-1500916434205-0c77489c6cf7?auto=format&fit=crop&w=1800&q=85" aria-pressed="false">
-          <h2>법인 주소지 확보</h2>
-          <p>사용 가능한 주소를 확인하시거나, 없으시면 공유 오피스 연결을 안내 및 연결 서비스를 제공해 드립니다.</p>
-        </button>
-
-        <button class="step-card step-trigger" type="button" data-image="https://images.unsplash.com/photo-1543716091-a840c05249ec?auto=format&fit=crop&w=1800&q=85" aria-pressed="false">
-          <h2>설립 주 선택</h2>
-          <p>실제 영업 주 또는 사업 특성에 맞는 주를 검토해 주세요.</p>
-        </button>
-      </section>
-
-      <section class="image-stage" aria-label="선택한 단계의 뉴욕 야경 이미지">
-        <img
-          class="nyc-image"
-          id="nycImage"
-          src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1800&q=85"
-          alt="뉴욕 야경"
-        />
-      </section>
-
-      <section class="entity-list" aria-label="법인 형태 목록">
-        <article class="entity-card">
-          <h3>C-Corp</h3>
-          <p>외국인 설립 가능, 투자 유치에 유리</p>
-          <strong>법인세와 배당 과세로 이중과세</strong>
-        </article>
-
-        <article class="entity-card">
-          <h3>LLC</h3>
-          <p>구조가 유연하고 Pass-through 과세 가능</p>
-          <strong>미국 시민권자 및 영주권자 제외한 외국인 단독 소유 시 신고가 복잡할 수 있음</strong>
-        </article>
-      </section>
-    </main>
-  </div>
-
-  <a class="floating-edit" href="#" aria-label="수정">✎</a>
-
-  <script>
-    const triggers = document.querySelectorAll(".step-trigger");
-    const image = document.getElementById("nycImage");
-
-    triggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        const nextImage = trigger.dataset.image;
-
-        triggers.forEach((item) => {
-          item.classList.remove("is-active");
-          item.setAttribute("aria-pressed", "false");
-        });
-
-        trigger.classList.add("is-active");
-        trigger.setAttribute("aria-pressed", "true");
-
-        if (image.src === nextImage) return;
-
-        image.classList.add("is-changing");
-
-        setTimeout(() => {
-          image.src = nextImage;
-          image.onload = () => {
-            image.classList.remove("is-changing");
-          };
-        }, 180);
-      });
-    });
-  </script>
+        <section id="cta" class="cta-card">
+          <div class="cta-inner">
+            <div class="cta-copy"><span class="tag">마지막</span><h2>Neque porro<br>quisquam est qui</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pharetra nibh metus.</p><a class="btn" href="#contact">서비스 더보기</a></div>
+            <div class="cta-img">법인 홈</div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
