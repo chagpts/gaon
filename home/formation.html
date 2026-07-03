@@ -6,13 +6,16 @@
   <title>UNIST - 미국 법인 설립</title>
   <style>
     :root {
-      --bg: #fbf6ed;
+      --bg: #fbf7f0;
       --card: #f3eee6;
-      --card-border: #d8d1c5;
+      --card-border: #ddd6cb;
       --brown: #6f5730;
-      --text: #1f1f1f;
-      --muted: #383838;
-      --button: #202326;
+      --text: #1d1d1f;
+      --muted: #49433d;
+      --black: #222325;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --shadow: 0 18px 38px rgba(36, 31, 24, 0.10);
     }
 
     * {
@@ -21,480 +24,435 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
-      background: var(--bg);
+      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
       color: var(--text);
+      background: var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .page {
-      width: min(1200px, calc(100% - 80px));
+      width: min(1180px, calc(100% - 48px));
       margin: 0 auto;
-      padding-bottom: 80px;
+      padding-bottom: 72px;
     }
 
-    .navbar {
-      height: 84px;
-      margin-top: 0;
-      padding: 0 24px;
-      border-radius: 0 0 18px 18px;
-      background: rgba(255, 252, 246, 0.92);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    .header-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 12px 0 28px;
+      background: linear-gradient(180deg, rgba(251,247,240,0.98), rgba(251,247,240,0.82) 72%, rgba(251,247,240,0));
+      backdrop-filter: blur(8px);
+    }
+
+    header {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      min-height: 70px;
+      padding: 0 18px 0 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      background: #fffdfa;
+      border-radius: 0 0 20px 20px;
+      box-shadow: var(--shadow);
     }
 
     .logo {
-      font-size: 34px;
+      display: flex;
+      align-items: center;
+      font-size: 32px;
       font-weight: 900;
       letter-spacing: -1px;
-      line-height: 1;
     }
 
     .logo .dot {
-      color: #00a79d;
-      margin: 0 1px;
+      width: 7px;
+      height: 7px;
+      margin: 0 2px;
+      border-radius: 50%;
+      background: #15c6c6;
+      transform: translateY(-7px);
     }
 
-    .nav-menu {
+    nav {
       display: flex;
       align-items: center;
-      gap: 56px;
+      gap: 54px;
       font-size: 16px;
       font-weight: 700;
     }
 
-    .nav-menu a {
-      color: var(--text);
-      text-decoration: none;
-      white-space: nowrap;
+    .nav-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
     }
 
     .chevron {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      margin-left: 8px;
-      border-right: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(45deg) translateY(-3px);
+      font-size: 13px;
+      transform: translateY(1px);
     }
 
-    .cta {
+    .consult-btn {
       padding: 16px 22px;
       border: 0;
-      border-radius: 12px;
-      background: var(--button);
+      border-radius: 14px;
       color: #fff;
+      background: var(--black);
       font-size: 16px;
       font-weight: 800;
       cursor: pointer;
     }
 
-    main {
-      padding-top: 52px;
-    }
-
-    .section-title {
-      padding: 26px 24px;
-      border-radius: 16px;
+    .intro {
+      margin-top: 26px;
+      padding: 28px 26px;
       background: var(--brown);
       color: #fff;
+      border-radius: var(--radius-md);
     }
 
-    .section-title h1 {
-      margin: 0 0 14px;
+    .intro h1 {
+      margin: 0 0 16px;
       font-size: 28px;
       line-height: 1.2;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.7px;
     }
 
-    .section-title p {
+    .intro p {
       margin: 0;
       font-size: 17px;
       font-weight: 700;
+      opacity: 0.94;
     }
 
     .steps {
-      margin-top: 14px;
       display: grid;
       gap: 14px;
+      margin-top: 14px;
     }
 
     .step-card {
-      min-height: 124px;
-      padding: 24px;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
+      width: 100%;
+      padding: 26px 24px;
+      text-align: left;
+      color: var(--text);
       background: var(--card);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .step-card:hover,
+    .step-card:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(35, 29, 20, 0.08);
+      border-color: rgba(111, 87, 48, 0.42);
+      outline: none;
+    }
+
+    .step-card.active {
+      color: #fff;
+      background: var(--brown);
+      border-color: var(--brown);
+      box-shadow: 0 16px 34px rgba(111, 87, 48, 0.22);
     }
 
     .step-card h2 {
       margin: 0 0 16px;
       font-size: 27px;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
+      line-height: 1.2;
+      letter-spacing: -0.7px;
     }
 
     .step-card p {
       margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      font-weight: 500;
+      font-size: 17px;
       line-height: 1.55;
+      font-weight: 500;
     }
 
-    .hero-visual {
-      margin-top: 28px;
+    .step-card.active p {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 700;
+    }
+
+    .hero {
+      margin-top: 30px;
       padding: 18px;
-      height: 760px;
-      border-radius: 20px;
+      min-height: 760px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255, 180, 118, 0.55), transparent 33%),
-        radial-gradient(circle at 20% 88%, rgba(229, 89, 156, 0.55), transparent 30%),
-        radial-gradient(circle at 72% 55%, rgba(255, 147, 103, 0.45), transparent 38%),
-        linear-gradient(135deg, #ba9f98, #f2c09c 32%, #d9d9d5 62%, #efb89b);
+      background-image: var(--hero-image);
+      background-position: center;
+      background-size: cover;
+      transition: background-image 0.35s ease, opacity 0.25s ease;
+      box-shadow: inset 0 0 0 999px rgba(234, 190, 169, 0.18);
     }
 
     .hero-inner {
-      position: relative;
+      width: 100%;
       height: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      background:
-        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 16px),
-        rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-    }
-
-    .hero-inner::before,
-    .hero-inner::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      z-index: 3;
-      width: 18%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .hero-inner::before {
-      left: 0;
-      background: linear-gradient(90deg, rgba(206, 169, 156, 0.84), transparent);
-    }
-
-    .hero-inner::after {
-      right: 0;
-      background: linear-gradient(270deg, rgba(231, 197, 178, 0.84), transparent);
-    }
-
-    .hero-label {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 5;
-      transform: translate(-50%, -50%);
-      padding: 14px 20px;
-      border-radius: 999px;
-      background: rgba(255, 249, 241, 0.74);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 18px 40px rgba(78, 55, 42, 0.14);
-      font-size: 18px;
-      font-weight: 800;
-      color: #1f1f1f;
-      white-space: nowrap;
-    }
-
-    .media-marquee {
-      position: absolute;
-      left: 0;
-      width: max-content;
-      display: flex;
-      gap: 26px;
-      opacity: 0.88;
-      will-change: transform;
-    }
-
-    .media-marquee.top {
-      top: 88px;
-      animation: flow-left 34s linear infinite;
-    }
-
-    .media-marquee.bottom {
-      bottom: 84px;
-      animation: flow-right 38s linear infinite;
-    }
-
-    .media-card {
-      position: relative;
-      width: 330px;
-      height: 210px;
-      flex: 0 0 auto;
-      border-radius: 22px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.32);
-      box-shadow: 0 24px 60px rgba(91, 65, 50, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.38);
-    }
-
-    .media-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--thumb);
-      background-size: cover;
-      background-position: center;
-      transform: scale(1.04);
-    }
-
-    .media-card::after {
-      content: attr(data-title);
-      position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 16px;
-      z-index: 1;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(255, 252, 246, 0.76);
-      backdrop-filter: blur(10px);
-      font-size: 14px;
-      font-weight: 800;
-      color: #292929;
-    }
-
-    .media-card.video .play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 2;
-      width: 58px;
-      height: 58px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.76);
-      box-shadow: 0 12px 28px rgba(60, 40, 30, 0.16);
-    }
-
-    .media-card.video .play::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 53%;
-      transform: translate(-50%, -50%);
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-left: 18px solid #282828;
-    }
-
-    @keyframes flow-left {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    @keyframes flow-right {
-      from { transform: translateX(-50%); }
-      to { transform: translateX(0); }
-    }
-
-    .entity-list {
-      margin-top: 92px;
+      min-height: 724px;
       display: grid;
-      gap: 30px;
+      place-items: center;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.22)),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.24) 0, rgba(255,255,255,0.24) 1px, transparent 1px, transparent 16px);
     }
 
-    .entity-card {
-      min-height: 205px;
-      padding: 38px;
-      border-radius: 16px;
-      background: var(--card);
+    .hero-content {
+      max-width: 720px;
+      padding: 28px 34px;
+      text-align: center;
+      color: #fff;
+      border-radius: 18px;
+      background: rgba(10, 12, 18, 0.40);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
     }
 
-    .entity-card h3 {
-      margin: 0 0 28px;
-      font-size: 31px;
-      line-height: 1.1;
+    .hero-eyebrow {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .hero-title {
+      margin: 0 0 12px;
+      font-size: 30px;
+      line-height: 1.25;
       letter-spacing: -0.7px;
     }
 
-    .entity-card p {
-      margin: 0 0 24px;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--muted);
-      line-height: 1.5;
+    .hero-desc {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.6;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
     }
 
-    .entity-card strong {
+    .business-types {
+      display: grid;
+      gap: 28px;
+      margin-top: 92px;
+    }
+
+    .type-card {
+      padding: 40px 38px;
+      background: var(--card);
+      border-radius: var(--radius-md);
+    }
+
+    .type-card h3 {
+      margin: 0 0 28px;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -0.7px;
+    }
+
+    .type-card p {
+      margin: 0 0 20px;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    .type-card strong {
       display: block;
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.55;
     }
 
-    .floating-edit {
-      position: fixed;
-      right: 0;
-      top: 52%;
-      width: 32px;
-      height: 36px;
-      border-radius: 18px 0 0 18px;
-      background: #4b4b4b;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-size: 15px;
-      text-decoration: none;
-    }
-
     @media (max-width: 760px) {
-      .page {
-        width: min(100% - 32px, 1200px);
+      .page,
+      header {
+        width: min(100% - 28px, 1180px);
       }
 
-      .navbar {
-        height: auto;
-        padding: 18px;
-        gap: 18px;
-        flex-wrap: wrap;
+      header {
+        padding: 0 12px 0 18px;
       }
 
-      .nav-menu {
-        order: 3;
-        width: 100%;
-        justify-content: space-between;
-        gap: 12px;
+      nav {
+        display: none;
+      }
+
+      .logo {
+        font-size: 26px;
+      }
+
+      .consult-btn {
+        padding: 13px 16px;
         font-size: 14px;
       }
 
-      main {
-        padding-top: 32px;
-      }
-
-      .section-title h1,
-      .step-card h2 {
+      .intro h1,
+      .step-card h2,
+      .type-card h3 {
         font-size: 23px;
       }
 
-      .hero-visual {
-        height: 420px;
+      .hero {
+        min-height: 520px;
       }
 
-      .media-marquee.top {
-        top: 44px;
+      .hero-inner {
+        min-height: 484px;
       }
 
-      .media-marquee.bottom {
-        bottom: 44px;
+      .hero-content {
+        padding: 24px 20px;
       }
 
-      .media-card {
-        width: 230px;
-        height: 145px;
-        border-radius: 16px;
-      }
-
-      .hero-label {
-        font-size: 15px;
-      }
-
-      .entity-list {
-        margin-top: 48px;
-      }
-
-      .entity-card {
-        padding: 28px 24px;
+      .hero-title {
+        font-size: 24px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="navbar">
-      <div class="logo" aria-label="UNIST logo">U<span class="dot">·</span>NST</div>
+  <div class="header-wrap">
+    <header>
+      <a class="logo" href="#" aria-label="UNIST 홈">
+        U<span class="dot"></span>NIST
+      </a>
 
-      <nav class="nav-menu" aria-label="주요 메뉴">
+      <nav aria-label="주요 메뉴">
         <a href="#">미국 법인 설립</a>
-        <a href="#">운영 및 유지 <span class="chevron" aria-hidden="true"></span></a>
+        <a class="nav-item" href="#">운영 및 유지 <span class="chevron">⌄</span></a>
         <a href="#">미국 법인 청산</a>
       </nav>
 
-      <button class="cta" type="button">상담 신청</button>
+      <button class="consult-btn" type="button">상담 신청</button>
     </header>
-
-    <main>
-      <section class="section-title">
-        <h1>법인 형태 선택</h1>
-        <p>사업 모델과 성장 계획에 맞는 구조를 선택해 주세요.</p>
-      </section>
-
-      <section class="steps" aria-label="법인 설립 단계">
-        <article class="step-card">
-          <h2>법인명 결정</h2>
-          <p>주(State)별로 중복 등록이 불가하므로 3 개 이상의 후보명을 준비해 주세요.</p>
-        </article>
-
-        <article class="step-card">
-          <h2>법인 주소지 확보</h2>
-          <p>사용 가능한 주소를 확인하시거나, 없으시면 공유 오피스 연결을 안내 및 연결 서비스를 제공해 드립니다.</p>
-        </article>
-
-        <article class="step-card">
-          <h2>설립 주 선택</h2>
-          <p>실제 영업 주 또는 사업 특성에 맞는 주를 검토해 주세요.</p>
-        </article>
-      </section>
-
-      <section class="hero-visual" aria-label="웹앱 법인 설립 서비스 이미지 영역">
-        <div class="hero-inner">
-          <div class="media-marquee top" aria-hidden="true">
-            <div class="media-card video" data-title="Delaware 법인 설립 가이드" style="--thumb: linear-gradient(135deg, rgba(87, 110, 137, 0.78), rgba(255, 196, 143, 0.82)), radial-gradient(circle at 25% 30%, #ffffff 0 8%, transparent 9%);"><span class="play"></span></div>
-            <div class="media-card" data-title="EIN · 은행 계좌 체크리스트" style="--thumb: linear-gradient(135deg, rgba(237, 177, 140, 0.88), rgba(246, 229, 205, 0.92)), linear-gradient(90deg, transparent 0 16%, rgba(255,255,255,.5) 16% 17%, transparent 17%);"></div>
-            <div class="media-card video" data-title="투자 유치용 C-Corp 설명" style="--thumb: linear-gradient(135deg, rgba(189, 129, 112, 0.8), rgba(226, 214, 199, 0.94)), radial-gradient(circle at 72% 36%, #fff 0 10%, transparent 11%);"><span class="play"></span></div>
-            <div class="media-card" data-title="주별 설립 비용 비교" style="--thumb: linear-gradient(135deg, rgba(230, 154, 187, 0.74), rgba(249, 201, 150, 0.9)), repeating-linear-gradient(0deg, rgba(255,255,255,.45) 0 16px, transparent 16px 42px);"></div>
-            <div class="media-card video" data-title="Delaware 법인 설립 가이드" style="--thumb: linear-gradient(135deg, rgba(87, 110, 137, 0.78), rgba(255, 196, 143, 0.82)), radial-gradient(circle at 25% 30%, #ffffff 0 8%, transparent 9%);"><span class="play"></span></div>
-            <div class="media-card" data-title="EIN · 은행 계좌 체크리스트" style="--thumb: linear-gradient(135deg, rgba(237, 177, 140, 0.88), rgba(246, 229, 205, 0.92)), linear-gradient(90deg, transparent 0 16%, rgba(255,255,255,.5) 16% 17%, transparent 17%);"></div>
-            <div class="media-card video" data-title="투자 유치용 C-Corp 설명" style="--thumb: linear-gradient(135deg, rgba(189, 129, 112, 0.8), rgba(226, 214, 199, 0.94)), radial-gradient(circle at 72% 36%, #fff 0 10%, transparent 11%);"><span class="play"></span></div>
-            <div class="media-card" data-title="주별 설립 비용 비교" style="--thumb: linear-gradient(135deg, rgba(230, 154, 187, 0.74), rgba(249, 201, 150, 0.9)), repeating-linear-gradient(0deg, rgba(255,255,255,.45) 0 16px, transparent 16px 42px);"></div>
-          </div>
-
-          <div class="media-marquee bottom" aria-hidden="true">
-            <div class="media-card" data-title="등록 주소지 샘플 화면" style="--thumb: linear-gradient(135deg, rgba(245, 206, 151, 0.86), rgba(219, 218, 209, 0.92)), radial-gradient(circle at 32% 70%, #fff 0 11%, transparent 12%);"></div>
-            <div class="media-card video" data-title="LLC와 C-Corp 차이" style="--thumb: linear-gradient(135deg, rgba(238, 161, 136, 0.82), rgba(205, 184, 179, 0.96)), repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 2px, transparent 2px 32px);"><span class="play"></span></div>
-            <div class="media-card" data-title="서류 진행 현황 대시보드" style="--thumb: linear-gradient(135deg, rgba(189, 203, 195, 0.88), rgba(249, 186, 147, 0.9)), linear-gradient(0deg, rgba(255,255,255,.44), transparent 58%);"></div>
-            <div class="media-card video" data-title="설립 후 유지 관리 안내" style="--thumb: linear-gradient(135deg, rgba(225, 139, 169, 0.74), rgba(246, 220, 185, 0.94)), radial-gradient(circle at 78% 72%, #fff 0 9%, transparent 10%);"><span class="play"></span></div>
-            <div class="media-card" data-title="등록 주소지 샘플 화면" style="--thumb: linear-gradient(135deg, rgba(245, 206, 151, 0.86), rgba(219, 218, 209, 0.92)), radial-gradient(circle at 32% 70%, #fff 0 11%, transparent 12%);"></div>
-            <div class="media-card video" data-title="LLC와 C-Corp 차이" style="--thumb: linear-gradient(135deg, rgba(238, 161, 136, 0.82), rgba(205, 184, 179, 0.96)), repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 2px, transparent 2px 32px);"><span class="play"></span></div>
-            <div class="media-card" data-title="서류 진행 현황 대시보드" style="--thumb: linear-gradient(135deg, rgba(189, 203, 195, 0.88), rgba(249, 186, 147, 0.9)), linear-gradient(0deg, rgba(255,255,255,.44), transparent 58%);"></div>
-            <div class="media-card video" data-title="설립 후 유지 관리 안내" style="--thumb: linear-gradient(135deg, rgba(225, 139, 169, 0.74), rgba(246, 220, 185, 0.94)), radial-gradient(circle at 78% 72%, #fff 0 9%, transparent 10%);"><span class="play"></span></div>
-          </div>
-
-          <span class="hero-label">웹앱 법인 설립 서비스</span>
-        </div>
-      </section>
-
-      <section class="entity-list" aria-label="법인 형태 목록">
-        <article class="entity-card">
-          <h3>C-Corp</h3>
-          <p>외국인 설립 가능, 투자 유치에 유리</p>
-          <strong>법인세와 배당 과세로 이중과세</strong>
-        </article>
-
-        <article class="entity-card">
-          <h3>LLC</h3>
-          <p>구조가 유연하고 Pass-through 과세 가능</p>
-          <strong>미국 시민권자 및 영주권자 제외한 외국인 단독 소유 시 신고가 복잡할 수 있음</strong>
-        </article>
-      </section>
-    </main>
   </div>
 
-  <a class="floating-edit" href="#" aria-label="수정">✎</a>
+  <main class="page">
+    <section class="intro">
+      <h1>법인 형태 선택</h1>
+      <p>사업 모델과 성장 계획에 맞는 구조를 선택해 주세요.</p>
+    </section>
+
+    <section class="steps" aria-label="미국 법인 설립 절차">
+      <button class="step-card active" type="button" data-key="type">
+        <h2>법인 형태 선택</h2>
+        <p>사업 모델과 성장 계획에 맞는 구조를 선택해 주세요.</p>
+      </button>
+
+      <button class="step-card" type="button" data-key="name">
+        <h2>법인명 결정</h2>
+        <p>주(State)별로 중복 등록이 불가하므로 3개 이상의 후보명을 준비해 주세요.</p>
+      </button>
+
+      <button class="step-card" type="button" data-key="address">
+        <h2>법인 주소지 확보</h2>
+        <p>사용 가능한 주소를 확인하시거나, 없으시면 공유 오피스 연결을 안내 및 연결 서비스를 제공해 드립니다.</p>
+      </button>
+
+      <button class="step-card" type="button" data-key="state">
+        <h2>설립 주 선택</h2>
+        <p>실제 영업 주 또는 사업 특성에 맞는 주를 검토해 주세요.</p>
+      </button>
+    </section>
+
+    <section class="hero" id="hero" style="--hero-image: url('https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1800&q=80');" aria-live="polite">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <p class="hero-eyebrow" id="heroEyebrow">STEP 01</p>
+          <h2 class="hero-title" id="heroTitle">법인 형태 선택</h2>
+          <p class="hero-desc" id="heroDesc">C-Corp, LLC 등 사업 목적과 투자 계획에 맞는 구조를 먼저 선택합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="business-types">
+      <article class="type-card">
+        <h3>C-Corp</h3>
+        <p>외국인 설립 가능, 투자 유치에 유리</p>
+        <strong>법인세와 배당 과세로 이중과세</strong>
+      </article>
+
+      <article class="type-card">
+        <h3>LLC</h3>
+        <p>구조가 유연하고 Pass-through 과세 가능</p>
+        <strong>미국 시민권자 및 영주권자 제외한 외국인 단독 소유 시 신고가 복잡할 수 있음</strong>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const stepData = {
+      type: {
+        eyebrow: 'STEP 01',
+        title: '법인 형태 선택',
+        desc: 'C-Corp, LLC 등 사업 목적과 투자 계획에 맞는 구조를 먼저 선택합니다.',
+        image: 'https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1800&q=80'
+      },
+      name: {
+        eyebrow: 'STEP 02',
+        title: '법인명 결정',
+        desc: '뉴욕의 밤처럼 선명하게 기억될 법인명을 후보군으로 정리하고 중복 여부를 확인합니다.',
+        image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1800&q=80'
+      },
+      address: {
+        eyebrow: 'STEP 03',
+        title: '법인 주소지 확보',
+        desc: '우편 수령, 관공서 서류, 은행 업무에 사용할 수 있는 안정적인 주소지를 준비합니다.',
+        image: 'https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1800&q=80'
+      },
+      state: {
+        eyebrow: 'STEP 04',
+        title: '설립 주 선택',
+        desc: '실제 영업 지역, 세무 요건, 운영 비용을 비교해 적합한 설립 주를 선택합니다.',
+        image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1800&q=80'
+      }
+    };
+
+    const cards = document.querySelectorAll('.step-card');
+    const hero = document.getElementById('hero');
+    const heroEyebrow = document.getElementById('heroEyebrow');
+    const heroTitle = document.getElementById('heroTitle');
+    const heroDesc = document.getElementById('heroDesc');
+    const introTitle = document.querySelector('.intro h1');
+    const introDesc = document.querySelector('.intro p');
+
+    function setActiveStep(key) {
+      const selected = stepData[key];
+      if (!selected) return;
+
+      cards.forEach((card) => {
+        card.classList.toggle('active', card.dataset.key === key);
+      });
+
+      hero.style.opacity = '0.72';
+
+      window.setTimeout(() => {
+        hero.style.setProperty('--hero-image', `url('${selected.image}')`);
+        heroEyebrow.textContent = selected.eyebrow;
+        heroTitle.textContent = selected.title;
+        heroDesc.textContent = selected.desc;
+        introTitle.textContent = selected.title;
+        introDesc.textContent = document.querySelector(`.step-card[data-key="${key}"] p`).textContent;
+        hero.style.opacity = '1';
+      }, 160);
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => setActiveStep(card.dataset.key));
+    });
+  </script>
 </body>
 </html>
