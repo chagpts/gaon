@@ -51,12 +51,13 @@
     .hero p{font-size:13px;color:#48433c;font-weight:700;margin:0 0 22px}
     .hero .visual{
       margin:48px auto 0;width:min(740px,100%);height:360px;border-radius:13px;overflow:hidden;
-      background:
-        repeating-linear-gradient(135deg, rgba(255,255,255,.28) 0 4px, rgba(0,0,0,.035) 4px 8px),
-        linear-gradient(135deg,#d5d0ca,#eee7df 55%,#cfc8bf);
+      background:#111;
       border:1px solid rgba(255,255,255,.75);
       box-shadow:var(--shadow);
-      display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#202020;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .hero .visual video{
+      width:100%;height:100%;display:block;object-fit:cover;
     }
 
     .section{text-align:center;padding:30px 0 42px}
@@ -67,36 +68,35 @@
       width:min(740px,100%);
       margin:0 auto 18px;
       position:relative;
-      padding-bottom:92px;
+      padding-bottom:220px;
     }
     .aud-card{
       position:sticky;
-      top:78px;
-      z-index:1;
-      height:104px;
+      top:88px;
+      height:118px;
       display:grid;
-      grid-template-columns:minmax(0,1fr) 182px;
-      gap:8px;
+      grid-template-columns:minmax(0,1fr) 176px;
+      gap:7px;
       align-items:stretch;
       padding:7px;
-      margin:0 0 -28px;
+      margin:0 0 22px;
       border-radius:14px;
       background:linear-gradient(120deg, rgba(255,170,150,.62), rgba(200,225,255,.56), rgba(255,255,255,.76));
       box-shadow:0 14px 32px rgba(50,38,30,.09);
       transition:transform .25s ease, box-shadow .25s ease;
       will-change:transform;
     }
-    .aud-card:nth-child(1){top:78px;z-index:1}
-    .aud-card:nth-child(2){top:102px;z-index:2}
-    .aud-card:nth-child(3){top:126px;z-index:3}
-    .aud-card:nth-child(4){top:150px;z-index:4}
-    .aud-card:nth-child(5){top:174px;z-index:5;margin-bottom:0}
+    .aud-card:nth-child(1){z-index:1}
+    .aud-card:nth-child(2){z-index:2}
+    .aud-card:nth-child(3){z-index:3}
+    .aud-card:nth-child(4){z-index:4}
+    .aud-card:nth-child(5){z-index:5;margin-bottom:0}
     .aud-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(50,38,30,.13)}
-    .aud-copy{background:rgba(255,255,255,.82);border-radius:10px;text-align:left;padding:13px 16px;position:relative;overflow:hidden}
-    .aud-copy h3{margin:0 0 5px;font-size:18px;letter-spacing:-.045em;line-height:1.15}
-    .aud-copy p{margin:0;color:#333;font-size:9.5px;line-height:1.38;font-weight:700;max-width:360px}
-    .aud-copy .icon{position:absolute;left:16px;bottom:8px;color:#bbb;font-size:17px}
-    .photo{border-radius:10px;overflow:hidden;position:relative;background:#ddd;min-height:90px}
+    .aud-copy{background:rgba(255,255,255,.84);border-radius:10px;text-align:left;padding:12px 15px;position:relative;overflow:hidden}
+    .aud-copy h3{margin:0 0 5px;font-size:17px;letter-spacing:-.045em;line-height:1.15}
+    .aud-copy p{margin:0;color:#333;font-size:9px;line-height:1.34;font-weight:700;max-width:340px}
+    .aud-copy .icon{position:absolute;left:15px;bottom:7px;color:#bbb;font-size:16px}
+    .photo{border-radius:10px;overflow:hidden;position:relative;background:#ddd;min-height:100px}
     .photo:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.08))}
     .house{background:linear-gradient(135deg,#e6f5ff,#88b073 42%,#f8f3e4 43%,#d8d0ba 63%,#6d8a63 64%)}
     .desk{background:linear-gradient(135deg,#e7d2bd,#f8f4ea 38%,#314a58 39%,#ca9d75 64%,#eee 65%)}
@@ -138,7 +138,9 @@
       <h1>미국 법인 설립 이후가<br>더 중요합니다.</h1>
       <p>미국 법인 운영부터 세무, 회계, 관리까지 안정적으로 도와드립니다.</p>
       <a class="btn" href="#services">알아보기</a>
-      <div class="visual">영상 영역</div>
+      <div class="visual">
+        <video src="./1.mp4" autoplay muted loop playsinline controls></video>
+      </div>
     </section>
 
     <section class="section container" id="target">
