@@ -51,53 +51,96 @@
     h1{font-size:38px;line-height:1.04;letter-spacing:-.065em;margin:0 0 15px;font-weight:900}
     .hero p{font-size:11px;color:#48433c;font-weight:800;margin:0 0 20px}
     .hero .visual{
-      margin:38px auto 0;
+      margin:36px auto 0;
       width:min(650px,100%);
       height:300px;
-      border-radius:18px;
-      overflow:hidden;
+      border-radius:22px;
+      overflow:visible;
       position:relative;
       isolation:isolate;
-      background:#111;
-      border:1px solid rgba(255,255,255,.72);
+      padding:10px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.86), rgba(255,245,235,.48) 42%, rgba(230,236,244,.68)),
+        linear-gradient(135deg, rgba(255,195,164,.9), rgba(183,207,244,.72));
+      border:1px solid rgba(255,255,255,.78);
       box-shadow:
-        0 32px 75px rgba(61,45,31,.16),
-        0 12px 28px rgba(31,31,31,.10),
-        inset 0 1px 0 rgba(255,255,255,.72);
-      display:flex;align-items:center;justify-content:center;
-      transform:perspective(1000px) rotateX(1.2deg);
+        0 30px 80px rgba(69,49,33,.13),
+        0 10px 24px rgba(32,32,32,.07),
+        inset 0 1px 0 rgba(255,255,255,.88);
+      display:flex;align-items:stretch;justify-content:center;
     }
     .hero .visual::before{
       content:"";
       position:absolute;
-      inset:-42px;
+      inset:-28px -34px -42px;
       z-index:-2;
       background:
-        radial-gradient(circle at 22% 20%, rgba(255,192,145,.55), transparent 35%),
-        radial-gradient(circle at 78% 28%, rgba(188,214,255,.50), transparent 38%),
-        radial-gradient(circle at 50% 100%, rgba(255,221,199,.70), transparent 42%);
-      filter:blur(20px);
-      opacity:.88;
+        radial-gradient(ellipse at 19% 20%, rgba(255,207,163,.48), transparent 42%),
+        radial-gradient(ellipse at 84% 24%, rgba(205,220,255,.48), transparent 42%),
+        radial-gradient(ellipse at 50% 105%, rgba(255,184,157,.30), transparent 50%);
+      filter:blur(18px);
+      opacity:.92;
     }
     .hero .visual::after{
       content:"";
       position:absolute;
-      inset:0;
-      z-index:2;
+      inset:10px;
+      z-index:4;
       pointer-events:none;
+      border-radius:16px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.22), transparent 18%, transparent 72%, rgba(0,0,0,.22)),
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.32), transparent 40%),
-        linear-gradient(115deg, transparent 0 42%, rgba(255,255,255,.18) 48%, transparent 56%);
-      mix-blend-mode:screen;
-      opacity:.74;
+        linear-gradient(180deg, rgba(255,255,255,.36) 0%, rgba(255,255,255,.08) 21%, transparent 42%, rgba(0,0,0,.20) 100%),
+        linear-gradient(120deg, transparent 4%, rgba(255,255,255,.18) 34%, transparent 52%),
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.26), transparent 45%);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);
+      opacity:.78;
+    }
+    .hero .visual .browserbar{
+      position:absolute;
+      left:10px;right:10px;top:10px;height:30px;
+      z-index:5;
+      border-radius:16px 16px 0 0;
+      background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.36));
+      border-bottom:1px solid rgba(255,255,255,.32);
+      backdrop-filter:blur(10px);
+      display:flex;align-items:center;gap:6px;padding-left:14px;
+    }
+    .hero .visual .browserbar i{
+      width:7px;height:7px;border-radius:50%;display:block;
+      background:rgba(34,34,34,.24);
+    }
+    .hero .visual .browserbar span{
+      margin-left:8px;font-size:9px;font-weight:900;letter-spacing:.02em;color:rgba(30,30,30,.48);
+    }
+    .hero .visual .video-wrap{
+      width:100%;height:100%;position:relative;overflow:hidden;border-radius:16px;background:#121212;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.20);
     }
     .hero .visual video{
       width:100%;height:100%;display:block;object-fit:cover;
-      filter:saturate(1.06) contrast(1.04) brightness(.98);
-      transform:scale(1.015);
+      filter:saturate(1.03) contrast(1.03) brightness(.92);
+      transform:scale(1.018);
     }
-    .hero .visual .video-vignette{display:none}
+    .hero .visual .video-caption{
+      position:absolute;
+      left:24px;bottom:22px;z-index:6;
+      display:inline-flex;align-items:center;gap:8px;
+      height:28px;padding:0 12px;border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(255,255,255,.62);
+      color:rgba(35,35,35,.78);font-size:10px;font-weight:900;
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+    .hero .visual .video-caption::before{
+      content:"";width:7px;height:7px;border-radius:50%;background:#20242a;box-shadow:0 0 0 4px rgba(32,36,42,.10);
+    }
+    .hero .visual .video-vignette{
+      position:absolute;inset:0;z-index:3;pointer-events:none;
+      background:
+        radial-gradient(ellipse at center, transparent 44%, rgba(15,13,12,.34) 100%),
+        linear-gradient(180deg, rgba(251,246,237,.18), transparent 28%, rgba(247,242,234,.26));
+    }
 
     .section{text-align:center;padding:30px 0 42px}
     .tag{display:inline-flex;font-size:9px;font-weight:900;letter-spacing:.06em;border:1px solid #bbb1a7;border-radius:5px;padding:4px 7px;color:#4f4944;background:rgba(255,255,255,.45);margin-bottom:12px}
@@ -178,7 +221,12 @@
       <p>미국 법인 운영부터 세무, 회계, 관리까지 안정적으로 도와드립니다.</p>
       <a class="btn" href="#services">알아보기</a>
       <div class="visual">
-        <video src="./1.mp4" autoplay muted loop playsinline controls></video>
+        <div class="browserbar"><i></i><i></i><i></i><span>UXST OPERATING SYSTEM</span></div>
+        <div class="video-wrap">
+          <video src="./1.mp4" autoplay muted loop playsinline></video>
+          <div class="video-vignette"></div>
+        </div>
+        <div class="video-caption">US Entity · Tax · Accounting</div>
       </div>
     </section>
 
