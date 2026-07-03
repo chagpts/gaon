@@ -51,15 +51,53 @@
     h1{font-size:38px;line-height:1.04;letter-spacing:-.065em;margin:0 0 15px;font-weight:900}
     .hero p{font-size:11px;color:#48433c;font-weight:800;margin:0 0 20px}
     .hero .visual{
-      margin:38px auto 0;width:min(650px,100%);height:300px;border-radius:13px;overflow:hidden;
+      margin:38px auto 0;
+      width:min(650px,100%);
+      height:300px;
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+      isolation:isolate;
       background:#111;
-      border:6px solid rgba(255,255,255,.62);
-      box-shadow:0 20px 42px rgba(60,45,28,.07);
+      border:1px solid rgba(255,255,255,.72);
+      box-shadow:
+        0 32px 75px rgba(61,45,31,.16),
+        0 12px 28px rgba(31,31,31,.10),
+        inset 0 1px 0 rgba(255,255,255,.72);
       display:flex;align-items:center;justify-content:center;
+      transform:perspective(1000px) rotateX(1.2deg);
+    }
+    .hero .visual::before{
+      content:"";
+      position:absolute;
+      inset:-42px;
+      z-index:-2;
+      background:
+        radial-gradient(circle at 22% 20%, rgba(255,192,145,.55), transparent 35%),
+        radial-gradient(circle at 78% 28%, rgba(188,214,255,.50), transparent 38%),
+        radial-gradient(circle at 50% 100%, rgba(255,221,199,.70), transparent 42%);
+      filter:blur(20px);
+      opacity:.88;
+    }
+    .hero .visual::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.22), transparent 18%, transparent 72%, rgba(0,0,0,.22)),
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.32), transparent 40%),
+        linear-gradient(115deg, transparent 0 42%, rgba(255,255,255,.18) 48%, transparent 56%);
+      mix-blend-mode:screen;
+      opacity:.74;
     }
     .hero .visual video{
       width:100%;height:100%;display:block;object-fit:cover;
+      filter:saturate(1.06) contrast(1.04) brightness(.98);
+      transform:scale(1.015);
     }
+    .hero .visual .video-vignette{display:none}
 
     .section{text-align:center;padding:30px 0 42px}
     .tag{display:inline-flex;font-size:9px;font-weight:900;letter-spacing:.06em;border:1px solid #bbb1a7;border-radius:5px;padding:4px 7px;color:#4f4944;background:rgba(255,255,255,.45);margin-bottom:12px}
