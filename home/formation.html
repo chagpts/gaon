@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -165,20 +164,144 @@
     }
 
     .hero-inner {
+      position: relative;
       height: 100%;
       border-radius: 12px;
-      display: grid;
-      place-items: center;
+      overflow: hidden;
       background:
         repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 16px),
         rgba(255, 255, 255, 0.08);
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
     }
 
-    .hero-inner span {
+    .hero-inner::before,
+    .hero-inner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      z-index: 3;
+      width: 18%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .hero-inner::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(206, 169, 156, 0.84), transparent);
+    }
+
+    .hero-inner::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(231, 197, 178, 0.84), transparent);
+    }
+
+    .hero-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 5;
+      transform: translate(-50%, -50%);
+      padding: 14px 20px;
+      border-radius: 999px;
+      background: rgba(255, 249, 241, 0.74);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 40px rgba(78, 55, 42, 0.14);
       font-size: 18px;
       font-weight: 800;
-      color: #2a2a2a;
+      color: #1f1f1f;
+      white-space: nowrap;
+    }
+
+    .media-marquee {
+      position: absolute;
+      left: 0;
+      width: max-content;
+      display: flex;
+      gap: 26px;
+      opacity: 0.88;
+      will-change: transform;
+    }
+
+    .media-marquee.top {
+      top: 88px;
+      animation: flow-left 34s linear infinite;
+    }
+
+    .media-marquee.bottom {
+      bottom: 84px;
+      animation: flow-right 38s linear infinite;
+    }
+
+    .media-card {
+      position: relative;
+      width: 330px;
+      height: 210px;
+      flex: 0 0 auto;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.32);
+      box-shadow: 0 24px 60px rgba(91, 65, 50, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.38);
+    }
+
+    .media-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--thumb);
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+    }
+
+    .media-card::after {
+      content: attr(data-title);
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+      z-index: 1;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 252, 246, 0.76);
+      backdrop-filter: blur(10px);
+      font-size: 14px;
+      font-weight: 800;
+      color: #292929;
+    }
+
+    .media-card.video .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      width: 58px;
+      height: 58px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.76);
+      box-shadow: 0 12px 28px rgba(60, 40, 30, 0.16);
+    }
+
+    .media-card.video .play::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 53%;
+      transform: translate(-50%, -50%);
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 18px solid #282828;
+    }
+
+    @keyframes flow-left {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes flow-right {
+      from { transform: translateX(-50%); }
+      to { transform: translateX(0); }
     }
 
     .entity-list {
@@ -263,6 +386,24 @@
         height: 420px;
       }
 
+      .media-marquee.top {
+        top: 44px;
+      }
+
+      .media-marquee.bottom {
+        bottom: 44px;
+      }
+
+      .media-card {
+        width: 230px;
+        height: 145px;
+        border-radius: 16px;
+      }
+
+      .hero-label {
+        font-size: 15px;
+      }
+
       .entity-list {
         margin-top: 48px;
       }
@@ -312,7 +453,29 @@
 
       <section class="hero-visual" aria-label="웹앱 법인 설립 서비스 이미지 영역">
         <div class="hero-inner">
-          <span>웹앱 법인 설립 서비스</span>
+          <div class="media-marquee top" aria-hidden="true">
+            <div class="media-card video" data-title="Delaware 법인 설립 가이드" style="--thumb: linear-gradient(135deg, rgba(87, 110, 137, 0.78), rgba(255, 196, 143, 0.82)), radial-gradient(circle at 25% 30%, #ffffff 0 8%, transparent 9%);"><span class="play"></span></div>
+            <div class="media-card" data-title="EIN · 은행 계좌 체크리스트" style="--thumb: linear-gradient(135deg, rgba(237, 177, 140, 0.88), rgba(246, 229, 205, 0.92)), linear-gradient(90deg, transparent 0 16%, rgba(255,255,255,.5) 16% 17%, transparent 17%);"></div>
+            <div class="media-card video" data-title="투자 유치용 C-Corp 설명" style="--thumb: linear-gradient(135deg, rgba(189, 129, 112, 0.8), rgba(226, 214, 199, 0.94)), radial-gradient(circle at 72% 36%, #fff 0 10%, transparent 11%);"><span class="play"></span></div>
+            <div class="media-card" data-title="주별 설립 비용 비교" style="--thumb: linear-gradient(135deg, rgba(230, 154, 187, 0.74), rgba(249, 201, 150, 0.9)), repeating-linear-gradient(0deg, rgba(255,255,255,.45) 0 16px, transparent 16px 42px);"></div>
+            <div class="media-card video" data-title="Delaware 법인 설립 가이드" style="--thumb: linear-gradient(135deg, rgba(87, 110, 137, 0.78), rgba(255, 196, 143, 0.82)), radial-gradient(circle at 25% 30%, #ffffff 0 8%, transparent 9%);"><span class="play"></span></div>
+            <div class="media-card" data-title="EIN · 은행 계좌 체크리스트" style="--thumb: linear-gradient(135deg, rgba(237, 177, 140, 0.88), rgba(246, 229, 205, 0.92)), linear-gradient(90deg, transparent 0 16%, rgba(255,255,255,.5) 16% 17%, transparent 17%);"></div>
+            <div class="media-card video" data-title="투자 유치용 C-Corp 설명" style="--thumb: linear-gradient(135deg, rgba(189, 129, 112, 0.8), rgba(226, 214, 199, 0.94)), radial-gradient(circle at 72% 36%, #fff 0 10%, transparent 11%);"><span class="play"></span></div>
+            <div class="media-card" data-title="주별 설립 비용 비교" style="--thumb: linear-gradient(135deg, rgba(230, 154, 187, 0.74), rgba(249, 201, 150, 0.9)), repeating-linear-gradient(0deg, rgba(255,255,255,.45) 0 16px, transparent 16px 42px);"></div>
+          </div>
+
+          <div class="media-marquee bottom" aria-hidden="true">
+            <div class="media-card" data-title="등록 주소지 샘플 화면" style="--thumb: linear-gradient(135deg, rgba(245, 206, 151, 0.86), rgba(219, 218, 209, 0.92)), radial-gradient(circle at 32% 70%, #fff 0 11%, transparent 12%);"></div>
+            <div class="media-card video" data-title="LLC와 C-Corp 차이" style="--thumb: linear-gradient(135deg, rgba(238, 161, 136, 0.82), rgba(205, 184, 179, 0.96)), repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 2px, transparent 2px 32px);"><span class="play"></span></div>
+            <div class="media-card" data-title="서류 진행 현황 대시보드" style="--thumb: linear-gradient(135deg, rgba(189, 203, 195, 0.88), rgba(249, 186, 147, 0.9)), linear-gradient(0deg, rgba(255,255,255,.44), transparent 58%);"></div>
+            <div class="media-card video" data-title="설립 후 유지 관리 안내" style="--thumb: linear-gradient(135deg, rgba(225, 139, 169, 0.74), rgba(246, 220, 185, 0.94)), radial-gradient(circle at 78% 72%, #fff 0 9%, transparent 10%);"><span class="play"></span></div>
+            <div class="media-card" data-title="등록 주소지 샘플 화면" style="--thumb: linear-gradient(135deg, rgba(245, 206, 151, 0.86), rgba(219, 218, 209, 0.92)), radial-gradient(circle at 32% 70%, #fff 0 11%, transparent 12%);"></div>
+            <div class="media-card video" data-title="LLC와 C-Corp 차이" style="--thumb: linear-gradient(135deg, rgba(238, 161, 136, 0.82), rgba(205, 184, 179, 0.96)), repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 2px, transparent 2px 32px);"><span class="play"></span></div>
+            <div class="media-card" data-title="서류 진행 현황 대시보드" style="--thumb: linear-gradient(135deg, rgba(189, 203, 195, 0.88), rgba(249, 186, 147, 0.9)), linear-gradient(0deg, rgba(255,255,255,.44), transparent 58%);"></div>
+            <div class="media-card video" data-title="설립 후 유지 관리 안내" style="--thumb: linear-gradient(135deg, rgba(225, 139, 169, 0.74), rgba(246, 220, 185, 0.94)), radial-gradient(circle at 78% 72%, #fff 0 9%, transparent 10%);"><span class="play"></span></div>
+          </div>
+
+          <span class="hero-label">웹앱 법인 설립 서비스</span>
         </div>
       </section>
 
