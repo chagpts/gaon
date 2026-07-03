@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UXST | US Tax Service</title>
+  <style>
+    :root{
+      --bg:#f7f2ea;
+      --ink:#222;
+      --muted:#6f6a63;
+      --line:#ded8cf;
+      --soft:#fffaf4;
+      --dark:#272727;
+      --radius:18px;
+      --shadow:0 18px 45px rgba(60,45,28,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255,225,144,.55), transparent 24rem),
+        radial-gradient(circle at 82% 10%, rgba(255,190,206,.48), transparent 27rem),
+        linear-gradient(180deg,#fbf6ed 0%,#f7f2ea 62%,#f4eee5 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(840px, calc(100% - 38px)); margin:0 auto;}
+
+    header{
+      position:sticky;top:12px;z-index:10;
+      width:min(840px, calc(100% - 38px));
+      height:42px;margin:12px auto 0;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 14px 0 18px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:12px;
+      backdrop-filter: blur(14px);
+      box-shadow:0 10px 25px rgba(34,34,34,.06);
+    }
+    .logo{font-weight:900;letter-spacing:.08em;font-size:17px}
+    nav{display:flex;gap:28px;align-items:center;font-size:12px;font-weight:700;color:#2f2f2f}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:9px;background:#20242a;color:white;font-weight:800;font-size:12px;height:30px;padding:0 16px;cursor:pointer}
+
+    .hero{text-align:center;padding:78px 0 86px}
+    .eyebrow{font-size:14px;color:#58524b;margin-bottom:20px;font-weight:600}
+    h1{font-size:42px;line-height:1.07;letter-spacing:-.06em;margin:0 0 16px;font-weight:900}
+    .hero p{font-size:13px;color:#48433c;font-weight:700;margin:0 0 22px}
+    .hero .visual{
+      margin:48px auto 0;width:min(740px,100%);height:360px;border-radius:13px;overflow:hidden;
+      background:
+        repeating-linear-gradient(135deg, rgba(255,255,255,.28) 0 4px, rgba(0,0,0,.035) 4px 8px),
+        linear-gradient(135deg,#d5d0ca,#eee7df 55%,#cfc8bf);
+      border:1px solid rgba(255,255,255,.75);
+      box-shadow:var(--shadow);
+      display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#202020;
+    }
+
+    .section{text-align:center;padding:30px 0 42px}
+    .tag{display:inline-flex;font-size:9px;font-weight:900;letter-spacing:.06em;border:1px solid #bbb1a7;border-radius:5px;padding:4px 7px;color:#4f4944;background:rgba(255,255,255,.45);margin-bottom:12px}
+    h2{font-size:30px;line-height:1.16;letter-spacing:-.055em;margin:0 0 26px;font-weight:900}
+
+    .audience{
+      width:min(740px,100%);
+      margin:0 auto 18px;
+      position:relative;
+      padding-bottom:92px;
+    }
+    .aud-card{
+      position:sticky;
+      top:78px;
+      z-index:1;
+      height:104px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 182px;
+      gap:8px;
+      align-items:stretch;
+      padding:7px;
+      margin:0 0 -28px;
+      border-radius:14px;
+      background:linear-gradient(120deg, rgba(255,170,150,.62), rgba(200,225,255,.56), rgba(255,255,255,.76));
+      box-shadow:0 14px 32px rgba(50,38,30,.09);
+      transition:transform .25s ease, box-shadow .25s ease;
+      will-change:transform;
+    }
+    .aud-card:nth-child(1){top:78px;z-index:1}
+    .aud-card:nth-child(2){top:102px;z-index:2}
+    .aud-card:nth-child(3){top:126px;z-index:3}
+    .aud-card:nth-child(4){top:150px;z-index:4}
+    .aud-card:nth-child(5){top:174px;z-index:5;margin-bottom:0}
+    .aud-card:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(50,38,30,.13)}
+    .aud-copy{background:rgba(255,255,255,.82);border-radius:10px;text-align:left;padding:13px 16px;position:relative;overflow:hidden}
+    .aud-copy h3{margin:0 0 5px;font-size:18px;letter-spacing:-.045em;line-height:1.15}
+    .aud-copy p{margin:0;color:#333;font-size:9.5px;line-height:1.38;font-weight:700;max-width:360px}
+    .aud-copy .icon{position:absolute;left:16px;bottom:8px;color:#bbb;font-size:17px}
+    .photo{border-radius:10px;overflow:hidden;position:relative;background:#ddd;min-height:90px}
+    .photo:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.08))}
+    .house{background:linear-gradient(135deg,#e6f5ff,#88b073 42%,#f8f3e4 43%,#d8d0ba 63%,#6d8a63 64%)}
+    .desk{background:linear-gradient(135deg,#e7d2bd,#f8f4ea 38%,#314a58 39%,#ca9d75 64%,#eee 65%)}
+    .startup{background:linear-gradient(135deg,#77bfd6,#eaf3f4 38%,#24485f 39%,#eda65f 68%,#223344 69%)}
+    .tech{background:linear-gradient(135deg,#0f2432,#183d58 35%,#6da9c4 36%,#182431 64%,#0a1118 65%)}
+    .consult{background:linear-gradient(135deg,#664a2c,#d6b486 36%,#f2eadf 37%,#1e3431 70%,#9a6d43 71%)}
+
+    .services-wrap{padding:42px 0 62px;text-align:center}
+    .service-strip{width:100vw;margin-left:calc(50% - 50vw);display:grid;grid-template-columns:repeat(11, minmax(126px,1fr));gap:12px;padding:0 0;margin-top:22px}
+    .svc{height:88px;border:1px solid #d9d1c7;border-radius:7px;background:rgba(255,255,255,.45);padding:14px 10px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,.035)}
+    .svc .mini{font-size:16px;color:#b8b0a7;margin-bottom:8px}.svc b{display:block;font-size:11px;margin-bottom:7px}.svc p{margin:0;font-size:7px;line-height:1.35;color:#716b65;font-weight:700}
+
+    .chart{text-align:center;padding:36px 0 74px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px auto 64px;max-width:570px}.chip{height:38px;min-width:170px;border:1px solid #cfc6bb;border-radius:8px;background:rgba(255,255,255,.5);display:flex;align-items:center;gap:10px;padding:0 14px;text-align:left;font-size:10px;font-weight:800}.chip span{font-size:17px;color:#777}
+    .case-card{width:min(690px,100%);margin:0 auto;border-radius:14px;padding:12px;background:linear-gradient(110deg,#e6ece9,#fff7f1,#f2cbb8);display:grid;grid-template-columns:1fr 330px;gap:16px;text-align:left;box-shadow:var(--shadow)}
+    .case-copy{padding:28px 22px}.case-copy h3{font-size:26px;line-height:1.1;letter-spacing:-.04em;margin:0 0 15px}.case-copy p{font-size:9.5px;line-height:1.45;color:#4c4741;font-weight:700;margin:0 0 18px}.case-img{border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;background:repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 4px,rgba(0,0,0,.035) 4px 8px),linear-gradient(135deg,#cfc8c1,#eee8e0)}
+
+    footer{background:#292929;color:#fff;margin-top:18px;padding:48px 0 42px}.foot{width:min(740px,calc(100% - 38px));margin:0 auto}.foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:34px}.foot .logo{font-size:24px}.foot p,.foot a{font-size:10px;line-height:1.8;color:#d7d7d7;font-weight:600}.foot h4{font-size:12px;margin:0 0 12px}.copyright{border-top:1px solid rgba(255,255,255,.18);margin-top:34px;padding-top:22px;text-align:center;font-size:9px;color:#c7c7c7}
+
+    @media (max-width:760px){
+      header{top:8px} nav{display:none}.hero{padding-top:56px}.eyebrow{font-size:12px}h1{font-size:32px}.hero .visual{height:230px}.audience{padding-bottom:0}.aud-card{top:68px!important;grid-template-columns:1fr;height:auto;min-height:0;margin-bottom:12px}.photo{height:150px;order:-1}.aud-copy{padding:16px 18px 38px}.service-strip{grid-template-columns:repeat(2,1fr);width:100%;margin-left:0;padding:0 19px}.case-card{grid-template-columns:1fr}.case-img{height:210px}.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > div:first-child{grid-column:1/-1}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="#">UXST</a>
+    <nav>
+      <a href="#target">미국 법인 설립</a>
+      <a href="#services">고객 맞춤 서비스</a>
+      <a href="#chart">미국 TAX SERVICE</a>
+    </nav>
+    <a class="btn" href="#contact">상담 신청</a>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="eyebrow">스타트업 투자, 미국 법인으로 진출하는 것이 맞을까?</div>
+      <h1>미국 법인 설립 이후가<br>더 중요합니다.</h1>
+      <p>미국 법인 운영부터 세무, 회계, 관리까지 안정적으로 도와드립니다.</p>
+      <a class="btn" href="#services">알아보기</a>
+      <div class="visual">영상 영역</div>
+    </section>
+
+    <section class="section container" id="target">
+      <span class="tag">TARGET CUSTOMERS</span>
+      <h2>이런 분들께<br>US TAX SERVICE가 필요합니다</h2>
+      <div class="audience">
+        <article class="aud-card"><div class="aud-copy"><h3>미국 부동산 투자자</h3><p>매입, 임대수익, 양도세, 신고까지 복잡한 미국 세무를 한 번에 관리하고 싶으신가요?</p><div class="icon">⌂</div></div><div class="photo house"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>미국 이커머스·무역 사업자</h3><p>Amazon, Shopify, Sales Tax, 매출 정산과 회계 처리를 체계화하고 싶으신가요?</p><div class="icon">◎</div></div><div class="photo desk"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>스타트업·벤처 기업</h3><p>Delaware C-Corp 설립 이후, 투자 유치와 세무 컴플라이언스를 준비하고 계신가요?</p><div class="icon">↗</div></div><div class="photo startup"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>SaaS·IT 서비스 기업</h3><p>미국 고객 과금, 해외 결제, 판매세, 정산 구조까지 효율적으로 설계하고 싶으신가요?</p><div class="icon">♙</div></div><div class="photo tech"></div></article>
+        <article class="aud-card"><div class="aud-copy"><h3>유학·이민·자산관리 고객</h3><p>미국 거주자/비거주자 세무, 계좌 신고, 자산 이전 이슈를 안전하게 관리하세요.</p><div class="icon">✈</div></div><div class="photo consult"></div></article>
+      </div>
+    </section>
+
+    <section class="services-wrap" id="services">
+      <span class="tag">OUR SERVICES</span>
+      <h2>대표 서비스</h2>
+      <div class="service-strip">
+        <div class="svc"><div class="mini">□</div><b>기타 운영 관리</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▧</div><b>법인 설립</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▤</div><b>자문 지원</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▣</div><b>기장</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▱</div><b>법인 세금 신고</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▱</div><b>주정부 유지 신고</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">⌂</div><b>Registered Agent</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▧</div><b>정산</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">□</div><b>기타 운영 관리</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▧</div><b>법인 설립</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+        <div class="svc"><div class="mini">▤</div><b>자문 지원</b><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
+      </div>
+    </section>
+
+    <section class="chart container" id="chart">
+      <span class="tag">WHY US</span>
+      <h2>US TAX SERVICE<br>차별화 포인트</h2>
+      <div class="chips">
+        <div class="chip"><span>▥</span>미국 세무와 한국 상황을 함께 이해</div>
+        <div class="chip"><span>◎</span>사업 단계에 맞춘 맞춤형 설계</div>
+        <div class="chip"><span>♧</span>고객별 리스크를 고려한 전략</div>
+        <div class="chip"><span>⌂</span>법인 설립 이후 운영까지 관리</div>
+        <div class="chip"><span>◇</span>미국 Tax ID·Sales Tax 지원</div>
+      </div>
+      <article class="case-card">
+        <div class="case-copy">
+          <span class="tag">SERVICE</span>
+          <h3>Neque porro<br>quisquam est qui</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pharetra nibh vehicula, sollicitudin risus eu, hendrerit lorem.</p>
+          <a class="btn" href="#contact">문의하기</a>
+        </div>
+        <div class="case-img">영상 등</div>
+      </article>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="foot">
+      <div class="foot-grid">
+        <div><div class="logo">UXST</div><p>미국 법인 설립과 세무 관리를 위한 전문 서비스</p><p>support@uxst.example</p></div>
+        <div><h4>서비스</h4><a href="#">법인 설립</a><br><a href="#">세무 신고</a></div>
+        <div><h4>고객 안내</h4><a href="#">상담 신청</a><br><a href="#">자주 묻는 질문</a></div>
+        <div><h4>정보</h4><a href="#">회사 소개</a><br><a href="#">공지사항</a></div>
+        <div><h4>문의</h4><a href="#">상담 예약</a><br><a href="#">메일 문의</a></div>
+      </div>
+      <div class="copyright">©2026 UXST. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
