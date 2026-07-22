@@ -1,337 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>미국 법인 설립 | US TAX SERVICE</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>미국 법인 설립 | UST</title>
   <style>
-    :root {
-      --ink: #111;
-      --white: #fff;
-      --button: #171717;
-      --page: #f3efe9;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      background: var(--page);
-      color: var(--ink);
-      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
-    }
+    :root { --black:#050505; --white:#fff; --paper:#f4f0ea; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:#151515; background:var(--paper); font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif; }
 
     .site-header {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      z-index: 20;
-      transform: translateX(-50%);
-      width: min(1128px, calc(100% - 32px));
-      height: 68px;
-      padding: 0 12px 0 22px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      border: 1px solid rgba(255,255,255,.52);
-      border-radius: 24px;
-      background: rgba(255,255,255,.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 16px 44px rgba(0,0,0,.12);
+      position:fixed; top:14px; left:50%; z-index:50; transform:translateX(-50%);
+      width:min(1128px,calc(100% - 32px)); height:68px; padding:0 12px 0 22px;
+      display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+      border:1px solid rgba(255,255,255,.45); border-radius:24px;
+      background:rgba(255,255,255,.88); backdrop-filter:blur(16px);
+      box-shadow:0 14px 42px rgba(0,0,0,.12);
     }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      color: #0b0b0b;
-      text-decoration: none;
-      font-size: 30px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: -2px;
-    }
-
-    .logo-mark {
-      margin: 0 2px;
-      font-size: 18px;
-      transform: translateY(-1px);
-      background: linear-gradient(135deg, #111 0 42%, #20bff6 43% 63%, #8659ff 64% 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 38px;
-      white-space: nowrap;
-    }
-
-    .main-nav a {
-      color: #191919;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 750;
-    }
-
-    .main-nav .has-menu::after {
-      content: "⌄";
-      margin-left: 7px;
-    }
-
-    .consult-btn,
-    .start-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      background: var(--button);
-      text-decoration: none;
-      font-weight: 800;
-      transition: transform .2s ease, background .2s ease;
-    }
-
-    .consult-btn {
-      justify-self: end;
-      height: 46px;
-      padding: 0 18px;
-      border-radius: 12px;
-      font-size: 14px;
-    }
+    .logo { color:#080808; text-decoration:none; font-size:30px; font-weight:950; letter-spacing:-2px; }
+    .logo i { font-style:normal; font-size:17px; margin:0 2px; color:#39bff4; }
+    .main-nav { display:flex; gap:38px; white-space:nowrap; }
+    .main-nav a { color:#171717; text-decoration:none; font-size:14px; font-weight:800; }
+    .consult-btn { justify-self:end; padding:14px 18px; border-radius:12px; color:#fff; background:#191919; text-decoration:none; font-size:14px; font-weight:800; }
 
     .hero {
-      position: relative;
-      min-height: 760px;
-      overflow: hidden;
-      display: grid;
-      place-items: center;
-      padding: 130px 24px 70px;
-      isolation: isolate;
-      background: #151515;
+      position:relative; height:100svh; min-height:720px; overflow:hidden;
+      background:var(--black); color:var(--white); isolation:isolate;
+    }
+    .grain { position:absolute; inset:0; pointer-events:none; opacity:.09; z-index:10;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+    .scene { position:absolute; inset:0; opacity:0; animation:scene 18s infinite; }
+    .scene.s1 { animation-delay:0s; }
+    .scene.s2 { animation-delay:4.5s; }
+    .scene.s3 { animation-delay:9s; }
+    .scene.s4 { animation-delay:13.5s; }
+
+    .word { position:absolute; margin:0; color:#fff; font-weight:700; line-height:1.15; letter-spacing:-.035em; }
+    .s1 .w1 { left:9%; top:28%; font-size:clamp(20px,2vw,36px); }
+    .s1 .w2 { right:11%; top:43%; font-size:clamp(15px,1.35vw,24px); }
+    .s1 .w3 { left:22%; bottom:18%; font-size:clamp(13px,1vw,18px); }
+    .s1 .w4 { right:28%; bottom:12%; font-size:clamp(12px,.9vw,16px); }
+
+    .media-card { position:absolute; overflow:hidden; background:#1a1a1a; }
+    .media-card::before { content:""; position:absolute; inset:-8%; background-size:cover; background-position:center; animation:slowZoom 7s ease-in-out infinite alternate; }
+    .m1 { width:21vw; min-width:250px; aspect-ratio:16/10; left:29%; top:20%; }
+    .m1::before { background:linear-gradient(135deg,rgba(8,8,8,.15),rgba(8,8,8,.05)), url('/mnt/data/image.png'); }
+    .m2 { width:16vw; min-width:190px; aspect-ratio:4/3; right:14%; bottom:16%; }
+    .m2::before { background:linear-gradient(145deg,#b98357,#efe0c5 48%,#56473f); }
+    .m3 { width:14vw; min-width:170px; aspect-ratio:4/3; left:7%; bottom:12%; }
+    .m3::before { background:linear-gradient(145deg,#29465b,#8fc1d7 45%,#d7ad7f); }
+
+    .split-frame { position:absolute; left:50%; top:50%; width:min(720px,70vw); height:min(340px,40vw); transform:translate(-50%,-50%); display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .split-frame span { position:relative; overflow:hidden; background:#222; }
+    .split-frame span:first-child { background:linear-gradient(140deg,#151e2b 0 35%,#4f7898 36% 62%,#d6e2e5 63%); }
+    .split-frame span:last-child { background:radial-gradient(circle at 52% 50%,#17130f 0 10%,#8a6644 11% 22%,#415e5e 23% 40%,#151515 41%); }
+    .s2 .big { left:50%; top:16%; transform:translateX(-50%); width:100%; text-align:center; font-size:clamp(24px,3.5vw,62px); font-weight:850; }
+
+    .s3 { display:grid; place-items:center; }
+    .brand-reveal { font-size:clamp(56px,10vw,170px); font-weight:900; letter-spacing:-.08em; }
+    .brand-reveal span { display:inline-block; opacity:0; transform:translateY(35px); animation:letterIn 4.5s infinite; }
+    .brand-reveal span:nth-child(2){animation-delay:.12s}.brand-reveal span:nth-child(3){animation-delay:.24s}.brand-reveal span:nth-child(4){animation-delay:.36s}.brand-reveal span:nth-child(5){animation-delay:.48s}.brand-reveal span:nth-child(6){animation-delay:.6s}
+
+    .final-grid { position:absolute; inset:0; display:grid; place-items:center; padding:120px 8vw 60px; }
+    .final-inner { width:min(1180px,100%); position:relative; }
+    .final-title { margin:0; font-size:clamp(68px,11vw,180px); line-height:.78; letter-spacing:-.085em; text-transform:uppercase; font-weight:950; }
+    .final-title span { display:block; }
+    .final-title .indent { margin-left:22%; }
+    .image-strip { position:absolute; inset:15% 6% 8% 10%; z-index:-1; display:grid; grid-template-columns:1fr .62fr 1fr; gap:8px; transform:skewX(-2deg); }
+    .image-strip i { display:block; background:#333; overflow:hidden; }
+    .image-strip i:nth-child(1){background:linear-gradient(140deg,#d7b48f,#6a4b35 55%,#263c48)}
+    .image-strip i:nth-child(2){background:linear-gradient(160deg,#ebebeb,#9c8771 48%,#251d18)}
+    .image-strip i:nth-child(3){background:linear-gradient(130deg,#b9c2cb,#31495b 52%,#d3a26b)}
+    .final-copy { position:absolute; right:0; bottom:-5px; width:min(430px,38vw); margin:0; font-size:clamp(14px,1.05vw,18px); line-height:1.6; font-weight:600; color:rgba(255,255,255,.9); }
+    .start-btn { position:absolute; left:8vw; bottom:45px; z-index:20; color:#111; background:#fff; text-decoration:none; padding:15px 22px; border-radius:999px; font-weight:850; }
+    .progress { position:absolute; left:0; bottom:0; z-index:30; height:3px; width:100%; background:rgba(255,255,255,.15); }
+    .progress::after { content:""; display:block; height:100%; background:#fff; transform-origin:left; animation:progress 18s linear infinite; }
+
+    .precheck { min-height:430px; display:grid; place-items:center; padding:90px 24px; }
+    .precheck h2 { margin:0; font-size:clamp(44px,5vw,72px); letter-spacing:-.06em; }
+
+    @keyframes scene { 0%,3%{opacity:0} 8%,21%{opacity:1} 25%,100%{opacity:0} }
+    @keyframes slowZoom { from{transform:scale(1.02)} to{transform:scale(1.12) translate(-2%,1%)} }
+    @keyframes letterIn { 0%,12%{opacity:0;transform:translateY(35px)} 28%,72%{opacity:1;transform:none} 88%,100%{opacity:0;transform:translateY(-20px)} }
+    @keyframes progress { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+    @media (max-width:760px){
+      .site-header{grid-template-columns:1fr auto;height:62px}.main-nav{display:none}.consult-btn{padding:12px 14px}.logo{font-size:26px}
+      .hero{min-height:680px}.m1{left:17%;top:24%;width:62vw}.m2{right:5%;bottom:18%;width:34vw}.m3{left:5%;bottom:15%;width:31vw}
+      .s1 .w1{left:7%;top:18%}.s1 .w2{right:5%;top:62%}.s1 .w3{left:9%;bottom:8%}
+      .split-frame{width:82vw;height:46vw}.s2 .big{top:22%}
+      .final-title{font-size:clamp(58px,18vw,110px);line-height:.83}.final-title .indent{margin-left:10%}
+      .image-strip{inset:23% 0 15% 0}.final-copy{position:relative;right:auto;bottom:auto;width:85%;margin:32px 0 0 12%;font-size:14px}
+      .start-btn{left:24px;bottom:36px}
     }
 
-    /* OpenAI 기업 페이지의 영상형 히어로처럼 느껴지는 CSS 모션 배경 */
-    .hero-motion,
-    .hero-motion::before,
-    .hero-motion::after {
-      position: absolute;
-      inset: -18%;
-      content: "";
-      z-index: -3;
-    }
-
-    .hero-motion {
-      background:
-        radial-gradient(circle at 20% 25%, rgba(254,196,135,.95), transparent 28%),
-        radial-gradient(circle at 82% 32%, rgba(200,158,255,.9), transparent 30%),
-        radial-gradient(circle at 56% 84%, rgba(87,171,255,.88), transparent 32%),
-        linear-gradient(125deg, #261b16, #282138 46%, #132738);
-      filter: saturate(115%);
-      animation: drift 16s ease-in-out infinite alternate;
-    }
-
-    .hero-motion::before {
-      background:
-        radial-gradient(ellipse at 34% 52%, rgba(255,255,255,.34), transparent 27%),
-        radial-gradient(ellipse at 70% 58%, rgba(255,172,143,.28), transparent 25%);
-      filter: blur(42px);
-      animation: breathe 10s ease-in-out infinite alternate;
-    }
-
-    .hero-motion::after {
-      background-image:
-        linear-gradient(115deg, transparent 20%, rgba(255,255,255,.18) 45%, transparent 67%),
-        repeating-linear-gradient(108deg, rgba(255,255,255,.04) 0 1px, transparent 1px 9px);
-      mix-blend-mode: screen;
-      animation: sweep 11s linear infinite;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background:
-        linear-gradient(180deg, rgba(8,8,8,.25), rgba(8,8,8,.48)),
-        radial-gradient(circle at center, transparent 8%, rgba(0,0,0,.22) 72%);
-    }
-
-    .hero-content {
-      width: min(1180px, 100%);
-      text-align: center;
-      color: #fff;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(54px, 7vw, 102px);
-      line-height: .98;
-      letter-spacing: -.065em;
-      font-weight: 900;
-      text-shadow: 0 5px 30px rgba(0,0,0,.32);
-    }
-
-    .subhead {
-      margin: 30px 0 0;
-      font-size: clamp(19px, 1.55vw, 25px);
-      line-height: 1.45;
-      font-weight: 750;
-      text-shadow: 0 3px 18px rgba(0,0,0,.42);
-    }
-
-    .marquee-wrap {
-      width: min(1120px, 100%);
-      margin: 32px auto 0;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.28);
-      border-radius: 18px;
-      background: rgba(5,5,5,.58);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 18px 50px rgba(0,0,0,.2);
-    }
-
-    .marquee {
-      display: flex;
-      width: max-content;
-      animation: marquee 32s linear infinite;
-      will-change: transform;
-    }
-
-    .marquee-wrap:hover .marquee { animation-play-state: paused; }
-
-    .marquee p {
-      flex: none;
-      margin: 0;
-      padding: 20px 40px;
-      white-space: nowrap;
-      color: #fff;
-      font-size: clamp(15px, 1.22vw, 18px);
-      line-height: 1.5;
-      font-weight: 650;
-      letter-spacing: -.02em;
-    }
-
-    .start-btn {
-      margin-top: 34px;
-      min-width: 112px;
-      height: 50px;
-      padding: 0 22px;
-      border-radius: 14px;
-      background: #fff;
-      color: #111;
-      font-size: 15px;
-      box-shadow: 0 14px 35px rgba(0,0,0,.25);
-    }
-
-    .start-btn:hover,
-    .consult-btn:hover { transform: translateY(-2px); }
-
-    .precheck {
-      min-height: 430px;
-      display: grid;
-      place-items: center;
-      padding: 90px 24px;
-      background: #f4f0ea;
-    }
-
-    .precheck h2 {
-      margin: 0;
-      font-size: clamp(42px, 5vw, 70px);
-      line-height: 1.1;
-      letter-spacing: -.06em;
-      font-weight: 900;
-    }
-
-    @keyframes drift {
-      0% { transform: scale(1.03) translate3d(-2%, -1%, 0) rotate(-1deg); }
-      100% { transform: scale(1.13) translate3d(2%, 2%, 0) rotate(2deg); }
-    }
-
-    @keyframes breathe {
-      0% { transform: translate3d(-3%, 2%, 0) scale(.94); opacity: .65; }
-      100% { transform: translate3d(4%, -3%, 0) scale(1.12); opacity: 1; }
-    }
-
-    @keyframes sweep {
-      from { transform: translateX(-8%); }
-      to { transform: translateX(8%); }
-    }
-
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-motion,
-      .hero-motion::before,
-      .hero-motion::after,
-      .marquee { animation: none; }
-      .marquee { transform: translateX(0); }
-    }
-
-    @media (max-width: 760px) {
-      .site-header {
-        grid-template-columns: 1fr auto;
-        height: 62px;
-        border-radius: 20px;
-      }
-
-      .main-nav { display: none; }
-      .logo { font-size: 26px; }
-      .consult-btn { height: 42px; }
-
-      .hero {
-        min-height: 690px;
-        padding-top: 120px;
-      }
-
-      .hero h1 { font-size: clamp(48px, 15vw, 66px); }
-      .marquee-wrap { border-radius: 14px; }
-      .marquee p { padding: 17px 28px; }
+    @media (prefers-reduced-motion:reduce){
+      .scene{animation:none;opacity:0}.scene.s4{opacity:1}.progress::after,.media-card::before,.brand-reveal span{animation:none}
     }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <a class="logo" href="#" aria-label="US TAX SERVICE 홈">U<span class="logo-mark">◢</span>ST</a>
-
+    <a class="logo" href="#">U<i>\</i>ST</a>
     <nav class="main-nav" aria-label="주요 메뉴">
-      <a href="#">미국 법인 설립</a>
-      <a class="has-menu" href="#">운영 및 유지</a>
-      <a href="#">미국 법인 청산</a>
+      <a href="#">미국 법인 설립</a><a href="#">운영 및 유지⌄</a><a href="#">미국 법인 청산</a>
     </nav>
-
-    <a class="consult-btn" href="#contact">상담 신청</a>
+    <a class="consult-btn" href="#">상담 신청</a>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-motion" aria-hidden="true"></div>
-      <div class="hero-overlay" aria-hidden="true"></div>
+    <section class="hero" aria-label="미국 법인 설립 소개">
+      <div class="grain"></div>
 
-      <div class="hero-content">
-        <h1>미국 법인 설립</h1>
-        <p class="subhead">초기 구조 설계가 중요합니다.</p>
+      <div class="scene s1">
+        <p class="word w1">미국 진출의 시작은<br>법인 설립부터</p>
+        <p class="word w2">단순한 등록 절차가 아닌</p>
+        <p class="word w3">사업 구조 · 세무 · 운영</p>
+        <p class="word w4">하나의 흐름으로 설계합니다</p>
+        <div class="media-card m1"></div><div class="media-card m2"></div><div class="media-card m3"></div>
+      </div>
 
-        <div class="marquee-wrap" aria-label="서비스 소개">
-          <div class="marquee">
-            <p>미국 진출을 준비하는 기업에게 법인 설립은 단순한 등록 절차가 아니라, 향후 세무 신고와 운영 관리의 기준이 되는 중요한 출발점입니다. US TAX SERVICE는 사업 구조에 적합한 법인 형태 검토부터 설립, 세무 신고, 운영 관리까지 미국 사업 운영에 필요한 전 과정을 전문적으로 지원합니다.</p>
-            <p aria-hidden="true">미국 진출을 준비하는 기업에게 법인 설립은 단순한 등록 절차가 아니라, 향후 세무 신고와 운영 관리의 기준이 되는 중요한 출발점입니다. US TAX SERVICE는 사업 구조에 적합한 법인 형태 검토부터 설립, 세무 신고, 운영 관리까지 미국 사업 운영에 필요한 전 과정을 전문적으로 지원합니다.</p>
+      <div class="scene s2">
+        <p class="word big">사업을 보는 새로운 기준</p>
+        <div class="split-frame"><span></span><span></span></div>
+      </div>
+
+      <div class="scene s3">
+        <div class="brand-reveal" aria-label="UST"><span>U</span><span>S</span><span>&nbsp;</span><span>T</span><span>A</span><span>X</span></div>
+      </div>
+
+      <div class="scene s4">
+        <div class="final-grid">
+          <div class="final-inner">
+            <div class="image-strip"><i></i><i></i><i></i></div>
+            <h1 class="final-title"><span>미국 법인</span><span class="indent">설립은</span><span>시작입니다</span></h1>
+            <p class="final-copy">미국 진출을 준비하는 기업에게 법인 설립은 향후 세무 신고와 운영 관리의 기준이 되는 중요한 출발점입니다. 사업 구조에 맞는 법인 형태 검토부터 설립, 세무 신고, 운영 관리까지 전 과정을 지원합니다.</p>
           </div>
         </div>
-
-        <a class="start-btn" href="#precheck">시작하기</a>
       </div>
+
+      <a class="start-btn" href="#precheck">시작하기 →</a>
+      <div class="progress" aria-hidden="true"></div>
     </section>
 
-    <section id="precheck" class="precheck">
-      <h2>설립 전 확인 사항</h2>
-    </section>
+    <section class="precheck" id="precheck"><h2>설립 전 확인 사항</h2></section>
   </main>
 </body>
 </html>
