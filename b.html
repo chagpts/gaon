@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>상담 신청 샘플</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Pretendard, "Noto Sans KR", Arial, sans-serif;
+      color: #242424;
+      background:
+        linear-gradient(rgba(255,255,255,.45), rgba(255,255,255,.45)),
+        repeating-linear-gradient(
+          -12deg,
+          #f8f3ed 0,
+          #f8f3ed 3px,
+          #f4eee7 3px,
+          #f4eee7 6px
+        );
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 72px 24px;
+    }
+
+    .hero {
+      width: min(1100px, 100%);
+      margin: 0 auto 44px;
+    }
+
+    .hero h1 {
+      margin: 0 0 22px;
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #555;
+      font-size: 17px;
+    }
+
+    .card {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      padding: 42px;
+      border-radius: 22px;
+      background: rgba(255, 252, 247, 0.92);
+      box-shadow: 16px 18px 0 rgba(0,0,0,.035);
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      font-weight: 700;
+    }
+
+    .required {
+      color: #b64535;
+      margin-left: 4px;
+    }
+
+    .optional {
+      color: #777;
+      font-size: 13px;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid #e0dbd4;
+      border-radius: 10px;
+      padding: 14px 15px;
+      font: inherit;
+      background: #f8f6f2;
+      outline: none;
+      transition: .2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #333;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0,0,0,.06);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .error {
+      display: none;
+      margin-top: 7px;
+      color: #c33d2d;
+      font-size: 13px;
+    }
+
+    .field.invalid input,
+    .field.invalid textarea {
+      border-color: #c33d2d;
+      background: #fff8f7;
+    }
+
+    .field.invalid .error {
+      display: block;
+    }
+
+    .submit {
+      width: 100%;
+      border: 0;
+      border-radius: 11px;
+      padding: 16px;
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      background: #2b2b2b;
+      cursor: pointer;
+    }
+
+    .submit:hover { background: #111; }
+    .submit:disabled { opacity: .55; cursor: not-allowed; }
+
+    .privacy {
+      margin: 13px 0 0;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .complete {
+      display: none;
+      min-height: 420px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .complete-inner {
+      max-width: 520px;
+    }
+
+    .check {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: #2b2b2b;
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    .complete h2 {
+      margin: 0 0 16px;
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -0.04em;
+    }
+
+    .complete p {
+      margin: 0 0 28px;
+      color: #5e5e5e;
+      line-height: 1.7;
+    }
+
+    .home {
+      display: inline-block;
+      min-width: 210px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      color: #fff;
+      background: #2b2b2b;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .demo-note {
+      width: min(760px, 100%);
+      margin: 18px auto 0;
+      color: #6b6b6b;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 46px 16px; }
+      .card { padding: 26px 20px; }
+      .hero { margin-bottom: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>전문가와 상담하세요</h1>
+      <p>문의 내용을 남겨주시면 담당 전문가가 빠르게 확인 후 연락드리겠습니다.</p>
+    </section>
+
+    <section class="card">
+      <form id="consultForm" novalidate>
+        <div class="field">
+          <label for="name">이름<span class="required">*</span></label>
+          <input id="name" name="name" type="text" placeholder="이름을 입력해 주세요" />
+          <div class="error">이름을 입력해 주세요.</div>
+        </div>
+
+        <div class="field">
+          <label for="phone">전화번호<span class="optional">선택</span></label>
+          <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" />
+        </div>
+
+        <div class="field">
+          <label for="email">이메일<span class="required">*</span></label>
+          <input id="email" name="email" type="email" placeholder="example@email.com" />
+          <div class="error">올바른 이메일 주소를 입력해 주세요.</div>
+        </div>
+
+        <div class="field">
+          <label for="message">문의 내용<span class="required">*</span></label>
+          <textarea id="message" name="message" placeholder="문의 내용을 입력해 주세요"></textarea>
+          <div class="error">문의 내용을 입력해 주세요.</div>
+        </div>
+
+        <button class="submit" id="submitBtn" type="submit">상담 신청하기</button>
+        <p class="privacy">입력해 주신 개인정보는 상담 목적 외에는 사용되지 않습니다.</p>
+      </form>
+
+      <div class="complete" id="completeView">
+        <div class="complete-inner">
+          <div class="check">✓</div>
+          <h2>문의가 정상적으로 접수되었습니다.</h2>
+          <p>보내주신 문의 내용을 확인한 후 담당자가 빠른 시일 내에 연락드리겠습니다.</p>
+          <a class="home" href="#" id="homeBtn">메인 페이지로 이동</a>
+        </div>
+      </div>
+    </section>
+
+    <p class="demo-note">
+      샘플 페이지입니다. 실제 서버 전송 없이 필수값 검증과 완료 화면 전환만 확인할 수 있습니다.
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById("consultForm");
+    const completeView = document.getElementById("completeView");
+    const submitBtn = document.getElementById("submitBtn");
+    const homeBtn = document.getElementById("homeBtn");
+
+    const requiredFields = [
+      { el: document.getElementById("name"), validate: v => v.trim().length > 0 },
+      { el: document.getElementById("email"), validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+      { el: document.getElementById("message"), validate: v => v.trim().length > 0 }
+    ];
+
+    function validateField(item) {
+      const field = item.el.closest(".field");
+      const valid = item.validate(item.el.value);
+      field.classList.toggle("invalid", !valid);
+      return valid;
+    }
+
+    requiredFields.forEach(item => {
+      item.el.addEventListener("input", () => validateField(item));
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const isValid = requiredFields
+        .map(validateField)
+        .every(Boolean);
+
+      if (!isValid) {
+        const firstInvalid = document.querySelector(".field.invalid input, .field.invalid textarea");
+        firstInvalid?.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "접수 중...";
+
+      setTimeout(() => {
+        form.style.display = "none";
+        completeView.style.display = "flex";
+      }, 700);
+    });
+
+    homeBtn.addEventListener("click", event => {
+      event.preventDefault();
+
+      // 실제 사이트에서는 아래 줄 대신 메인 페이지 주소로 이동합니다.
+      // location.href = "/";
+      form.reset();
+      document.querySelectorAll(".field.invalid").forEach(el => el.classList.remove("invalid"));
+      completeView.style.display = "none";
+      form.style.display = "block";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "상담 신청하기";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
